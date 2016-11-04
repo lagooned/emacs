@@ -25,10 +25,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+	("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages
    (quote
-	(python-mode ido-ubiquitous ido-vertical-mode nxml-mode yasnippet emmet-mode adaptive-wrap magit less-css-mode web-mode php-mode winner-mode evil-surround projectile smex lorem-ipsum linum-relative evil dired+ use-package)))
- '(winner-mode t))
+	(remember-theme nxml-mode python-mode yasnippet adaptive-wrap magit web-mode projectile smex lorem-ipsum linum-relative ido-ubiquitous ido-vertical-mode evil-surround dired+ use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

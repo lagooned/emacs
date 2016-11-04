@@ -65,7 +65,12 @@
   :config (projectile-global-mode))
 
 ;; emmet-mode
-(use-package emmet-mode)
+(use-package emmet-mode
+  :ensure web-mode
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode) 
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'web-mode-hook 'emmet-mode))
 
 ;; magit
 (use-package magit
@@ -115,3 +120,24 @@
   :config
   (setq nxml-child-indent 4
 		nxml-attribute-indent 4))
+
+;; remember theme
+(use-package remember-theme
+  :commands remember-theme-load
+  :config
+  (remember-theme-load)
+  (add-hook 'kill-emacs-hook 'remember-theme-save))
+
+;; solarized
+(use-package solarized-theme
+  :init
+  (setq solarized-use-variable-pitch nil)
+  (setq solarized-high-contrast-mode-line t)
+  (setq solarized-use-less-bold t)
+  (setq solarized-emphasize-indicators nil)
+  (setq solarized-scale-org-headlines nil)
+  (setq solarized-height-minus-1 1)
+  (setq solarized-height-plus-1 1)
+  (setq solarized-height-plus-2 1)
+  (setq solarized-height-plus-3 1)
+  (setq solarized-height-plus-4 1))
