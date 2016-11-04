@@ -28,9 +28,6 @@
 		(bury-buffer)
 	  ad-do-it)))
 
-;; load themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-
 ;; winner mode
 (when (fboundp 'winner-mode)
     (winner-mode 1))
@@ -93,3 +90,4 @@
     (set-face-attribute 'default nil :height 130)
     (menu-bar-mode -1)
 ) 
+

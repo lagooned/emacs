@@ -10,6 +10,12 @@
 (setq use-package-always-ensure t)
 (require 'use-package)
 
+;; auto-complete
+(use-package auto-complete
+  :config
+  (ac-config-default)
+  (global-auto-complete-mode t))
+
 ;; dired+ 
 (use-package dired+
   :init
@@ -64,12 +70,18 @@
 			  ("C-p" . projectile-find-file))
   :config (projectile-global-mode))
 
+(use-package web-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.less\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode)))
+
 ;; emmet-mode
 (use-package emmet-mode
-  :ensure web-mode
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode) 
-  (add-hook 'css-mode-hook  'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode))
 
 ;; magit
@@ -141,3 +153,4 @@
   (setq solarized-height-plus-2 1)
   (setq solarized-height-plus-3 1)
   (setq solarized-height-plus-4 1))
+
