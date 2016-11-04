@@ -1,5 +1,17 @@
+# Unix
+*~
+
 # Compiled
 *.elc
 
 # Packaging
 .cask
+
+# Everything Else
+*.dat
+*.data
+ido*
+smex-items
+elpa
+auto-save-list
+
