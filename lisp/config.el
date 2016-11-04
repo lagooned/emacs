@@ -10,6 +10,9 @@
 (setq use-package-always-ensure t)
 (require 'use-package)
 
+;; try
+(use-package try)
+
 ;; auto-complete
 (use-package auto-complete
   :config
