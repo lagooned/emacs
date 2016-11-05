@@ -90,4 +90,3 @@
     (set-face-attribute 'default nil :height 130)
     (menu-bar-mode -1)
 ) 
-
