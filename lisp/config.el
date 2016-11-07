@@ -13,10 +13,9 @@
 
 (use-package try)
 
-(use-package auto-complete
+(use-package company
   :config
-  (ac-config-default)
-  (global-auto-complete-mode t))
+  (add-hook 'after-init-hook 'global-company-mode)) 
 
 (use-package dired+
   :init
