@@ -17,3 +17,7 @@ auto-save-list
 
 eshell
 *.eld
+.DS_Store
+tutorial
+.last-theme
+url

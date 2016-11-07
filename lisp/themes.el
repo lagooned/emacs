@@ -4,6 +4,7 @@
 
 (use-package remember-theme
   :init
+  (setq remember-theme-file "~/.emacs.d/.last-theme")
   (add-hook 'kill-emacs-hook 'remember-theme-save)
   :config
   (remember-theme-load))
@@ -20,3 +21,12 @@
   (setq solarized-height-plus-2 1)
   (setq solarized-height-plus-3 1)
   (setq solarized-height-plus-4 1))
+
+(use-package monokai-theme
+  :init
+  (setq monokai-height-plus-2 1.0
+		monokai-height-plus-2 1.0
+		monokai-height-plus-3 1.0
+		monokai-height-plus-4 1.0
+		monokai-height-minus-1 1.0)
+  (setq monokai-use-variable-pitch nil))
