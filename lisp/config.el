@@ -2,30 +2,13 @@
 ;; PACKAGE CONFIG ;;
 ;;;;;;;;;;;;;;;;;;;;
 
-;; create auto-minor-mode-alist for files
-(defvar auto-minor-mode-alist ()
-  "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'
-All elements of this alist are checked, meaning you can enable multiple minor modes for the same regexp.")
-
-(defun enable-minor-mode-based-on-extension ()
-  "check file name against auto-minor-mode-alist to enable minor modes
-the checking happens for all pairs in auto-minor-mode-alist"
-  (when buffer-file-name
-    (let ((name buffer-file-name)
-          (remote-id (file-remote-p buffer-file-name))
-          (alist auto-minor-mode-alist))
-      ;; Remove backup-suffixes from file name.
-      (setq name (file-name-sans-versions name))
-      ;; Remove remote file name identification.
-      (when (and (stringp remote-id)
-                 (string-match-p (regexp-quote remote-id) name))
-        (setq name (substring name (match-end 0))))
-      (while (and alist (caar alist) (cdar alist))
-        (if (string-match (caar alist) name)
-            (funcall (cdar alist) 1))
-        (setq alist (cdr alist))))))
-
-(add-hook 'find-file-hook 'enable-minor-mode-based-on-extension)
+;; INSTALL USE-PACKAGE IF NOT INSTALLED
+(if (not (package-installed-p 'use-package))
+	(progn
+	  (package-refresh-contents)
+	  (package-install 'use-package)))
+(setq use-package-always-ensure t)
+(require 'use-package)
 
 ;; USE PACKAGE CONFIGS
 (use-package adaptive-wrap
@@ -141,9 +124,11 @@ the checking happens for all pairs in auto-minor-mode-alist"
 
 (use-package web-mode
   :ensure skewer-mode
+  :ensure impatient-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . skewer-html-mode))
+  (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   (add-to-list 'auto-minor-mode-alist '("\\.css\\'" . skewer-css-mode))
@@ -151,5 +136,4 @@ the checking happens for all pairs in auto-minor-mode-alist"
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))
   :config
-  ;; place web documents in this folder
   (setq httpd-root "~/web"))

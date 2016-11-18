@@ -14,12 +14,16 @@
 ;; add load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-;; setup environment 
-(load "global")
-(load "config")
+;; SETUP ENV
 
-;; load custom settings
+;; load custom functions
 (load "custom")
+
+;; load global config
+(load "global")
+
+;; load package config
+(load "config")
 
 ;; motd
 (message "#################")
