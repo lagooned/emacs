@@ -60,6 +60,9 @@
 ;; electric indent
 (electric-indent-mode 1)
 
+;; electric pair
+(electric-pair-mode 1)
+
 ;; reload init 
 (global-set-key (kbd "C-c i") (lambda() (interactive)(load-file "~/.emacs.d/init.el")))
 

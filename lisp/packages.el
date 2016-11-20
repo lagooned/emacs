@@ -128,6 +128,7 @@
   (add-hook 'kill-emacs-hook 'remember-theme-save))
 
 (use-package web-mode
+  :ensure web-mode
   :ensure skewer-mode
   :ensure impatient-mode
   :init
