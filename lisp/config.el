@@ -2,6 +2,15 @@
 ;; PACKAGE CONFIG ;;
 ;;;;;;;;;;;;;;;;;;;;
 
+;; INSTALL USE-PACKAGE IF NOT INSTALLED
+(if (not (package-installed-p 'use-package))
+	(progn
+	  (package-refresh-contents)
+	  (package-install 'use-package)))
+(setq use-package-always-ensure t)
+(require 'use-package)
+
+;; USE PACKAGE CONFIGS
 (use-package adaptive-wrap
   :config
   (setq-default adaptive-wrap-extra-indent 2)
@@ -115,9 +124,11 @@
 
 (use-package web-mode
   :ensure skewer-mode
+  :ensure impatient-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . skewer-html-mode))
+  (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
   (add-to-list 'auto-minor-mode-alist '("\\.css\\'" . skewer-css-mode))
@@ -125,5 +136,4 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))
   :config
-  ;; place web documents in this folder
   (setq httpd-root "~/web"))

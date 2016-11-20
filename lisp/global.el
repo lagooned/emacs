@@ -21,6 +21,14 @@
 (setq backup-directory-alist `((".*" . , temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
 
+;; unique buffer names
+(require 'uniquify)
+(setq 
+  uniquify-buffer-name-style 'reverse
+  uniquify-after-kill-buffer-p t
+  uniquify-separator ":"
+  uniquify-ignore-buffers-re "^\\*")
+
 ;; bury scratch on kill
 (defadvice kill-buffer (around kill-buffer-around-advice activate)
   (let ((buffer-to-kill (ad-get-arg 0)))
