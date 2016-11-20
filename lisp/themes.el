@@ -4,10 +4,9 @@
 
 (use-package remember-theme
   :init
-  (setq remember-theme-file "~/.emacs.d/.last-theme")
   (add-hook 'kill-emacs-hook 'remember-theme-save)
-  :config
-  (remember-theme-load))
+  (remember-theme-load)
+  (setq remember-theme-file "~/.emacs.d/.last-theme"))
 
 (use-package solarized-theme
   :init

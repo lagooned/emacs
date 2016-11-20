@@ -19,7 +19,7 @@
 ;;;;;;;;;;;;;;;
 
 ;; load custom functions
-(load "custom")
+(load "functions")
 
 ;; load global config
 (load "global")
@@ -27,14 +27,14 @@
 ;; load package config
 (load "config")
 
-;; load themes
-(load "themes")
-
 ;; motd
 (message "#################")
 (message "# CONFIG LOADED #")
 (message "#################")
 
 ;; customs
-(custom-set-variables)
-(custom-set-faces)
+(setq custom-file "~/.emacs.d/.custom.el")
+(load custom-file 'noerror)
+
+;; load themes
+(load "themes")
