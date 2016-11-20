@@ -14,7 +14,9 @@
 ;; add load path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-;; SETUP ENV
+;;;;;;;;;;;;;;;
+;; SETUP ENV ;;
+;;;;;;;;;;;;;;;
 
 ;; load custom functions
 (load "custom")
@@ -24,6 +26,9 @@
 
 ;; load package config
 (load "config")
+
+;; load themes
+(load "themes")
 
 ;; motd
 (message "#################")
