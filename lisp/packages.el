@@ -122,6 +122,11 @@
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package remember-theme
+  :init
+  (setq remember-theme-file "~/.emacs.d/.last-theme")
+  (add-hook 'kill-emacs-hook 'remember-theme-save))
+
 (use-package web-mode
   :ensure skewer-mode
   :ensure impatient-mode
@@ -137,3 +142,17 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))
   :config
   (setq httpd-root "~/web"))
+
+(use-package solarized-theme
+  :init
+  (setq solarized-use-variable-pitch nil)
+  (setq solarized-high-contrast-mode-line t)
+  (setq solarized-use-less-bold t)
+  (setq solarized-emphasize-indicators nil)
+  (setq solarized-scale-org-headlines nil)
+  (setq solarized-height-minus-1 1)
+  (setq solarized-height-plus-1 1)
+  (setq solarized-height-plus-2 1)
+  (setq solarized-height-plus-3 1)
+  (setq solarized-height-plus-4 1))
+

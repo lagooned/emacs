@@ -25,7 +25,7 @@
 (load "global")
 
 ;; load package config
-(load "config")
+(load "packages")
 
 ;; motd
 (message "#################")
@@ -36,5 +36,5 @@
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
 
-;; load themes
-(load "themes")
+;; load remembered theme 
+(remember-theme-load)
