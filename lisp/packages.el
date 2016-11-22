@@ -13,16 +13,18 @@
 ;; USE PACKAGE CONFIGS
 (use-package adaptive-wrap
   :config
-  (setq-default adaptive-wrap-extra-indent 2)
-  (add-hook 'visual-line-mode-hook
-			(lambda ()
-			  (adaptive-wrap-prefix-mode +1)
-			  (diminish 'visual-line-mode)))
-  (global-visual-line-mode +1))
+  (progn
+	(setq-default adaptive-wrap-extra-indent 2)
+	(add-hook 'visual-line-mode-hook
+			  (lambda ()
+				(adaptive-wrap-prefix-mode +1)
+				(diminish 'visual-line-mode)))
+	(global-visual-line-mode +1)))
 
 (use-package try)
 
 (use-package company
+  :diminish company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)) 
 
@@ -30,13 +32,24 @@
   :init
   (setq dired-omit-mode t)) 
 
+(use-package "eldoc"
+  :diminish eldoc-mode
+  :commands turn-on-eldoc-mode
+  :defer t
+  :init
+  (progn
+	(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+	(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+	(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
+
 (use-package evil
   :ensure evil-surround
   :init
   (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1)
-  (global-evil-surround-mode 1))
+  (progn
+	(evil-mode 1)
+	(global-evil-surround-mode 1)))
 
 (use-package ido
   :ensure ido-vertical-mode 
@@ -44,18 +57,22 @@
   :init
   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
   :config
-  (ido-mode t)
-  (ido-everywhere 1)
-  (ido-vertical-mode 1)
-  (ido-ubiquitous-mode 1))
+  (progn
+	(ido-mode t)
+	(ido-everywhere 1)
+	(ido-vertical-mode 1)
+	(ido-ubiquitous-mode 1)))
 
 (use-package linum-relative
+  :diminish linum-relative-mode
   :init
-  (setq linum-relative-format "%3s ")
-  (setq linum-relative-current-symbol "")
+  (progn
+	(setq linum-relative-format "%3s ")
+	(setq linum-relative-current-symbol ""))
   :config
-  (linum-relative-mode)
-  (global-linum-mode))
+  (progn
+	(linum-relative-mode)
+	(global-linum-mode)))
 
 (use-package lorem-ipsum
   :config
@@ -75,8 +92,19 @@
 
 (use-package emmet-mode
   :init
-  (add-hook 'sgml-mode-hook 'emmet-mode) 
-  (add-hook 'web-mode-hook 'emmet-mode))
+  (progn
+	(add-hook 'sgml-mode-hook 'emmet-mode) 
+	(add-hook 'web-mode-hook 'emmet-mode)))
+
+(use-package erc
+  :config
+  (setq erc-hide-list '("PART" "QUIT" "JOIN"))
+  (setq erc-server "irc.freenode.net"
+		erc-nick "lagooned"
+		erc-autojoin-channels-alist '(("freenode.net"
+									   "#bitswebteam"
+									   "#gamestoptrades"
+									   "#emacs-beginners"))))
 
 (use-package magit
   :init (setq magit-push-always-verify nil)
@@ -88,25 +116,31 @@
 				 "~/.emacs.d/packages/magit/Documentation/")))
 
 (use-package yasnippet
+  :diminish yas-minor-mode
   :config
   (yas-global-mode 1))
 
 (use-package undo-tree
+  :diminish undo-tree-mode
   :config
-  (global-undo-tree-mode))
+  (progn
+    (global-undo-tree-mode)
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)))
 
 (use-package python-mode
   :config
-  (defun electric-indent-ignore-python (char)
-	"Ignore electric indentation for python-mode"
-	(if (equal major-mode 'python-mode)
-		'no-indent
-	  nil))
-  (add-hook 'electric-indent-functions 'electric-indent-ignore-python)
-  (defun set-newline-and-indent ()
-	"Map the return key with `newline-and-indent'"
-	(local-set-key (kbd "RET") 'newline-and-indent))
-  (add-hook 'python-mode-hook 'set-newline-and-indent))
+  (progn 
+	(defun electric-indent-ignore-python (char)
+	  "Ignore electric indentation for python-mode"
+	  (if (equal major-mode 'python-mode)
+		  'no-indent
+		nil))
+	(add-hook 'electric-indent-functions 'electric-indent-ignore-python)
+	(defun set-newline-and-indent ()
+	  "Map the return key with `newline-and-indent'"
+	  (local-set-key (kbd "RET") 'newline-and-indent))
+	(add-hook 'python-mode-hook 'set-newline-and-indent)))
 
 (use-package nxml-mode
   :init
@@ -115,8 +149,8 @@
 
 (use-package fix-word
   :bind (("M-u" . fix-word-upcase)
-		("M-l" . fix-word-downcase)
-		("M-c" . fix-word-capitalize)))
+		 ("M-l" . fix-word-downcase)
+		 ("M-c" . fix-word-capitalize)))
 
 (use-package rainbow-delimiters
   :init
@@ -132,28 +166,33 @@
   :ensure skewer-mode
   :ensure impatient-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-  (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . skewer-html-mode))
-  (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-  (add-to-list 'auto-minor-mode-alist '("\\.css\\'" . skewer-css-mode))
-  (add-to-list 'auto-mode-alist '("\\.less\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))
+  (progn 
+	(add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+	(add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . skewer-html-mode))
+	(add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+	(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+	(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+	(add-to-list 'auto-minor-mode-alist '("\\.css\\'" . skewer-css-mode))
+	(add-to-list 'auto-mode-alist '("\\.less\\'" . web-mode))
+	(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+	(add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))))
+
+(use-package skewer-mode
+  :init
+  (setq httpd-root "~/web")
   :config
-  (setq httpd-root "~/web"))
+  (skewer-setup))
 
 (use-package solarized-theme
   :init
-  (setq solarized-use-variable-pitch nil)
-  (setq solarized-high-contrast-mode-line t)
-  (setq solarized-use-less-bold t)
-  (setq solarized-emphasize-indicators nil)
-  (setq solarized-scale-org-headlines nil)
-  (setq solarized-height-minus-1 1)
-  (setq solarized-height-plus-1 1)
-  (setq solarized-height-plus-2 1)
-  (setq solarized-height-plus-3 1)
-  (setq solarized-height-plus-4 1))
+  (setq solarized-use-variable-pitch nil
+		solarized-high-contrast-mode-line t
+		solarized-use-less-bold t
+		solarized-emphasize-indicators nil
+		solarized-scale-org-headlines nil
+		solarized-height-minus-1 1
+		solarized-height-plus-1 1
+		solarized-height-plus-2 1
+		solarized-height-plus-3 1
+		solarized-height-plus-4 1))
 

@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 
 ;; deunicode file
-(defun jme/de-unicode ()
+(defun my/de-unicode ()
   "Tidy up a buffer by replacing all special Unicode characters
      (smart quotes, etc.) with their more sane cousins"
   (interactive)
@@ -23,25 +23,39 @@
             (replace-regexp key value)))))
 
 ;; sudo find-file
-(defun jme/find-file-as-sudo ()
+(defun my/find-file-as-sudo ()
   (interactive)
   (let ((file-name (buffer-file-name)))
     (when file-name
       (find-alternate-file (concat "/sudo::" file-name)))))
 
+(defun my/untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun my/indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun my/cleanup-buffer ()
+  (interactive)
+  (my/untabify-buffer)
+  (delete-trailing-whitespace)
+  (my/indent-buffer))
+
 ;; indent on paste
 (dolist (command '(yank yank-pop))
   (eval `(defadvice ,command (after indent-region activate)
-		   (and (not current-prefix-arg)
-				(member major-mode '(emacs-lisp-mode lisp-mode
-													 clojure-mode    scheme-mode
-													 haskell-mode    ruby-mode
-													 rspec-mode      python-mode
-													 c-mode          c++-mode
-													 objc-mode       latex-mode
-													 plain-tex-mode))
-				(let ((mark-even-if-inactive transient-mark-mode))
-				  (indent-region (region-beginning) (region-end) nil))))))
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode lisp-mode
+                                                     clojure-mode    scheme-mode
+                                                     haskell-mode    ruby-mode
+                                                     rspec-mode      python-mode
+                                                     c-mode          c++-mode
+                                                     objc-mode       latex-mode
+                                                     plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
 
 ;; create auto-minor-mode-alist for files
 (defvar auto-minor-mode-alist ()
