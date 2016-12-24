@@ -25,8 +25,6 @@
 ;; backup files to temp
 (setq backup-directory-alist `((".*" . , temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
-(setq version-control t)
-(setq delete-old-versions t)
 
 ;; show column too
 (column-number-mode 1)
@@ -38,6 +36,9 @@
  uniquify-after-kill-buffer-p t
  uniquify-separator ":"
  uniquify-ignore-buffers-re "^\\*")
+
+;; show inputs immediately
+(setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
 (defadvice kill-buffer (around kill-buffer-around-advice activate)
@@ -93,6 +94,10 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c n") 'my/cleanup-buffer)
+(global-set-key (kbd "<S-tab>") 'my/un-indent-by-removing-4-spaces)
+
+;; auto-insert
+(auto-insert-mode 1)
 
 ;; platform specific options
 (when (eq system-type 'darwin)

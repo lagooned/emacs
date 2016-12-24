@@ -25,6 +25,8 @@
 
 (use-package company
   :diminish company-mode
+  :init
+  (setq company-show-numbers t)
   :config
   (add-hook 'after-init-hook 'global-company-mode)) 
 
@@ -32,7 +34,7 @@
   :init
   (setq dired-omit-mode t)) 
 
-(use-package "eldoc"
+(use-package eldoc
   :diminish eldoc-mode
   :commands turn-on-eldoc-mode
   :defer t
@@ -179,7 +181,7 @@
 
 (use-package skewer-mode
   :init
-  (setq httpd-root "~/web")
+  (setq httpd-root "~/")
   :config
   (skewer-setup))
 
