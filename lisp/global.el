@@ -94,7 +94,6 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c n") 'my/cleanup-buffer)
-(global-set-key (kbd "<S-tab>") 'my/un-indent-by-removing-4-spaces)
 
 ;; auto-insert
 (auto-insert-mode 1)
@@ -105,8 +104,8 @@
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :height 130)
 
-  ;; disable the menu bar => no full screen
-  ;; (menu-bar-mode -1)
+  (unless (display-graphic-p) (menu-bar-mode -1))
+
   )
 
 (when (eq system-type 'gnu/linux)
