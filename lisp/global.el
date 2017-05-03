@@ -40,6 +40,9 @@
  uniquify-separator ":"
  uniquify-ignore-buffers-re "^\\*")
 
+;; show inputs immediately
+(setq echo-keystrokes 0.01)
+
 ;; bury scratch on kill
 (defadvice kill-buffer (around kill-buffer-around-advice activate)
   (let ((buffer-to-kill (ad-get-arg 0)))
@@ -95,14 +98,15 @@
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c n") 'my/cleanup-buffer)
 
+;; auto-insert
+(auto-insert-mode 1)
+
 ;; platform specific options
 (when (eq system-type 'darwin)
   ;; railwaycat/homebrew-emacsmacport
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :height 130)
-
-  ;; disable the menu bar => no full screen
-  ;; (menu-bar-mode -1)
+  (unless (display-graphic-p) (menu-bar-mode -1))
   )
 
 (when (eq system-type 'gnu/linux)
