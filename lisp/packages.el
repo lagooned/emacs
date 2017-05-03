@@ -128,20 +128,6 @@
     (setq undo-tree-visualizer-timestamps t)
     (setq undo-tree-visualizer-diff t)))
 
-(use-package python-mode
-  :config
-  (progn 
-	(defun electric-indent-ignore-python (char)
-	  "Ignore electric indentation for python-mode"
-	  (if (equal major-mode 'python-mode)
-		  'no-indent
-		nil))
-	(add-hook 'electric-indent-functions 'electric-indent-ignore-python)
-	(defun set-newline-and-indent ()
-	  "Map the return key with `newline-and-indent'"
-	  (local-set-key (kbd "RET") 'newline-and-indent))
-	(add-hook 'python-mode-hook 'set-newline-and-indent)))
-
 (use-package nxml-mode
   :init
   (setq nxml-child-indent 4
@@ -177,6 +163,8 @@
 	(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))))
 
+(use-package restclient)
+
 (use-package skewer-mode
   :init
   (setq httpd-root "~/web")
@@ -195,4 +183,3 @@
 		solarized-height-plus-2 1
 		solarized-height-plus-3 1
 		solarized-height-plus-4 1))
-

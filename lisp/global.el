@@ -23,10 +23,11 @@
                                      (dired-directory dired-directory "%b"))))
 
 ;; backup files to temp
-(setq backup-directory-alist `((".*" . , temporary-file-directory)))
-(setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
-(setq version-control t)
-(setq delete-old-versions t)
+(setq auto-save-default nil)
+;; (setq backup-directory-alist `((".*" . , temporary-file-directory)))
+;; (setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
+;; (setq version-control t)
+;; (setq delete-old-versions t)
 
 ;; show column too
 (column-number-mode 1)
