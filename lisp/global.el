@@ -95,6 +95,9 @@
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c n") 'my/cleanup-buffer)
 
+;; insert newlines with C-n at end of buffer
+(setq next-line-add-newlines t)
+
 ;; auto-insert
 (auto-insert-mode 1)
 

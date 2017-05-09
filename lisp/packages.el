@@ -23,6 +23,26 @@
 
 (use-package try)
 
+(use-package ace-jump-mode)
+
+(use-package restart-emacs)
+
+(use-package haskell-mode)
+
+(use-package magit
+  :init (setq magit-push-always-verify nil)
+  :bind ("C-x g" . magit-status)
+  :config
+  (progn
+  (with-eval-after-load 'info
+	(info-initialize)
+	(add-to-list 'Info-directory-list
+				 "~/.emacs.d/packages/magit/Documentation/"))))
+
+(use-package projectile
+  :commands projectile-find-file
+  :config (projectile-global-mode))
+
 (use-package company
   :diminish company-mode
   :init
@@ -32,8 +52,9 @@
 
 (use-package dired+
   :init
-  (setq dired-omit-mode t)) 
-
+  (setq diredp-hide-details-initially-flag t)
+  (setq dired-omit-mode t))
+  
 (use-package eldoc
   :diminish eldoc-mode
   :commands turn-on-eldoc-mode
@@ -45,11 +66,24 @@
 	(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)))
 
 (use-package evil
+  :ensure projectile
   :ensure evil-surround
   :init
   (setq evil-want-C-u-scroll t)
+  (setq evil-default-state 'normal)
+  (loop for (mode . state) in '(
+								(nrepl-mode . emacs)
+                                (shell-mode . emacs)
+                                (eshell-mode . emacs)
+                                (term-mode . emacs)
+                                (help-mode . emacs)
+                                (grep-mode . emacs)
+								)
+      do (evil-set-initial-state mode state))
   :config
   (progn
+	(define-key evil-normal-state-map (kbd "C-f") 'ace-jump-mode)
+	(define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
 	(evil-mode 1)
 	(global-evil-surround-mode 1)))
 
@@ -80,69 +114,17 @@
   :config
   (lorem-ipsum-use-default-bindings))
 
-(use-package smex
-  :commands smex
-  :bind (("M-x" . smex)
-		 ("M-X" . smex-major-mode-commands))
-  :config (smex-initialize))
-
-(use-package projectile
-  :commands projectile-find-file
-  :bind (:map evil-normal-state-map
-			  ("C-p" . projectile-find-file))
-  :config (projectile-global-mode))
-
 (use-package emmet-mode
   :init
   (progn
 	(add-hook 'sgml-mode-hook 'emmet-mode) 
 	(add-hook 'web-mode-hook 'emmet-mode)))
 
-(use-package erc
-  :config
-  (setq erc-hide-list '("PART" "QUIT" "JOIN"))
-  (setq erc-server "irc.freenode.net"
-		erc-nick "lagooned"
-		erc-autojoin-channels-alist '(("freenode.net"
-									   "#bitswebteam"
-									   "#gamestoptrades"
-									   "#emacs-beginners"))))
-
-(use-package magit
-  :init (setq magit-push-always-verify nil)
-  :bind ("C-x g" . magit-status)
-  :config
-  (with-eval-after-load 'info
-	(info-initialize)
-	(add-to-list 'Info-directory-list
-				 "~/.emacs.d/packages/magit/Documentation/")))
-
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :config
-  (yas-global-mode 1))
-
-(use-package undo-tree
-  :diminish undo-tree-mode
-  :config
-  (progn
-    (global-undo-tree-mode)
-    (setq undo-tree-visualizer-timestamps t)
-    (setq undo-tree-visualizer-diff t)))
-
-(use-package python-mode
-  :config
-  (progn 
-	(defun electric-indent-ignore-python (char)
-	  "Ignore electric indentation for python-mode"
-	  (if (equal major-mode 'python-mode)
-		  'no-indent
-		nil))
-	(add-hook 'electric-indent-functions 'electric-indent-ignore-python)
-	(defun set-newline-and-indent ()
-	  "Map the return key with `newline-and-indent'"
-	  (local-set-key (kbd "RET") 'newline-and-indent))
-	(add-hook 'python-mode-hook 'set-newline-and-indent)))
+(use-package smex
+  :commands smex
+  :bind (("M-x" . smex)
+		 ("M-X" . smex-major-mode-commands))
+  :config (smex-initialize))
 
 (use-package nxml-mode
   :init
@@ -158,32 +140,40 @@
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package restclient
+  :ensure company-restclient)
+
 (use-package remember-theme
   :init
   (setq remember-theme-file "~/.emacs.d/.last-theme")
   (add-hook 'kill-emacs-hook 'remember-theme-save))
 
+(use-package org
+  :init
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+  :bind (("C-c l" . org-store-link)
+		 ("C-c a" . org-agenda)))
+
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :config
+  (progn
+	(global-undo-tree-mode)
+	(setq undo-tree-visualizer-timestamps t)
+	(setq undo-tree-visualizer-diff t)))
+
 (use-package web-mode
   :ensure web-mode
-  :ensure skewer-mode
   :ensure impatient-mode
   :init
   (progn 
 	(add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-	(add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . skewer-html-mode))
 	(add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
 	(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-	(add-to-list 'auto-minor-mode-alist '("\\.css\\'" . skewer-css-mode))
 	(add-to-list 'auto-mode-alist '("\\.less\\'" . web-mode))
 	(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-	(add-to-list 'auto-mode-alist '("\\.js\\'" . skewer-mode))))
-
-(use-package skewer-mode
-  :init
-  (setq httpd-root "~/")
-  :config
-  (skewer-setup))
+	))
 
 (use-package solarized-theme
   :init
@@ -197,4 +187,3 @@
 		solarized-height-plus-2 1
 		solarized-height-plus-3 1
 		solarized-height-plus-4 1))
-
