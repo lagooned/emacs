@@ -23,8 +23,11 @@
                                      (dired-directory dired-directory "%b"))))
 
 ;; backup files to temp
-(setq backup-directory-alist `((".*" . , temporary-file-directory)))
-(setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
+(setq auto-save-default nil)
+;; (setq backup-directory-alist `((".*" . , temporary-file-directory)))
+;; (setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
+;; (setq version-control t)
+;; (setq delete-old-versions t)
 
 ;; show column too
 (column-number-mode 1)
@@ -46,10 +49,6 @@
     (if (equal buffer-to-kill "*scratch*")
         (bury-buffer)
       ad-do-it)))
-
-;; winner mode
-(when (fboundp 'winner-mode)
-  (winner-mode 1))
 
 ;; no tool bar
 (tool-bar-mode -1)
@@ -90,10 +89,9 @@
 ;; random binds
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-=") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c n") 'my/cleanup-buffer)
+(global-set-key (kbd "C-c C-v") 'browse-url-at-point)
 
 ;; insert newlines with C-n at end of buffer
 (setq next-line-add-newlines t)
@@ -106,9 +104,7 @@
   ;; railwaycat/homebrew-emacsmacport
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :height 130)
-
   (unless (display-graphic-p) (menu-bar-mode -1))
-
   )
 
 (when (eq system-type 'gnu/linux)

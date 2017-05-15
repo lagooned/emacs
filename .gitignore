@@ -23,3 +23,5 @@ url
 /.custom.el
 /recentf
 games
+/tramp
+/projectile.cache
