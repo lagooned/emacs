@@ -92,14 +92,8 @@
 	(evil-mode 1))
   :config
   (progn 
-	;; (define-key evil-normal-state-map (kbd "M-d") 'evil-scroll-up)
-	;; (define-key evil-visual-state-map (kbd "M-d") 'evil-scroll-up)
-	;; (define-key evil-normal-state-map (kbd "C-M-d") 'evil-scroll-up)
-	;; (define-key evil-visual-state-map (kbd "C-M-d") 'evil-scroll-up)
-	;; (define-key evil-normal-state-map (kbd "C-S-d") 'evil-scroll-up)
-	;; (define-key evil-visual-state-map (kbd "C-S-d") 'evil-scroll-up)
 	(define-key evil-normal-state-map (kbd "f") 'ace-jump-mode)
-	(define-key evil-normal-state-map (kbd "S-f") 'ace-jump-char-mode)
+	(define-key evil-normal-state-map (kbd "F") 'ace-jump-char-mode)
 	(define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
 	(define-key evil-insert-state-map (kbd "C-c f") 'ace-jump-char-mode)
 	(define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
