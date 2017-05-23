@@ -81,4 +81,3 @@ the checking happens for all pairs in auto-minor-mode-alist"
         (setq alist (cdr alist))))))
 
 (add-hook 'find-file-hook 'enable-minor-mode-based-on-extension)
-

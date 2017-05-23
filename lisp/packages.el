@@ -87,22 +87,24 @@
   :ensure evil-surround
   :init
   (progn
-	;; (setq evil-want-C-u-scroll t)
+	(setq evil-want-C-u-scroll t)
 	(global-evil-surround-mode 1)
 	(evil-mode 1))
   :config
   (progn 
-	(define-key evil-normal-state-map (kbd "M-d") 'evil-scroll-up)
-	(define-key evil-visual-state-map (kbd "M-d") 'evil-scroll-up)
-	(define-key evil-normal-state-map (kbd "C-M-d") 'evil-scroll-up)
-	(define-key evil-visual-state-map (kbd "C-M-d") 'evil-scroll-up)
+	;; (define-key evil-normal-state-map (kbd "M-d") 'evil-scroll-up)
+	;; (define-key evil-visual-state-map (kbd "M-d") 'evil-scroll-up)
+	;; (define-key evil-normal-state-map (kbd "C-M-d") 'evil-scroll-up)
+	;; (define-key evil-visual-state-map (kbd "C-M-d") 'evil-scroll-up)
+	;; (define-key evil-normal-state-map (kbd "C-S-d") 'evil-scroll-up)
+	;; (define-key evil-visual-state-map (kbd "C-S-d") 'evil-scroll-up)
 	(define-key evil-normal-state-map (kbd "f") 'ace-jump-mode)
-	(define-key evil-insert-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
-	(define-key evil-insert-state-map (kbd "C-c f") 'ace-jump-char-mode)
+	(define-key evil-normal-state-map (kbd "S-f") 'ace-jump-char-mode)
 	(define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+	(define-key evil-insert-state-map (kbd "C-c f") 'ace-jump-char-mode)
+	(define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
 	(define-key evil-emacs-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
 	(define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize)
-	(define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
 	(loop for (mode . state) in '(()) do (evil-set-initial-state mode state))))
 
 (use-package ido
@@ -143,15 +145,26 @@
 
 (use-package erc
   :config
+  (require 'erc-services nil t)
+  (erc-services-mode 1)
+  (setq erc-prompt-for-nickserv-password nil)
   (setq erc-hide-list '("PART" "QUIT" "JOIN"))
-  (setq erc-server "irc.freenode.net"
+  (setq erc-default-coding-system '(utf-8 . utf-8)
+		erc-server-coding-system '(utf-8 . utf-8)
+		erc-server "irc.freenode.net"
 		erc-nick "lagooned"
-		erc-autojoin-channels-alist '((
-									   "#bitswebteam"
-									   "#gamestoptrades"
-									   "#emacs"
-									   "#wiki"
-									   ))))
+		erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
+		erc-prompt-for-password nil
+		erc-prompt (lambda () (concat (buffer-name) ">"))
+		erc-server-send-ping-interval 10
+		erc-server-send-ping-timeout 180
+		erc-server-reconnect-timeout 60
+		erc-prompt-for-nickserv-password nil
+		;; erc-kill-buffer-on-part t
+		;; erc-server-auto-reconnect t
+		;; erc-kill-server-buffer-on-quit t
+		erc-kill-queries-on-quit t
+		erc-autojoin-channels-alist '((".*freenode.net" "#bitswebteam"))))
 
 (use-package magit
   :init (setq magit-push-always-verify nil)
@@ -191,8 +204,13 @@
   (add-hook 'kill-emacs-hook 'remember-theme-save))
 
 (use-package org
+  :ensure org-bullets
   :bind (("C-c l" . org-store-link)
-		 ("C-c a" . org-agenda)))
+		 ("C-c a" . org-agenda))
+  :config
+  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
+(use-package org-bullets)
 
 (use-package restart-emacs)
 

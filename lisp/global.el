@@ -86,12 +86,13 @@
 ;; sentence navigation
 (setq sentence-end-double-space nil)
 
-;; random binds
+;; binds
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c n") 'my/cleanup-buffer)
 (global-set-key (kbd "C-c C-v") 'browse-url-at-point)
+(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 
 ;; insert newlines with C-n at end of buffer
 (setq next-line-add-newlines t)
@@ -104,17 +105,14 @@
   ;; railwaycat/homebrew-emacsmacport
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :height 130)
-  (unless (display-graphic-p) (menu-bar-mode -1))
-  )
+  (unless (display-graphic-p) (menu-bar-mode -1)))
 
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Ubuntu Mono")
   (set-face-attribute 'default nil :height 110)
-  (menu-bar-mode -1)
-  )
+  (unless (display-graphic-p) (menu-bar-mode -1)))
 
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :height 130)
-  (menu-bar-mode -1)
-  )
+  (menu-bar-mode -1))
