@@ -92,14 +92,12 @@
 	(evil-mode 1))
   :config
   (progn 
-	(define-key evil-normal-state-map (kbd "f") 'ace-jump-mode)
-	(define-key evil-normal-state-map (kbd "F") 'ace-jump-char-mode)
+	(define-key evil-normal-state-map (kbd "f") 'ace-jump-char-mode)
 	(define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-	(define-key evil-visual-state-map (kbd "f") 'ace-jump-mode)
-	(define-key evil-visual-state-map (kbd "F") 'ace-jump-char-mode)
-	(define-key evil-insert-state-map (kbd "C-c a f") 'ace-jump-char-mode)
+	(define-key evil-visual-state-map (kbd "f") 'ace-jump-char-mode)
+	(define-key evil-insert-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
 	(define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
-	(define-key evil-emacs-state-map (kbd "C-c a f") 'ace-jump-char-mode)
+	(define-key evil-emacs-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
 	(define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
 	(define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize)
 	(loop for (mode . state) in '(()) do (evil-set-initial-state mode state))))
