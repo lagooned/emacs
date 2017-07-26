@@ -2,73 +2,23 @@
 ;; CUSTOM FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
-;; deunicode file
-(defun my/de-unicode ()
-  "Tidy up a buffer by replacing all special Unicode characters
-     (smart quotes, etc.) with their more sane cousins"
+;; load config
+(defun my/load-config ()
   (interactive)
-  (let ((unicode-map '(("[\u2018\'\u2019\'\u201A\'\uFFFD]" . "'")
-                       ("[\u201c\'\u201d\'\u201e]" . "\"")
-                       ("\u2013" . "--")
-                       ("\u2014" . "---")
-                       ("\u2026" . "...")
-                       ("\u00A9" . "(c)")
-                       ("\u00AE" . "(r)")
-                       ("\u2122" . "TM")
-                       ("[\u02DC\'\u00A0]" . " "))))
-    (save-excursion
-      (loop for (key . value) in unicode-map
-            do
-            (goto-char (point-min))
-            (replace-regexp key value)))))
+  (load-file "~/.emacs.d/init.el"))
 
-;; sudo find-file
-(defun my/find-file-as-sudo ()
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (when file-name
-      (find-alternate-file (concat "/sudo::" file-name)))))
-
-(defun my/untabify-buffer ()
-  (interactive)
-  (untabify (point-min) (point-max)))
-
-(defun my/indent-buffer ()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
-(defun my/cleanup-buffer ()
-  (interactive)
-  (my/untabify-buffer)
-  (delete-trailing-whitespace)
-  (my/indent-buffer))
-
-;; indent on paste
-(dolist (command '(yank yank-pop))
-  (eval `(defadvice ,command (after indent-region activate)
-           (and (not current-prefix-arg)
-                (member major-mode '(emacs-lisp-mode lisp-mode
-                                                     clojure-mode    scheme-mode
-                                                     haskell-mode    ruby-mode
-                                                     rspec-mode      python-mode
-                                                     c-mode          c++-mode
-                                                     objc-mode       latex-mode
-                                                     plain-tex-mode))
-                (let ((mark-even-if-inactive transient-mark-mode))
-                  (indent-region (region-beginning) (region-end) nil))))))
-
-;; create auto-minor-mode-alist for files
-(defvar auto-minor-mode-alist ()
+;; create my/auto-minor-mode-alist for files
+(defvar my/auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'
 All elements of this alist are checked, meaning you can enable multiple minor modes for the same regexp.")
 
-(defun enable-minor-mode-based-on-extension ()
-  "check file name against auto-minor-mode-alist to enable minor modes
-the checking happens for all pairs in auto-minor-mode-alist"
+(defun my/enable-minor-mode-based-on-extension ()
+  "check file name against my/auto-minor-mode-alist to enable minor modes
+the checking happens for all pairs in my/auto-minor-mode-alist"
   (when buffer-file-name
     (let ((name buffer-file-name)
           (remote-id (file-remote-p buffer-file-name))
-          (alist auto-minor-mode-alist))
+          (alist my/auto-minor-mode-alist))
       ;; Remove backup-suffixes from file name.
       (setq name (file-name-sans-versions name))
       ;; Remove remote file name identification.
@@ -80,4 +30,19 @@ the checking happens for all pairs in auto-minor-mode-alist"
             (funcall (cdar alist) 1))
         (setq alist (cdr alist))))))
 
-(add-hook 'find-file-hook 'enable-minor-mode-based-on-extension)
+(add-hook 'find-file-hook 'my/enable-minor-mode-based-on-extension)
+
+;; untabify
+(defun my/untabify-except-makefiles ()
+  "Replace tabs with spaces except in makefiles."
+  (unless (derived-mode-p 'makefile-mode)
+    (untabify (point-min) (point-max))))
+
+;; cleanup
+(defun my/cleanup-buffer ()
+  (interactive)
+  (my/untabify-except-makefiles)
+  (delete-trailing-whitespace))
+
+;; cleanup on save
+(add-hook 'before-save-hook 'my/cleanup-buffer)

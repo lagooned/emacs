@@ -1,12 +1,12 @@
-;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE CONFIG ;;
 ;;;;;;;;;;;;;;;;;;;;
 
 ;; INSTALL USE-PACKAGE IF NOT INSTALLED
 (if (not (package-installed-p 'use-package))
-	(progn
-	  (package-refresh-contents)
-	  (package-install 'use-package)))
+    (progn
+      (package-refresh-contents)
+      (package-install 'use-package)))
 (setq use-package-always-ensure t)
 (require 'use-package)
 
@@ -17,10 +17,15 @@
   (setq-default adaptive-wrap-extra-indent 2)
   :config
   (add-hook 'visual-line-mode-hook
-			(lambda ()
-			  (adaptive-wrap-prefix-mode +1)
-			  (diminish 'visual-line-mode)))
+            (lambda ()
+              (adaptive-wrap-prefix-mode +1)
+              (diminish 'visual-line-mode)))
   (global-visual-line-mode +1))
+
+(use-package aggressive-indent
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'css-mode-hook #'aggressive-indent-mode))
 
 (use-package try)
 
@@ -39,6 +44,12 @@
   :config
   (add-hook 'haskell-mode-hook 'intero-mode))
 
+(use-package indium
+  :ensure js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-hook 'js2-mode-hook #'indium-interaction-mode))
+
 (use-package flycheck
   :commands flycheck-add-next-checker
   :init
@@ -49,24 +60,28 @@
 (use-package magit
   :init
   (setq magit-push-always-verify nil)
-  :bind ("C-x g" . magit-status)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  :bind
+  ("C-x g" . magit-status)
+  ("C-x C-g" . magit-status)
   :config
   (progn
-	(with-eval-after-load 'info
-	  (info-initialize)
-	  (add-to-list 'Info-directory-list
-				   "~/.emacs.d/packages/magit/Documentation/"))))
+    (with-eval-after-load 'info
+      (info-initialize)
+      (add-to-list 'Info-directory-list
+                   "~/.emacs.d/packages/magit/Documentation/"))))
 
 (use-package projectile
   :commands projectile-find-file
-  :config (projectile-global-mode))
+  :config
+  (projectile-global-mode))
 
 (use-package company
   :diminish company-mode
   :init
   (setq company-show-numbers t)
   :config
-  (add-hook 'after-init-hook 'global-company-mode)) 
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package dired+
   :init
@@ -85,25 +100,26 @@
 (use-package evil
   :ensure projectile
   :ensure evil-surround
+  :ensure evil-ediff
   :init
   (progn
-	(setq evil-want-C-u-scroll t)
-	(global-evil-surround-mode 1)
-	(evil-mode 1))
+    (setq evil-want-C-u-scroll t)
+    (global-evil-surround-mode 1)
+    (evil-mode 1))
   :config
-  (progn 
-	(define-key evil-normal-state-map (kbd "f") 'ace-jump-char-mode)
-	(define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-	(define-key evil-visual-state-map (kbd "f") 'ace-jump-char-mode)
-	(define-key evil-insert-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
-	(define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
-	(define-key evil-emacs-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
-	(define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
-	(define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize)
-	(loop for (mode . state) in '(()) do (evil-set-initial-state mode state))))
+  (progn
+    (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+    (define-key evil-normal-state-map (kbd "M-f") 'ace-jump-char-mode)
+    (define-key evil-visual-state-map (kbd "M-f") 'ace-jump-char-mode)
+    (define-key evil-insert-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
+    (define-key evil-emacs-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
+    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+    (define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
+    (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
+    (define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize)))
 
 (use-package ido
-  :ensure ido-vertical-mode 
+  :ensure ido-vertical-mode
   :ensure ido-ubiquitous
   :init
   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
@@ -117,7 +133,7 @@
   :diminish linum-relative-mode
   :init
   (setq linum-relative-format "%3s "
-		linum-relative-current-symbol "")
+        linum-relative-current-symbol "")
   :config
   (linum-relative-mode)
   (global-linum-mode))
@@ -128,13 +144,13 @@
 
 (use-package emmet-mode
   :config
-  (add-hook 'sgml-mode-hook 'emmet-mode) 
+  (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode))
 
 (use-package smex
   :commands smex
   :bind (("M-x" . smex)
-		 ("M-X" . smex-major-mode-commands))
+         ("C-c M-x" . smex-major-mode-commands))
   :config
   (smex-initialize))
 
@@ -145,30 +161,20 @@
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-hide-list '("PART" "QUIT" "JOIN"))
   (setq erc-default-coding-system '(utf-8 . utf-8)
-		erc-server-coding-system '(utf-8 . utf-8)
-		erc-server "irc.freenode.net"
-		erc-nick "lagooned"
-		erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
-		erc-prompt-for-password nil
-		erc-prompt (lambda () (concat (buffer-name) ">"))
-		erc-server-send-ping-interval 10
-		erc-server-send-ping-timeout 180
-		erc-server-reconnect-timeout 60
-		erc-prompt-for-nickserv-password nil
-		;; erc-kill-buffer-on-part t
-		;; erc-server-auto-reconnect t
-		;; erc-kill-server-buffer-on-quit t
-		erc-kill-queries-on-quit t
-		erc-autojoin-channels-alist '((".*freenode.net" "#bitswebteam"))))
-
-(use-package magit
-  :init (setq magit-push-always-verify nil)
-  :bind ("C-x g" . magit-status)
-  :config
-  (with-eval-after-load 'info
-	(info-initialize)
-	(add-to-list 'Info-directory-list
-				 "~/.emacs.d/packages/magit/Documentation/")))
+        erc-server-coding-system '(utf-8 . utf-8)
+        erc-server "irc.freenode.net"
+        erc-nick "lagooned"
+        erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
+        erc-prompt-for-password nil
+        erc-prompt (lambda () (concat (buffer-name) ">"))
+        erc-server-send-ping-interval 10
+        erc-server-send-ping-timeout 180
+        erc-server-reconnect-timeout 60
+        erc-prompt-for-nickserv-password nil
+        ;; erc-kill-buffer-on-part t
+        ;; erc-server-auto-reconnect t
+        ;; erc-kill-server-buffer-on-quit t
+        erc-kill-queries-on-quit t))
 
 (use-package yasnippet
   :diminish yas-minor-mode
@@ -178,12 +184,12 @@
 (use-package nxml-mode
   :init
   (setq nxml-child-indent 4
-		nxml-attribute-indent 4))
+        nxml-attribute-indent 4))
 
 (use-package fix-word
   :bind (("M-u" . fix-word-upcase)
-		 ("M-l" . fix-word-downcase)
-		 ("M-c" . fix-word-capitalize)))
+         ("M-l" . fix-word-downcase)
+         ("M-c" . fix-word-capitalize)))
 
 (use-package rainbow-delimiters
   :config
@@ -192,22 +198,50 @@
 (use-package restclient
   :ensure company-restclient)
 
-(use-package remember-theme
-  :init
-  (setq remember-theme-file "~/.emacs.d/.last-theme")
+
+(use-package enh-ruby-mode
+  :ensure flymake-ruby
   :config
-  (add-hook 'kill-emacs-hook 'remember-theme-save))
+  (add-hook 'ruby-mode-hook 'enh-ruby-mode)
+  (add-hook 'enh-ruby-mode-hook 'flymake-ruby-load))
 
 (use-package org
   :ensure org-bullets
+  :ensure org-beautify-theme
   :bind (("C-c l" . org-store-link)
-		 ("C-c a" . org-agenda))
+         ("C-c a" . org-agenda))
+  :init
+  (setq org-startup-indented t)
   :config
+  (load-theme 'org-beautify t)
+  (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0)))
+  (add-hook 'org-mode-hook (lambda() (linum-mode 0)))
   (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
-(use-package org-bullets)
+(use-package restart-emacs
+  :bind
+  ("C-x C-r" . restart-emacs))
 
-(use-package restart-emacs)
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  (add-hook 'prog-mode-hook #'smartparens-mode))
+
+(use-package solarized-theme
+  :init
+  (setq solarized-use-variable-pitch nil
+        solarized-high-contrast-mode-line t
+        solarized-use-less-bold t
+        solarized-emphasize-indicators nil
+        solarized-scale-org-headlines nil
+        solarized-height-minus-1 1
+        solarized-height-plus-1 1
+        solarized-height-plus-2 1
+        solarized-height-plus-3 1
+        solarized-height-plus-4 1)
+  :config
+  (load-theme 'solarized-dark t))
+
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -221,25 +255,8 @@
   :ensure web-mode
   :ensure impatient-mode
   ;; setup mode
-  ;; :mode 
+  ;; :mode
   :init
-  (progn 
-	(add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-	(add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
-	(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-	(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-	(add-to-list 'auto-mode-alist '("\\.less\\'" . web-mode))
-	(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))))
-
-(use-package solarized-theme
-  :init
-  (setq solarized-use-variable-pitch nil
-		solarized-high-contrast-mode-line t
-		solarized-use-less-bold t
-		solarized-emphasize-indicators nil
-		solarized-scale-org-headlines nil
-		solarized-height-minus-1 1
-		solarized-height-plus-1 1
-		solarized-height-plus-2 1
-		solarized-height-plus-3 1
-		solarized-height-plus-4 1))
+  (progn
+    (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+    (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))))

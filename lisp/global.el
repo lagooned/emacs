@@ -10,6 +10,37 @@
 ;; set default warning level
 (setq warning-minimum-level :emergency)
 
+;; new fringe arrows
+(define-fringe-bitmap 'right-curly-arrow
+  [#b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000])
+
+(define-fringe-bitmap 'left-curly-arrow
+  [#b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000])
+
+(define-fringe-bitmap 'right-arrow
+  [#b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000])
+
 ;; setup user
 (setq user-full-name "Jared M. Engler"
       user-mail-address "jared.lite@gmail.com"
@@ -18,14 +49,12 @@
       calendar-location-name "Normal, IL")
 
 ;; frame title format
-(setq frame-title-format
-      '("Emacs - " (buffer-file-name "%f"
-                                     (dired-directory dired-directory "%b"))))
+(setq frame-title-format '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 ;; backup files to temp
-(setq auto-save-default nil)
-;; (setq backup-directory-alist `((".*" . , temporary-file-directory)))
-;; (setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
+;; (setq auto-save-default nil)
+(setq backup-directory-alist `((".*" . , temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
 ;; (setq version-control t)
 ;; (setq delete-old-versions t)
 
@@ -34,11 +63,10 @@
 
 ;; unique buffer names
 (require 'uniquify)
-(setq
- uniquify-buffer-name-style 'reverse
- uniquify-after-kill-buffer-p t
- uniquify-separator ":"
- uniquify-ignore-buffers-re "^\\*")
+(setq uniquify-buffer-name-style 'reverse
+      uniquify-after-kill-buffer-p t
+      uniquify-separator ":"
+      uniquify-ignore-buffers-re "^\\*")
 
 ;; show inputs immediately
 (setq echo-keystrokes 0.01)
@@ -53,11 +81,18 @@
 ;; no tool bar
 (tool-bar-mode -1)
 
+;; no tabs
+(setq-default indent-tabs-mode nil)
+
 ;; no scroll bar
 (scroll-bar-mode -1)
 
 ;; symbols
 (global-prettify-symbols-mode t)
+
+;; truncate and wrap lines
+;; (setq-default truncate-lines 0)
+(setq-default word-wrap t)
 
 ;; show parens
 (show-paren-mode 1)
@@ -67,14 +102,8 @@
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
-;; electric indent
-(electric-indent-mode 1)
-
-;; electric pair
-(electric-pair-mode 1)
-
 ;; reload init
-(global-set-key (kbd "C-c i") (lambda() (interactive)(load-file "~/.emacs.d/init.el")))
+(global-set-key (kbd "C-c i") 'my/load-config)
 
 ;; make prompts easier
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -89,10 +118,10 @@
 ;; binds
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-c m") 'compile)
-(global-set-key (kbd "C-c n") 'my/cleanup-buffer)
-(global-set-key (kbd "C-c C-v") 'browse-url-at-point)
+(global-set-key (kbd "C-c C-c C-l") 'my/cleanup-buffer)
 (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+(global-set-key (kbd "C-x f") 'find-file)
+(global-set-key (kbd "M-q") 'toggle-truncate-lines)
 
 ;; insert newlines with C-n at end of buffer
 (setq next-line-add-newlines t)
@@ -104,8 +133,10 @@
 (when (eq system-type 'darwin)
   ;; railwaycat/homebrew-emacsmacport
   (set-face-attribute 'default nil :family "Source Code Pro")
-  (set-face-attribute 'default nil :height 130)
-  (unless (display-graphic-p) (menu-bar-mode -1)))
+  ;; (set-face-attribute 'default nil :family "Monaco")
+  (set-face-attribute 'default nil :height 120)
+  (unless (display-graphic-p) (menu-bar-mode -1))
+  (setq ispell-program-name "aspell"))
 
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Ubuntu Mono")
