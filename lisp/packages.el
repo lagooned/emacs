@@ -1,6 +1,24 @@
-;;;;;;;;;;;;;;;;;;;
-;; PACKAGE CONFIG ;;
-;;;;;;;;;;;;;;;;;;;;
+;;; packages.el --- package configuragion            -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017  Jared M. Engler
+
+;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: calendar, convenience, extensions
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Code:
 
 ;; INSTALL USE-PACKAGE IF NOT INSTALLED
 (if (not (package-installed-p 'use-package))
@@ -118,6 +136,10 @@
     (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
     (define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize)))
 
+(use-package expand-region
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
 (use-package ido
   :ensure ido-vertical-mode
   :ensure ido-ubiquitous
@@ -198,7 +220,6 @@
 (use-package restclient
   :ensure company-restclient)
 
-
 (use-package enh-ruby-mode
   :ensure flymake-ruby
   :config
@@ -260,3 +281,6 @@
   (progn
     (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
     (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))))
+
+(provide 'packages)
+;;; packages.el ends here

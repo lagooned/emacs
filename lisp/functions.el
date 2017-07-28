@@ -1,6 +1,24 @@
-;;;;;;;;;;;;;;;;;;;;;;
-;; CUSTOM FUNCTIONS ;;
-;;;;;;;;;;;;;;;;;;;;;;
+;;; functions.el --- describe custom functions       -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017  Jared M. Engler
+
+;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: lisp, custom, config, minor-mode, tabify
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Code:
 
 ;; load config
 (defun my/load-config ()
@@ -9,12 +27,14 @@
 
 ;; create my/auto-minor-mode-alist for files
 (defvar my/auto-minor-mode-alist ()
-  "Alist of filename patterns vs correpsonding minor mode functions, see `auto-mode-alist'
-All elements of this alist are checked, meaning you can enable multiple minor modes for the same regexp.")
+  "Alist of filename patterns vs correpsonding minor mode functions, see
+  `auto-mode-alist' All elements of this alist are checked, meaning you can
+  enable multiple minor modes for the same regexp.")
 
+;; enable minor modes
 (defun my/enable-minor-mode-based-on-extension ()
-  "check file name against my/auto-minor-mode-alist to enable minor modes
-the checking happens for all pairs in my/auto-minor-mode-alist"
+  "check file name against my/auto-minor-mode-alist to enable minor modes the
+checking happens for all pairs in my/auto-minor-mode-alist"
   (when buffer-file-name
     (let ((name buffer-file-name)
           (remote-id (file-remote-p buffer-file-name))
@@ -30,6 +50,7 @@ the checking happens for all pairs in my/auto-minor-mode-alist"
             (funcall (cdar alist) 1))
         (setq alist (cdr alist))))))
 
+;; hook to new buffer
 (add-hook 'find-file-hook 'my/enable-minor-mode-based-on-extension)
 
 ;; untabify
@@ -46,3 +67,6 @@ the checking happens for all pairs in my/auto-minor-mode-alist"
 
 ;; cleanup on save
 (add-hook 'before-save-hook 'my/cleanup-buffer)
+
+(provide 'functions)
+;;; functions.el ends here

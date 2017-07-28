@@ -1,6 +1,24 @@
-;;;;;;;;;;;;;;;;;;
-;; GLOBAL SETUP ;;
-;;;;;;;;;;;;;;;;;;
+;;; global.el --- main emacs config                  -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017  Jared M. Engler
+
+;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: c, data, docs, faces, wp, local, multimedia, vc, calendar, maint
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Code:
 
 ;; use utf-8
 (prefer-coding-system 'utf-8)
@@ -49,7 +67,8 @@
       calendar-location-name "Normal, IL")
 
 ;; frame title format
-(setq frame-title-format '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+(setq frame-title-format
+      '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 ;; backup files to temp
 ;; (setq auto-save-default nil)
@@ -109,13 +128,13 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; highlight line
-(when window-system
-  (global-hl-line-mode))
+;; (when window-system
+;; (global-hl-line-mode))
 
 ;; sentence navigation
 (setq sentence-end-double-space nil)
 
-;; binds
+;; some custom binds
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-c C-c C-l") 'my/cleanup-buffer)
@@ -147,3 +166,6 @@
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :height 130)
   (menu-bar-mode -1))
+
+(provide 'global)
+;;; global.el ends here
