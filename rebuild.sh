@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -r .custom.el .last-theme elpa auto-save-list smex-items
+rm -r .custom.el elpa auto-save-list smex-items

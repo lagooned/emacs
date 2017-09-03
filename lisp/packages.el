@@ -20,7 +20,6 @@
 
 ;;; Code:
 
-;; INSTALL USE-PACKAGE IF NOT INSTALLED
 (if (not (package-installed-p 'use-package))
     (progn
       (package-refresh-contents)
@@ -28,7 +27,10 @@
 (setq use-package-always-ensure t)
 (require 'use-package)
 
-;; USE PACKAGE CONFIGS
+(use-package ace-jump-mode)
+
+(use-package all-the-icons)
+
 (use-package adaptive-wrap
   :commands global-visual-line-mode
   :init
@@ -45,7 +47,25 @@
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
 
-(use-package try)
+(use-package dired+
+  :init
+  (setq diredp-hide-details-initially-flag t)
+  (setq dired-omit-mode t))
+
+(use-package doom-themes
+  :init
+  (setq doom-themes-enable-bold t)
+  :config
+  (load-theme 'doom-molokai t))
+
+(use-package eldoc
+  :diminish eldoc-mode
+  :commands turn-on-eldoc-mode
+  :defer t
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
 (use-package elpy
   :commands elpy-enable
@@ -54,19 +74,29 @@
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
   (elpy-enable))
 
-(use-package ace-jump-mode)
-
-(use-package haskell-mode
-  :ensure intero
-  :ensure flycheck
+(use-package evil
+  :ensure projectile
+  :ensure evil-surround
+  :ensure evil-ediff
+  :ensure evil-vimish-fold
+  :init
+  (setq evil-want-C-u-scroll t)
   :config
-  (add-hook 'haskell-mode-hook 'intero-mode))
+  (evil-mode 1)
+  (global-evil-surround-mode 1)
+  (evil-vimish-fold-mode 1)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+  (define-key evil-normal-state-map (kbd "M-f") 'ace-jump-char-mode)
+  (define-key evil-visual-state-map (kbd "M-f") 'ace-jump-char-mode)
+  (define-key evil-insert-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
+  (define-key evil-emacs-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
+  (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+  (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
+  (define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize))
 
-(use-package indium
-  :ensure js2-mode
+(use-package expand-region
   :config
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-hook 'js2-mode-hook #'indium-interaction-mode))
+  (global-set-key (kbd "C-=") 'er/expand-region))
 
 (use-package flycheck
   :commands flycheck-add-next-checker
@@ -74,6 +104,16 @@
   (setq flycheck-check-syntax-automatically '(save new-line))
   :config
   (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
+
+(use-package gnus
+  :init
+  (setq gnus-select-method '(nntp "gmane" (nntp-address "news.gmane.org"))))
+
+(use-package haskell-mode
+  :ensure intero
+  :ensure flycheck
+  :config
+  (add-hook 'haskell-mode-hook 'intero-mode))
 
 (use-package magit
   :init
@@ -89,67 +129,16 @@
       (add-to-list 'Info-directory-list
                    "~/.emacs.d/packages/magit/Documentation/"))))
 
-(use-package projectile
-  :commands projectile-find-file
-  :config
-  (projectile-global-mode))
-
-(use-package company
-  :diminish company-mode
-  :init
-  (setq company-show-numbers t)
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
-
-(use-package dired+
-  :init
-  (setq diredp-hide-details-initially-flag t)
-  (setq dired-omit-mode t))
-
-(use-package eldoc
-  :diminish eldoc-mode
-  :commands turn-on-eldoc-mode
-  :defer t
-  :init
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
-
-(use-package evil
-  :ensure projectile
-  :ensure evil-surround
-  :ensure evil-ediff
-  :init
-  (progn
-    (setq evil-want-C-u-scroll t)
-    (global-evil-surround-mode 1)
-    (evil-mode 1))
-  :config
-  (progn
-    (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-    (define-key evil-normal-state-map (kbd "M-f") 'ace-jump-char-mode)
-    (define-key evil-visual-state-map (kbd "M-f") 'ace-jump-char-mode)
-    (define-key evil-insert-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
-    (define-key evil-emacs-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
-    (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
-    (define-key evil-emacs-state-map (kbd "M-p") 'projectile-find-file)
-    (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
-    (define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize)))
-
-(use-package expand-region
-  :config
-  (global-set-key (kbd "C-=") 'er/expand-region))
-
 (use-package ido
   :ensure ido-vertical-mode
   :ensure ido-ubiquitous
   :init
   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
   :config
-  (ido-mode t)
-  (ido-everywhere 1)
+  (ido-ubiquitous-mode 1)
   (ido-vertical-mode 1)
-  (ido-ubiquitous-mode 1))
+  (ido-everywhere 1)
+  (ido-mode t))
 
 (use-package linum-relative
   :diminish linum-relative-mode
@@ -158,7 +147,7 @@
         linum-relative-current-symbol "")
   :config
   (linum-relative-mode)
-  (global-linum-mode))
+  (add-hook 'prog-mode-hook #'(lambda () (linum-mode 1))))
 
 (use-package lorem-ipsum
   :config
@@ -198,11 +187,6 @@
         ;; erc-kill-server-buffer-on-quit t
         erc-kill-queries-on-quit t))
 
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :config
-  (yas-global-mode 1))
-
 (use-package nxml-mode
   :init
   (setq nxml-child-indent 4
@@ -213,35 +197,34 @@
          ("M-l" . fix-word-downcase)
          ("M-c" . fix-word-capitalize)))
 
-(use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
-(use-package restclient
-  :ensure company-restclient)
-
-(use-package enh-ruby-mode
-  :ensure flymake-ruby
-  :config
-  (add-hook 'ruby-mode-hook 'enh-ruby-mode)
-  (add-hook 'enh-ruby-mode-hook 'flymake-ruby-load))
-
 (use-package org
   :ensure org-bullets
   :ensure org-beautify-theme
   :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda))
+         ("C-c a" . org-agenda)
+         ("C-c b" . org-iswitchb)
+         ("C-c c" . org-capture))
   :init
   (setq org-startup-indented t)
   :config
   (load-theme 'org-beautify t)
   (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0)))
-  (add-hook 'org-mode-hook (lambda() (linum-mode 0)))
   (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
+(use-package projectile
+  :commands projectile-find-file
+  :config
+  (projectile-global-mode))
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package restart-emacs
   :bind
   ("C-x C-r" . restart-emacs))
+
+(use-package restclient)
 
 (use-package smartparens
   :config
@@ -259,10 +242,18 @@
         solarized-height-plus-1 1
         solarized-height-plus-2 1
         solarized-height-plus-3 1
-        solarized-height-plus-4 1)
-  :config
-  (load-theme 'solarized-dark t))
+        solarized-height-plus-4 1))
 
+(use-package switch-window
+  :commands switch-window
+  :init
+  (setq switch-window-shortcut-style 'qwerty)
+  (setq switch-window-qwerty-shortcuts
+        '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
+  :bind
+  ("C-x o" . switch-window))
+
+(use-package try)
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -275,12 +266,15 @@
 (use-package web-mode
   :ensure web-mode
   :ensure impatient-mode
-  ;; setup mode
-  ;; :mode
   :init
-  (progn
-    (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-    (add-to-list 'auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))))
+  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+  (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
+
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :config
+  (yas-global-mode 1))
 
 (provide 'packages)
 ;;; packages.el ends here

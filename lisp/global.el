@@ -140,6 +140,7 @@
 (global-set-key (kbd "C-c C-c C-l") 'my/cleanup-buffer)
 (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x f") 'find-file)
+(global-set-key (kbd "C-x C-d") 'dired)
 (global-set-key (kbd "M-q") 'toggle-truncate-lines)
 
 ;; insert newlines with C-n at end of buffer
@@ -155,7 +156,16 @@
   ;; (set-face-attribute 'default nil :family "Monaco")
   (set-face-attribute 'default nil :height 120)
   (unless (display-graphic-p) (menu-bar-mode -1))
-  (setq ispell-program-name "aspell"))
+  (setq ispell-program-name "aspell")
+  ;; load mu4e
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+  (require 'mu4e)
+  (setq mu4e-contexts `(,(make-mu4e-context
+                          :name "Gmail"
+                          :match-func (lambda (msg) (when msg (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+                          :vars '((mu4e-trash-folder . "/Gmail/[Gmail].Trash")
+                                  (mu4e-refile-folder . "/Gmail/[Gmail].Archive")))))
+  )
 
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Ubuntu Mono")
@@ -164,7 +174,7 @@
 
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :family "Consolas")
-  (set-face-attribute 'default nil :height 130)
+  (set-face-attribute 'default nil :height 120)
   (menu-bar-mode -1))
 
 (provide 'global)
