@@ -66,7 +66,7 @@ checking happens for all pairs in my/auto-minor-mode-alist"
   (delete-trailing-whitespace))
 
 ;; cleanup on save
-(add-hook 'before-save-hook 'my/cleanup-buffer)
+;; (add-hook 'before-save-hook 'my/cleanup-buffer)
 
 (provide 'functions)
 ;;; functions.el ends here
