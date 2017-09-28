@@ -136,6 +136,8 @@
 
 (use-package linum-relative
   :diminish linum-relative-mode
+  :bind
+  ("C-x l" . linum-mode)
   :init
   (setq linum-relative-format "%3s "
         linum-relative-current-symbol "")
