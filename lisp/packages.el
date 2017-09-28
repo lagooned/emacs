@@ -51,6 +51,7 @@
   (counsel-mode 1))
 
 (use-package dired+
+  :diminish dired-omit-mode
   :init
   (setq diredp-hide-details-initially-flag t)
   (setq dired-omit-mode t))
@@ -201,7 +202,9 @@
   :bind
   ("C-x C-r" . restart-emacs))
 
-(use-package restclient)
+(use-package restclient
+  :config
+  (add-to-list 'auto-mode-alist '("\\.rest\\'" . restclient-mode)))
 
 (use-package smartparens
   :diminish smartparens-mode
@@ -235,6 +238,13 @@
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
+
+(use-package yasnippet
+  :bind
+  ("C-c y i s" . yas-insert-snippet)
+  :config
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook #'yas-minor-mode))
 
 (provide 'packages)
 ;;; packages.el ends here

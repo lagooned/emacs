@@ -29,7 +29,9 @@
 (package-initialize)
 
 ;; add load path
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(let ((default-directory  "~/.emacs.d/lisp/"))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
 
 ;; load custom functions
 (load "functions")
