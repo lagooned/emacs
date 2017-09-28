@@ -29,8 +29,6 @@
 
 (use-package ace-jump-mode)
 
-(use-package all-the-icons)
-
 (use-package adaptive-wrap
   :commands global-visual-line-mode
   :init
@@ -46,6 +44,11 @@
   :config
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
+
+(use-package counsel
+  :diminish counsel-mode
+  :config
+  (counsel-mode 1))
 
 (use-package dired+
   :init
@@ -67,53 +70,54 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
-(use-package elpy
-  :commands elpy-enable
-  :ensure py-autopep8
-  :config
-  (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-  (elpy-enable))
-
 (use-package evil
-  :ensure projectile
+  :ensure ace-jump-mode
+  :ensure counsel
   :ensure evil-surround
   :ensure evil-ediff
   :ensure evil-vimish-fold
+  :ensure undo-tree
+  :diminish evil-vimish-fold-mode
   :init
   (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1)
   (global-evil-surround-mode 1)
   (evil-vimish-fold-mode 1)
-  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
   (define-key evil-normal-state-map (kbd "M-f") 'ace-jump-char-mode)
   (define-key evil-visual-state-map (kbd "M-f") 'ace-jump-char-mode)
-  (define-key evil-insert-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
-  (define-key evil-emacs-state-map (kbd "C-c C-f") 'ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+  (define-key evil-insert-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
+  (define-key evil-emacs-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
+  (define-key evil-normal-state-map (kbd "C-c p g") 'counsel-git-grep)
+  (define-key evil-insert-state-map (kbd "C-c p g") 'counsel-git-grep)
+  (define-key evil-emacs-state-map (kbd "C-c p g") 'counsel-git-grep)
+  (define-key evil-normal-state-map (kbd "C-x M-f") 'counsel-recentf)
+  (define-key evil-insert-state-map (kbd "C-x M-f") 'counsel-recentf)
+  (define-key evil-emacs-state-map (kbd "C-c C-f") 'counsel-recentf)
+  (define-key evil-normal-state-map (kbd "C-x C-M-f") 'counsel-locate)
+  (define-key evil-insert-state-map (kbd "C-x C-M-f") 'counsel-locate)
+  (define-key evil-emacs-state-map (kbd "C-c C-M-f") 'counsel-locate)
+  (define-key evil-normal-state-map (kbd "C-p") 'counsel-git)
+  (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "M-y") 'counsel-yank-pop)
+  (define-key evil-emacs-state-map (kbd "M-y") 'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "C-s") 'swiper)
+  (define-key evil-normal-state-map (kbd "C-s") 'swiper)
+  (define-key evil-visual-state-map (kbd "C-s") 'swiper)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
   (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
-  (define-key evil-emacs-state-map (kbd "C-/") 'undo-tree-visualize))
+  (define-key evil-emacs-state-map (kbd "C-M-/") 'undo-tree-visualize))
 
 (use-package expand-region
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 
-(use-package flycheck
-  :commands flycheck-add-next-checker
-  :init
-  (setq flycheck-check-syntax-automatically '(save new-line))
+(use-package ivy
+  :diminish ivy-mode
+  :ensure counsel
+  :ensure swiper
   :config
-  (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
-
-(use-package gnus
-  :init
-  (setq gnus-select-method '(nntp "gmane" (nntp-address "news.gmane.org"))))
-
-(use-package haskell-mode
-  :ensure intero
-  :ensure flycheck
-  :config
-  (add-hook 'haskell-mode-hook 'intero-mode))
+  (ivy-mode))
 
 (use-package magit
   :init
@@ -129,17 +133,6 @@
       (add-to-list 'Info-directory-list
                    "~/.emacs.d/packages/magit/Documentation/"))))
 
-(use-package ido
-  :ensure ido-vertical-mode
-  :ensure ido-ubiquitous
-  :init
-  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
-  :config
-  (ido-ubiquitous-mode 1)
-  (ido-vertical-mode 1)
-  (ido-everywhere 1)
-  (ido-mode t))
-
 (use-package linum-relative
   :diminish linum-relative-mode
   :init
@@ -149,21 +142,12 @@
   (linum-relative-mode)
   (add-hook 'prog-mode-hook #'(lambda () (linum-mode 1))))
 
-(use-package lorem-ipsum
-  :config
-  (lorem-ipsum-use-default-bindings))
+(use-package lorem-ipsum)
 
 (use-package emmet-mode
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode))
-
-(use-package smex
-  :commands smex
-  :bind (("M-x" . smex)
-         ("C-c M-x" . smex-major-mode-commands))
-  :config
-  (smex-initialize))
 
 (use-package erc
   :config
@@ -198,7 +182,6 @@
          ("M-c" . fix-word-capitalize)))
 
 (use-package org
-  :ensure org-bullets
   :ensure org-beautify-theme
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
@@ -208,13 +191,7 @@
   (setq org-startup-indented t)
   :config
   (load-theme 'org-beautify t)
-  (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0)))
-  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
-
-(use-package projectile
-  :commands projectile-find-file
-  :config
-  (projectile-global-mode))
+  (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0))))
 
 (use-package rainbow-delimiters
   :config
@@ -227,22 +204,10 @@
 (use-package restclient)
 
 (use-package smartparens
+  :diminish smartparens-mode
   :config
   (require 'smartparens-config)
   (add-hook 'prog-mode-hook #'smartparens-mode))
-
-(use-package solarized-theme
-  :init
-  (setq solarized-use-variable-pitch nil
-        solarized-high-contrast-mode-line t
-        solarized-use-less-bold t
-        solarized-emphasize-indicators nil
-        solarized-scale-org-headlines nil
-        solarized-height-minus-1 1
-        solarized-height-plus-1 1
-        solarized-height-plus-2 1
-        solarized-height-plus-3 1
-        solarized-height-plus-4 1))
 
 (use-package switch-window
   :commands switch-window
@@ -270,11 +235,6 @@
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
-
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :config
-  (yas-global-mode 1))
 
 (provide 'packages)
 ;;; packages.el ends here

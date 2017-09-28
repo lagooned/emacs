@@ -102,6 +102,7 @@
 
 ;; no tabs
 (setq-default indent-tabs-mode nil)
+(setq indent-tabs-mode nil)
 
 ;; no scroll bar
 (scroll-bar-mode -1)
