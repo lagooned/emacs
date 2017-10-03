@@ -148,15 +148,14 @@
                    "~/.emacs.d/packages/magit/Documentation/"))))
 
 (use-package linum-relative
+  :commands linum-relative-mode
   :diminish linum-relative-mode
   :bind
-  ("C-x l" . linum-mode)
+  ("C-x l" . linum-relative-mode)
   :init
   (setq linum-relative-format "%3s "
         linum-relative-current-symbol "")
-  :config
-  (linum-relative-mode)
-  (add-hook 'prog-mode-hook #'(lambda () (linum-mode 1))))
+  (add-hook 'prog-mode-hook (lambda () (linum-relative-mode 1))))
 
 (use-package lorem-ipsum)
 
