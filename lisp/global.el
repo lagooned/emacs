@@ -143,6 +143,8 @@
 (global-set-key (kbd "C-x f") 'find-file)
 (global-set-key (kbd "C-x C-d") 'dired)
 (global-set-key (kbd "M-q") 'toggle-truncate-lines)
+(global-set-key (kbd "M-/") nil)
+
 
 ;; insert newlines with C-n at end of buffer
 (setq next-line-add-newlines t)

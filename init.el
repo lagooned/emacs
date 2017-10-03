@@ -19,13 +19,13 @@
 
 ;;; Code:
 
-;; elpa
 (require 'package)
-(setq package-archives
-      '(("ELPA" . "http://tromey.com/elpa/")
-        ("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.milkbox.net/packages/")
-        ("marmalade" . "http://marmalade-repo.org/packages/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
+                         ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
+ 						 ("org" . "http://orgmode.org/elpa/"))) 
 (package-initialize)
 
 ;; add load path

@@ -34,14 +34,16 @@
   :init
   (setq-default adaptive-wrap-extra-indent 2)
   :config
-  (add-hook 'visual-line-mode-hook
-            (lambda ()
-              (adaptive-wrap-prefix-mode +1)
-              (diminish 'visual-line-mode)))
+  (add-hook
+   'visual-line-mode-hook
+   (lambda ()
+     (adaptive-wrap-prefix-mode +1)
+     (diminish 'visual-line-mode)))
   (global-visual-line-mode +1))
 
 (use-package aggressive-indent
-  :config
+  :commands aggressive-indent-mode
+  :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
 
@@ -54,7 +56,8 @@
   :diminish dired-omit-mode
   :init
   (setq diredp-hide-details-initially-flag t)
-  (setq dired-omit-mode t))
+  (setq dired-omit-mode t)
+  (setq dired-dwim-target t))
 
 (use-package doom-themes
   :init
@@ -74,8 +77,9 @@
 (use-package evil
   :ensure ace-jump-mode
   :ensure counsel
-  :ensure evil-surround
+  :ensure evil-matchit
   :ensure evil-ediff
+  :ensure evil-surround
   :ensure evil-vimish-fold
   :ensure undo-tree
   :diminish evil-vimish-fold-mode
@@ -83,35 +87,43 @@
   (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1)
+  (global-evil-matchit-mode 1)
   (global-evil-surround-mode 1)
   (evil-vimish-fold-mode 1)
-  (define-key evil-normal-state-map (kbd "M-f") 'ace-jump-char-mode)
-  (define-key evil-visual-state-map (kbd "M-f") 'ace-jump-char-mode)
-  (define-key evil-insert-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
-  (define-key evil-emacs-state-map (kbd "C-c C-j") 'ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "C-c p g") 'counsel-git-grep)
-  (define-key evil-insert-state-map (kbd "C-c p g") 'counsel-git-grep)
-  (define-key evil-emacs-state-map (kbd "C-c p g") 'counsel-git-grep)
-  (define-key evil-normal-state-map (kbd "C-x M-f") 'counsel-recentf)
-  (define-key evil-insert-state-map (kbd "C-x M-f") 'counsel-recentf)
-  (define-key evil-emacs-state-map (kbd "C-c C-f") 'counsel-recentf)
-  (define-key evil-normal-state-map (kbd "C-x C-M-f") 'counsel-locate)
-  (define-key evil-insert-state-map (kbd "C-x C-M-f") 'counsel-locate)
-  (define-key evil-emacs-state-map (kbd "C-c C-M-f") 'counsel-locate)
-  (define-key evil-normal-state-map (kbd "C-p") 'counsel-git)
-  (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
-  (define-key evil-insert-state-map (kbd "M-y") 'counsel-yank-pop)
-  (define-key evil-emacs-state-map (kbd "M-y") 'counsel-yank-pop)
-  (define-key evil-insert-state-map (kbd "C-s") 'swiper)
-  (define-key evil-normal-state-map (kbd "C-s") 'swiper)
-  (define-key evil-visual-state-map (kbd "C-s") 'swiper)
-  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-  (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
-  (define-key evil-emacs-state-map (kbd "C-M-/") 'undo-tree-visualize))
+
+  ;; evil binds
+  (define-key evil-normal-state-map (kbd "M-f")         'ace-jump-char-mode)
+  (define-key evil-visual-state-map (kbd "M-f")         'ace-jump-char-mode)
+  (define-key evil-insert-state-map (kbd "C-c C-j")     'ace-jump-char-mode)
+  (define-key evil-emacs-state-map  (kbd "C-c C-j")     'ace-jump-char-mode)
+  (define-key evil-normal-state-map (kbd "C-c g")       'counsel-rg)
+  (define-key evil-insert-state-map (kbd "C-c g")       'counsel-rg)
+  (define-key evil-emacs-state-map  (kbd "C-c g")       'counsel-rg)
+  (define-key evil-normal-state-map (kbd "C-x C-M-f")   'counsel-locate)
+  (define-key evil-insert-state-map (kbd "C-x C-M-f")   'counsel-locate)
+  (define-key evil-emacs-state-map  (kbd "C-x C-M-f")   'counsel-locate)
+  (define-key evil-normal-state-map (kbd "C-x M-f")     'counsel-recentf)
+  (define-key evil-insert-state-map (kbd "C-x M-f")     'counsel-recentf)
+  (define-key evil-emacs-state-map  (kbd "C-x M-f")     'counsel-recentf)
+  (define-key evil-normal-state-map (kbd "C-p")         'counsel-git)
+  (define-key evil-normal-state-map (kbd "M-y")         'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
+  (define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "C-s")         'swiper)
+  (define-key evil-normal-state-map (kbd "C-s")         'swiper)
+  (define-key evil-visual-state-map (kbd "C-s")         'swiper)
+  (define-key evil-insert-state-map (kbd "TAB")         'tab-to-tab-stop)
+  (define-key evil-normal-state-map (kbd "U")           'undo-tree-visualize)
+  (define-key evil-normal-state-map (kbd "M-/")         'yas-expand)
+  (define-key evil-insert-state-map (kbd "M-/")         'yas-expand)
+  (define-key evil-emacs-state-map (kbd "M-/")          'hippie-expand))
 
 (use-package expand-region
-  :config
-  (global-set-key (kbd "C-=") 'er/expand-region))
+  :commands er/expand-region
+  :bind ("C-=" . er/expand-region))
+
+(use-package impatient-mode
+  :commands impatient-mode)
 
 (use-package ivy
   :diminish ivy-mode
@@ -121,6 +133,7 @@
   (ivy-mode))
 
 (use-package magit
+  :commands magit-status
   :init
   (setq magit-push-always-verify nil)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -148,11 +161,14 @@
 (use-package lorem-ipsum)
 
 (use-package emmet-mode
-  :config
+  :commands emmet-mode
+  :init
   (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode))
+  (add-hook 'web-mode-hook  'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode))
 
 (use-package erc
+  :commands erc
   :config
   (require 'erc-services nil t)
   (erc-services-mode 1)
@@ -174,17 +190,13 @@
         ;; erc-kill-server-buffer-on-quit t
         erc-kill-queries-on-quit t))
 
-(use-package nxml-mode
-  :init
-  (setq nxml-child-indent 4
-        nxml-attribute-indent 4))
-
 (use-package fix-word
   :bind (("M-u" . fix-word-upcase)
          ("M-l" . fix-word-downcase)
          ("M-c" . fix-word-capitalize)))
 
 (use-package org
+  :commands org-mode
   :ensure org-beautify-theme
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
@@ -205,10 +217,12 @@
   ("C-x C-r" . restart-emacs))
 
 (use-package restclient
+  :commands restclient-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.rest\\'" . restclient-mode)))
 
 (use-package smartparens
+  :commands smartparens-mode
   :diminish smartparens-mode
   :config
   (require 'smartparens-config)
@@ -234,19 +248,28 @@
   (global-undo-tree-mode))
 
 (use-package web-mode
+  :commands web-mode
   :ensure web-mode
   :ensure impatient-mode
+  :ensure emmet-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
 
 (use-package yasnippet
-  :bind
-  ("C-c y i s" . yas-insert-snippet)
-  :config
+  :diminish yas-minor-mode
+  :commands yas-minor-mode
+  :bind ("C-c y i s" . yas-insert-snippet)
+  :init
+  (require 'yasnippet)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (define-key yas-minor-mode-map (kbd "C-i") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (yas-reload-all)
-  (add-hook 'prog-mode-hook #'yas-minor-mode))
+  :config
+  (yas-minor-mode 1))
 
 (provide 'packages)
 ;;; packages.el ends here
