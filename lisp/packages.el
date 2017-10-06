@@ -63,7 +63,7 @@
   :init
   (setq doom-themes-enable-bold t)
   :config
-  (load-theme 'doom-molokai t))
+  (load-theme 'doom-tomorrow-night t))
 
 (use-package eldoc
   :diminish eldoc-mode

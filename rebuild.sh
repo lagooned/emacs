@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -r elpa
+rm -r elpa eshell games recentf tramp

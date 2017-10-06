@@ -68,9 +68,9 @@ checking happens for all pairs in my/auto-minor-mode-alist"
 ;; rg region
 (defun my/counsel-rg-region ()
   "runs counsel-rg optionally on the region"
-  (interactive 
-   (if (use-region-p) (counsel-rg (buffer-substring (region-beginning) (region-end)))
-     (counsel-rg))))
+  (interactive)
+  (if (use-region-p) (counsel-rg (buffer-substring (region-beginning) (region-end)))
+    (counsel-rg)))
 
 ;; cleanup on save
 ;; (add-hook 'before-save-hook 'my/cleanup-buffer)
