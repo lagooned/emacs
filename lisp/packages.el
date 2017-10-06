@@ -63,7 +63,12 @@
   :init
   (setq doom-themes-enable-bold t)
   :config
-  (load-theme 'doom-tomorrow-night t))
+  ;; (load-theme 'doom-molokai)
+  ;; (load-theme 'doom-nova t)
+  ;; (load-theme 'doom-one t)
+  ;; (load-theme 'doom-tomorrow-night t)
+  (load-theme 'doom-vibrant t)
+  )
 
 (use-package eldoc
   :diminish eldoc-mode
@@ -129,6 +134,8 @@
   :diminish ivy-mode
   :ensure counsel
   :ensure swiper
+  :bind (:map ivy-minibuffer-map
+              ([escape] . minibuffer-keyboard-quit)) 
   :config
   (ivy-mode))
 
@@ -227,6 +234,10 @@
   (require 'smartparens-config)
   (add-hook 'prog-mode-hook #'smartparens-mode))
 
+(use-package swiper
+  :bind (:map swiper-map
+              ([escape] . minibuffer-keyboard-quit)))
+
 (use-package switch-window
   :commands switch-window
   :init
@@ -236,39 +247,62 @@
   :bind
   ("C-x o" . switch-window))
 
-(use-package try)
-
-(use-package undo-tree
-  :diminish undo-tree-mode
+(use-package telephone-line
   :init
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-diff t)
+  (setq telephone-line-height 25
+        telephone-line-evil-use-short-tag t)
+  (setq telephone-line-lhs
+        '((evil   . (telephone-line-evil-tag-segment))
+          (accent . (telephone-line-vc-segment
+                     telephone-line-erc-modified-channels-segment
+                     telephone-line-process-segment))
+          (nil    . (telephone-line-minor-mode-segment
+                     telephone-line-buffer-segment))))
+
+  (setq telephone-line-rhs
+        '((nil    . (telephone-line-misc-info-segment))
+          (accent . (telephone-line-major-mode-segment))
+          (evil   . (telephone-line-airline-position-segment))))
+
+  (custom-set-faces
+   '(telephone-line-evil-normal ((t (:inherit telephone-line-evil :background "darkmagenta")))))
+
   :config
-  (global-undo-tree-mode))
+  (telephone-line-mode t))
 
-(use-package web-mode
-  :commands web-mode
-  :ensure web-mode
-  :ensure impatient-mode
-  :ensure emmet-mode
-  :init
-  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-  (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
+  (use-package try)
 
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :commands yas-minor-mode
-  :bind ("C-c y i s" . yas-insert-snippet)
-  :init
-  (require 'yasnippet)
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
-  (define-key yas-minor-mode-map (kbd "C-i") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (yas-reload-all)
-  :config
-  (yas-minor-mode 1))
+  (use-package undo-tree
+    :diminish undo-tree-mode
+    :init
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)
+    :config
+    (global-undo-tree-mode))
 
-(provide 'packages)
+  (use-package web-mode
+    :commands web-mode
+    :ensure web-mode
+    :ensure impatient-mode
+    :ensure emmet-mode
+    :init
+    (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+    (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
+
+  (use-package yasnippet
+    :diminish yas-minor-mode
+    :commands yas-minor-mode
+    :bind ("C-c y i s" . yas-insert-snippet)
+    :init
+    (require 'yasnippet)
+    (add-hook 'prog-mode-hook #'yas-minor-mode)
+    (define-key yas-minor-mode-map (kbd "C-i") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (yas-reload-all)
+    :config
+    (yas-minor-mode 1))
+
+  (provide 'packages)
 ;;; packages.el ends here
