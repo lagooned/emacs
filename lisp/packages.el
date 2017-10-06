@@ -99,8 +99,8 @@
   ;; evil binds
   (define-key evil-normal-state-map (kbd "M-f")         'ace-jump-char-mode)
   (define-key evil-visual-state-map (kbd "M-f")         'ace-jump-char-mode)
-  (define-key evil-insert-state-map (kbd "C-c C-j")     'ace-jump-char-mode)
-  (define-key evil-emacs-state-map  (kbd "C-c C-j")     'ace-jump-char-mode)
+  (define-key evil-insert-state-map (kbd "C-c j")       'ace-jump-char-mode)
+  (define-key evil-emacs-state-map  (kbd "C-c j")       'ace-jump-char-mode)
   (define-key evil-normal-state-map (kbd "C-c g")       'my/counsel-rg-region)
   (define-key evil-insert-state-map (kbd "C-c g")       'my/counsel-rg-region)
   (define-key evil-emacs-state-map  (kbd "C-c g")       'my/counsel-rg-region)
@@ -114,6 +114,7 @@
   (define-key evil-normal-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "M-\\")        'evil-execute-in-emacs-state)
   (define-key evil-insert-state-map (kbd "C-s")         'swiper)
   (define-key evil-normal-state-map (kbd "C-s")         'swiper)
   (define-key evil-visual-state-map (kbd "C-s")         'swiper)
@@ -148,11 +149,10 @@
   ("C-x g" . magit-status)
   ("C-x C-g" . magit-status)
   :config
-  (progn
-    (with-eval-after-load 'info
-      (info-initialize)
-      (add-to-list 'Info-directory-list
-                   "~/.emacs.d/packages/magit/Documentation/"))))
+  (with-eval-after-load 'info
+    (info-initialize)
+    (add-to-list 'Info-directory-list
+                 "~/.emacs.d/packages/magit/Documentation/")))
 
 (use-package linum-relative
   :commands linum-relative-mode
@@ -168,7 +168,10 @@
 
 (use-package emmet-mode
   :commands emmet-mode
-  :init
+  :bind
+  (("C-c C-n" . emmet-next-edit-point)
+   ("C-c C-p" . emmet-prev-edit-point))
+  :init 
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook  'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode))
@@ -249,7 +252,7 @@
 
 (use-package telephone-line
   :init
-  (setq telephone-line-height 25
+  (setq telephone-line-height 32 
         telephone-line-evil-use-short-tag t)
   (setq telephone-line-lhs
         '((evil   . (telephone-line-evil-tag-segment))
@@ -270,39 +273,43 @@
   :config
   (telephone-line-mode t))
 
-  (use-package try)
+(use-package try)
 
-  (use-package undo-tree
-    :diminish undo-tree-mode
-    :init
-    (setq undo-tree-visualizer-timestamps t)
-    (setq undo-tree-visualizer-diff t)
-    :config
-    (global-undo-tree-mode))
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :init
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-diff t)
+  :config
+  (global-undo-tree-mode))
 
-  (use-package web-mode
-    :commands web-mode
-    :ensure web-mode
-    :ensure impatient-mode
-    :ensure emmet-mode
-    :init
-    (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-    (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
-    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode)))
+(use-package web-mode
+  :commands web-mode
+  :ensure web-mode
+  :ensure impatient-mode
+  :ensure emmet-mode
+  :bind
+  (:map web-mode-map ("C-c C-n" . nil)) 
+  :init
+  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+  (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  :config 
+  (emmet-mode 1))
 
-  (use-package yasnippet
-    :diminish yas-minor-mode
-    :commands yas-minor-mode
-    :bind ("C-c y i s" . yas-insert-snippet)
-    :init
-    (require 'yasnippet)
-    (add-hook 'prog-mode-hook #'yas-minor-mode)
-    (define-key yas-minor-mode-map (kbd "C-i") nil)
-    (define-key yas-minor-mode-map (kbd "TAB") nil)
-    (define-key yas-minor-mode-map (kbd "<tab>") nil)
-    (yas-reload-all)
-    :config
-    (yas-minor-mode 1))
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :commands yas-minor-mode
+  :bind ("C-c y i s" . yas-insert-snippet)
+  :init
+  (require 'yasnippet)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (define-key yas-minor-mode-map (kbd "C-i") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (yas-reload-all)
+  :config
+  (yas-minor-mode 1))
 
-  (provide 'packages)
+(provide 'packages)
 ;;; packages.el ends here

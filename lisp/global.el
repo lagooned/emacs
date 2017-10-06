@@ -168,7 +168,7 @@
                           :match-func (lambda (msg) (when msg (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
                           :vars '((mu4e-trash-folder . "/Gmail/[Gmail].Trash")
                                   (mu4e-refile-folder . "/Gmail/[Gmail].Archive")))))
-  )
+  (setenv "SHELL" "/bin/zsh"))
 
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Ubuntu Mono")
