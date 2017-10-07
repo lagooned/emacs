@@ -227,7 +227,7 @@
 
 (use-package restclient
   :commands restclient-mode
-  :config
+  :init
   (add-to-list 'auto-mode-alist '("\\.rest\\'" . restclient-mode)))
 
 (use-package smartparens
