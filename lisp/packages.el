@@ -116,7 +116,7 @@
   (define-key evil-normal-state-map (kbd "C-x M-f")     'counsel-recentf)
   (define-key evil-insert-state-map (kbd "C-x M-f")     'counsel-recentf)
   (define-key evil-emacs-state-map  (kbd "C-x M-f")     'counsel-recentf)
-  (define-key evil-normal-state-map (kbd "C-p")         'counsel-git)
+  (define-key evil-normal-state-map (kbd "C-p")         'my/counsel-git-region)
   (define-key evil-normal-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
