@@ -96,6 +96,12 @@
   (global-evil-surround-mode 1)
   (evil-vimish-fold-mode 1)
 
+  ;; initial states
+  (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'ansi-term-mode 'emacs)
+  (evil-set-initial-state 'magit-mode 'emacs)
+  (evil-set-initial-state 'magit-log-edit-mode 'emacs)
+
   ;; evil binds
   (define-key evil-normal-state-map (kbd "M-f")         'ace-jump-char-mode)
   (define-key evil-visual-state-map (kbd "M-f")         'ace-jump-char-mode)
@@ -212,9 +218,18 @@
          ("C-c b" . org-iswitchb)
          ("C-c c" . org-capture))
   :init
-  (setq org-startup-indented t)
+  (setq org-startup-indented t
+        org-log-done t
+        org-agenda-files (list "~/org/work.org"
+                               "~/org/home.org")
+        org-beautify-theme-use-box-hack nil)
   :config
   (load-theme 'org-beautify t)
+  (custom-theme-set-faces 'org-beautify
+                          `(org-done
+                            ((t (:strike-through nil))))
+                          `(org-headline-done
+                            ((t (:strike-through nil)))))
   (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0))))
 
 (use-package rainbow-delimiters

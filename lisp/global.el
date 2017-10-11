@@ -22,10 +22,13 @@
 
 ;; use utf-8
 (prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 (when (display-graphic-p)
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+  (setq x-select-request-type
+        '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-;; set default warning level
+;; no warnings
 (setq warning-minimum-level :emergency)
 
 ;; new fringe arrows
@@ -59,12 +62,15 @@
    #b00000000
    #b00000000])
 
+;; let text breath 
+(fringe-mode 8)
+
 ;; setup user
 (setq user-full-name "Jared M. Engler"
       user-mail-address "jared.lite@gmail.com"
       calendar-latitude 40.52
       calendar-longitude -88.99
-      calendar-location-name "Normal, IL")
+      calendar-location-name "Springfield, IL")
 
 ;; frame title format
 (setq frame-title-format
