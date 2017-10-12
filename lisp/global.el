@@ -183,7 +183,7 @@
 
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :family "Consolas")
-  (set-face-attribute 'default nil :height 120)
+  (set-face-attribute 'default nil :height 105)
   (menu-bar-mode -1))
 
 (provide 'global)
