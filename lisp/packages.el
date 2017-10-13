@@ -67,8 +67,7 @@
   ;; (load-theme 'doom-nova t)
   ;; (load-theme 'doom-one t)
   ;; (load-theme 'doom-tomorrow-night t)
-  (load-theme 'doom-vibrant t)
-  )
+  (load-theme 'doom-vibrant t))
 
 (use-package eldoc
   :diminish eldoc-mode
@@ -82,10 +81,13 @@
 (use-package evil
   :ensure ace-jump-mode
   :ensure counsel
-  :ensure evil-matchit
   :ensure evil-ediff
+  :ensure evil-exchange
+  :ensure evil-matchit
+  :ensure evil-numbers
   :ensure evil-surround
   :ensure evil-vimish-fold
+  :ensure evil-visualstar
   :ensure undo-tree
   :diminish evil-vimish-fold-mode
   :init
@@ -94,7 +96,9 @@
   (evil-mode 1)
   (global-evil-matchit-mode 1)
   (global-evil-surround-mode 1)
+  (global-evil-visualstar-mode 1)
   (evil-vimish-fold-mode 1)
+  (evil-exchange-install)
 
   ;; initial states
   (evil-set-initial-state 'term-mode 'emacs)
@@ -121,6 +125,8 @@
   (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-insert-state-map (kbd "M-\\")        'evil-execute-in-emacs-state)
+  (define-key evil-normal-state-map (kbd "C-c =")       'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-c -")       'evil-numbers/dec-at-pt)
   (define-key evil-insert-state-map (kbd "C-s")         'swiper)
   (define-key evil-normal-state-map (kbd "C-s")         'swiper)
   (define-key evil-visual-state-map (kbd "C-s")         'swiper)
@@ -129,6 +135,13 @@
   (define-key evil-normal-state-map (kbd "M-/")         'yas-expand)
   (define-key evil-insert-state-map (kbd "M-/")         'yas-expand)
   (define-key evil-emacs-state-map (kbd "M-/")          'hippie-expand))
+
+(use-package evil-numbers
+  :commands
+  evil-numbers/inc-at-point
+  evil-numbers/dev-at-point
+  :config
+  (require 'evil-numbers))
 
 (use-package expand-region
   :commands er/expand-region
@@ -271,15 +284,15 @@
         telephone-line-evil-use-short-tag t)
   (setq telephone-line-lhs
         '((evil   . (telephone-line-evil-tag-segment))
-          (accent . (telephone-line-vc-segment
-                     telephone-line-erc-modified-channels-segment
-                     telephone-line-process-segment))
-          (nil    . (telephone-line-minor-mode-segment
-                     telephone-line-buffer-segment))))
+          (accent . (telephone-line-major-mode-segment))
+          (nil    . (telephone-line-buffer-segment
+                     telephone-line-process-segment
+                     telephone-line-minor-mode-segment
+                     telephone-line-erc-modified-channels-segment))))
 
   (setq telephone-line-rhs
         '((nil    . (telephone-line-misc-info-segment))
-          (accent . (telephone-line-major-mode-segment))
+          (accent . (telephone-line-vc-segment))
           (evil   . (telephone-line-airline-position-segment))))
 
   (custom-set-faces
