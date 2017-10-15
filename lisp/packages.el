@@ -63,10 +63,6 @@
   :init
   (setq doom-themes-enable-bold t)
   :config
-  ;; (load-theme 'doom-molokai)
-  ;; (load-theme 'doom-nova t)
-  ;; (load-theme 'doom-one t)
-  ;; (load-theme 'doom-tomorrow-night t)
   (load-theme 'doom-vibrant t))
 
 (use-package eldoc
@@ -83,6 +79,7 @@
   :ensure counsel
   :ensure evil-ediff
   :ensure evil-exchange
+  :ensure evil-leader
   :ensure evil-matchit
   :ensure evil-numbers
   :ensure evil-surround
@@ -92,8 +89,10 @@
   :diminish evil-vimish-fold-mode
   :init
   (setq evil-want-C-u-scroll t)
+
   :config
   (evil-mode 1)
+  (global-evil-leader-mode 1)
   (global-evil-matchit-mode 1)
   (global-evil-surround-mode 1)
   (global-evil-visualstar-mode 1)
@@ -107,34 +106,80 @@
   (evil-set-initial-state 'magit-log-edit-mode 'emacs)
 
   ;; evil binds
+  (define-key evil-normal-state-map "j"                 'evil-next-visual-line)
+  (define-key evil-motion-state-map "j"                 'evil-next-visual-line)
+  (define-key evil-visual-state-map "j"                 'evil-next-visual-line)
+  (define-key evil-normal-state-map "k"                 'evil-previous-visual-line)
+  (define-key evil-visual-state-map "k"                 'evil-previous-visual-line)
+  (define-key evil-motion-state-map "k"                 'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "M-f")         'ace-jump-char-mode)
   (define-key evil-visual-state-map (kbd "M-f")         'ace-jump-char-mode)
   (define-key evil-insert-state-map (kbd "C-c j")       'ace-jump-char-mode)
   (define-key evil-emacs-state-map  (kbd "C-c j")       'ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "C-c g")       'my/counsel-rg-region)
-  (define-key evil-insert-state-map (kbd "C-c g")       'my/counsel-rg-region)
-  (define-key evil-emacs-state-map  (kbd "C-c g")       'my/counsel-rg-region)
-  (define-key evil-normal-state-map (kbd "C-x C-M-f")   'counsel-locate)
-  (define-key evil-insert-state-map (kbd "C-x C-M-f")   'counsel-locate)
-  (define-key evil-emacs-state-map  (kbd "C-x C-M-f")   'counsel-locate)
-  (define-key evil-normal-state-map (kbd "C-x M-f")     'counsel-recentf)
-  (define-key evil-insert-state-map (kbd "C-x M-f")     'counsel-recentf)
-  (define-key evil-emacs-state-map  (kbd "C-x M-f")     'counsel-recentf)
-  (define-key evil-normal-state-map (kbd "C-p")         'my/counsel-git-region)
   (define-key evil-normal-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
   (define-key evil-insert-state-map (kbd "M-\\")        'evil-execute-in-emacs-state)
-  (define-key evil-normal-state-map (kbd "C-c =")       'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "C-c -")       'evil-numbers/dec-at-pt)
-  (define-key evil-insert-state-map (kbd "C-s")         'swiper)
-  (define-key evil-normal-state-map (kbd "C-s")         'swiper)
-  (define-key evil-visual-state-map (kbd "C-s")         'swiper)
+  (define-key evil-insert-state-map (kbd "C-M-n")       'evil-execute-in-emacs-state)
+  (define-key evil-normal-state-map (kbd "C-c C-=")     'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-c C--")     'evil-numbers/dec-at-pt)
   (define-key evil-insert-state-map (kbd "TAB")         'tab-to-tab-stop)
   (define-key evil-normal-state-map (kbd "U")           'undo-tree-visualize)
   (define-key evil-normal-state-map (kbd "M-/")         'yas-expand)
   (define-key evil-insert-state-map (kbd "M-/")         'yas-expand)
-  (define-key evil-emacs-state-map (kbd "M-/")          'hippie-expand))
+  (define-key evil-emacs-state-map  (kbd "M-/")         'hippie-expand)
+  (define-key evil-normal-state-map (kbd "C-M-/")       'nil))
+
+(use-package evil-leader
+  :commands
+  global-evil-leader-mode
+  :init
+  :config
+  (require 'evil-leader)
+
+  ;; leader binds
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+
+    "b b" 'switch-to-buffer
+    "b k" 'kill-buffer
+    "b l" 'list-buffers
+
+    "e r" 'restart-emacs
+    "e l" 'my/load-config
+
+    "f f" 'find-file
+    "f a" 'find-alternate-file
+    "f r" 'counsel-recentf
+    "f l" 'counsel-locate
+
+    "g s" 'magit-status
+    "g d" 'magit-diff-popup
+
+    "h d f" 'describe-function
+    "h d k" 'describe-key
+    "h d m" 'describe-mode
+    "h d v" 'describe-variable
+
+    "i s" 'yas-insert-snippet
+    "i f" 'insert-file
+
+    "o l" 'org-store-link
+    "o a" 'org-agenda
+    "o b" 'org-iswitchb
+    "o c" 'org-capture
+    "o e" 'org-export-dispatch
+
+    "s s" 'swiper
+    "s g" 'my/counsel-rg-region
+    "s f" 'my/counsel-git-region
+
+    "w w" 'save-buffer
+    "w f" 'write-file
+
+    "x" 'counsel-M-x
+
+    ))
 
 (use-package evil-numbers
   :commands
@@ -155,7 +200,7 @@
   :ensure counsel
   :ensure swiper
   :bind (:map ivy-minibuffer-map
-              ([escape] . minibuffer-keyboard-quit)) 
+              ([escape] . minibuffer-keyboard-quit))
   :config
   (ivy-mode))
 
@@ -164,9 +209,6 @@
   :init
   (setq magit-push-always-verify nil)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  :bind
-  ("C-x g" . magit-status)
-  ("C-x C-g" . magit-status)
   :config
   (with-eval-after-load 'info
     (info-initialize)
@@ -190,7 +232,7 @@
   :bind
   (("C-c C-n" . emmet-next-edit-point)
    ("C-c C-p" . emmet-prev-edit-point))
-  :init 
+  :init
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook  'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode))
@@ -224,12 +266,13 @@
          ("M-c" . fix-word-capitalize)))
 
 (use-package org
-  :commands org-mode
+  :commands
+  org-mode
+  org-store-link
+  org-agenda
+  org-iswitchb   
+  org-capture
   :ensure org-beautify-theme
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c b" . org-iswitchb)
-         ("C-c c" . org-capture))
   :init
   (setq org-startup-indented t
         org-log-done t
@@ -280,7 +323,7 @@
 
 (use-package telephone-line
   :init
-  (setq telephone-line-height 32 
+  (setq telephone-line-height 32
         telephone-line-evil-use-short-tag t)
   (setq telephone-line-lhs
         '((evil   . (telephone-line-evil-tag-segment))
@@ -317,18 +360,23 @@
   :ensure impatient-mode
   :ensure emmet-mode
   :bind
-  (:map web-mode-map ("C-c C-n" . nil)) 
+  (:map web-mode-map ("C-c C-n" . nil))
   :init
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-  :config 
+  :config
   (emmet-mode 1))
+
+(use-package which-key
+  :config
+  (which-key-mode 1))
 
 (use-package yasnippet
   :diminish yas-minor-mode
-  :commands yas-minor-mode
-  :bind ("C-c y i s" . yas-insert-snippet)
+  :commands
+  yas-minor-mode
+  yas-insert-snippet
   :init
   (require 'yasnippet)
   (add-hook 'prog-mode-hook #'yas-minor-mode)

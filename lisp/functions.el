@@ -23,7 +23,9 @@
 ;; load config
 (defun my/load-config ()
   (interactive)
-  (load-file "~/.emacs.d/init.el"))
+  (save-some-buffers)
+  (load-file "~/.emacs.d/init.el")
+  (revert-buffer t t))
 
 ;; create my/auto-minor-mode-alist for files
 (defvar my/auto-minor-mode-alist ()
@@ -74,7 +76,7 @@ checking happens for all pairs in my/auto-minor-mode-alist"
 
 ;; git file region
 (defun my/counsel-git-region ()
-  "runs counsel-rg optionally on the region"
+  "runs counsel-git optionally on the region"
   (interactive)
   (if (use-region-p) (counsel-git (buffer-substring (region-beginning) (region-end)))
     (counsel-git)))

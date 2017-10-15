@@ -141,16 +141,10 @@
 ;; sentence navigation
 (setq sentence-end-double-space nil)
 
-;; some custom binds
+;; some global binds
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-c C-c C-l") 'my/cleanup-buffer)
-(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
-(global-set-key (kbd "C-x f") 'find-file)
-(global-set-key (kbd "C-x C-d") 'dired)
 (global-set-key (kbd "M-q") 'toggle-truncate-lines)
-(global-set-key (kbd "M-/") nil)
-
 
 ;; insert newlines with C-n at end of buffer
 (setq next-line-add-newlines t)
