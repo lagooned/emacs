@@ -78,6 +78,7 @@
   :ensure ace-jump-mode
   :ensure counsel
   :ensure evil-ediff
+  :ensure evil-escape
   :ensure evil-exchange
   :ensure evil-leader
   :ensure evil-matchit
@@ -98,6 +99,7 @@
   (global-evil-visualstar-mode 1)
   (evil-vimish-fold-mode 1)
   (evil-exchange-install)
+  (evil-escape-mode)
 
   ;; initial states
   (evil-set-initial-state 'term-mode 'emacs)
@@ -107,11 +109,9 @@
 
   ;; evil binds
   (define-key evil-normal-state-map "j"                 'evil-next-visual-line)
-  (define-key evil-motion-state-map "j"                 'evil-next-visual-line)
   (define-key evil-visual-state-map "j"                 'evil-next-visual-line)
   (define-key evil-normal-state-map "k"                 'evil-previous-visual-line)
   (define-key evil-visual-state-map "k"                 'evil-previous-visual-line)
-  (define-key evil-motion-state-map "k"                 'evil-previous-visual-line)
   (define-key evil-normal-state-map (kbd "M-f")         'ace-jump-char-mode)
   (define-key evil-visual-state-map (kbd "M-f")         'ace-jump-char-mode)
   (define-key evil-insert-state-map (kbd "C-c j")       'ace-jump-char-mode)
@@ -130,56 +130,62 @@
   (define-key evil-emacs-state-map  (kbd "M-/")         'hippie-expand)
   (define-key evil-normal-state-map (kbd "C-M-/")       'nil))
 
+(use-package evil-escape
+  :init
+  (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-delay 0.1))
+
 (use-package evil-leader
   :commands
   global-evil-leader-mode
-  :init
+
   :config
   (require 'evil-leader)
-
-  ;; leader binds
   (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
 
+  (evil-leader/set-key
     "b b" 'switch-to-buffer
     "b k" 'kill-buffer
     "b l" 'list-buffers
-
     "e r" 'restart-emacs
     "e l" 'my/load-config
-
     "f f" 'find-file
     "f a" 'find-alternate-file
     "f r" 'counsel-recentf
     "f l" 'counsel-locate
-
-    "g s" 'magit-status
+    "g g" 'magit-status
     "g d" 'magit-diff-popup
-
+    "h d b" 'describe-bindings
+    "h d d" 'describe-distribution
     "h d f" 'describe-function
     "h d k" 'describe-key
     "h d m" 'describe-mode
     "h d v" 'describe-variable
-
-    "i s" 'yas-insert-snippet
+    "h d s s" 'describe-symbol
+    "h d s t" 'describe-syntax
+    "h d p" 'describe-package
+    "h v l" 'view-lossage
+    "h a" 'about-emacs
     "i f" 'insert-file
-
-    "o l" 'org-store-link
+    "i s" 'yas-insert-snippet
+    "l y" 'org-store-link
+    "l i" 'org-insert-link-global
+    "l o" 'org-open-at-point
     "o a" 'org-agenda
     "o b" 'org-iswitchb
     "o c" 'org-capture
-    "o e" 'org-export-dispatch
-
     "s s" 'swiper
     "s g" 'my/counsel-rg-region
     "s f" 'my/counsel-git-region
-
     "w w" 'save-buffer
     "w f" 'write-file
+    "x" 'counsel-M-x)
 
-    "x" 'counsel-M-x
+  (evil-leader/set-key-for-mode 'org-mode
+    "o e" 'org-export-dispatch)
 
-    ))
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode
+    "e e" 'eval-last-sexp))
 
 (use-package evil-numbers
   :commands
@@ -293,8 +299,7 @@
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package restart-emacs
-  :bind
-  ("C-x C-r" . restart-emacs))
+  :commands restart-emacs)
 
 (use-package restclient
   :commands restclient-mode
