@@ -153,8 +153,7 @@
     "f a" 'find-alternate-file
     "f r" 'counsel-recentf
     "f l" 'counsel-locate
-    "g g" 'magit-status
-    "g d" 'magit-diff-popup
+    "f s" 'save-buffer
     "h d b" 'describe-bindings
     "h d d" 'describe-distribution
     "h d f" 'describe-function
@@ -168,18 +167,26 @@
     "h a" 'about-emacs
     "i f" 'insert-file
     "i s" 'yas-insert-snippet
+    "u" 'universal-argument
     "l y" 'org-store-link
     "l i" 'org-insert-link-global
     "l o" 'org-open-at-point
     "o a" 'org-agenda
     "o b" 'org-iswitchb
-    "o c" 'org-capture
     "s s" 'swiper
-    "s g" 'my/counsel-rg-region
-    "s f" 'my/counsel-git-region
-    "w w" 'save-buffer
-    "w f" 'write-file
-    "x" 'counsel-M-x)
+    "p g" 'my/counsel-rg-region
+    "p f" 'my/counsel-git-region
+    "p s" 'magit-status
+    "p d" 'magit-diff-popup
+    "w w" 'evil-window-next
+    "w h" 'evil-window-left
+    "w j" 'evil-window-down
+    "w k" 'evil-window-up
+    "w l" 'evil-window-right
+    "w v" 'evil-window-vsplit
+    "w c" 'evil-window-delete
+    "w o" 'delete-other-windows
+    "SPC" 'counsel-M-x)
 
   (evil-leader/set-key-for-mode 'org-mode
     "o e" 'org-export-dispatch)

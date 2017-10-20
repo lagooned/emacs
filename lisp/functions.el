@@ -68,17 +68,27 @@ checking happens for all pairs in my/auto-minor-mode-alist"
   (delete-trailing-whitespace))
 
 ;; rg region
-(defun my/counsel-rg-region ()
-  "runs counsel-rg optionally on the region"
-  (interactive)
-  (if (use-region-p) (counsel-rg (buffer-substring (region-beginning) (region-end)))
+(defun my/counsel-rg-region (beg end)
+  "ripgrep region or 'empty string' if none highlighted."
+  (interactive (if (use-region-p)
+                   (list (region-beginning) (region-end))
+                 (list nil nil)))
+  (if (and beg end)
+      (progn
+        (deactivate-mark)
+        (counsel-rg (buffer-substring-no-properties beg end)))
     (counsel-rg)))
 
-;; git file region
-(defun my/counsel-git-region ()
-  "runs counsel-git optionally on the region"
-  (interactive)
-  (if (use-region-p) (counsel-git (buffer-substring (region-beginning) (region-end)))
+;; git find region
+(defun my/counsel-git-region (beg end)
+  "ripgrep region or 'empty string' if none highlighted."
+  (interactive (if (use-region-p)
+                   (list (region-beginning) (region-end))
+                 (list nil nil)))
+  (if (and beg end)
+      (progn
+        (deactivate-mark)
+        (counsel-git (buffer-substring-no-properties beg end)))
     (counsel-git)))
 
 ;; cleanup on save
