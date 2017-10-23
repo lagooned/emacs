@@ -34,13 +34,13 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; load custom functions
-(load "functions")
+(load "functions.el")
 
 ;; load global config
-(load "global")
+(load "global.el")
 
 ;; load package config
-(load "packages")
+(load "packages.el")
 
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
@@ -48,3 +48,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+

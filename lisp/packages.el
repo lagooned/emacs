@@ -27,7 +27,7 @@
 (setq use-package-always-ensure t)
 (require 'use-package)
 
-(use-package ace-jump-mode)
+(use-package avy)
 
 (use-package adaptive-wrap
   :commands global-visual-line-mode
@@ -46,6 +46,8 @@
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
+
+(use-package centered-cursor-mode)
 
 (use-package counsel
   :diminish counsel-mode
@@ -75,7 +77,7 @@
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
 (use-package evil
-  :ensure ace-jump-mode
+  :ensure avy
   :ensure counsel
   :ensure evil-ediff
   :ensure evil-escape
@@ -87,10 +89,10 @@
   :ensure evil-vimish-fold
   :ensure evil-visualstar
   :ensure undo-tree
+  :ensure golden-ratio
   :diminish evil-vimish-fold-mode
   :init
   (setq evil-want-C-u-scroll t)
-
   :config
   (evil-mode 1)
   (global-evil-leader-mode 1)
@@ -100,35 +102,8 @@
   (evil-vimish-fold-mode 1)
   (evil-exchange-install)
   (evil-escape-mode)
-
-  ;; initial states
-  (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'ansi-term-mode 'emacs)
-  (evil-set-initial-state 'magit-mode 'emacs)
-  (evil-set-initial-state 'magit-log-edit-mode 'emacs)
-
-  ;; evil binds
-  (define-key evil-normal-state-map "j"                 'evil-next-visual-line)
-  (define-key evil-visual-state-map "j"                 'evil-next-visual-line)
-  (define-key evil-normal-state-map "k"                 'evil-previous-visual-line)
-  (define-key evil-visual-state-map "k"                 'evil-previous-visual-line)
-  (define-key evil-normal-state-map (kbd "M-f")         'ace-jump-char-mode)
-  (define-key evil-visual-state-map (kbd "M-f")         'ace-jump-char-mode)
-  (define-key evil-insert-state-map (kbd "C-c j")       'ace-jump-char-mode)
-  (define-key evil-emacs-state-map  (kbd "C-c j")       'ace-jump-char-mode)
-  (define-key evil-normal-state-map (kbd "M-y")         'counsel-yank-pop)
-  (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
-  (define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
-  (define-key evil-insert-state-map (kbd "M-\\")        'evil-execute-in-emacs-state)
-  (define-key evil-insert-state-map (kbd "C-M-n")       'evil-execute-in-emacs-state)
-  (define-key evil-normal-state-map (kbd "C-c C-=")     'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "C-c C--")     'evil-numbers/dec-at-pt)
-  (define-key evil-insert-state-map (kbd "TAB")         'tab-to-tab-stop)
-  (define-key evil-normal-state-map (kbd "U")           'undo-tree-visualize)
-  (define-key evil-normal-state-map (kbd "M-/")         'yas-expand)
-  (define-key evil-insert-state-map (kbd "M-/")         'yas-expand)
-  (define-key evil-emacs-state-map  (kbd "M-/")         'hippie-expand)
-  (define-key evil-normal-state-map (kbd "C-M-/")       'nil))
+  (golden-ratio-mode 1)
+  (load "evil.el"))
 
 (use-package evil-escape
   :init
@@ -138,61 +113,8 @@
 (use-package evil-leader
   :commands
   global-evil-leader-mode
-
   :config
-  (require 'evil-leader)
-  (evil-leader/set-leader "<SPC>")
-
-  (evil-leader/set-key
-    "b b" 'switch-to-buffer
-    "b k" 'kill-buffer
-    "b l" 'list-buffers
-    "e r" 'restart-emacs
-    "e l" 'my/load-config
-    "f f" 'find-file
-    "f a" 'find-alternate-file
-    "f r" 'counsel-recentf
-    "f l" 'counsel-locate
-    "f s" 'save-buffer
-    "h d b" 'describe-bindings
-    "h d d" 'describe-distribution
-    "h d f" 'describe-function
-    "h d k" 'describe-key
-    "h d m" 'describe-mode
-    "h d v" 'describe-variable
-    "h d s s" 'describe-symbol
-    "h d s t" 'describe-syntax
-    "h d p" 'describe-package
-    "h v l" 'view-lossage
-    "h a" 'about-emacs
-    "i f" 'insert-file
-    "i s" 'yas-insert-snippet
-    "u" 'universal-argument
-    "l y" 'org-store-link
-    "l i" 'org-insert-link-global
-    "l o" 'org-open-at-point
-    "o a" 'org-agenda
-    "o b" 'org-iswitchb
-    "s s" 'swiper
-    "p g" 'my/counsel-rg-region
-    "p f" 'my/counsel-git-region
-    "p s" 'magit-status
-    "p d" 'magit-diff-popup
-    "w w" 'evil-window-next
-    "w h" 'evil-window-left
-    "w j" 'evil-window-down
-    "w k" 'evil-window-up
-    "w l" 'evil-window-right
-    "w v" 'evil-window-vsplit
-    "w c" 'evil-window-delete
-    "w o" 'delete-other-windows
-    "SPC" 'counsel-M-x)
-
-  (evil-leader/set-key-for-mode 'org-mode
-    "o e" 'org-export-dispatch)
-
-  (evil-leader/set-key-for-mode 'emacs-lisp-mode
-    "e e" 'eval-last-sexp))
+  (load "leader.el"))
 
 (use-package evil-numbers
   :commands
@@ -202,8 +124,29 @@
   (require 'evil-numbers))
 
 (use-package expand-region
-  :commands er/expand-region
-  :bind ("C-=" . er/expand-region))
+  :commands er/expand-region)
+
+(use-package golden-ratio
+  :diminish
+  golden-ratio-mode
+  :commands
+  golden-ratio-mode
+  :init
+  (setq golden-ratio-extra-commands
+        (append golden-ratio-extra-commands
+                '(evil-window-left
+                  evil-window-right
+                  evil-window-up
+                  evil-window-down
+                  evil-window-next
+                  evil-window-prev
+                  select-window-1
+                  select-window-2
+                  select-window-3
+                  select-window-4
+                  select-window-5)))
+  :config
+  (golden-ratio-mode 1))
 
 (use-package impatient-mode
   :commands impatient-mode)
@@ -212,6 +155,7 @@
   :diminish ivy-mode
   :ensure counsel
   :ensure swiper
+  :ensure avy
   :bind (:map ivy-minibuffer-map
               ([escape] . minibuffer-keyboard-quit))
   :config
@@ -231,8 +175,6 @@
 (use-package linum-relative
   :commands linum-relative-mode
   :diminish linum-relative-mode
-  :bind
-  ("C-x l" . linum-relative-mode)
   :init
   (setq linum-relative-format "%3s "
         linum-relative-current-symbol "")
@@ -241,10 +183,10 @@
 (use-package lorem-ipsum)
 
 (use-package emmet-mode
-  :commands emmet-mode
-  :bind
-  (("C-c C-n" . emmet-next-edit-point)
-   ("C-c C-p" . emmet-prev-edit-point))
+  :commands
+  emmet-mode
+  emmet-next-edit-point
+  emmet-prev-edit-point
   :init
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook  'emmet-mode)
@@ -274,16 +216,17 @@
         erc-kill-queries-on-quit t))
 
 (use-package fix-word
-  :bind (("M-u" . fix-word-upcase)
-         ("M-l" . fix-word-downcase)
-         ("M-c" . fix-word-capitalize)))
+  :commands
+  fix-word-upcase
+  fix-word-downcase
+  fix-word-capitalize)
 
 (use-package org
   :commands
   org-mode
   org-store-link
   org-agenda
-  org-iswitchb   
+  org-iswitchb
   org-capture
   :ensure org-beautify-theme
   :init
@@ -324,15 +267,6 @@
   :bind (:map swiper-map
               ([escape] . minibuffer-keyboard-quit)))
 
-(use-package switch-window
-  :commands switch-window
-  :init
-  (setq switch-window-shortcut-style 'qwerty)
-  (setq switch-window-qwerty-shortcuts
-        '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))
-  :bind
-  ("C-x o" . switch-window))
-
 (use-package telephone-line
   :init
   (setq telephone-line-height 32
@@ -351,7 +285,8 @@
           (evil   . (telephone-line-airline-position-segment))))
 
   (custom-set-faces
-   '(telephone-line-evil-normal ((t (:inherit telephone-line-evil :background "darkmagenta")))))
+   '(telephone-line-evil-normal
+     ((t (:inherit telephone-line-evil :background "darkmagenta")))))
 
   :config
   (telephone-line-mode t))
@@ -372,7 +307,8 @@
   :ensure impatient-mode
   :ensure emmet-mode
   :bind
-  (:map web-mode-map ("C-c C-n" . nil))
+  (:map web-mode-map ("C-c n" . emmet-next-edit-point))
+  (:map web-mode-map ("C-c p" . emmet-prev-edit-point))
   :init
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
@@ -381,6 +317,8 @@
   (emmet-mode 1))
 
 (use-package which-key
+  :diminish
+  which-key-mode
   :config
   (which-key-mode 1))
 

@@ -31,6 +31,30 @@
 ;; no warnings
 (setq warning-minimum-level :emergency)
 
+(dolist (key '(
+               ;; "\C-a"
+               ;; "\C-b"
+               "\C-c"
+               ;; "\C-d"
+               ;; "\C-e"
+               ;; "\C-f"
+               ;; "\C-g"
+               "\C-h"
+               ;; "\C-k"
+               ;; "\C-l"
+               ;; "\C-n"
+               "\C-o"
+               ;; "\C-p"
+               ;; "\C-q"
+               "\C-t"
+               ;; "\C-u"
+               ;; "\C-v"
+               "\C-x"
+               "\C-z"
+               ;; "\e"
+               ))
+  (global-unset-key key))
+
 ;; new fringe arrows
 (define-fringe-bitmap 'right-curly-arrow
   [#b00000000
