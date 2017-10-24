@@ -1,4 +1,4 @@
-;;; leader.el --- evil leader config                 -*- lexical-binding: t; -*-
+;;; leader-config.el --- evil leader config                 -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
@@ -96,5 +96,5 @@
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "e e" 'eval-last-sexp)
 
-(provide 'leader)
-;;; leader.el ends here
+(provide 'leader-config)
+;;; leader-config.el ends here

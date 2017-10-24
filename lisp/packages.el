@@ -103,7 +103,7 @@
   (evil-exchange-install)
   (evil-escape-mode)
   (golden-ratio-mode 1)
-  (load "evil.el"))
+  (load "evil-config.el"))
 
 (use-package evil-escape
   :init
@@ -114,7 +114,7 @@
   :commands
   global-evil-leader-mode
   :config
-  (load "leader.el"))
+  (load "leader-config.el"))
 
 (use-package evil-numbers
   :commands

@@ -1,4 +1,4 @@
-;;; evil.el --- evil config                          -*- lexical-binding: t; -*-
+;;; evil-config.el --- evil config                          -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
@@ -53,5 +53,5 @@
 (define-key evil-emacs-state-map  (kbd "M-/")         'hippie-expand)
 (define-key evil-normal-state-map (kbd "C-M-/")       'nil)
 
-(provide 'evil)
-;;; evil.el ends here
+(provide 'evil-config)
+;;; evil-config.el ends here
