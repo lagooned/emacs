@@ -63,8 +63,9 @@
   "p s" 'magit-status
   "p d" 'magit-diff-popup
   ;; search
-  "s s" 'swiper
-  "s f" 'avy-goto-char
+  "s s" 'my/swiper-region
+  "s c" 'avy-goto-char
+  "s t" 'my/swiper-thing
   ;; toggles
   "t l" 'linum-relative-mode
   "t w" 'whitespace-mode

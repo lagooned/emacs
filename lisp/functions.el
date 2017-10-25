@@ -67,7 +67,9 @@ checking happens for all pairs in my/auto-minor-mode-alist"
   (my/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
-;; rg region
+;;
+;; TODO make these region functions higher order
+;;
 (defun my/counsel-rg-region (beg end)
   "ripgrep region or 'empty string' if none highlighted."
   (interactive (if (use-region-p)
@@ -79,9 +81,8 @@ checking happens for all pairs in my/auto-minor-mode-alist"
         (counsel-rg (buffer-substring-no-properties beg end)))
     (counsel-rg)))
 
-;; git find region
 (defun my/counsel-git-region (beg end)
-  "ripgrep region or 'empty string' if none highlighted."
+  "counsel-git region or 'empty string' if none highlighted."
   (interactive (if (use-region-p)
                    (list (region-beginning) (region-end))
                  (list nil nil)))
@@ -90,6 +91,23 @@ checking happens for all pairs in my/auto-minor-mode-alist"
         (deactivate-mark)
         (counsel-git (buffer-substring-no-properties beg end)))
     (counsel-git)))
+
+(defun my/swiper-region (beg end)
+  "swiper region or 'empty string' if none highlighted."
+  (interactive (if (use-region-p)
+                   (list (region-beginning) (region-end))
+                 (list nil nil)))
+  (if (and beg end)
+      (progn
+        (deactivate-mark)
+        (swiper (buffer-substring-no-properties beg end)))
+    (swiper)))
+
+(defun my/swiper-thing ()
+  "swiper current word or line"
+  (interactive
+   (if (word-at-point) (swiper (word-at-point))
+     (swiper (sentence-at-point)))))
 
 ;; cleanup on save
 ;; (add-hook 'before-save-hook 'my/cleanup-buffer)

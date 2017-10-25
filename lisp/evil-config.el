@@ -20,10 +20,9 @@
 ;;; Code:
 
 ;; initial states
-(evil-set-initial-state 'term-mode 'emacs)
-(evil-set-initial-state 'ansi-term-mode 'emacs)
-(evil-set-initial-state 'magit-mode 'emacs)
-(evil-set-initial-state 'magit-log-edit-mode 'emacs)
+(add-hook 'with-editor-mode-hook 'evil-insert-state)
+(add-hook 'term-mode-hook 'evil-emacs-state)
+(add-hook 'ansi-term-mode-hook 'evil-emacs-state)
 
 ;; evil binds
 (define-key evil-normal-state-map "j"                 'evil-next-visual-line)
@@ -32,26 +31,24 @@
 (define-key evil-visual-state-map "k"                 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "M-f")         'avy-goto-char)
 (define-key evil-visual-state-map (kbd "M-f")         'avy-goto-char)
-(define-key evil-insert-state-map (kbd "C-c j")       'avy-goto-char)
-(define-key evil-emacs-state-map  (kbd "C-c j")       'avy-goto-char)
 (define-key evil-normal-state-map (kbd "M-y")         'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-y")         'counsel-yank-pop)
-(define-key evil-emacs-state-map  (kbd "M-y")         'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-\\")        'evil-execute-in-emacs-state)
 (define-key evil-insert-state-map (kbd "C-M-n")       'evil-execute-in-emacs-state)
-(define-key evil-normal-state-map (kbd "C-c C-=")     'evil-numbers/inc-at-pt)
-(define-key evil-normal-state-map (kbd "C-c C--")     'evil-numbers/dec-at-pt)
+(define-key evil-normal-state-map (kbd "C-a")         'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-b")         'evil-numbers/dec-at-pt)
 (define-key evil-normal-state-map (kbd "C-=")         'er/expand-region)
 (define-key evil-insert-state-map (kbd "C-=")         'er/expand-region)
-(define-key evil-normal-state-map (kbd "M-u")         'fx-word-upcase)
+(define-key evil-normal-state-map (kbd "M-u")         'fix-word-upcase)
 (define-key evil-normal-state-map (kbd "M-l")         'fix-word-downcase)
 (define-key evil-normal-state-map (kbd "M-c")         'fix-word-capitalize)
 (define-key evil-insert-state-map (kbd "TAB")         'tab-to-tab-stop)
 (define-key evil-normal-state-map (kbd "U")           'undo-tree-visualize)
 (define-key evil-normal-state-map (kbd "M-/")         'yas-expand)
 (define-key evil-insert-state-map (kbd "M-/")         'yas-expand)
-(define-key evil-emacs-state-map  (kbd "M-/")         'hippie-expand)
 (define-key evil-normal-state-map (kbd "C-M-/")       'nil)
+(define-key evil-insert-state-map (kbd "C-.")         'company-complete)
+
 
 (provide 'evil-config)
 ;;; evil-config.el ends here

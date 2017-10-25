@@ -49,6 +49,21 @@
 
 (use-package centered-cursor-mode)
 
+(use-package company
+  :diminish
+  company-mode
+  :commands
+  company-complete
+  company-mode
+  :bind (:map company-active-map
+              ("C-n" . company-select-next-or-abort)
+              ("C-p" . company-select-previous-or-abort)
+              ("C-d" . company-show-doc-buffer)
+              ("<tab>" . nil))
+
+  :init
+  (setq company-idle-delay nil))
+
 (use-package counsel
   :diminish counsel-mode
   :config
@@ -79,6 +94,7 @@
 (use-package evil
   :ensure avy
   :ensure counsel
+  :ensure company
   :ensure evil-ediff
   :ensure evil-escape
   :ensure evil-exchange
@@ -103,6 +119,7 @@
   (evil-exchange-install)
   (evil-escape-mode)
   (golden-ratio-mode 1)
+  (global-company-mode 1)
   (load "evil-config.el"))
 
 (use-package evil-escape
@@ -153,11 +170,10 @@
 
 (use-package ivy
   :diminish ivy-mode
+  :ensure ivy-hydra
   :ensure counsel
   :ensure swiper
   :ensure avy
-  :bind (:map ivy-minibuffer-map
-              ([escape] . minibuffer-keyboard-quit))
   :config
   (ivy-mode))
 
@@ -264,8 +280,8 @@
   (add-hook 'prog-mode-hook #'smartparens-mode))
 
 (use-package swiper
-  :bind (:map swiper-map
-              ([escape] . minibuffer-keyboard-quit)))
+  :commands
+  swiper)
 
 (use-package telephone-line
   :init
