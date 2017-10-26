@@ -125,6 +125,7 @@
 (use-package evil-escape
   :init
   (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-unordered-key-sequence t)
   (setq-default evil-escape-delay 0.1))
 
 (use-package evil-leader
@@ -133,12 +134,26 @@
   :config
   (load "leader-config.el"))
 
+(use-package evil-magit
+  :after magit evil
+  :config
+  (require 'evil-magit))
+
 (use-package evil-numbers
   :commands
   evil-numbers/inc-at-point
   evil-numbers/dev-at-point
   :config
   (require 'evil-numbers))
+
+(use-package evil-org
+  :diminish evil-org-mode
+  :after org
+  :init
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme))))
 
 (use-package expand-region
   :commands er/expand-region)
@@ -275,9 +290,10 @@
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode
+  :init
+  (add-hook 'prog-mode-hook #'smartparens-mode)
   :config
-  (require 'smartparens-config)
-  (add-hook 'prog-mode-hook #'smartparens-mode))
+  (require 'smartparens-config))
 
 (use-package swiper
   :commands
@@ -322,10 +338,8 @@
   :ensure web-mode
   :ensure impatient-mode
   :ensure emmet-mode
-  :bind
-  (:map web-mode-map ("C-c n" . emmet-next-edit-point))
-  (:map web-mode-map ("C-c p" . emmet-prev-edit-point))
   :init
+  (add-hook 'web-mode-hook 'electric-indent-mode)
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
@@ -336,6 +350,7 @@
   :diminish
   which-key-mode
   :config
+  (which-key-setup-minibuffer)
   (which-key-mode 1))
 
 (use-package yasnippet

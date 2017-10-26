@@ -71,6 +71,9 @@
   "t w" 'whitespace-mode
   "t -" 'centered-cursor-mode
   "t g" 'golden-ratio-mode
+  "t I" 'aggressive-indent-mode
+  "t i" 'indent-guide-mode
+  "t A" 'auto-revert-mode
   ;; universal
   "u" 'universal-argument
   ;; window
@@ -92,10 +95,16 @@
   "SPC" 'counsel-M-x)
 
 (evil-leader/set-key-for-mode 'org-mode
-  "o e" 'org-export-dispatch)
+  "e e" 'org-export-dispatch)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "e e" 'eval-last-sexp)
 
+(evil-leader/set-key-for-mode 'web-mode
+  "n" 'emmet-next-edit-point
+  "N" 'emmet-prev-edit-point)
+
 (provide 'leader-config)
 ;;; leader-config.el ends here
+
+
