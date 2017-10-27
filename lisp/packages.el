@@ -301,20 +301,23 @@
 
 (use-package telephone-line
   :init
+  (setq telephone-line-primary-left-separator 'telephone-line-identity-right
+        telephone-line-primary-right-separator 'telephone-line-identify-left)
   (setq telephone-line-height 32
         telephone-line-evil-use-short-tag t)
+
   (setq telephone-line-lhs
-        '((evil   . (telephone-line-evil-tag-segment))
-          (accent . (telephone-line-major-mode-segment))
-          (nil    . (telephone-line-buffer-segment
-                     telephone-line-process-segment
-                     telephone-line-minor-mode-segment
-                     telephone-line-erc-modified-channels-segment))))
+        '((evil . ())
+          (evil . (telephone-line-major-mode-segment))
+          (evil . ())
+          (accent . (telephone-line-minor-mode-segment))
+          (accent . ())
+          (nil . (telephone-line-buffer-segment))
+          (nil . (telephone-line-vc-segment))
+          (nil . (telephone-line-airline-position-segment))))
 
   (setq telephone-line-rhs
-        '((nil    . (telephone-line-misc-info-segment))
-          (accent . (telephone-line-vc-segment))
-          (evil   . (telephone-line-airline-position-segment))))
+        '((nil . ())))
 
   (custom-set-faces
    '(telephone-line-evil-normal
