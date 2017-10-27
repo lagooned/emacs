@@ -308,13 +308,17 @@
 
   (setq telephone-line-lhs
         '((evil . ())
-          (evil . (telephone-line-major-mode-segment))
+          (evil . (telephone-line-simple-major-mode-segment))
           (evil . ())
-          (accent . (telephone-line-minor-mode-segment))
           (accent . ())
+          (accent . (telephone-line-simple-minor-mode-segment))
+          (accent . ())
+          (nil . ())
           (nil . (telephone-line-buffer-segment))
-          (nil . (telephone-line-vc-segment))
-          (nil . (telephone-line-airline-position-segment))))
+          (nil . ())
+          (nil . (telephone-line-airline-position-segment))
+          (nil . ())
+          (nil . (telephone-line-vc-segment))))
 
   (setq telephone-line-rhs
         '((nil . ())))
