@@ -19,6 +19,22 @@
 
 ;;; Code:
 
+(setq inhibit-splash-screen t)
+(setq initial-scratch-message "
+;;    ▄██████▄    ▄▄▄▄███▄▄▄▄    ▄████████  ▄████████  ▄████████ 
+;;   ███    ███ ▄██▀▀▀███▀▀▀██▄ ███    ███ ███    ███ ███    ███ 
+;;   ███    █▀  ███   ███   ███ ███    ███ ███    █▀  ███    █▀  
+;;   ███        ███   ███   ███ ███    ███ ███        ███        
+;;   ███ ██████ ███   ███   ███ ██████████ ███        ██████████ 
+;;   ███    ███ ███   ███   ███ ███    ███ ███    █▄         ███ 
+;;   ███    ███ ███   ███   ███ ███    ███ ███    ███  ▄█    ███ 
+;;   ████████▀   ▀█   ███   █▀  ███    █▀  ████████▀ ▄████████▀  
+
+;; welcome to goodmacs, enjoy and have a good day
+
+;; this buffer is for text that is not saved, and for lisp evaluation.
+;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
+
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
@@ -36,11 +52,11 @@
 ;; load custom functions
 (load "functions.el")
 
-;; load global config
-(load "global.el")
-
 ;; load package config
 (load "packages.el")
+
+;; load global config
+(load "global.el")
 
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
