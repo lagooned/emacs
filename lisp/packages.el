@@ -27,6 +27,8 @@
 (setq use-package-always-ensure t)
 (require 'use-package)
 
+(use-package all-the-icons)
+
 (use-package avy)
 
 (use-package adaptive-wrap
@@ -50,19 +52,24 @@
 (use-package centered-cursor-mode)
 
 (use-package company
+  :ensure company-flx
   :diminish
-  company-mode
+  company-mode 
   :commands
   company-complete
   company-mode
-  :bind (:map company-active-map
-              ("C-n" . company-select-next-or-abort)
-              ("C-p" . company-select-previous-or-abort)
-              ("C-d" . company-show-doc-buffer)
-              ("<tab>" . nil))
-
+  global-company-mode
+  :bind
+  (:map company-active-map
+        ("C-n" . company-select-next-or-abort)
+        ("C-p" . company-select-previous-or-abort)
+        ("C-d" . company-show-doc-buffer)
+        ("<tab>" . nil))
   :init
-  (setq company-idle-delay nil))
+  (setq company-idle-delay nil)
+  :config
+  (global-company-mode 1)
+  (company-flx-mode +1))
 
 (use-package counsel
   :diminish counsel-mode
@@ -110,16 +117,16 @@
   :init
   (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1)
   (global-evil-leader-mode 1)
   (global-evil-matchit-mode 1)
   (global-evil-surround-mode 1)
   (global-evil-visualstar-mode 1)
+  (global-company-mode 1)
+  (evil-mode 1)
   (evil-vimish-fold-mode 1)
   (evil-exchange-install)
   (evil-escape-mode)
   (golden-ratio-mode 1)
-  (global-company-mode 1)
   (load "evil-config.el"))
 
 (use-package evil-escape
@@ -129,6 +136,7 @@
   (setq-default evil-escape-delay 0.1))
 
 (use-package evil-leader
+  :ensure indent-guide
   :commands
   global-evil-leader-mode
   :config
@@ -189,6 +197,12 @@
   :ensure counsel
   :ensure swiper
   :ensure avy
+  :init
+  (setq
+   ivy-re-builders-alist
+   '((ivy-switch-buffer . ivy--regex-ignore-order)
+     (counsel-M-x . ivy--regex-ignore-order)
+     (t . ivy--regex-plus)))
   :config
   (ivy-mode))
 
@@ -200,8 +214,9 @@
   :config
   (with-eval-after-load 'info
     (info-initialize)
-    (add-to-list 'Info-directory-list
-                 "~/.emacs.d/packages/magit/Documentation/")))
+    (add-to-list
+     'Info-directory-list
+     "~/.emacs.d/packages/magit/Documentation/")))
 
 (use-package linum-relative
   :commands linum-relative-mode
@@ -209,7 +224,8 @@
   :init
   (setq linum-relative-format "%3s "
         linum-relative-current-symbol "")
-  (add-hook 'prog-mode-hook (lambda () (linum-relative-mode 1))))
+  (add-hook
+   'prog-mode-hook (lambda () (linum-relative-mode 1))))
 
 (use-package lorem-ipsum)
 
@@ -285,7 +301,9 @@
 (use-package restclient
   :commands restclient-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.rest\\'" . restclient-mode)))
+  (add-to-list
+   'auto-mode-alist
+   '("\\.rest\\'" . restclient-mode)))
 
 (use-package smartparens
   :commands smartparens-mode
@@ -298,37 +316,6 @@
 (use-package swiper
   :commands
   swiper)
-
-(use-package telephone-line
-  :init
-  (setq telephone-line-primary-left-separator 'telephone-line-identity-right
-        telephone-line-primary-right-separator 'telephone-line-identify-left)
-  (setq telephone-line-height 32
-        telephone-line-evil-use-short-tag t)
-
-  (setq telephone-line-lhs
-        '((evil . ())
-          (evil . (telephone-line-simple-major-mode-segment))
-          (evil . ())
-          (accent . ())
-          (accent . (telephone-line-simple-minor-mode-segment))
-          (accent . ())
-          (nil . ())
-          (nil . (telephone-line-buffer-segment))
-          (nil . ())
-          (nil . (telephone-line-airline-position-segment))
-          (nil . ())
-          (nil . (telephone-line-vc-segment))))
-
-  (setq telephone-line-rhs
-        '((nil . ())))
-
-  (custom-set-faces
-   '(telephone-line-evil-normal
-     ((t (:inherit telephone-line-evil :background "darkmagenta")))))
-
-  :config
-  (telephone-line-mode t))
 
 (use-package try)
 
@@ -346,10 +333,15 @@
   :ensure impatient-mode
   :ensure emmet-mode
   :init
-  (add-hook 'web-mode-hook 'electric-indent-mode)
-  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-  (add-to-list 'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (add-hook
+   'web-mode-hook
+   'electric-indent-mode)
+  (add-to-list
+   'auto-mode-alist '("\\.x?html\\'" . web-mode))
+  (add-to-list
+   'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+  (add-to-list
+   'auto-mode-alist '("\\.php\\'" . web-mode))
   :config
   (emmet-mode 1))
 

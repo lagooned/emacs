@@ -31,29 +31,10 @@
 ;; no warnings
 (setq warning-minimum-level :emergency)
 
-(dolist (key '(
-               ;; "\C-a"
-               ;; "\C-b"
-               "\C-c"
-               ;; "\C-d"
-               ;; "\C-e"
-               ;; "\C-f"
-               ;; "\C-g"
-               "\C-h"
-               ;; "\C-k"
-               ;; "\C-l"
-               ;; "\C-n"
-               "\C-o"
-               ;; "\C-p"
-               ;; "\C-q"
-               "\C-t"
-               ;; "\C-u"
-               ;; "\C-v"
-               "\C-x"
-               "\C-z"
-               ;; "\e"
-               ))
-  (global-unset-key key))
+;; some global binds
+(global-set-key (kbd "C-;") 'comment-line)
+(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "M-q") 'toggle-truncate-lines)
 
 ;; new fringe arrows
 (define-fringe-bitmap 'right-curly-arrow
@@ -158,40 +139,18 @@
 ;; make prompts easier
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; highlight line
-;; (when window-system
-;; (global-hl-line-mode))
-
 ;; sentence navigation
 (setq sentence-end-double-space nil)
-
-;; some global binds
-(global-set-key (kbd "C-;") 'comment-line)
-(global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "M-q") 'toggle-truncate-lines)
-
-;; insert newlines with C-n at end of buffer
-(setq next-line-add-newlines t)
 
 ;; auto-insert
 (auto-insert-mode 1)
 
 ;; platform specific options
 (when (eq system-type 'darwin)
-  ;; railwaycat/homebrew-emacsmacport
   (set-face-attribute 'default nil :family "Source Code Pro")
-  ;; (set-face-attribute 'default nil :family "Monaco")
   (set-face-attribute 'default nil :height 120)
   (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
-  ;; load mu4e
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-  (require 'mu4e)
-  (setq mu4e-contexts `(,(make-mu4e-context
-                          :name "Gmail"
-                          :match-func (lambda (msg) (when msg (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
-                          :vars '((mu4e-trash-folder . "/Gmail/[Gmail].Trash")
-                                  (mu4e-refile-folder . "/Gmail/[Gmail].Archive")))))
   (setenv "SHELL" "/bin/zsh"))
 
 (when (eq system-type 'gnu/linux)

@@ -52,9 +52,11 @@
   ;; insert
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
-  "i l" 'org-insert-link-global
+  ;; link
+  "l s" 'org-store-link
+  "l i" 'org-insert-link-global
+  "l l" 'org-open-at-point
   ;; org
-  "o l" 'org-open-at-point
   "o a" 'org-agenda
   "o b" 'org-iswitchb
   ;; project
@@ -89,8 +91,6 @@
   "w s" 'evil-window-split
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
-  ;; yank
-  "y l" 'org-store-link
   ;; command
   "SPC" 'counsel-M-x)
 
