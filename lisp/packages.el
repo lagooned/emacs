@@ -116,6 +116,10 @@
   :diminish evil-vimish-fold-mode
   :init
   (setq evil-want-C-u-scroll t)
+  (setq evil-default-cursor '(t "#ffffff")
+        evil-visual-state-cursor '("#ff9900" box)
+        evil-normal-state-cursor '("#dd00dd" box)
+        evil-insert-state-cursor '("#00e000" box))
   :config
   (global-evil-leader-mode 1)
   (global-evil-matchit-mode 1)

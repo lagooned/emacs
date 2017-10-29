@@ -55,7 +55,7 @@
   ;; link
   "l s" 'org-store-link
   "l i" 'org-insert-link-global
-  "l l" 'org-open-at-point
+  "l l" 'org-open-at-point-global
   ;; org
   "o a" 'org-agenda
   "o b" 'org-iswitchb

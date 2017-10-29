@@ -148,14 +148,18 @@
 ;; platform specific options
 (when (eq system-type 'darwin)
   (set-face-attribute 'default nil :family "Source Code Pro")
+  (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 120)
   (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
+  (setq-default line-spacing 3)
   (setenv "SHELL" "/bin/zsh"))
 
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Ubuntu Mono")
+  (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 110)
+  (setq ispell-program-name "aspell")
   (unless (display-graphic-p) (menu-bar-mode -1)))
 
 (when (eq system-type 'windows-nt)
