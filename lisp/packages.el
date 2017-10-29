@@ -116,10 +116,20 @@
   :diminish evil-vimish-fold-mode
   :init
   (setq evil-want-C-u-scroll t)
-  (setq evil-default-cursor '(t "#ffffff")
-        evil-visual-state-cursor '("#ff9900" box)
-        evil-normal-state-cursor '("#dd00dd" box)
-        evil-insert-state-cursor '("#00e000" box))
+  (setq evil-normal-state-cursor
+        `("#dd00dd" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (setq evil-insert-state-cursor
+        `("#00e000" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (setq evil-visual-state-cursor
+        `("#ff8800" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (setq evil-emacs-state-cursor
+        `("#ff0000" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (setq evil-motion-state-cursor
+        `("#0000ff" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (setq evil-replace-state-cursor 
+        `("#00bbbb" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (setq evil-operator-state-cursor 
+        `("#ff66ff" (hbar . ,(+ line-spacing my/evil-cursor-height))))
   :config
   (global-evil-leader-mode 1)
   (global-evil-matchit-mode 1)
@@ -341,10 +351,14 @@
           (nil . (telephone-line-vc-segment))
           (nil . (telephone-line-airline-position-segment))))
   (setq telephone-line-rhs nil)
-  (telephone-line-mode 1)
   (custom-set-faces
    '(telephone-line-evil-normal
-     ((t (:inherit telephone-line-evil :background "darkmagenta"))))))
+     ((t (:inherit telephone-line-evil :background "darkmagenta"))))
+   '(telephone-line-evil-replace
+     ((t (:inherit telephone-line-evil :background "darkcyan"))))
+   '(telephone-line-evil-emacs
+     ((t (:inherit telephone-line-evil :background "red")))))
+  (telephone-line-mode 1))
 
 (use-package try)
 

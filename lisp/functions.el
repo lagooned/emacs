@@ -20,6 +20,9 @@
 
 ;;; Code:
 
+(defvar my/evil-cursor-height 15
+  "set the cursor height to be used across all evil")
+
 ;; load config
 (defun my/load-config ()
   (interactive)

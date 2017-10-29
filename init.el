@@ -19,6 +19,7 @@
 
 ;;; Code:
 
+(setq inhibit-startup-screen t)
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "
 ;;    ▄████████▀ ▄█████████████▀ ▄████████▀ ▄████████▀ ▄████████▀ 
@@ -52,16 +53,17 @@
 ;; load custom functions
 (load "functions.el")
 
-;; load package config
-(load "packages.el")
-
 ;; load global config
 (load "global.el")
+
+;; load package config
+(load "packages.el")
 
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
 
+(when window-system (set-frame-size (selected-frame) 80 40))
+
 (provide 'init)
 ;;; init.el ends here
-
