@@ -51,6 +51,9 @@
 (define-key evil-normal-state-map (kbd "C-M-/")       'nil)
 (define-key evil-insert-state-map (kbd "C-.")         'company-complete)
 
+;; web-mode
+(evil-define-key 'insert web-mode-map (kbd "C-c C-n") 'emmet-next-edit-point)
+(evil-define-key 'insert web-mode-map (kbd "C-c C-p") 'emmet-prev-edit-point)
 
 (provide 'evil-config)
 ;;; evil-config.el ends here

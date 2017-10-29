@@ -67,9 +67,6 @@ checking happens for all pairs in my/auto-minor-mode-alist"
   (my/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
-;;
-;; TODO make these region functions higher order
-;;
 (defun my/counsel-rg-region (beg end)
   "ripgrep region or 'empty string' if none highlighted."
   (interactive (if (use-region-p)

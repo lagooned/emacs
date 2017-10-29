@@ -159,8 +159,10 @@
   (unless (display-graphic-p) (menu-bar-mode -1)))
 
 (when (eq system-type 'windows-nt)
-  (set-face-attribute 'default nil :family "Source Code Pro")
-  (set-face-attribute 'default nil :height 105)
+  ;; (set-face-attribute 'default nil :family "Source Code Pro")
+  (set-face-attribute 'default nil :family "Consolas")
+  (set-face-attribute 'default nil :weight 'bold)
+  (set-face-attribute 'default nil :height 110)
   (setq-default line-spacing 1)
   (menu-bar-mode -1))
 

@@ -268,6 +268,10 @@
   fix-word-downcase
   fix-word-capitalize)
 
+(use-package focus
+  :commands
+  focus-mode)
+
 (use-package org
   :commands
   org-mode
@@ -277,13 +281,13 @@
   org-capture
   :ensure org-beautify-theme
   :init
+  (load-theme 'org-beautify t)
   (setq org-startup-indented t
         org-log-done t
         org-agenda-files (list "~/org/work.org"
                                "~/org/home.org")
         org-beautify-theme-use-box-hack nil)
   :config
-  (load-theme 'org-beautify t)
   (custom-theme-set-faces 'org-beautify
                           `(org-done
                             ((t (:strike-through nil))))
@@ -316,6 +320,27 @@
 (use-package swiper
   :commands
   swiper)
+
+(use-package telephone-line
+  :init
+  (require 'telephone-line-config)
+  (setq telephone-line-height 30
+        telephone-line-separator-extra-padding 1
+        telephone-line-primary-left-separator 'telephone-line-flat
+        telephone-line-secondary-left-separator 'telephone-line-flat
+        telephone-line-primary-right-separator 'telephone-line-flat
+        telephone-line-secondary-right-separator 'telephone-line-flat)
+  (setq telephone-line-lhs
+        '((evil . (telephone-line-simple-major-mode-segment))
+          (accent . (telephone-line-simple-minor-mode-segment))
+          (nil . (telephone-line-buffer-segment))
+          (nil . (telephone-line-vc-segment))
+          (nil . (telephone-line-airline-position-segment))))
+  (setq telephone-line-rhs nil)
+  (telephone-line-mode 1)
+  (custom-set-faces
+   '(telephone-line-evil-normal
+     ((t (:inherit telephone-line-evil :background "darkmagenta"))))))
 
 (use-package try)
 

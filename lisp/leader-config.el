@@ -27,9 +27,11 @@
   "b b" 'switch-to-buffer
   "b k" 'kill-buffer
   "b l" 'list-buffers
+
   ;; emacs
   "e r" 'restart-emacs
   "e l" 'my/load-config
+
   ;; file
   "f f" 'find-file
   "f a" 'find-alternate-file
@@ -37,6 +39,7 @@
   "f l" 'counsel-locate
   "f s" 'save-buffer
   "f w" 'write-file
+
   ;; help
   "h d b" 'describe-bindings
   "h d d" 'describe-distribution
@@ -49,23 +52,28 @@
   "h d p" 'describe-package
   "h v l" 'view-lossage
   "h a" 'about-emacs
+
   ;; insert
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
   "i l" 'org-insert-link-global
+
   ;; org
   "o l" 'org-open-at-point
   "o a" 'org-agenda
   "o b" 'org-iswitchb
+
   ;; project
   "p g" 'my/counsel-rg-region
   "p f" 'my/counsel-git-region
   "p s" 'magit-status
   "p d" 'magit-diff-popup
+
   ;; search
   "s s" 'my/swiper-region
   "s c" 'avy-goto-char
   "s t" 'my/swiper-thing
+
   ;; toggles
   "t l" 'linum-relative-mode
   "t w" 'whitespace-mode
@@ -74,8 +82,11 @@
   "t I" 'aggressive-indent-mode
   "t i" 'indent-guide-mode
   "t A" 'auto-revert-mode
+  "t f" 'focus-mode
+
   ;; universal
   "u" 'universal-argument
+
   ;; window
   "w w" 'evil-window-next
   "w W" 'evil-window-prev
@@ -89,8 +100,10 @@
   "w s" 'evil-window-split
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
+
   ;; yank
   "y l" 'org-store-link
+
   ;; command
   "SPC" 'counsel-M-x)
 
@@ -98,6 +111,9 @@
   "e e" 'org-export-dispatch)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
+  "e e" 'eval-last-sexp)
+
+(evil-leader/set-key-for-mode 'lisp-interaction-mode
   "e e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'web-mode
