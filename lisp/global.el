@@ -145,6 +145,9 @@
 ;; auto-insert
 (auto-insert-mode 1)
 
+;; line spaceing
+(setq-default line-spacing 3)
+
 ;; platform specific options
 (when (eq system-type 'darwin)
   (set-face-attribute 'default nil :family "Source Code Pro")
@@ -152,7 +155,7 @@
   (set-face-attribute 'default nil :height 120)
   (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
-  (setq-default line-spacing 3)
+  (setq my/evil-cursor-height 15)
   (setenv "SHELL" "/bin/zsh"))
 
 (when (eq system-type 'gnu/linux)
@@ -167,7 +170,7 @@
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 110)
-  (setq-default line-spacing 1)
+  (setq my/evil-cursor-height 18)
   (menu-bar-mode -1))
 
 (provide 'global)
