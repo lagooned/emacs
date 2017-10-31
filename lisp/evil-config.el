@@ -37,8 +37,6 @@
 (add-hook 'term-mode-hook 'evil-emacs-state)
 (add-hook 'ansi-term-mode-hook 'evil-emacs-state)
 
-;; evil unbinds
-
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "j")     'evil-next-visual-line)
@@ -63,8 +61,9 @@
 (define-key evil-insert-state-map (kbd "M-/")   'yas-expand)
 (define-key evil-normal-state-map (kbd "C-M-/") 'nil)
 (define-key evil-insert-state-map (kbd "C-.")   'company-complete)
-(define-key evil-normal-state-map (kbd "C-;")   'evil-commentary-line)
-(define-key evil-insert-state-map (kbd "C-;")   'comment-line)
+(define-key evil-normal-state-map (kbd "C-;")   'comment-line)
+(define-key evil-visual-state-map (kbd "C-;")   'evil-commentary-line)
+(define-key evil-insert-state-map (kbd "C-;")   'evil-commentary-line)
 
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
