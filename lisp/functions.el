@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: lisp, custom, config, minor-mode, tabify
+;; Keywords: gmacs, lisp, custom, config, minor-mode, tabify
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,20 +23,32 @@
 (defvar my/evil-cursor-height 15
   "set the cursor height to be used across all evil")
 
-;; load config
 (defun my/load-config ()
+  "load init.el"
   (interactive)
   (save-some-buffers)
   (load-file "~/.emacs.d/init.el")
   (revert-buffer t t))
 
-;; create my/auto-minor-mode-alist for files
+(defun my/force-buffer-backup ()
+  "Make a special /per session/ backup at the first save of each macs session."
+  (when (not buffer-backed-up)
+    ;; Override the default parameters for per-session backups.
+    (let ((backup-directory-alist '(("" . "~/.emacs.d/backup/session")))
+          (kept-new-versions 3))
+      (backup-buffer)))
+  ;; Make a "per save" backup on each save.  The first save results in
+  ;; both a per-session and a per-save backup, to keep the numbering
+  ;; of per-save backups consistent.
+  (let ((buffer-backed-up nil))
+    (backup-buffer)))
+(add-hook 'before-save-hook 'my/force-buffer-backup)
+
 (defvar my/auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see
   `auto-mode-alist' All elements of this alist are checked, meaning you can
   enable multiple minor modes for the same regexp.")
 
-;; enable minor modes
 (defun my/enable-minor-mode-based-on-extension ()
   "check file name against my/auto-minor-mode-alist to enable minor modes the
 checking happens for all pairs in my/auto-minor-mode-alist"
@@ -54,54 +66,48 @@ checking happens for all pairs in my/auto-minor-mode-alist"
         (if (string-match (caar alist) name)
             (funcall (cdar alist) 1))
         (setq alist (cdr alist))))))
-
-;; hook to new buffer
 (add-hook 'find-file-hook 'my/enable-minor-mode-based-on-extension)
 
-;; untabify
 (defun my/untabify-except-makefiles ()
   "Replace tabs with spaces except in makefiles."
   (unless (derived-mode-p 'makefile-mode)
     (untabify (point-min) (point-max))))
 
-;; cleanup
 (defun my/cleanup-buffer ()
   (interactive)
   (my/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
 (defun my/counsel-rg-region (beg end)
-  "ripgrep region or 'empty string' if none highlighted."
-  (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
-  (if (and beg end)
-      (progn
-        (deactivate-mark)
-        (counsel-rg (buffer-substring-no-properties beg end)))
-    (counsel-rg)))
+  "optionally run ripgrep on region"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (list nil nil)))
+  (my/opt-region-helper #'counsel-rg beg end))
 
 (defun my/counsel-git-region (beg end)
-  "counsel-git region or 'empty string' if none highlighted."
-  (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
-  (if (and beg end)
-      (progn
-        (deactivate-mark)
-        (counsel-git (buffer-substring-no-properties beg end)))
-    (counsel-git)))
+  "optionally run counsel-git on region"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (list nil nil)))
+  (my/opt-region-helper #'counsel-git beg end))
 
 (defun my/swiper-region (beg end)
-  "swiper region or 'empty string' if none highlighted."
-  (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
+  "optionally run swiper on region"
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (list nil nil)))
+  (my/opt-region-helper #'swiper beg end))
+
+(defun my/opt-region-helper (func beg end)
+  "run func on the region"
   (if (and beg end)
-      (progn
-        (deactivate-mark)
-        (swiper (buffer-substring-no-properties beg end)))
-    (swiper)))
+      (progn (deactivate-mark)
+             (funcall func (buffer-substring-no-properties beg end)))
+    (funcall func)))
 
 (defun my/swiper-thing ()
   "swiper current word or line"

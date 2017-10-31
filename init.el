@@ -3,6 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: gmacs, init
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -22,14 +23,14 @@
 (setq inhibit-startup-screen t)
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "
-;;    ▄████████▀ ▄█████████████▀ ▄████████▀ ▄████████▀ ▄████████▀ 
-;;   ███    ███ ███▀▀▀███▀▀▀███ ███    ███ ███    ███ ███    ███ 
-;;   ███    █▀  ███   ███   ███ ███    ███ ███    █▀  ███    █▀  
-;;   ███        ███   ███   ███ ███    ███ ███        ███        
-;;   ███ ██████ ███   ███   ███ ██████████ ███        ██████████ 
-;;   ███    ███ ███   ███   ███ ███    ███ ███    █▄         ███ 
-;;   ███    ███ ███   ███   ███ ███    ███ ███    ███  ▄█    ███ 
-;;  ▄████████▀ ▄███   ███   █▀ ▄███    █▀ ▄████████▀ ▄████████▀  
+;;    ▄████████▀ ▄█████████████▀ ▄████████▀ ▄████████▀ ▄████████▀
+;;   ███    ███ ███▀▀▀███▀▀▀███ ███    ███ ███    ███ ███    ███
+;;   ███    █▀  ███   ███   ███ ███    ███ ███    █▀  ███    █▀
+;;   ███        ███   ███   ███ ███    ███ ███        ███
+;;   ███ ██████ ███   ███   ███ ██████████ ███        ██████████
+;;   ███    ███ ███   ███   ███ ███    ███ ███    █▄         ███
+;;   ███    ███ ███   ███   ███ ███    ███ ███    ███  ▄█    ███
+;;  ▄████████▀ ▄███   ███   █▀ ▄███    █▀ ▄████████▀ ▄████████▀
 
 ;; welcome to goodmacs, enjoy and have a good day
 
@@ -42,7 +43,7 @@
                          ("melpa" . "https://melpa.org/packages/")
                          ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
                          ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
- 						 ("org" . "http://orgmode.org/elpa/"))) 
+                         ("org" . "http://orgmode.org/elpa/")))
 (package-initialize)
 
 ;; add load path
@@ -63,7 +64,11 @@
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
 
-(when window-system (set-frame-size (selected-frame) 80 40))
+;; initial window size
+(add-hook
+ 'emacs-startup-hook (lambda ()
+                       (when window-system
+                         (set-frame-size (selected-frame) 80 40))))
 
 (provide 'init)
 ;;; init.el ends here

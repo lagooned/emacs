@@ -31,11 +31,6 @@
 ;; no warnings
 (setq warning-minimum-level :emergency)
 
-;; some global binds
-(global-set-key (kbd "C-;") 'comment-line)
-(global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "M-q") 'toggle-truncate-lines)
-
 ;; new fringe arrows
 (define-fringe-bitmap 'right-curly-arrow
   [#b00000000
@@ -67,8 +62,8 @@
    #b00000000
    #b00000000])
 
-;; let text breath 
-(fringe-mode 8)
+;; let text breath
+(fringe-mode 12)
 
 ;; setup user
 (setq user-full-name "Jared M. Engler"
@@ -81,12 +76,14 @@
 (setq frame-title-format
       '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
-;; backup files to temp
-;; (setq auto-save-default nil)
-(setq backup-directory-alist `((".*" . , temporary-file-directory)))
-(setq auto-save-file-name-transforms `((".*" , temporary-file-directory t)))
-;; (setq version-control t)
-;; (setq delete-old-versions t)
+;; backups
+(setq version-control t
+      kept-new-versions 10
+      kept-old-versions 0
+      delete-old-versions t
+      backup-by-copying t
+      vc-make-backup-files t
+      backup-directory-alist '(("" . "~/.emacs.d/backup/save")))
 
 ;; show column too
 (column-number-mode 1)
@@ -148,7 +145,14 @@
 ;; line spaceing
 (setq-default line-spacing 3)
 
-;; platform specific options
+;; unbinds
+(global-unset-key (kbd "M-u"))
+(global-unset-key (kbd "\M-l"))
+(global-unset-key (kbd "M-c"))
+(global-unset-key (kbd "C-x C-u"))
+(global-unset-key (kbd "C-x C-l"))
+
+;; osx
 (when (eq system-type 'darwin)
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :weight 'bold)
@@ -158,15 +162,18 @@
   (setq my/evil-cursor-height 15)
   (setenv "SHELL" "/bin/zsh"))
 
+;; linux
 (when (eq system-type 'gnu/linux)
   (set-face-attribute 'default nil :family "Ubuntu Mono")
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 110)
+  (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
-  (unless (display-graphic-p) (menu-bar-mode -1)))
+  (setq my/evil-cursor-height 15)
+  (setenv "SHELL" "/bin/zsh"))
 
+;; win
 (when (eq system-type 'windows-nt)
-  ;; (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 110)

@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: calendar, convenience, extensions
+;; Keywords: gmacs, packages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -102,6 +102,7 @@
   :ensure avy
   :ensure counsel
   :ensure company
+  :ensure evil-commentary
   :ensure evil-ediff
   :ensure evil-escape
   :ensure evil-exchange
@@ -131,17 +132,13 @@
   (setq evil-operator-state-cursor 
         `("#ff66ff" (hbar . ,(+ line-spacing my/evil-cursor-height))))
   :config
-  (global-evil-leader-mode 1)
-  (global-evil-matchit-mode 1)
-  (global-evil-surround-mode 1)
-  (global-evil-visualstar-mode 1)
-  (global-company-mode 1)
-  (evil-mode 1)
-  (evil-vimish-fold-mode 1)
-  (evil-exchange-install)
-  (evil-escape-mode)
-  (golden-ratio-mode 1)
   (load "evil-config.el"))
+
+(use-package evil-commentary
+  :commands
+  evil-commentary-mode
+  :config
+  (evil-commentary-mode))
 
 (use-package evil-escape
   :init
@@ -188,7 +185,8 @@
   :init
   (setq golden-ratio-extra-commands
         (append golden-ratio-extra-commands
-                '(evil-window-left
+                '(top-level
+                  evil-window-left
                   evil-window-right
                   evil-window-up
                   evil-window-down
@@ -293,20 +291,13 @@
   org-agenda
   org-iswitchb
   org-capture
-  :ensure org-beautify-theme
   :init
-  (load-theme 'org-beautify t)
   (setq org-startup-indented t
         org-log-done t
         org-agenda-files (list "~/org/work.org"
-                               "~/org/home.org")
-        org-beautify-theme-use-box-hack nil)
+                               "~/org/home.org"))
   :config
-  (custom-theme-set-faces 'org-beautify
-                          `(org-done
-                            ((t (:strike-through nil))))
-                          `(org-headline-done
-                            ((t (:strike-through nil)))))
+  (set-face-attribute 'org-level-1 nil :height 1.0)
   (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0))))
 
 (use-package rainbow-delimiters

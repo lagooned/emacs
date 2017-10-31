@@ -3,6 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: gmacs, evil, leader, config
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,9 +28,16 @@
   "b b" 'switch-to-buffer
   "b k" 'kill-buffer
   "b l" 'list-buffers
+
+  ;; case
+  "c u" 'fix-word-upcase
+  "c c" 'fix-word-capitalize
+  "c l" 'fix-word-downcase
+
   ;; emacs
   "e r" 'restart-emacs
   "e l" 'my/load-config
+
   ;; file
   "f f" 'find-file
   "f a" 'find-alternate-file
@@ -37,6 +45,7 @@
   "f l" 'counsel-locate
   "f s" 'save-buffer
   "f w" 'write-file
+
   ;; help
   "h d b" 'describe-bindings
   "h d d" 'describe-distribution
@@ -49,25 +58,31 @@
   "h d p" 'describe-package
   "h v l" 'view-lossage
   "h a" 'about-emacs
+
   ;; insert
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
+
   ;; link
   "l s" 'org-store-link
   "l i" 'org-insert-link-global
   "l l" 'org-open-at-point-global
+
   ;; org
   "o a" 'org-agenda
   "o b" 'org-iswitchb
+
   ;; project
   "p g" 'my/counsel-rg-region
   "p f" 'my/counsel-git-region
   "p s" 'magit-status
   "p d" 'magit-diff-popup
+
   ;; search
   "s s" 'my/swiper-region
   "s c" 'avy-goto-char
   "s t" 'my/swiper-thing
+
   ;; toggles
   "t l" 'linum-relative-mode
   "t w" 'whitespace-mode
@@ -76,8 +91,12 @@
   "t I" 'aggressive-indent-mode
   "t i" 'indent-guide-mode
   "t A" 'auto-revert-mode
+  "t t" 'toggle-truncate-lines
+  "t p" 'smartparens-mode
+
   ;; universal
   "u" 'universal-argument
+
   ;; window
   "w w" 'evil-window-next
   "w W" 'evil-window-prev
@@ -91,6 +110,7 @@
   "w s" 'evil-window-split
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
+
   ;; command
   "SPC" 'counsel-M-x)
 
@@ -109,5 +129,3 @@
 
 (provide 'leader-config)
 ;;; leader-config.el ends here
-
-
