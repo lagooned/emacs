@@ -73,9 +73,9 @@
   "o b" 'org-iswitchb
 
   ;; project
+  "p p" 'magit-status
   "p g" 'my/counsel-rg-region
   "p f" 'my/counsel-git-region
-  "p s" 'magit-status
   "p d" 'magit-diff-popup
 
   ;; search
@@ -96,6 +96,7 @@
 
   ;; universal
   "u" 'universal-argument
+  "U" 'negative-argument
 
   ;; window
   "w w" 'evil-window-next

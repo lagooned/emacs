@@ -12,7 +12,6 @@
 *.data
 ido*
 smex-items
-elpa
 auto-save-list
 eshell
 *.eld

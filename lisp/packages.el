@@ -144,7 +144,7 @@
   :init
   (setq-default evil-escape-key-sequence "kj")
   (setq-default evil-escape-unordered-key-sequence t)
-  (setq-default evil-escape-delay 0.1))
+  (setq-default evil-escape-delay 0.02))
 
 (use-package evil-leader
   :ensure indent-guide
