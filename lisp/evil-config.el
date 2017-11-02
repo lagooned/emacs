@@ -64,6 +64,7 @@
 (define-key evil-normal-state-map (kbd "C-;")   'comment-line)
 (define-key evil-visual-state-map (kbd "C-;")   'evil-commentary-line)
 (define-key evil-insert-state-map (kbd "C-;")   'evil-commentary-line)
+(define-key evil-normal-state-map (kbd "-")     'dired-jump)
 
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)

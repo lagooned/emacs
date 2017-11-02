@@ -76,6 +76,17 @@
   :config
   (counsel-mode 1))
 
+(use-package dired-x
+  :ensure nil
+  :defer t
+  :bind
+  (:map dired-mode-map
+        ("-" . dired-jump)
+        ("n" . evil-search-next)
+        ("N" . evil-search-previous)
+        ("p" . magit-status)
+        ("C-j" . dired-find-file)))
+
 (use-package dired+
   :diminish dired-omit-mode
   :init
