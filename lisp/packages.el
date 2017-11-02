@@ -146,6 +146,8 @@
   (load "evil-config.el"))
 
 (use-package evil-commentary
+  :diminish
+  evil-commentary-mode
   :commands
   evil-commentary-mode
   :config
