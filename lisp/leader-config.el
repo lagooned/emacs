@@ -36,7 +36,7 @@
 
   ;; emacs
   "e r" 'restart-emacs
-  "e l" 'my/load-config
+  "e l" 'gmacs/load-config
 
   ;; file
   "f f" 'find-file
@@ -74,14 +74,14 @@
 
   ;; project
   "p p" 'magit-status
-  "p g" 'my/counsel-rg-region
-  "p f" 'my/counsel-git-region
+  "p g" 'gmacs/counsel-rg-region
+  "p f" 'gmacs/counsel-git-region
   "p d" 'magit-diff-popup
 
   ;; search
-  "s s" 'my/swiper-region
+  "s s" 'gmacs/swiper-region
   "s c" 'avy-goto-char
-  "s t" 'my/swiper-thing
+  "s t" 'gmacs/swiper-thing
 
   ;; toggles
   "t l" 'linum-relative-mode
@@ -93,6 +93,7 @@
   "t A" 'auto-revert-mode
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
+  "t m" 'hidden-mode-line-mode
 
   ;; universal
   "u" 'universal-argument

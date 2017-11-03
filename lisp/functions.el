@@ -20,17 +20,14 @@
 
 ;;; Code:
 
-(defvar my/evil-cursor-height 15
-  "set the cursor height to be used across all evil")
-
-(defun my/load-config ()
+(defun gmacs/load-config ()
   "load init.el"
   (interactive)
   (save-some-buffers)
   (load-file "~/.emacs.d/init.el")
   (revert-buffer t t))
 
-(defun my/force-buffer-backup ()
+(defun gmacs/force-buffer-backup ()
   "Make a special /per session/ backup at the first save of each macs session."
   (when (not buffer-backed-up)
     ;; Override the default parameters for per-session backups.
@@ -42,20 +39,20 @@
   ;; of per-save backups consistent.
   (let ((buffer-backed-up nil))
     (backup-buffer)))
-(add-hook 'before-save-hook 'my/force-buffer-backup)
+(add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
-(defvar my/auto-minor-mode-alist ()
+(defvar gmacs/auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see
   `auto-mode-alist' All elements of this alist are checked, meaning you can
   enable multiple minor modes for the same regexp.")
 
-(defun my/enable-minor-mode-based-on-extension ()
-  "check file name against my/auto-minor-mode-alist to enable minor modes the
-checking happens for all pairs in my/auto-minor-mode-alist"
+(defun gmacs/enable-minor-mode-based-on-extension ()
+  "check file name against gmacs/auto-minor-mode-alist to enable minor modes the
+checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (when buffer-file-name
     (let ((name buffer-file-name)
           (remote-id (file-remote-p buffer-file-name))
-          (alist my/auto-minor-mode-alist))
+          (alist gmacs/auto-minor-mode-alist))
       ;; Remove backup-suffixes from file name.
       (setq name (file-name-sans-versions name))
       ;; Remove remote file name identification.
@@ -66,57 +63,57 @@ checking happens for all pairs in my/auto-minor-mode-alist"
         (if (string-match (caar alist) name)
             (funcall (cdar alist) 1))
         (setq alist (cdr alist))))))
-(add-hook 'find-file-hook 'my/enable-minor-mode-based-on-extension)
+(add-hook 'find-file-hook 'gmacs/enable-minor-mode-based-on-extension)
 
-(defun my/untabify-except-makefiles ()
+(defun gmacs/untabify-except-makefiles ()
   "Replace tabs with spaces except in makefiles."
   (unless (derived-mode-p 'makefile-mode)
     (untabify (point-min) (point-max))))
 
-(defun my/cleanup-buffer ()
+(defun gmacs/cleanup-buffer ()
   (interactive)
-  (my/untabify-except-makefiles)
+  (gmacs/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
-(defun my/counsel-rg-region (beg end)
+(defun gmacs/counsel-rg-region (beg end)
   "optionally run ripgrep on region"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
      (list nil nil)))
-  (my/opt-region-helper #'counsel-rg beg end))
+  (gmacs/opt-region-helper #'counsel-rg beg end))
 
-(defun my/counsel-git-region (beg end)
+(defun gmacs/counsel-git-region (beg end)
   "optionally run counsel-git on region"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
      (list nil nil)))
-  (my/opt-region-helper #'counsel-git beg end))
+  (gmacs/opt-region-helper #'counsel-git beg end))
 
-(defun my/swiper-region (beg end)
+(defun gmacs/swiper-region (beg end)
   "optionally run swiper on region"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
      (list nil nil)))
-  (my/opt-region-helper #'swiper beg end))
+  (gmacs/opt-region-helper #'swiper beg end))
 
-(defun my/opt-region-helper (func beg end)
-  "run func on the region"
+(defun gmacs/opt-region-helper (func beg end)
+  "run func with optional region arg"
   (if (and beg end)
       (progn (deactivate-mark)
              (funcall func (buffer-substring-no-properties beg end)))
     (funcall func)))
 
-(defun my/swiper-thing ()
+(defun gmacs/swiper-thing ()
   "swiper current word or line"
   (interactive
    (if (word-at-point) (swiper (word-at-point))
      (swiper (sentence-at-point)))))
 
 ;; cleanup on save
-;; (add-hook 'before-save-hook 'my/cleanup-buffer)
+;; (add-hook 'before-save-hook 'gmacs/cleanup-buffer)
 
 (provide 'functions)
 ;;; functions.el ends here

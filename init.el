@@ -51,6 +51,9 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; load custom vars
+(load "variables.el")
+
 ;; load custom functions
 (load "functions.el")
 
@@ -68,7 +71,8 @@
 (add-hook
  'emacs-startup-hook (lambda ()
                        (when window-system
-                         (set-frame-size (selected-frame) 80 40))))
+                         (set-frame-size (selected-frame) 160 46)
+                         (setq initial-frame-alist '((left . 50) (top . 50))))))
 
 (provide 'init)
 ;;; init.el ends here

@@ -85,7 +85,8 @@
         ("n" . evil-search-next)
         ("N" . evil-search-previous)
         ("p" . magit-status)
-        ("C-j" . dired-find-file)))
+        ("C-j" . dired-find-file)
+        ("." . dired-omit-mode)))
 
 (use-package dired+
   :diminish dired-omit-mode
@@ -127,21 +128,7 @@
   :ensure golden-ratio
   :diminish evil-vimish-fold-mode
   :init
-  (setq evil-want-C-u-scroll t)
-  (setq evil-normal-state-cursor
-        `("#dd00dd" (hbar . ,(+ line-spacing my/evil-cursor-height))))
-  (setq evil-insert-state-cursor
-        `("#00e000" (hbar . ,(+ line-spacing my/evil-cursor-height))))
-  (setq evil-visual-state-cursor
-        `("#ff8800" (hbar . ,(+ line-spacing my/evil-cursor-height))))
-  (setq evil-emacs-state-cursor
-        `("#ff0000" (hbar . ,(+ line-spacing my/evil-cursor-height))))
-  (setq evil-motion-state-cursor
-        `("#0000ff" (hbar . ,(+ line-spacing my/evil-cursor-height))))
-  (setq evil-replace-state-cursor 
-        `("#00bbbb" (hbar . ,(+ line-spacing my/evil-cursor-height))))
-  (setq evil-operator-state-cursor 
-        `("#ff66ff" (hbar . ,(+ line-spacing my/evil-cursor-height))))
+  (load "evil-init.el")
   :config
   (load "evil-config.el"))
 
