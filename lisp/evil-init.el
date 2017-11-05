@@ -46,6 +46,11 @@
     (setq evil-replace-state-cursor `("#00bbbb" box))
     (setq evil-operator-state-cursor `("#ff66ff" box))))
 
+;; initial states
+(add-hook 'with-editor-mode-hook 'evil-insert-state)
+(add-hook 'term-mode-hook 'evil-emacs-state)
+(add-hook 'ansi-term-mode-hook 'evil-emacs-state)
+
 (provide 'evil-init)
 ;;; evil-init.el ends here
 

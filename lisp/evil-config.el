@@ -32,11 +32,6 @@
 (evil-escape-mode 1)
 (golden-ratio-mode 1)
 
-;; initial states
-(add-hook 'with-editor-mode-hook 'evil-insert-state)
-(add-hook 'term-mode-hook 'evil-emacs-state)
-(add-hook 'ansi-term-mode-hook 'evil-emacs-state)
-
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "j")     'evil-next-visual-line)

@@ -77,6 +77,7 @@
   "p g" 'gmacs/counsel-rg-region
   "p f" 'gmacs/counsel-git-region
   "p d" 'magit-diff-popup
+  "p c f" 'magit-file-popup
 
   ;; search
   "s s" 'gmacs/swiper-region
