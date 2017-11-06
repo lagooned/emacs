@@ -159,7 +159,6 @@
   (set-face-attribute 'default nil :height 120)
   (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
-  (setq gmacs/evil-base-cursor-height 15)
   (setenv "SHELL" "/bin/zsh"))
 
 ;; linux
@@ -169,7 +168,6 @@
   (set-face-attribute 'default nil :height 110)
   (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
-  (setq gmacs/evil-base-cursor-height 15)
   (setenv "SHELL" "/bin/zsh"))
 
 ;; win
@@ -177,7 +175,6 @@
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 110)
-  (setq gmacs/evil-base-cursor-height 18)
   (menu-bar-mode -1))
 
 (provide 'global)

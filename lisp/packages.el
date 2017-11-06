@@ -202,6 +202,9 @@
   :config
   (golden-ratio-mode 1))
 
+(use-package hidden-mode-line-mode
+  :ensure nil)
+
 (use-package impatient-mode
   :commands impatient-mode)
 

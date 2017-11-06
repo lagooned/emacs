@@ -28,7 +28,7 @@
 
 (if gmacs/use-line-height-cursor
     ;; todo make a minor mode that uses the line-pixel-height 
-    (let ((height (eval (+ line-spacing gmacs/evil-base-cursor-height))))
+    (let ((height (eval gmacs/evil-base-cursor-height)))
       ;; fixed height cursors
       (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
       (setq evil-insert-state-cursor `("#00e000" (hbar . ,(eval height))))

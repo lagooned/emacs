@@ -24,8 +24,8 @@
 
 ;;; Code:
 
-(defvar gmacs/evil-base-cursor-height 15
-  "set the cursor height to be used")
+(defvar gmacs/evil-base-cursor-height 500
+  "set the cursor height to be used, note anything over the current line height will be capped at the current line height set by (line-pixel-height)")
 
 (defvar gmacs/use-line-height-cursor t
   "enable or disable fixed cursor height")
