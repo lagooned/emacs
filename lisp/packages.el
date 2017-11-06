@@ -101,6 +101,9 @@
   :config
   (load-theme 'doom-vibrant t))
 
+(use-package dumb-jump
+  :config (setq dumb-jump-selector 'ivy))
+
 (use-package eldoc
   :diminish eldoc-mode
   :commands turn-on-eldoc-mode

@@ -63,6 +63,13 @@
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
 
+  ;; jump
+  "j o" 'dumb-jump-go-other-window
+  "j j" 'dumb-jump-go
+  "j c" 'dumb-jump-go-prompt
+  "j x x" 'dumb-jump-go-prefer-external
+  "j x o" 'dumb-jump-go-prefer-external-other-window
+
   ;; link
   "l s" 'org-store-link
   "l i" 'org-insert-link-global
@@ -129,6 +136,7 @@
 (evil-leader/set-key-for-mode 'web-mode
   "n" 'emmet-next-edit-point
   "N" 'emmet-prev-edit-point)
+
 
 (provide 'leader-config)
 ;;; leader-config.el ends here
