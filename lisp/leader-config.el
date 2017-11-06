@@ -102,6 +102,7 @@
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
   "t m" 'hidden-mode-line-mode
+  "t f" 'focus-mode
 
   ;; universal
   "u" 'universal-argument
