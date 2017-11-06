@@ -154,7 +154,9 @@
   (load "leader-config.el"))
 
 (use-package evil-magit
-  :after magit evil
+  :after
+  magit
+  evil
   :config
   (require 'evil-magit))
 
