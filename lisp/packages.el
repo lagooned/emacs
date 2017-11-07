@@ -194,6 +194,7 @@
   (setq golden-ratio-extra-commands
         (append golden-ratio-extra-commands
                 '(top-level
+                  magit-status
                   evil-window-left
                   evil-window-right
                   evil-window-up
@@ -222,6 +223,9 @@
   :ensure counsel
   :ensure swiper
   :ensure avy
+  :bind
+  (:map ivy-minibuffer-map
+        ("M--" . counsel-up-directory))
   :init
   (setq
    ivy-re-builders-alist
@@ -397,6 +401,22 @@
   which-key-mode
   :config
   (which-key-setup-minibuffer)
+  (which-key-add-key-based-replacements
+    "SPC b" "buffer"
+    "SPC c" "case"
+    "SPC e" "editor"
+    "SPC f" "file"
+    "SPC h" "help"
+    "SPC i" "insert"
+    "SPC j" "jump"
+    "SPC j a" "away"
+    "SPC l" "insert"
+    "SPC o" "org"
+    "SPC p" "project"
+    "SPC p c" "current"
+    "SPC s" "search"
+    "SPC t" "toggle"
+    "SPC w" "window")
   (which-key-mode 1))
 
 (use-package yasnippet

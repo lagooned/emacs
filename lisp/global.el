@@ -28,6 +28,9 @@
   (setq x-select-request-type
         '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
+;; set max mem alloc before gc
+(setq gc-cons-threshold 50000000)
+
 ;; no warnings
 (setq warning-minimum-level :emergency)
 
