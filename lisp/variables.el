@@ -24,17 +24,14 @@
 
 ;;; Code:
 
-(defvar gmacs/evil-base-cursor-height 500
+(defvar gmacs/evil-base-cursor-height 999
   "set the cursor height to be used, note
 anything over the current line height
 will be capped at the current line height
 set by (line-pixel-height)")
 
 (defvar gmacs/use-line-height-cursor t
-  "enable or disable fixed cursor height")
-
-(defvar gmacs/evil-total-cursor-height nil
-  "helper var which holds calculated total cursor height")
+  "enable or disable line height cursor")
 
 (provide 'variables)
 ;;; variables.el ends here

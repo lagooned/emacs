@@ -102,7 +102,10 @@
   (load-theme 'doom-vibrant t))
 
 (use-package dumb-jump
-  :config (setq dumb-jump-selector 'ivy))
+  :init
+  (setq dumb-jump-selector 'ivy
+        dumb-jump-prefer-searcher 'rg
+        dumb-jump-quiet t))
 
 (use-package eldoc
   :diminish eldoc-mode
@@ -201,7 +204,9 @@
                   select-window-2
                   select-window-3
                   select-window-4
-                  select-window-5)))
+                  select-window-5
+                  ivy-done
+                  ivy-alt-done)))
   :config
   (golden-ratio-mode 1))
 

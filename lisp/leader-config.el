@@ -64,11 +64,11 @@
   "i s" 'yas-insert-snippet
 
   ;; jump
-  "j o" 'dumb-jump-go-other-window
-  "j j" 'dumb-jump-go
-  "j c" 'dumb-jump-go-prompt
-  "j x x" 'dumb-jump-go-prefer-external
-  "j x o" 'dumb-jump-go-prefer-external-other-window
+  "j j"   'dumb-jump-go                               ; jump
+  "j o"   'dumb-jump-go-other-window                  ; jump other
+  "j b"   'dumb-jump-back                             ; jump back
+  "j a j" 'dumb-jump-go-prefer-external               ; jump away
+  "j a o" 'dumb-jump-go-prefer-external-other-window  ; jump away other
 
   ;; link
   "l s" 'org-store-link
