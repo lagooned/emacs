@@ -66,5 +66,24 @@
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
 (evil-define-key 'insert web-mode-map (kbd "C-c N") 'emmet-prev-edit-point)
 
+;; dired
+(eval-after-load 'dired
+  '(progn
+     ;; use the standard Dired bindings as a base
+     (evil-make-overriding-map dired-mode-map 'normal t)
+     (evil-define-key 'normal dired-mode-map
+       "-" 'dired-jump
+       "h" 'evil-backward-char
+       "j" 'evil-next-line
+       "k" 'evil-previous-line
+       "l" 'evil-forward-char
+       "C-j" 'dired-find-file
+       "K" 'dired-do-kill-lines
+       "n" 'evil-search-next
+       "p" 'magit-status
+       "N" 'evil-search-previous
+       "r" 'revert-buffer
+       "." 'dired-omit-mode)))
+
 (provide 'evil-config)
 ;;; evil-config.el ends here

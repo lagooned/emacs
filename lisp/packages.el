@@ -76,24 +76,33 @@
   :config
   (counsel-mode 1))
 
-(use-package dired-x
-  :ensure nil
+(use-package dired
   :defer t
-  :bind
-  (:map dired-mode-map
-        ("-" . dired-jump)
-        ("n" . evil-search-next)
-        ("N" . evil-search-previous)
-        ("p" . magit-status)
-        ("C-j" . dired-find-file)
-        ("." . dired-omit-mode)))
+  :ensure nil
+  :after evil
+  :init
+  (setq-default dired-omit-files-p t)
+  (add-hook 'dired-mode-hook (lambda() (toggle-truncate-lines 1)))
+  (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package dired+
+  :defer t
   :diminish dired-omit-mode
+  :after dired
   :init
-  (setq diredp-hide-details-initially-flag t)
-  (setq dired-omit-mode t)
+  (setq diredp-hide-details-initially-flag nil)
   (setq dired-dwim-target t))
+
+(use-package dired-x
+  :defer t
+  :ensure nil
+  :after dired+
+  :bind
+  (:map dired-mode-map
+        ("C-j" . dired-find-file))
+  :config
+  (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+  (setq dired-omit-mode t))
 
 (use-package doom-themes
   :init
@@ -206,6 +215,7 @@
                   select-window-3
                   select-window-4
                   select-window-5
+                  keyboard-quit
                   ivy-done
                   ivy-alt-done)))
   :config
