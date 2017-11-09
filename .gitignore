@@ -23,3 +23,5 @@ games
 /tramp
 /.gnus.el
 /server
+/elpa/gnupg
+/elpa/archives
