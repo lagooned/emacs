@@ -432,6 +432,7 @@
 (use-package whitespace-mode
   :ensure nil
   :init
+  (require 'whitespace)
   (setq whitespace-line-column 100))
 
 (use-package yasnippet

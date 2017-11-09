@@ -122,7 +122,8 @@
 (global-prettify-symbols-mode t)
 
 ;; truncate and wrap lines
-;; (setq-default truncate-lines 0)
+(add-hook 'prog-mode-hook (lambda() (toggle-truncate-lines 0)))
+(add-hook 'lisp-interaction-mode-hook (lambda() (toggle-truncate-lines 1)))
 (setq-default word-wrap t)
 
 ;; show parens
