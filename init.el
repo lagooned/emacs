@@ -71,7 +71,7 @@
 (add-hook
  'emacs-startup-hook (lambda ()
                        (when window-system
-                         (set-frame-size (selected-frame) 160 46)
+                         (set-frame-size (selected-frame) 165 46)
                          (setq initial-frame-alist '((left . 50) (top . 50))))))
 
 (provide 'init)

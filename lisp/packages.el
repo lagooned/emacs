@@ -429,6 +429,11 @@
     "SPC w" "window")
   (which-key-mode 1))
 
+(use-package whitespace-mode
+  :ensure nil
+  :init
+  (setq whitespace-line-column 100))
+
 (use-package yasnippet
   :diminish yas-minor-mode
   :commands

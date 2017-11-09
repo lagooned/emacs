@@ -155,6 +155,9 @@
 (global-unset-key (kbd "C-x C-u"))
 (global-unset-key (kbd "C-x C-l"))
 
+;; no tooltips
+(tooltip-mode 0)
+
 ;; osx
 (when (eq system-type 'darwin)
   (set-face-attribute 'default nil :family "Source Code Pro")
