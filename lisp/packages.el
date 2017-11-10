@@ -324,6 +324,7 @@
         org-agenda-files (list "~/org/work.org"
                                "~/org/home.org"))
   :config
+  (add-to-list 'org-file-apps '(directory . emacs))
   (set-face-attribute 'org-level-1 nil :height 1.0)
   (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0))))
 
