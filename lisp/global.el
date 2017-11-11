@@ -66,7 +66,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 20)
+(fringe-mode 4)
 
 ;; setup user
 (setq user-full-name "Jared M. Engler"

@@ -263,7 +263,7 @@
   :commands linum-relative-mode
   :diminish linum-relative-mode
   :init
-  (setq linum-relative-format "%5s"
+  (setq linum-relative-format "%5s "
         linum-relative-current-symbol "")
   (add-hook
    'prog-mode-hook (lambda () (linum-relative-mode 1))))
