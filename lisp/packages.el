@@ -114,7 +114,9 @@
   :init
   (setq dumb-jump-selector 'ivy
         dumb-jump-prefer-searcher 'rg
-        dumb-jump-quiet t))
+        dumb-jump-quiet t)
+  (when (eq system-type 'windows-nt)
+    (setq dumb-jump-force-searcher 'rg)))
 
 (use-package eldoc
   :diminish eldoc-mode
@@ -159,7 +161,7 @@
   :init
   (setq-default evil-escape-key-sequence "kj")
   (setq-default evil-escape-unordered-key-sequence t)
-  (setq-default evil-escape-delay 0.02))
+  (setq-default evil-escape-delay 0.05))
 
 (use-package evil-leader
   :ensure indent-guide
@@ -261,7 +263,7 @@
   :commands linum-relative-mode
   :diminish linum-relative-mode
   :init
-  (setq linum-relative-format "%3s "
+  (setq linum-relative-format "%5s"
         linum-relative-current-symbol "")
   (add-hook
    'prog-mode-hook (lambda () (linum-relative-mode 1))))
@@ -413,10 +415,12 @@
   :config
   (which-key-setup-minibuffer)
   (which-key-add-key-based-replacements
+    "SPC SPC" "M-x"
     "SPC b" "buffer"
     "SPC c" "case"
     "SPC e" "editor"
     "SPC f" "file"
+    "SPC g" "grep"
     "SPC h" "help"
     "SPC i" "insert"
     "SPC j" "jump"
@@ -427,6 +431,8 @@
     "SPC p c" "current"
     "SPC s" "search"
     "SPC t" "toggle"
+    "SPC u" "univ arg"
+    "SPC U" "negt arg"
     "SPC w" "window")
   (which-key-mode 1))
 

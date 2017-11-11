@@ -46,6 +46,9 @@
   "f s" 'save-buffer
   "f w" 'write-file
 
+  ;; grep
+  "g" 'gmacs/counsel-rg-region
+
   ;; help
   "h d b" 'describe-bindings
   "h d d" 'describe-distribution
@@ -81,10 +84,9 @@
 
   ;; project
   "p p" 'magit-status
-  "p g" 'gmacs/counsel-rg-region
   "p f" 'gmacs/counsel-git-region
   "p d" 'magit-diff-popup
-  "p c f" 'magit-file-popup
+  "p c" 'magit-file-popup
 
   ;; search
   "s s" 'gmacs/swiper-region
@@ -126,18 +128,18 @@
   "SPC" 'counsel-M-x)
 
 (evil-leader/set-key-for-mode 'org-mode
-  "e e" 'org-export-dispatch)
+  "m e" 'org-export-dispatch)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "e e" 'eval-last-sexp)
+  "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
-  "e e" 'eval-last-sexp)
+  "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'web-mode
-  "n" 'emmet-next-edit-point
-  "N" 'emmet-prev-edit-point)
-
+  "m n" 'emmet-next-edit-point
+  "m p" 'emmet-prev-edit-point
+  "m N" 'emmet-prev-edit-point)
 
 (provide 'leader-config)
 ;;; leader-config.el ends here

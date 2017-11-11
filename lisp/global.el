@@ -66,7 +66,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 12)
+(fringe-mode 20)
 
 ;; setup user
 (setq user-full-name "Jared M. Engler"
@@ -125,10 +125,6 @@
 (add-hook 'prog-mode-hook (lambda() (toggle-truncate-lines 0)))
 (add-hook 'lisp-interaction-mode-hook (lambda() (toggle-truncate-lines 1)))
 (setq-default word-wrap t)
-
-;; show parens
-(show-paren-mode 1)
-(setq show-paren-delay 0)
 
 ;; set default tab display width to 4 spaces
 (setq-default tab-width 4)
