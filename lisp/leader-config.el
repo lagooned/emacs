@@ -21,6 +21,7 @@
 ;;; Code:
 
 (require 'evil-leader)
+
 (evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key
@@ -103,7 +104,6 @@
   "t A" 'auto-revert-mode
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
-  "t m" 'hidden-mode-line-mode
   "t f" 'focus-mode
 
   ;; universal

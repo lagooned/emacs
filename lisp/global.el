@@ -91,6 +91,13 @@
 ;; show column too
 (column-number-mode 1)
 
+;; cursor blink
+(blink-cursor-mode t)
+(setq blink-cursor-blinks -1)
+
+;; cursor stretch
+(setq x-stretch-cursor t)
+
 ;; unique buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'reverse
