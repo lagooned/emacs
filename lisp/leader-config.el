@@ -123,6 +123,7 @@
   "w s" 'evil-window-split
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
+  "w f" 'reposition-window
 
   ;; command
   "SPC" 'counsel-M-x)

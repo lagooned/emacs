@@ -164,6 +164,7 @@
 
 ;; osx
 (when (eq system-type 'darwin)
+  (setq mac-pass-command-to-system nil)
   (set-face-attribute 'default nil :family "Source Code Pro")
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 120)
