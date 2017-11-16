@@ -29,6 +29,7 @@
   "b b" 'switch-to-buffer
   "b k" 'kill-buffer
   "b l" 'list-buffers
+  "b c" 'gmacs/cleanup-buffer
 
   ;; case
   "c u" 'fix-word-upcase
