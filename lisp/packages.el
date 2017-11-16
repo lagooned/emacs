@@ -247,8 +247,10 @@
 (use-package magit
   :commands magit-status
   :init
-  (setq magit-push-always-verify nil)
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq magit-push-always-verify nil
+        magit-refresh-status-buffer nil
+        ediff-window-setup-function 'ediff-setup-windows-plain
+        magit-refresh-verbose t)
   :config
   (with-eval-after-load 'info
     (info-initialize)
