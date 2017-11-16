@@ -251,6 +251,7 @@
         magit-refresh-status-buffer nil
         ediff-window-setup-function 'ediff-setup-windows-plain
         magit-refresh-verbose t)
+  (setq vc-handled-backends (delq 'Git vc-handled-backends))
   :config
   (with-eval-after-load 'info
     (info-initialize)
@@ -358,7 +359,7 @@
 (use-package telephone-line
   :init
   (require 'telephone-line-config)
-  (setq telephone-line-height 30
+  (setq telephone-line-height 24
         telephone-line-separator-extra-padding 1
         telephone-line-primary-left-separator 'telephone-line-flat
         telephone-line-secondary-left-separator 'telephone-line-flat
@@ -368,7 +369,6 @@
         '((evil . (telephone-line-simple-major-mode-segment))
           (accent . (telephone-line-simple-minor-mode-segment))
           (nil . (telephone-line-buffer-segment))
-          (nil . (telephone-line-vc-segment))
           (nil . (telephone-line-airline-position-segment))))
   (setq telephone-line-rhs nil)
   (custom-set-faces
