@@ -41,21 +41,18 @@
 (define-key evil-normal-state-map (kbd "RET")   'newline-and-indent)
 (define-key evil-insert-state-map (kbd "RET")   'newline-and-indent)
 (define-key evil-visual-state-map (kbd "RET")   'newline-and-indent)
-(define-key evil-normal-state-map (kbd "M-f")   'avy-goto-char)
 (define-key evil-visual-state-map (kbd "M-f")   'avy-goto-char)
 (define-key evil-normal-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-\\")  'evil-execute-in-emacs-state)
-(define-key evil-insert-state-map (kbd "C-M-n") 'evil-execute-in-emacs-state)
 (define-key evil-normal-state-map (kbd "C-a")   'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-b")   'evil-numbers/dec-at-pt)
 (define-key evil-normal-state-map (kbd "C-=")   'er/expand-region)
-(define-key evil-insert-state-map (kbd "C-=")   'er/expand-region)
+(define-key evil-visual-state-map (kbd "C-=")   'er/expand-region)
 (define-key evil-insert-state-map (kbd "TAB")   'tab-to-tab-stop)
 (define-key evil-normal-state-map (kbd "U")     'undo-tree-visualize)
 (define-key evil-normal-state-map (kbd "M-/")   'yas-expand)
 (define-key evil-insert-state-map (kbd "M-/")   'yas-expand)
-(define-key evil-normal-state-map (kbd "C-M-/") 'nil)
 (define-key evil-insert-state-map (kbd "C-.")   'company-complete)
 (define-key evil-normal-state-map (kbd "C-;")   'comment-line)
 (define-key evil-visual-state-map (kbd "C-;")   'evil-commentary-line)
@@ -94,6 +91,17 @@
       evil-motion-state-message nil
       evil-insert-state-message nil
       evil-operator-state-message nil)
+
+;; emacs binds
+(define-key evil-emacs-state-map (kbd "M-u") 'fix-word-upcase)
+(define-key evil-emacs-state-map (kbd "M-l") 'fix-word-downcase)
+(define-key evil-emacs-state-map (kbd "M-c") 'fix-word-capitalize)
+(define-key evil-emacs-state-map (kbd "M-h") 'mark-paragraph)
+(define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
+(define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
+(define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
+(define-key evil-emacs-state-map (kbd "C-M-/") 'reposition-window)
+(define-key evil-emacs-state-map (kbd "M-.") 'xref-find-definitions)
 
 (provide 'evil-config)
 ;;; evil-config.el ends here

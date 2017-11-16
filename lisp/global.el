@@ -156,8 +156,12 @@
 (global-unset-key (kbd "M-u"))
 (global-unset-key (kbd "M-l"))
 (global-unset-key (kbd "M-c"))
+(global-unset-key (kbd "M-h"))
 (global-unset-key (kbd "C-x C-u"))
 (global-unset-key (kbd "C-x C-l"))
+(global-unset-key (kbd "C-M-l"))
+(global-unset-key (kbd "C-M-/"))
+(global-unset-key (kbd "M-."))
 
 ;; no tooltips
 (tooltip-mode 0)

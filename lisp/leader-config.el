@@ -132,9 +132,13 @@
   "m e" 'org-export-dispatch)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
+  "j j" 'xref-find-definitions
+  "j o" 'xref-find-definitions-other-window
   "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
+  "j j" 'xref-find-definitions
+  "j o" 'xref-find-definitions-other-window
   "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'web-mode
