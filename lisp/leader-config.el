@@ -74,6 +74,7 @@
   "j b"   'dumb-jump-back                             ; jump back
   "j a j" 'dumb-jump-go-prefer-external               ; jump away
   "j a o" 'dumb-jump-go-prefer-external-other-window  ; jump away other
+  "j c"   'gmacs/xref-find-apropos-region-thing       ; jump candidates
 
   ;; link
   "l s" 'org-store-link
@@ -91,9 +92,9 @@
   "p c" 'magit-file-popup
 
   ;; search
-  "s s" 'gmacs/swiper-region
+  "s s" 'swiper
+  "s t" 'gmacs/swiper-region-thing
   "s c" 'avy-goto-char
-  "s t" 'gmacs/swiper-thing
 
   ;; toggles
   "t l" 'linum-relative-mode
@@ -144,7 +145,6 @@
 
 (evil-leader/set-key-for-mode 'web-mode
   "m n" 'emmet-next-edit-point
-  "m p" 'emmet-prev-edit-point
   "m N" 'emmet-prev-edit-point)
 
 (provide 'leader-config)

@@ -88,14 +88,6 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
      (list nil nil)))
   (gmacs/opt-region-helper #'counsel-git beg end))
 
-(defun gmacs/swiper-region (beg end)
-  "optionally run swiper on region"
-  (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (list nil nil)))
-  (gmacs/opt-region-helper #'swiper beg end))
-
 (defun gmacs/opt-region-helper (func beg end)
   "run func with optional region arg"
   (if (and beg end)
@@ -103,14 +95,27 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
              (funcall func (buffer-substring-no-properties beg end)))
     (funcall func)))
 
-(defun gmacs/swiper-thing ()
-  "swiper current word or line"
+(defun gmacs/swiper-region-thing (beg end)
   (interactive
-   (if (word-at-point) (swiper (word-at-point))
-     (swiper (sentence-at-point)))))
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (list nil nil)))
+  (if (and beg end)
+      (progn (deactivate-mark)
+             (swiper (buffer-substring beg end)))
+    (if (word-at-point) (swiper (word-at-point))
+      (message "No region or thing selected"))))
 
-;; cleanup on save
-;; (add-hook 'before-save-hook 'gmacs/cleanup-buffer)
+(defun gmacs/xref-find-apropos-region-thing (beg end)
+  (interactive
+   (if (use-region-p)
+       (list (region-beginning) (region-end))
+     (list nil nil)))
+  (if (and beg end)
+      (progn (deactivate-mark)
+             (xref-find-apropos (buffer-substring beg end)))
+    (if (word-at-point) (xref-find-apropos (word-at-point))
+      (xref-find-apropos ""))))
 
 (provide 'functions)
 ;;; functions.el ends here

@@ -93,15 +93,41 @@
       evil-operator-state-message nil)
 
 ;; emacs binds
+(define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
+(define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
+(define-key evil-emacs-state-map (kbd "C-w") 'kill-region)
+(define-key evil-emacs-state-map (kbd "M-w") 'kill-ring-save)
+(define-key evil-emacs-state-map (kbd "M-k") 'kill-sentence)
 (define-key evil-emacs-state-map (kbd "M-u") 'fix-word-upcase)
 (define-key evil-emacs-state-map (kbd "M-l") 'fix-word-downcase)
 (define-key evil-emacs-state-map (kbd "M-c") 'fix-word-capitalize)
 (define-key evil-emacs-state-map (kbd "M-h") 'mark-paragraph)
+(define-key evil-emacs-state-map (kbd "M-.") 'xref-find-definitions)
 (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
 (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
 (define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
 (define-key evil-emacs-state-map (kbd "C-M-/") 'reposition-window)
-(define-key evil-emacs-state-map (kbd "M-.") 'xref-find-definitions)
+
+;; unbinds to clean up global bindspace
+(global-unset-key (kbd "C-k"))
+(global-unset-key (kbd "C-w"))
+(global-unset-key (kbd "C-s"))
+(global-unset-key (kbd "M-w"))
+(global-unset-key (kbd "M-k"))
+(global-unset-key (kbd "M-u"))
+(global-unset-key (kbd "M-l"))
+(global-unset-key (kbd "M-c"))
+(global-unset-key (kbd "M-h"))
+(global-unset-key (kbd "M-."))
+(global-unset-key (kbd "C-x C-u"))
+(global-unset-key (kbd "C-x C-l"))
+(global-unset-key (kbd "C-M-l"))
+(global-unset-key (kbd "C-M-/"))
+
+;; emacs mode for minibuffer
+(add-hook
+ 'minibuffer-setup-hook
+ '(lambda () (evil-emacs-state)))
 
 (provide 'evil-config)
 ;;; evil-config.el ends here

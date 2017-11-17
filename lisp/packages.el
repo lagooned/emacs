@@ -54,7 +54,7 @@
 (use-package company
   :ensure company-flx
   :diminish
-  company-mode 
+  company-mode
   :commands
   company-complete
   company-mode
@@ -204,7 +204,10 @@
   :init
   (setq golden-ratio-extra-commands
         (append golden-ratio-extra-commands
-                '(top-level
+                '(quit-window
+                  keyboard-quit
+                  abort-recursive-edit
+                  top-level
                   magit-status
                   evil-window-left
                   evil-window-right
@@ -217,11 +220,17 @@
                   select-window-3
                   select-window-4
                   select-window-5
-                  keyboard-quit
                   ivy-done
-                  ivy-alt-done)))
+                  ivy-alt-done
+                  reposition-window)))
   :config
   (golden-ratio-mode 1))
+
+(use-package help-mode
+  :ensure nil
+  :bind
+  (:map help-mode-map
+        ("C-j" . push-button)))
 
 (use-package impatient-mode
   :commands impatient-mode)
@@ -440,6 +449,12 @@
   :init
   (require 'whitespace)
   (setq whitespace-line-column 100))
+
+(use-package xref
+  :ensure nil
+  :bind
+  (:map xref--button-map
+        ("C-j" . xref-goto-xref)))
 
 (use-package yasnippet
   :diminish yas-minor-mode
