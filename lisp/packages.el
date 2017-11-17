@@ -452,9 +452,13 @@
 
 (use-package xref
   :ensure nil
+
   :bind
   (:map xref--button-map
-        ("C-j" . xref-goto-xref)))
+        ("C-j" . xref-goto-xref))
+  :init
+  (setq xref-after-jump-hook '(recenter)
+        xref-after-return-hook '(recenter)))
 
 (use-package yasnippet
   :diminish yas-minor-mode

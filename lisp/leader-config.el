@@ -69,12 +69,9 @@
   "i s" 'yas-insert-snippet
 
   ;; jump
-  "j j"   'dumb-jump-go                               ; jump
-  "j o"   'dumb-jump-go-other-window                  ; jump other
-  "j b"   'dumb-jump-back                             ; jump back
-  "j a j" 'dumb-jump-go-prefer-external               ; jump away
-  "j a o" 'dumb-jump-go-prefer-external-other-window  ; jump away other
-  "j c"   'gmacs/xref-find-apropos-region-thing       ; jump candidates
+  "j j" 'dumb-jump-go
+  "j o" 'dumb-jump-go-other-window
+  "j b" 'dumb-jump-back
 
   ;; link
   "l s" 'org-store-link
@@ -136,11 +133,15 @@
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "j j" 'xref-find-definitions
   "j o" 'xref-find-definitions-other-window
+  "j a" 'gmacs/xref-find-apropos-region-thing
+  "j b" 'pop-tag-mark
   "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
   "j j" 'xref-find-definitions
   "j o" 'xref-find-definitions-other-window
+  "j a" 'gmacs/xref-find-apropos-region-thing
+  "j b" 'pop-tag-mark
   "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'web-mode
