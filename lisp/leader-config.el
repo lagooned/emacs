@@ -123,6 +123,8 @@
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
   "w f" 'reposition-window
+  "w u" 'winner-undo
+  "w C-r" 'winner-redo
 
   ;; command
   "SPC" 'counsel-M-x)
