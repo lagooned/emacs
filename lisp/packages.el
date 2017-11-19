@@ -209,6 +209,7 @@
                   abort-recursive-edit
                   top-level
                   magit-status
+                  magit-process-buffer
                   evil-window-left
                   evil-window-right
                   evil-window-up
