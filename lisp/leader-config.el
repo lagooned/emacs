@@ -123,6 +123,7 @@
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
   "w f" 'reposition-window
+  "w m" 'gmacs/switch-to-minibuffer
   "w u" 'winner-undo
   "w C-r" 'winner-redo
 
@@ -130,6 +131,7 @@
   "SPC" 'counsel-M-x)
 
 (evil-leader/set-key-for-mode 'org-mode
+  "m c" 'org-toggle-checkbox
   "m e" 'org-export-dispatch)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode

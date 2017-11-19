@@ -38,12 +38,13 @@
 ;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
 
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
-                         ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
-                         ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("marmalade" . "https://marmalade-repo.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
+        ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")))
 (package-initialize)
 
 ;; add load path
@@ -69,10 +70,14 @@
 
 ;; initial window size
 (add-hook
- 'emacs-startup-hook (lambda ()
-                       (when window-system
-                         (set-frame-size (selected-frame) 165 46)
-                         (setq initial-frame-alist '((left . 50) (top . 50))))))
+ 'emacs-startup-hook
+ (lambda ()
+   (when window-system
+     (set-frame-size
+      (selected-frame) 165 46)
+     (setq initial-frame-alist
+           '((left . 50)
+             (top  . 50))))))
 
 (provide 'init)
 ;;; init.el ends here

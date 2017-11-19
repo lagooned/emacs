@@ -67,6 +67,13 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (unless (derived-mode-p 'makefile-mode)
     (untabify (point-min) (point-max))))
 
+(defun gmacs/switch-to-minibuffer ()
+  "Switch to minibuffer window."
+  (interactive)
+  (if (active-minibuffer-window)
+      (select-window (active-minibuffer-window))
+    (error "Minibuffer is not active")))
+
 (defun gmacs/cleanup-buffer ()
   (interactive)
   (gmacs/untabify-except-makefiles)
