@@ -67,6 +67,7 @@
   ;; insert
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
+  "i h" 'auto-insert
 
   ;; jump
   "j j" 'dumb-jump-go

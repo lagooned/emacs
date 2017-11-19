@@ -141,6 +141,7 @@
   :ensure evil-surround
   :ensure evil-vimish-fold
   :ensure evil-visualstar
+  :ensure exato
   :ensure undo-tree
   :ensure golden-ratio
   :diminish evil-vimish-fold-mode
@@ -312,6 +313,8 @@
         ;; erc-server-auto-reconnect t
         ;; erc-kill-server-buffer-on-quit t
         erc-kill-queries-on-quit t))
+
+(use-package exato)
 
 (use-package fix-word
   :commands

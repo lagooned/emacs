@@ -146,9 +146,6 @@
 ;; sentence navigation
 (setq sentence-end-double-space nil)
 
-;; auto-insert
-(auto-insert-mode 1)
-
 ;; line spaceing
 (setq-default line-spacing 3)
 
