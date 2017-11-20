@@ -75,6 +75,11 @@
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
   "i h" 'auto-insert
+ 
+   ;; jump
+  "j j" 'dumb-jump-go
+  "j o" 'dumb-jump-go-other-window
+  "j b" 'dumb-jump-back
 
   ;; link
   "l s" 'org-store-link
