@@ -36,7 +36,7 @@
   "c c" 'fix-word-capitalize
   "c l" 'fix-word-downcase
 
-  ;; emacs
+  ;; editor
   "e r" 'restart-emacs
   "e l" 'gmacs/load-config
 
@@ -52,27 +52,28 @@
   "g" 'gmacs/counsel-rg-region
 
   ;; help
+  "h a"   'about-emacs
+  "h i"   'info
+  "h h"   'help-for-help
+  "h I"   'info-other-window
+  "h n"   'view-emacs-news
   "h d b" 'describe-bindings
   "h d d" 'describe-distribution
   "h d f" 'describe-function
   "h d k" 'describe-key
+  "h d K" 'finder-by-keyword
   "h d m" 'describe-mode
   "h d v" 'describe-variable
   "h d s" 'describe-symbol
-  "h d S" 'describe-syntax
+  "h d t" 'describe-syntax
   "h d p" 'describe-package
+  "h d c" 'describe-coding-system
   "h v l" 'view-lossage
-  "h a" 'about-emacs
 
   ;; insert
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
   "i h" 'auto-insert
-
-  ;; jump
-  "j j" 'dumb-jump-go
-  "j o" 'dumb-jump-go-other-window
-  "j b" 'dumb-jump-back
 
   ;; link
   "l s" 'org-store-link

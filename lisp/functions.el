@@ -111,7 +111,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
       (progn (deactivate-mark)
              (swiper (buffer-substring beg end)))
     (if (word-at-point) (swiper (word-at-point))
-      (message "No region or thing selected"))))
+      (error "No region or thing selected"))))
 
 (defun gmacs/xref-find-apropos-region-thing (beg end)
   (interactive
@@ -122,7 +122,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
       (progn (deactivate-mark)
              (xref-find-apropos (buffer-substring beg end)))
     (if (word-at-point) (xref-find-apropos (word-at-point))
-      (xref-find-apropos ""))))
+      (error "No region or thing selected"))))
 
 (provide 'functions)
 ;;; functions.el ends here
