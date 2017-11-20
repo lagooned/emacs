@@ -30,6 +30,7 @@
   "b k" 'kill-buffer
   "b l" 'list-buffers
   "b c" 'gmacs/cleanup-buffer
+  "b r" 'revert-buffer
 
   ;; case
   "c u" 'fix-word-upcase
