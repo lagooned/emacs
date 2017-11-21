@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(setq evil-move-cursor-back nil)
 (setq evil-want-C-u-scroll t)
 
 (if gmacs/use-line-height-cursor
