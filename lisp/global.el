@@ -152,6 +152,10 @@
 ;; no tooltips
 (tooltip-mode 0)
 
+;; remember place
+(save-place-mode 1)
+(setq save-place-forget-unreadable-files nil)
+
 ;; osx
 (when (eq system-type 'darwin)
   (setq mac-pass-command-to-system nil)
