@@ -81,8 +81,13 @@
   :ensure nil
   :after evil
   :init
+  (add-hook
+   'dired-mode-hook
+   (lambda ()
+     (progn
+       (toggle-truncate-lines 1)
+       (message nil))))
   (setq-default dired-omit-files-p t)
-  (add-hook 'dired-mode-hook (lambda() (toggle-truncate-lines 1)))
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package dired+
@@ -341,7 +346,12 @@
   :config
   (add-to-list 'org-file-apps '(directory . emacs))
   (set-face-attribute 'org-level-1 nil :height 1.0)
-  (add-hook 'org-mode-hook (lambda() (toggle-truncate-lines 0))))
+  (add-hook
+   'org-mode-hook
+   (lambda ()
+     (progn
+       (toggle-truncate-lines 0)
+       (message nil)))))
 
 (use-package rainbow-delimiters
   :config

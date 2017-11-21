@@ -22,6 +22,8 @@
 
 (require 'evil-leader)
 
+(setq evil-leader/in-all-states 1)
+
 (evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key

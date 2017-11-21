@@ -129,8 +129,20 @@
 (global-prettify-symbols-mode t)
 
 ;; truncate and wrap lines
-(add-hook 'prog-mode-hook (lambda() (toggle-truncate-lines 0)))
-(add-hook 'lisp-interaction-mode-hook (lambda() (toggle-truncate-lines 1)))
+(add-hook
+ 'prog-mode-hook
+ (lambda ()
+   (progn
+     (toggle-truncate-lines 0)
+     (message nil))))
+
+(add-hook
+ 'lisp-interaction-mode-hook
+ (lambda ()
+   (progn
+     (toggle-truncate-lines 1)
+     (message nil))))
+
 (setq-default word-wrap t)
 
 ;; set default tab display width to 4 spaces
