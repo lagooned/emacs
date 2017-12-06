@@ -367,6 +367,12 @@
    'auto-mode-alist
    '("\\.rest\\'" . restclient-mode)))
 
+(use-package ripgrep
+  :commands ripgrep-regexp
+  :bind
+  (:map ripgrep-search-mode-map
+        ("C-j" . compile-goto-error)))
+
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode
