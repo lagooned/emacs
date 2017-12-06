@@ -425,7 +425,7 @@
   (add-to-list
    'auto-mode-alist '("\\.x?html\\'" . web-mode))
   (add-to-list
-   'my/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+   'gmacs/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
   (add-to-list
    'auto-mode-alist '("\\.php\\'" . web-mode))
   :config
