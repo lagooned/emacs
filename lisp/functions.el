@@ -143,7 +143,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
                 (append (list ripgrep-executable)
                         ripgrep-arguments
                         args
-                        '("--no-heading --vimgrep -n")
+                        '("--no-heading --vimgrep -ni ")
                         (when ripgrep-highlight-search '("--color=always"))
                         (list (shell-quote-argument regexp) ".")) " ")
      'ripgrep-search-mode)))
