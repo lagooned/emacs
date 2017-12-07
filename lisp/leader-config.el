@@ -53,6 +53,7 @@
 
   ;; grep
   "g" 'gmacs/counsel-rg-region
+  "G" 'gmacs/ripgrep-regexp-git
 
   ;; help
   "h a"   'about-emacs
@@ -99,9 +100,10 @@
   "p c" 'magit-file-popup
 
   ;; search
-  "s s" 'swiper
-  "s t" 'gmacs/swiper-region-thing
+  "s s" 'gmacs/swiper-region-thing
   "s c" 'avy-goto-char
+  "s l" 'avy-goto-line
+  "s j" 'avy-goto-word-0
 
   ;; toggles
   "t l" 'linum-relative-mode

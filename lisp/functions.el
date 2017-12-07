@@ -109,7 +109,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
      (list nil nil)))
   (if (and beg end)
       (progn (deactivate-mark)
-             (swiper (buffer-substring beg end)))
+             (swiper (buffer-substring-no-properties beg end)))
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
@@ -120,9 +120,30 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
      (list nil nil)))
   (if (and beg end)
       (progn (deactivate-mark)
-             (xref-find-apropos (buffer-substring beg end)))
+             (xref-find-apropos (buffer-substring-no-properties beg end)))
     (if (word-at-point) (xref-find-apropos (word-at-point))
       (error "No region or thing selected"))))
+
+(defun gmacs/ripgrep-regexp-git (regexp &optional args)
+  "ripgrep with `regexp' from the nearest git project directory.
+`args' provides ripgrep command line arguments."
+  (interactive
+   (list (read-from-minibuffer
+          "rg buffer: "
+          (if (use-region-p)
+              (progn
+                (deactivate-mark)
+                (buffer-substring-no-properties (region-beginning) (region-end)))))))
+  (let ((default-directory (locate-dominating-file default-directory ".git")))
+    (compilation-start
+     (mapconcat 'identity
+                (append (list ripgrep-executable)
+                        ripgrep-arguments
+                        args
+                        '("--no-heading --vimgrep -n")
+                        (when ripgrep-highlight-search '("--color=always"))
+                        (list (shell-quote-argument regexp) ".")) " ")
+     'ripgrep-search-mode)))
 
 (provide 'functions)
 ;;; functions.el ends here
