@@ -134,7 +134,10 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
               (progn
                 (deactivate-mark)
                 (buffer-substring-no-properties (region-beginning) (region-end)))))))
-  (let ((default-directory (locate-dominating-file default-directory ".git")))
+  (let ((directory (locate-dominating-file default-directory ".git")))
+    (if (not directory)
+        (message "not in a git project: using default-directory")
+      (setq default-directory directory))
     (compilation-start
      (mapconcat 'identity
                 (append (list ripgrep-executable)
