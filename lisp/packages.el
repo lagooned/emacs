@@ -456,6 +456,7 @@
     "SPC e" "editor"
     "SPC f" "file"
     "SPC g" "grep"
+    "SPC G" "grep buffer"
     "SPC h" "help"
     "SPC h d" "describe"
     "SPC h v" "view"
