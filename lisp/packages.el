@@ -368,10 +368,11 @@
    '("\\.rest\\'" . restclient-mode)))
 
 (use-package ripgrep
-  :commands ripgrep-regexp
   :bind
   (:map ripgrep-search-mode-map
-        ("C-j" . compile-goto-error)))
+        ("C-j" . compile-goto-error))
+  :init
+  (require 'ripgrep))
 
 (use-package smartparens
   :commands smartparens-mode
