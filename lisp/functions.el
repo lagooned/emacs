@@ -74,7 +74,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
       (select-window (active-minibuffer-window))
     (error "Minibuffer is not active")))
 
-(defun gmacs/cleanup-buffer ()
+(defun gmacs/cleanup-file ()
   (interactive)
   (gmacs/untabify-except-makefiles)
   (delete-trailing-whitespace))

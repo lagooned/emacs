@@ -63,7 +63,10 @@
   (:map company-active-map
         ("C-n" . company-select-next-or-abort)
         ("C-p" . company-select-previous-or-abort)
+        ("C-j" . company-complete-selection)
         ("C-d" . company-show-doc-buffer)
+        ("M-n" . nil)
+        ("M-p" . nil)
         ("<tab>" . nil))
   :init
   (setq company-idle-delay nil)

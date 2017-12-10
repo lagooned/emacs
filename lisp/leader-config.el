@@ -31,8 +31,9 @@
   "b b" 'switch-to-buffer
   "b k" 'kill-buffer
   "b l" 'list-buffers
-  "b c" 'gmacs/cleanup-buffer
   "b r" 'revert-buffer
+  "b c" 'clean-buffer-list
+  "b s" 'save-some-buffers
 
   ;; case
   "c u" 'fix-word-upcase
@@ -46,6 +47,7 @@
   ;; file
   "f f" 'find-file
   "f a" 'find-alternate-file
+  "f c" 'gmacs/cleanup-file
   "f r" 'counsel-recentf
   "f l" 'counsel-locate
   "f s" 'save-buffer
