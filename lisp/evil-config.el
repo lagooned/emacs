@@ -114,6 +114,7 @@
 (define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
 (define-key evil-emacs-state-map (kbd "C-M-o") 'split-line)
 (define-key evil-emacs-state-map (kbd "C-M-/") 'reposition-window)
+(define-key evil-emacs-state-map (kbd "C-M-.") 'xref-find-apropos)
 
 ;; unbinds to clean up global bindspace
 (global-unset-key (kbd "C-k"))
@@ -137,6 +138,7 @@
 (global-unset-key (kbd "C-M-l"))
 (global-unset-key (kbd "C-M-o"))
 (global-unset-key (kbd "C-M-/"))
+(global-unset-key (kbd "C-M-."))
 
 ;; emacs mode for minibuffer
 (add-hook

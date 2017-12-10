@@ -112,6 +112,11 @@
   (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
   (setq dired-omit-mode t))
 
+(use-package disable-mouse
+  :diminish global-disable-mouse-mode
+  :config
+  (global-disable-mouse-mode))
+
 (use-package doom-themes
   :init
   (setq doom-themes-enable-bold t)
@@ -119,6 +124,11 @@
   (load-theme 'doom-vibrant t))
 
 (use-package dumb-jump
+  :bind
+  (:map dumb-jump-mode-map
+        ("C-M-g" . nil)
+        ("C-M-p" . nil)
+        ("C-M-q" . nil))
   :init
   (setq dumb-jump-selector 'ivy
         dumb-jump-prefer-searcher 'rg
@@ -376,6 +386,22 @@
         ("C-j" . compile-goto-error))
   :init
   (require 'ripgrep))
+
+(use-package smart-jump
+  :ensure dumb-jump
+  :init
+  (setq smart-jump-bind-keys-for-evil nil
+        smart-jump-bind-keys nil
+        smart-jump-refs-key nil
+        smart-jump-pop-key nil)
+  :config
+  (smart-jump-register :modes '(emacs-lisp-mode lisp-interaction-mode)
+                       :jump-fn 'xref-find-definitions
+                       :pop-fn 'pop-tag-mark
+                       :refs-fn 'gmacs/xref-find-apropos-region-thing
+                       :should-jump t
+                       :heuristic 'error
+                       :async nil))
 
 (use-package smartparens
   :commands smartparens-mode

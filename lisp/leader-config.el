@@ -82,9 +82,9 @@
   "i h" 'auto-insert
 
   ;; jump
-  "j j" 'dumb-jump-go
-  "j o" 'dumb-jump-go-other-window
-  "j b" 'dumb-jump-back
+  "j j" 'smart-jump-go
+  "j b" 'smart-jump-back
+  "j r" 'smart-jump-references
 
   ;; link
   "l s" 'org-store-link
@@ -149,17 +149,9 @@
   "m e" 'org-export-dispatch)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "j j" 'xref-find-definitions
-  "j o" 'xref-find-definitions-other-window
-  "j a" 'gmacs/xref-find-apropos-region-thing
-  "j b" 'pop-tag-mark
   "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
-  "j j" 'xref-find-definitions
-  "j o" 'xref-find-definitions-other-window
-  "j a" 'gmacs/xref-find-apropos-region-thing
-  "j b" 'pop-tag-mark
   "m e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'web-mode
