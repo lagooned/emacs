@@ -80,6 +80,15 @@
        "p" 'magit-status
        "N" 'evil-search-previous
        "r" 'revert-buffer
+       "$" 'evil-end-of-line
+       "0" 'evil-beginning-of-line
+       "b" 'evil-backward-word-begin
+       "B" 'evil-backward-WORD-begin
+       "w" 'evil-forward-word-begin
+       "W" 'evil-forward-WORD-begin
+       "v" 'evil-visual-char
+       "V" 'evil-visual-line
+       "C-v" 'evil-visual-block
        "?" 'evil-search-backward
        "." 'dired-omit-mode)))
 
