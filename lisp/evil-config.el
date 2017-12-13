@@ -80,6 +80,7 @@
        "p" 'magit-status
        "N" 'evil-search-previous
        "r" 'revert-buffer
+       "?" 'evil-search-backward
        "." 'dired-omit-mode)))
 
 ;; minibuffer
