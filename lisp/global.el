@@ -180,10 +180,10 @@
 
 ;; linux
 (when (eq system-type 'gnu/linux)
-  (set-face-attribute 'default nil :family "Ubuntu Mono")
-  (set-face-attribute 'default nil :weight 'bold)
-  (set-face-attribute 'default nil :height 110)
-  (unless (display-graphic-p) (menu-bar-mode -1))
+  (set-face-attribute 'default nil :family "Deja Vu Sans Mono")
+  (set-face-attribute 'default nil :weight 'normal)
+  (set-face-attribute 'default nil :height 100)
+  (if (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell")
   (setenv "SHELL" "/bin/zsh"))
 
