@@ -510,7 +510,13 @@
   :ensure nil
   :init
   (require 'whitespace)
-  (setq whitespace-line-column 100))
+  (setq whitespace-line-column 100)
+  ;; replace padding with variable-width unicode spaces
+  (advice-add 'linum-relative :filter-return
+              (lambda (num)
+                (if (not (get-text-property 0 'invisible num))
+                    (propertize (replace-regexp-in-string " " "\u2002" num)
+                                'face (get-text-property 0 'face num))))))
 
 (use-package xref
   :ensure nil
