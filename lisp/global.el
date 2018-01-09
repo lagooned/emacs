@@ -168,6 +168,14 @@
 (save-place-mode 1)
 (setq save-place-forget-unreadable-files nil)
 
+;; create directories with find file
+(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+  "Create parent directory if not exists while visiting file."
+  (unless (file-exists-p filename)
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir)))))
+
 ;; osx
 (when (eq system-type 'darwin)
   (setq mac-pass-command-to-system nil)
