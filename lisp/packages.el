@@ -161,7 +161,7 @@
   :ensure evil-visualstar
   :ensure exato
   :ensure undo-tree
-  :ensure golden-ratio
+  :ensure zoom
   :diminish evil-vimish-fold-mode
   :init
   (load "evil-init.el")
@@ -217,37 +217,6 @@
 
 (use-package expand-region
   :commands er/expand-region)
-
-(use-package golden-ratio
-  :diminish
-  golden-ratio-mode
-  :commands
-  golden-ratio-mode
-  :init
-  (setq golden-ratio-extra-commands
-        (append golden-ratio-extra-commands
-                '(quit-window
-                  keyboard-quit
-                  abort-recursive-edit
-                  top-level
-                  magit-status
-                  magit-process-buffer
-                  evil-window-left
-                  evil-window-right
-                  evil-window-up
-                  evil-window-down
-                  evil-window-next
-                  evil-window-prev
-                  select-window-1
-                  select-window-2
-                  select-window-3
-                  select-window-4
-                  select-window-5
-                  ivy-done
-                  ivy-alt-done
-                  reposition-window)))
-  :config
-  (golden-ratio-mode 1))
 
 (use-package help-mode
   :ensure nil
@@ -541,6 +510,9 @@
   (yas-reload-all)
   :config
   (yas-minor-mode 1))
+
+(use-package zoom
+  :diminish zoom-mode)
 
 (provide 'packages)
 ;;; packages.el ends here

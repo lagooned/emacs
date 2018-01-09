@@ -31,7 +31,7 @@
 (evil-vimish-fold-mode 1)
 (evil-exchange-install)
 (evil-escape-mode 1)
-(golden-ratio-mode 1)
+(zoom-mode 1)
 
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
