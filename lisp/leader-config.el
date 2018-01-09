@@ -108,7 +108,8 @@
   "p c" 'magit-file-popup
 
   ;; search
-  "s s" 'gmacs/swiper-region-thing
+  "s s" 'swiper
+  "s t" 'gmacs/swiper-region-thing
   "s c" 'avy-goto-char
   "s l" 'avy-goto-line
   "s j" 'avy-goto-word-0
