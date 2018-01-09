@@ -152,7 +152,10 @@
 
 (evil-leader/set-key-for-mode 'org-mode
   "m c" 'org-toggle-checkbox
-  "m e" 'org-export-dispatch)
+  "m e" 'org-export-dispatch
+  "n e" 'org-narrow-to-element
+  "n b" 'org-narrow-to-block
+  "n s" 'org-narrow-to-subtree)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "m e" 'eval-last-sexp)
