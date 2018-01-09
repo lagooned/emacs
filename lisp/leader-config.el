@@ -91,6 +91,12 @@
   "l i" 'org-insert-link-global
   "l l" 'org-open-at-point-global
 
+  ;; narrow
+  "n r" 'narrow-to-region
+  "n f" 'narrow-to-defun
+  "n p" 'narrow-to-page
+  "n w" 'widen
+
   ;; org
   "o a" 'org-agenda
   "o b" 'org-iswitchb

@@ -176,6 +176,10 @@
       (unless (file-exists-p dir)
         (make-directory dir)))))
 
+;; enable narrow
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+
 ;; osx
 (when (eq system-type 'darwin)
   (setq mac-pass-command-to-system nil)
