@@ -133,13 +133,6 @@
  'prog-mode-hook
  (lambda ()
    (progn
-     (toggle-truncate-lines 0)
-     (message nil))))
-
-(add-hook
- 'lisp-interaction-mode-hook
- (lambda ()
-   (progn
      (toggle-truncate-lines 1)
      (message nil))))
 
