@@ -118,7 +118,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
       (progn (deactivate-mark)
              (xref-find-apropos (buffer-substring-no-properties beg end)))
     (if (word-at-point) (xref-find-apropos (word-at-point))
-      (error "No region or thing selected"))))
+      (error "No region or symbol selected"))))
 
 (defun gmacs/ripgrep-regexp-git (regexp &optional args)
   "ripgrep with `regexp' from the nearest git project directory.

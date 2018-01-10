@@ -363,7 +363,8 @@
 (use-package smart-jump
   :ensure dumb-jump
   :init
-  (setq smart-jump-bind-keys-for-evil nil
+  (setq smart-jump-find-references-fallback-function nil
+        smart-jump-bind-keys-for-evil nil
         smart-jump-bind-keys nil
         smart-jump-refs-key nil
         smart-jump-pop-key nil)
