@@ -79,28 +79,24 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (gmacs/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
-(defun gmacs/counsel-rg-region (beg end)
+(defun gmacs/counsel-rg-region ()
   "optionally run ripgrep on region"
-  (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (list nil nil)))
-  (gmacs/opt-region-helper #'counsel-rg beg end))
+  (interactive)
+  (gmacs/opt-region-helper 'counsel-rg))
 
-(defun gmacs/counsel-git-region (beg end)
+(defun gmacs/counsel-git-region ()
   "optionally run counsel-git on region"
-  (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (list nil nil)))
-  (gmacs/opt-region-helper #'counsel-git beg end))
+  (interactive)
+  (gmacs/opt-region-helper 'counsel-git))
 
-(defun gmacs/opt-region-helper (func beg end)
+(defun gmacs/opt-region-helper (func)
   "run func with optional region arg"
-  (if (and beg end)
+  (if (use-region-p)
       (progn (deactivate-mark)
-             (funcall func (buffer-substring-no-properties beg end)))
-    (funcall func)))
+             (funcall-interactively
+              func (buffer-substring-no-properties
+                    (region-beginning) (region-end))))
+    (funcall-interactively func)))
 
 (defun gmacs/swiper-region-thing (beg end)
   (interactive
