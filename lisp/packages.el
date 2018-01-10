@@ -241,6 +241,7 @@
    ivy-re-builders-alist
    '((ivy-switch-buffer . ivy--regex-ignore-order)
      (counsel-M-x . ivy--regex-ignore-order)
+     (counsel-git . ivy--regex-ignore-order)
      (t . ivy--regex-plus)))
   :config
   (ivy-mode))
