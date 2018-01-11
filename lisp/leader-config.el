@@ -163,9 +163,5 @@
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
   "m e" 'eval-last-sexp)
 
-(evil-leader/set-key-for-mode 'web-mode
-  "m n" 'emmet-next-edit-point
-  "m N" 'emmet-prev-edit-point)
-
 (provide 'leader-config)
 ;;; leader-config.el ends here
