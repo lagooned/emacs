@@ -145,16 +145,16 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
      'ripgrep-search-mode)))
 
 (defun gmacs/org-link-jump ()
-  (interactive
-   (let ((org-link-frame-setup
-          '((file . (lambda (args)
-                      (progn (xref-push-marker-stack)
-                             (find-file args)))))))
-     (org-open-at-point))))
+  (interactive)
+  (let ((org-link-frame-setup
+         '((file . (lambda (args)
+                     (progn (xref-push-marker-stack)
+                            (find-file args)))))))
+    (org-open-at-point)))
 
 (defun gmacs/org-link-jump-back ()
-  (interactive
-   (xref-pop-marker-stack)))
+  (interactive)
+  (xref-pop-marker-stack))
 
 (provide 'functions)
 ;;; functions.el ends here
