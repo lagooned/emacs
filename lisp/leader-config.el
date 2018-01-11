@@ -40,7 +40,7 @@
   "c c" 'fix-word-capitalize
   "c l" 'fix-word-downcase
 
-  ;; editor
+  ;; emacs
   "e r" 'restart-emacs
   "e l" 'gmacs/load-config
 

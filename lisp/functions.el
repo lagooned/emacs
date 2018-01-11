@@ -28,10 +28,12 @@
   (revert-buffer t t))
 
 (defun gmacs/force-buffer-backup ()
-  "Make a special /per session/ and /per save/ backup at the first save of each macs session."
+  "Make a special per session and per save backup at the
+first save of each gmacs session."
   (when (not buffer-backed-up)
     ;; Override the default parameters for per-session backups.
-    (let ((backup-directory-alist '(("" . "~/.emacs.d/backup/session")))
+    (let ((backup-directory-alist
+           '(("" . "~/.emacs.d/backup/session")))
           (kept-new-versions 3))
       (backup-buffer)))
   (let ((buffer-backed-up nil))
@@ -145,6 +147,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
      'ripgrep-search-mode)))
 
 (defun gmacs/org-link-jump ()
+  "push marker stack and follow org link"
   (interactive)
   (let ((org-link-frame-setup
          '((file . (lambda (args)
@@ -153,6 +156,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
     (org-open-at-point)))
 
 (defun gmacs/org-link-jump-back ()
+  "pop marker stack to jump back to source org link"
   (interactive)
   (xref-pop-marker-stack))
 
