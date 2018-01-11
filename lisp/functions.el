@@ -147,8 +147,9 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
 (defun gmacs/org-link-jump ()
   (interactive
    (let ((org-link-frame-setup
-          '((file . find-file))))
-     (xref-push-marker-stack)
+          '((file . (lambda (args)
+                      (progn (xref-push-marker-stack)
+                             (find-file args)))))))
      (org-open-at-point))))
 
 (defun gmacs/org-link-jump-back ()
