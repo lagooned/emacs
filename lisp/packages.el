@@ -339,6 +339,9 @@
        (toggle-truncate-lines 0)
        (message nil)))))
 
+(use-package projectile
+  :ensure counsel-projectile)
+
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
