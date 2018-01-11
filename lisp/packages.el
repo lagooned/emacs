@@ -514,7 +514,9 @@
   (yas-minor-mode 1))
 
 (use-package zoom
-  :diminish zoom-mode)
+  :diminish zoom-mode
+  :config
+  (setq zoom-size '(0.618 . 0.618)))
 
 (provide 'packages)
 ;;; packages.el ends here
