@@ -189,15 +189,14 @@
   (set-face-attribute 'default nil :weight 'normal)
   (set-face-attribute 'default nil :height 100)
   (if (display-graphic-p) (menu-bar-mode -1))
-  (setq ispell-program-name "aspell")
-  (setenv "SHELL" "/bin/zsh"))
+  (setenv "SHELL" "/bin/bash"))
 
 ;; win
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 110)
-  (menu-bar-mode -1))
+  (if (display-graphic-p) (menu-bar-mode -1)))
 
 (provide 'global)
 ;;; global.el ends here
