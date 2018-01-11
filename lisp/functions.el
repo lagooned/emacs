@@ -144,5 +144,16 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
                         (list (shell-quote-argument regexp) ".")) " ")
      'ripgrep-search-mode)))
 
+(defun gmacs/org-link-jump ()
+  (interactive
+   (let ((org-link-frame-setup
+          '((file . find-file))))
+     (xref-push-marker-stack)
+     (org-open-at-point))))
+
+(defun gmacs/org-link-jump-back ()
+  (interactive
+   (xref-pop-marker-stack)))
+
 (provide 'functions)
 ;;; functions.el ends here

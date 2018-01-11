@@ -468,7 +468,6 @@
     "SPC h v" "view"
     "SPC i" "insert"
     "SPC j" "jump"
-    "SPC l" "link"
     "SPC n" "narrow"
     "SPC o" "org"
     "SPC p" "project"

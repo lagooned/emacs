@@ -85,11 +85,7 @@
   "j j" 'smart-jump-go
   "j b" 'smart-jump-back
   "j r" 'smart-jump-references
-
-  ;; link
-  "l s" 'org-store-link
-  "l i" 'org-insert-link-global
-  "l l" 'org-open-at-point-global
+  "j s" 'org-store-link
 
   ;; narrow
   "n r" 'narrow-to-region
@@ -152,6 +148,9 @@
   "SPC" 'counsel-M-x)
 
 (evil-leader/set-key-for-mode 'org-mode
+  "j j" 'gmacs/org-link-jump
+  "j b" 'gmacs/org-link-jump-back
+  "j i" 'org-insert-link-global
   "m c" 'org-toggle-checkbox
   "m e" 'org-export-dispatch
   "n e" 'org-narrow-to-element
