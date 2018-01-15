@@ -35,11 +35,6 @@
   "b c" 'clean-buffer-list
   "b s" 'save-some-buffers
 
-  ;; case
-  "c u" 'fix-word-upcase
-  "c c" 'fix-word-capitalize
-  "c l" 'fix-word-downcase
-
   ;; emacs
   "e r" 'restart-emacs
   "e l" 'gmacs/load-config
@@ -104,8 +99,7 @@
   "p c" 'magit-file-popup
 
   ;; search
-  "s s" 'swiper
-  "s t" 'gmacs/swiper-region-thing
+  "s s" 'gmacs/swiper-region-thing
   "s c" 'avy-goto-char
   "s l" 'avy-goto-line
   "s j" 'avy-goto-word-0
@@ -145,7 +139,7 @@
   "w C-r" 'winner-redo
 
   ;; command
-  "SPC" 'counsel-M-x)
+  ";" 'counsel-M-x)
 
 (evil-leader/set-key-for-mode 'org-mode
   "j j" 'gmacs/org-link-jump

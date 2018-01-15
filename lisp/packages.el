@@ -466,9 +466,8 @@
   :config
   (which-key-setup-minibuffer)
   (which-key-add-key-based-replacements
-    "SPC SPC" "M-x"
+    "SPC ;" "M-x"
     "SPC b" "buffer"
-    "SPC c" "case"
     "SPC e" "emacs"
     "SPC f" "file"
     "SPC g" "grep"
