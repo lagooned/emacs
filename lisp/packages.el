@@ -125,6 +125,8 @@
   (load-theme 'doom-vibrant t))
 
 (use-package dumb-jump
+  ;; smart jump calls require
+  :defer t
   :bind
   (:map dumb-jump-mode-map
         ("C-M-g" . nil)
@@ -224,6 +226,8 @@
   :bind
   (:map help-mode-map
         ("C-j" . push-button)))
+
+(use-package indent-guide)
 
 (use-package impatient-mode
   :commands impatient-mode)
@@ -418,10 +422,12 @@
      ((t (:inherit telephone-line-evil :background "red")))))
   (telephone-line-mode 1))
 
-(use-package try)
+(use-package try
+  :defer t)
 
 (use-package undo-tree
   :diminish undo-tree-mode
+  :commands undo-tree-visualize
   :init
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-diff t)
@@ -438,11 +444,14 @@
    'web-mode-hook
    'electric-indent-mode)
   (add-to-list
-   'auto-mode-alist '("\\.x?html\\'" . web-mode))
+   'auto-mode-alist
+   '("\\.x?html\\'" . web-mode))
   (add-to-list
-   'gmacs/auto-minor-mode-alist '("\\.x?html\\'" . impatient-mode))
+   'gmacs/auto-minor-mode-alist
+   '("\\.x?html\\'" . impatient-mode))
   (add-to-list
-   'auto-mode-alist '("\\.php\\'" . web-mode))
+   'auto-mode-alist
+   '("\\.php\\'" . web-mode))
   :config
   (emmet-mode 1))
 
@@ -484,12 +493,14 @@
   :init
   (require 'whitespace)
   (setq whitespace-line-column 100)
-  ;; replace padding with variable-width unicode spaces
-  (advice-add 'linum-relative :filter-return
-              (lambda (num)
-                (if (not (get-text-property 0 'invisible num))
-                    (propertize (replace-regexp-in-string " " "\u2002" num)
-                                'face (get-text-property 0 'face num))))))
+  ;; replace ascii spaces unicode spaces
+  (advice-add
+   'linum-relative :filter-return
+   (lambda (num)
+     (if (not (get-text-property 0 'invisible num))
+         (propertize
+          (replace-regexp-in-string " " "\u2002" num)
+          'face (get-text-property 0 'face num))))))
 
 (use-package xref
   :ensure nil
