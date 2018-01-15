@@ -93,24 +93,25 @@
   (setq-default dired-omit-files-p t)
   (put 'dired-find-alternate-file 'disabled nil))
 
-(use-package dired+
-  :defer t
-  :diminish dired-omit-mode
-  :after dired
-  :init
-  (setq diredp-hide-details-initially-flag nil)
-  (setq dired-dwim-target t))
-
 (use-package dired-x
+  :diminish dired-omit-mode
   :defer t
   :ensure nil
-  :after dired+
+  :after dired
   :bind
   (:map dired-mode-map
         ("C-j" . dired-find-file))
   :config
   (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
   (setq dired-omit-mode t))
+
+(use-package dired+
+  :defer t
+  :diminish dired-omit-mode
+  :after dired-x
+  :init
+  (setq diredp-hide-details-initially-flag nil)
+  (setq dired-dwim-target t))
 
 (use-package disable-mouse
   :diminish global-disable-mouse-mode
