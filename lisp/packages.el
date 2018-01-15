@@ -148,10 +148,14 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
+(use-package evil-leader
+  :commands
+  global-evil-leader-mode
+  :config
+  (load "leader-config.el"))
+
 (use-package evil
-  :ensure avy
-  :ensure counsel
-  :ensure company
+  :after evil-leader
   :ensure evil-commentary
   :ensure evil-ediff
   :ensure evil-escape
@@ -163,8 +167,6 @@
   :ensure evil-vimish-fold
   :ensure evil-visualstar
   :ensure exato
-  :ensure undo-tree
-  :ensure zoom
   :diminish evil-vimish-fold-mode
   :init
   (load "evil-init.el")
@@ -184,13 +186,6 @@
   (setq-default evil-escape-key-sequence "kj")
   (setq-default evil-escape-unordered-key-sequence t)
   (setq-default evil-escape-delay 0.04))
-
-(use-package evil-leader
-  :ensure indent-guide
-  :commands
-  global-evil-leader-mode
-  :config
-  (load "leader-config.el"))
 
 (use-package evil-magit
   :after
