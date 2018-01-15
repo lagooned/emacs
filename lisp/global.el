@@ -88,6 +88,10 @@
       vc-make-backup-files t
       backup-directory-alist '(("" . "~/.emacs.d/backup/save")))
 
+;; auto save to temp
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
 ;; show column too
 (column-number-mode 1)
 
