@@ -40,13 +40,15 @@
 (define-key evil-visual-state-map (kbd "k")     'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "RET")   'newline-and-indent)
 (define-key evil-insert-state-map (kbd "RET")   'newline-and-indent)
-(define-key evil-visual-state-map (kbd "RET")   'newline-and-indent)
+(define-key evil-visual-state-map (kbd "RET")   'nil)
 (define-key evil-normal-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-normal-state-map (kbd "M-n")   'evil-search-word-forward)
 (define-key evil-normal-state-map (kbd "M-p")   'evil-search-word-backward)
+(define-key evil-normal-state-map (kbd "M-N")   'evil-search-word-backward)
 (define-key evil-visual-state-map (kbd "M-n")   'evil-visualstar/begin-search-forward)
 (define-key evil-visual-state-map (kbd "M-p")   'evil-visualstar/begin-search-backward)
+(define-key evil-visual-state-map (kbd "M-N")   'evil-visualstar/begin-search-backward)
 (define-key evil-insert-state-map (kbd "M-\\")  'evil-execute-in-emacs-state)
 (define-key evil-normal-state-map (kbd "C-a")   'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-b")   'evil-scroll-page-up)
@@ -65,7 +67,7 @@
 
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
-(evil-define-key 'insert web-mode-map (kbd "C-c N") 'emmet-prev-edit-point)
+(evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
 
 ;; dired
 (eval-after-load 'dired
