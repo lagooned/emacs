@@ -93,10 +93,12 @@
   "o b" 'org-iswitchb
 
   ;; project
-  "p p" 'magit-status
-  "p f" 'gmacs/counsel-git-region
-  "p d" 'magit-diff-popup
-  "p c" 'magit-file-popup
+  "p s" 'magit-status
+  "p p" 'counsel-projectile-switch-project
+  "p f" 'gmacs/counsel-projectile-region
+  "p d" 'gmacs/counsel-projectile-find-dir-region
+  "p D" 'magit-diff-popup
+  "p F" 'magit-file-popup
 
   ;; search
   "s s" 'gmacs/swiper-region-thing

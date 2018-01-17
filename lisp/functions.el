@@ -91,6 +91,16 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (interactive)
   (gmacs/opt-region-helper 'counsel-git))
 
+(defun gmacs/counsel-projectile-region ()
+  "optionally run counsel-projectile on region"
+  (interactive)
+  (gmacs/opt-region-helper 'custom/counsel-projectile))
+
+(defun gmacs/counsel-projectile-find-dir-region ()
+  "optionally run counsel-find-dir on region"
+  (interactive)
+  (gmacs/opt-region-helper 'custom/counsel-projectile-find-dir))
+
 (defun gmacs/opt-region-helper (func)
   "run func with optional region arg"
   (if (use-region-p)

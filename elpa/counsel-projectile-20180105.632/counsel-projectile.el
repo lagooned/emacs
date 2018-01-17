@@ -359,6 +359,19 @@ With a prefix ARG, invalidate the cache first."
             :action counsel-projectile-find-dir-action
             :caller 'counsel-projectile-find-dir))
 
+;;;###autoload
+(defun custom/counsel-projectile-find-dir (&optional initial-input)
+  "Jump to a directory in the current project."
+  (interactive)
+  (if (not (projectile-project-p))
+      (counsel-projectile-switch-project)
+    (ivy-read (projectile-prepend-project-name "Find dir: ")
+              (counsel-projectile--project-directories)
+              :initial-input initial-input
+              :require-match t
+              :action counsel-projectile-find-dir-action
+              :caller 'counsel-projectile-find-dir)))
+
 ;;;; counsel-projectile-switch-to-buffer
 
 (defcustom counsel-projectile-remove-current-buffer nil
@@ -1117,6 +1130,21 @@ If not inside a project, call `counsel-projectile-switch-project'."
 (ivy-set-display-transformer
  'counsel-projectile
  'counsel-projectile-transformer)
+
+;;;###autoload
+(defun custom/counsel-projectile (&optional initial-input)
+  "Jump to a buffer or file in the current project.
+If not inside a project, call `counsel-projectile-switch-project'."
+  (interactive)
+  (if (not (projectile-project-p))
+      (counsel-projectile-switch-project)
+    (ivy-read (projectile-prepend-project-name "Load buffer or file: ")
+              (counsel-projectile--project-buffers-and-files)
+              :initial-input initial-input
+              :matcher #'counsel-projectile--matcher
+              :require-match t
+              :action counsel-projectile-action
+              :caller 'counsel-projectile)))
 
 ;;;; counsel-projectile-mode
 

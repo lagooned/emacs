@@ -75,9 +75,13 @@
   (company-flx-mode +1))
 
 (use-package counsel
+  :ensure counsel-projectile
   :diminish counsel-mode
   :config
   (counsel-mode 1))
+
+(use-package counsel-projectile
+  :after counsel)
 
 (use-package dired
   :defer t
@@ -340,7 +344,9 @@
        (message nil)))))
 
 (use-package projectile
-  :ensure counsel-projectile)
+  :diminish projectile-mode
+  :config
+  (projectile-mode 1))
 
 (use-package rainbow-delimiters
   :config
