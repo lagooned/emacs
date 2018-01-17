@@ -75,6 +75,8 @@
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
   "i h" 'auto-insert
+  "i l s" 'lorem-ipsum-insert-sentences
+  "i l p" 'Lorem-ipsum-insert-paragraphs
 
   ;; jump
   "j j" 'smart-jump-go
