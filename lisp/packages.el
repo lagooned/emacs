@@ -532,5 +532,7 @@
   :config
   (setq zoom-size '(0.618 . 0.618)))
 
+(use-package zop-to-char)
+
 (provide 'packages)
 ;;; packages.el ends here

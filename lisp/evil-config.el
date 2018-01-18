@@ -122,15 +122,10 @@
 (define-key evil-emacs-state-map (kbd "M-u") 'fix-word-upcase)
 (define-key evil-emacs-state-map (kbd "M-l") 'fix-word-downcase)
 (define-key evil-emacs-state-map (kbd "M-c") 'fix-word-capitalize)
-(define-key evil-emacs-state-map (kbd "M-h") 'mark-paragraph)
-(define-key evil-emacs-state-map (kbd "M-z") 'zap-to-char)
-(define-key evil-emacs-state-map (kbd "M-.") 'xref-find-definitions)
+(define-key evil-emacs-state-map (kbd "M-z") 'zop-to-char)
 (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
 (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
-(define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
-(define-key evil-emacs-state-map (kbd "C-M-o") 'split-line)
-(define-key evil-emacs-state-map (kbd "C-M-/") 'reposition-window)
-(define-key evil-emacs-state-map (kbd "C-M-.") 'xref-find-apropos)
+(define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
 
 ;; unbinds to clean up global bindspace
 (global-unset-key (kbd "C-k"))
