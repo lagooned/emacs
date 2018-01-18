@@ -248,6 +248,7 @@
      (counsel-git . ivy--regex-ignore-order)
      (t . ivy--regex-plus)))
   :config
+  (require 'ivy-hydra)
   (ivy-mode))
 
 (use-package magit
