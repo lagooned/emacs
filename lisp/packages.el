@@ -353,6 +353,20 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package recentf
+  :ensure nil
+  :config
+  (setq recentf-max-menu-items 0
+        recentf-max-saved-items 300
+        recentf-filename-handlers '(file-truename)
+        recentf-exclude
+        (list "^/tmp/" "^/ssh:"
+              "\\.?ido\\.last$"
+              "\\.revive$"
+              "/TAGS$"
+              "^/var/folders/.+$"
+              "^#")))
+
 (use-package restart-emacs
   :commands restart-emacs)
 
