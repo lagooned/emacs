@@ -442,6 +442,7 @@
   :ensure impatient-mode
   :ensure emmet-mode
   :init
+  (setq web-mode-enable-auto-pairing nil)
   (add-hook
    'web-mode-hook
    'electric-indent-mode)
@@ -453,7 +454,7 @@
    '("\\.x?html\\'" . impatient-mode))
   (add-to-list
    'auto-mode-alist
-   '("\\.php\\'" . web-mode))
+   '("\\.blade.php\\'" . web-mode))
   :config
   (emmet-mode 1))
 
