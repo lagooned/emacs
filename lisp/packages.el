@@ -382,7 +382,7 @@
   (smart-jump-register :modes '(emacs-lisp-mode lisp-interaction-mode)
                        :jump-fn 'xref-find-definitions
                        :pop-fn 'pop-tag-mark
-                       :refs-fn 'gmacs/xref-find-apropos-region-thing
+                       :refs-fn 'gmacs/xref-find-apropos-symbol
                        :should-jump t
                        :heuristic 'error
                        :async nil))

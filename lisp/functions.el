@@ -139,16 +139,11 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
-(defun gmacs/xref-find-apropos-region-thing (beg end)
-  (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (list nil nil)))
-  (if (and beg end)
-      (progn (deactivate-mark)
-             (xref-find-apropos (buffer-substring-no-properties beg end)))
-    (if (word-at-point) (xref-find-apropos (word-at-point))
-      (error "No region or symbol selected"))))
+(defun gmacs/xref-find-apropos-symbol ()
+  (interactive)
+  (if (symbol-at-point)
+      (xref-find-apropos (symbol-name (symbol-at-point)))
+    (error "No symbol selected")))
 
 (defun gmacs/ripgrep-regexp-git (regexp &optional args)
   "ripgrep with `regexp' from the nearest git project directory.
