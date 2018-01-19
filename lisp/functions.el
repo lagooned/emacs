@@ -120,12 +120,13 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (gmacs/opt-region-helper 'custom/counsel-projectile-find-dir))
 
 (defun gmacs/opt-region-helper (func)
-  "run func with optional region arg"
+  "add region to kill ring and run func with optional region arg"
   (if (use-region-p)
-      (progn (deactivate-mark)
-             (funcall-interactively
-              func (buffer-substring-no-properties
-                    (region-beginning) (region-end))))
+      (let ((string (buffer-substring-no-properties
+                     (region-beginning) (region-end))))
+        (progn (kill-new string)
+               (deactivate-mark)
+               (funcall-interactively func string)))
     (funcall-interactively func)))
 
 (defun gmacs/swiper-region-thing (beg end)
@@ -152,9 +153,9 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
    (list (read-from-minibuffer
           "rg buffer: "
           (if (use-region-p)
-              (progn
-                (deactivate-mark)
-                (buffer-substring-no-properties (region-beginning) (region-end)))))))
+              (let ((string (buffer-substring-no-properties
+                             (region-beginning) (region-end))))
+                (progn (kill-new string) (deactivate-mark) string))))))
   (let ((directory (locate-dominating-file default-directory ".git")))
     (if (not directory)
         (message "not in a git project: using default-directory")
