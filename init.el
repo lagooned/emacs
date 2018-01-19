@@ -32,7 +32,7 @@
 ;;   ███    ███ ███   ███   ███ ███    ███ ███    ███  ▄█    ███
 ;;  ▄████████▀ ▄██▀  ▄██▀  ▄█▀ ▄██▀    █▀ ▄████████▀ ▄████████▀
 
-;; welcome to goodmacs, enjoy and have a good day
+;; welcome to goodmacs, enjoy! \\(^▾^\\)
 
 ;; this buffer is for text that is not saved, and for lisp evaluation.
 ;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
