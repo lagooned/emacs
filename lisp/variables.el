@@ -33,5 +33,22 @@ set by (line-pixel-height)")
 (defvar gmacs/use-line-height-cursor t
   "enable or disable line height cursor")
 
+(defvar gmacs/large-file-size 1
+  "Size (in MB) above which the user will be prompted to open the file literally
+to avoid performance issues. Opening literally means that no major or minor
+modes are active and the buffer is read-only.")
+
+(defvar gmacs/large-file-modes-list
+  '(archive-mode
+    tar-mode
+    jka-compr
+    git-commit-mode
+    image-mode
+    doc-view-mode
+    doc-view-mode-maybe
+    ebrowse-tree-mode
+    pdf-view-mode)
+  "Major modes that `gmacs/check-large-file' will ignore.")
+
 (provide 'variables)
 ;;; variables.el ends here

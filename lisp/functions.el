@@ -40,6 +40,24 @@ first save of each gmacs session."
     (backup-buffer)))
 (add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
+(defun gmacs/check-large-file ()
+  "Check if the buffer's file is large (see `gmacs/large-file-size'). If so, ask
+for confirmation to open it literally (read-only, disabled undo and in
+fundamental-mode) for performance sake."
+  (let* ((filename (buffer-file-name))
+         (size (nth 7 (file-attributes filename))))
+    (when (and (not (memq major-mode gmacs/large-file-modes-list))
+               size (> size (* 1024 1024 gmacs/large-file-size))
+               (y-or-n-p
+                (format (concat "%s is a large file, open literally to "
+                                "avoid performance issues?")
+                        (file-relative-name filename))))
+      (setq buffer-read-only t)
+      (buffer-disable-undo)
+      (fundamental-mode))))
+
+(add-hook 'find-file-hook #'gmacs/check-large-file)
+
 (defvar gmacs/auto-minor-mode-alist ()
   "Alist of filename patterns vs correpsonding minor mode functions, see
   `auto-mode-alist' All elements of this alist are checked, meaning you can
