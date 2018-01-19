@@ -112,12 +112,12 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
 (defun gmacs/counsel-projectile-region ()
   "optionally run counsel-projectile on region"
   (interactive)
-  (gmacs/opt-region-helper 'custom/counsel-projectile))
+  (gmacs/opt-region-helper 'gmacs/counsel-projectile))
 
 (defun gmacs/counsel-projectile-find-dir-region ()
   "optionally run counsel-find-dir on region"
   (interactive)
-  (gmacs/opt-region-helper 'custom/counsel-projectile-find-dir))
+  (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-dir))
 
 (defun gmacs/opt-region-helper (func)
   "add region to kill ring and run func with optional region arg"
@@ -183,6 +183,32 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   "pop marker stack to jump back to source org link"
   (interactive)
   (xref-pop-marker-stack))
+
+(defun gmacs/counsel-projectile (&optional initial-input)
+  "Jump to a buffer or file in the current project.
+If not inside a project, call `counsel-projectile-switch-project'."
+  (interactive)
+  (if (not (projectile-project-p))
+      (counsel-projectile-switch-project)
+    (ivy-read (projectile-prepend-project-name "Load buffer or file: ")
+              (counsel-projectile--project-buffers-and-files)
+              :initial-input initial-input
+              :matcher #'counsel-projectile--matcher
+              :require-match t
+              :action counsel-projectile-action
+              :caller 'counsel-projectile)))
+
+(defun gmacs/counsel-projectile-find-dir (&optional initial-input)
+  "Jump to a directory in the current project."
+  (interactive)
+  (if (not (projectile-project-p))
+      (counsel-projectile-switch-project)
+    (ivy-read (projectile-prepend-project-name "Find dir: ")
+              (counsel-projectile--project-directories)
+              :initial-input initial-input
+              :require-match t
+              :action counsel-projectile-find-dir-action
+              :caller 'counsel-projectile-find-dir)))
 
 (provide 'functions)
 ;;; functions.el ends here
