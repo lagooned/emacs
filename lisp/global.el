@@ -184,7 +184,8 @@
   (set-face-attribute 'default nil :weight 'bold)
   (set-face-attribute 'default nil :height 120)
   (unless (display-graphic-p) (menu-bar-mode -1))
-  (setq ispell-program-name "aspell")
+  (setq ispell-program-name "aspell"
+        ispell-extra-args '("--sug-mode=ultra"))
   (setenv "SHELL" "/bin/zsh"))
 
 ;; linux

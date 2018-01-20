@@ -343,6 +343,10 @@
   fix-word-downcase
   fix-word-capitalize)
 
+(use-package flyspell
+  :init
+  (setq flyspell-issue-message-flag nil))
+
 (use-package focus
   :commands
   focus-mode)

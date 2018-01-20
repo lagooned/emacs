@@ -214,8 +214,11 @@ If not inside a project, call `counsel-projectile-switch-project'."
   (interactive)
   (if (bound-and-true-p flyspell-mode)
       (flyspell-mode 0)
-    (progn (flyspell-buffer)
-           (flyspell-mode 1))))
+    (if (use-region-p)
+        (progn (flyspell-region (region-beginning) (region-end))
+               (flyspell-mode +1))
+      (progn (flyspell-buffer)
+             (flyspell-mode +1)))))
 
 (defun gmacs/unhighlight-all ()
   (interactive)
