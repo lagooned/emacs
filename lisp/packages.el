@@ -345,6 +345,9 @@
 
 (use-package flyspell
   :init
+  (custom-set-faces
+   '(flyspell-duplicate ((t (:underline "Green"))))
+   '(flyspell-incorrect ((t (:underline "magenta")))))
   (setq flyspell-issue-message-flag nil))
 
 (use-package focus
