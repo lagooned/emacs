@@ -53,16 +53,16 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; load custom vars
-(load "variables.el")
+(load "variables")
 
 ;; load custom functions
-(load "functions.el")
+(load "functions")
 
 ;; load global config
-(load "global.el")
+(load "global")
 
 ;; load package config
-(load "packages.el")
+(load "packages")
 
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
