@@ -186,6 +186,7 @@
   (evil-commentary-mode))
 
 (use-package evil-escape
+  :diminish evil-escape-mode
   :init
   (setq-default evil-escape-key-sequence "kj")
   (setq-default evil-escape-unordered-key-sequence t)
