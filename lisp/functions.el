@@ -217,5 +217,9 @@ If not inside a project, call `counsel-projectile-switch-project'."
     (progn (flyspell-buffer)
            (flyspell-mode 1))))
 
+(defun gmacs/unhighlight-all ()
+  (interactive)
+  (unhighlight-regexp t))
+
 (provide 'functions)
 ;;; functions.el ends here

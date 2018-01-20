@@ -227,6 +227,21 @@
   (:map help-mode-map
         ("C-j" . push-button)))
 
+(use-package hi-lock-mode
+  :ensure nil
+  :init
+  (defface hi-magenta
+    '((((background dark)) (:background "magenta" :foreground "black"))
+      (t (:background "magenta")))
+    "Custom magenta face for hi-lock mode."
+    :group 'hi-lock-faces)
+  (setq hi-lock-face-defaults
+        '("hi-yellow"
+          "hi-pink"
+          "hi-green"
+          "hi-blue"
+          "hi-magenta")))
+
 (use-package indent-guide)
 
 (use-package impatient-mode

@@ -119,6 +119,8 @@
   "t p" 'smartparens-mode
   "t f" 'focus-mode
   "t s" 'gmacs/toggle-spelling
+  "t h" 'highlight-symbol-at-point
+  "t H" 'gmacs/unhighlight-all
   "t z" 'zoom-mode
 
   ;; universal

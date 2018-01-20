@@ -64,6 +64,9 @@
 ;; load package config
 (load "packages")
 
+;; load custom faces
+(load "faces.el")
+
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
