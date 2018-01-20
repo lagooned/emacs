@@ -210,5 +210,12 @@ If not inside a project, call `counsel-projectile-switch-project'."
               :action counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
 
+(defun gmacs/toggle-spelling ()
+  (interactive)
+  (if (bound-and-true-p flyspell-mode)
+      (flyspell-mode 0)
+    (progn (flyspell-buffer)
+           (flyspell-mode 1))))
+
 (provide 'functions)
 ;;; functions.el ends here

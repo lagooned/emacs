@@ -118,6 +118,7 @@
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
   "t f" 'focus-mode
+  "t s" 'gmacs/toggle-spelling
   "t z" 'zoom-mode
 
   ;; universal
