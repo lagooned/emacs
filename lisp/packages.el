@@ -236,7 +236,7 @@
   (:map help-mode-map
         ("C-j" . push-button)))
 
-(use-package hi-lock-mode
+(use-package hi-lock
   :ensure nil
   :init
   (defface hi-magenta
