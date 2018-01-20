@@ -221,7 +221,7 @@
 (use-package expand-region
   :commands er/expand-region)
 
-(use-package help-mode
+(use-package help
   :ensure nil
   :bind
   (:map help-mode-map
