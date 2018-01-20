@@ -212,13 +212,17 @@ If not inside a project, call `counsel-projectile-switch-project'."
 
 (defun gmacs/toggle-spelling ()
   (interactive)
+  (ispell-set-spellchecker-params)
   (if (bound-and-true-p flyspell-mode)
       (flyspell-mode 0)
     (if (use-region-p)
-        (progn (flyspell-region (region-beginning) (region-end))
-               (flyspell-mode +1))
-      (progn (flyspell-buffer)
-             (flyspell-mode +1)))))
+        (save-excursion
+          (deactivate-mark)
+          (flyspell-large-region (region-beginning) (region-end))
+          (flyspell-mode +1))
+      (save-excursion
+        (flyspell-large-region (point-min) (point-max))
+        (flyspell-mode +1)))))
 
 (defun gmacs/unhighlight-all ()
   (interactive)
