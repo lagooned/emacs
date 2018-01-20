@@ -443,7 +443,9 @@
      ((t (:inherit telephone-line-evil :background "darkcyan"))))
    '(telephone-line-evil-emacs
      ((t (:inherit telephone-line-evil :background "red")))))
-  (telephone-line-mode 1))
+  (telephone-line-mode 1)
+  ;; fix in-window modeline fragements on quit
+  (add-hook 'minibuffer-exit-hook #'redraw-display))
 
 (use-package try
   :defer t)
