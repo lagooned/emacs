@@ -29,6 +29,15 @@
 
 (use-package all-the-icons)
 
+(use-package auto-revert
+  :ensure nil
+  :init
+  (setq auto-revert-verbose nil)
+  (add-hook
+   'auto-revert-mode-hook
+   (lambda () (diminish 'auto-revert-mode)))
+  (global-auto-revert-mode 1))
+
 (use-package avy)
 
 (use-package adaptive-wrap
