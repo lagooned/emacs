@@ -94,8 +94,11 @@
 
 (use-package dired
   :defer t
-  :ensure nil
   :after evil
+  :ensure nil
+  :bind
+  (:map dired-mode-map
+        ("C-j" . dired-find-file))
   :init
   (add-hook
    'dired-mode-hook
@@ -107,20 +110,15 @@
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package dired-x
-  :diminish dired-omit-mode
   :defer t
   :ensure nil
   :after dired
-  :bind
-  (:map dired-mode-map
-        ("C-j" . dired-find-file))
   :config
   (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
   (setq dired-omit-mode t))
 
 (use-package dired+
   :defer t
-  :diminish dired-omit-mode
   :after dired-x
   :init
   (setq diredp-hide-details-initially-flag nil)
