@@ -27,25 +27,14 @@
 (setq evil-move-cursor-back nil)
 (setq evil-want-C-u-scroll t)
 
-(if gmacs/use-line-height-cursor
-    ;; todo make a minor mode that uses the line-pixel-height 
-    (let ((height (eval gmacs/evil-base-cursor-height)))
-      ;; fixed height cursors
-      (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
-      (setq evil-insert-state-cursor `("#00e000" (hbar . ,(eval height))))
-      (setq evil-visual-state-cursor `("#ff8800" (hbar . ,(eval height))))
-      (setq evil-emacs-state-cursor `("#ff0000" (hbar . ,(eval height))))
-      (setq evil-motion-state-cursor `("#0000ff" (hbar . ,(eval height))))
-      (setq evil-replace-state-cursor `("#00bbbb" (hbar . ,(eval height))))
-      (setq evil-operator-state-cursor `("#ff66ff" (hbar . ,(eval height)))))
-  (progn
-    (setq evil-normal-state-cursor `("#dd00dd" box))
-    (setq evil-insert-state-cursor `("#00e000" box))
-    (setq evil-visual-state-cursor `("#ff8800" box))
-    (setq evil-emacs-state-cursor `("#ff0000" box))
-    (setq evil-motion-state-cursor `("#0000ff" box))
-    (setq evil-replace-state-cursor `("#00bbbb" box))
-    (setq evil-operator-state-cursor `("#ff66ff" box))))
+(let ((height (eval gmacs/evil-base-cursor-height)))
+  (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
+  (setq evil-insert-state-cursor `("#00e000" (hbar . ,(eval height))))
+  (setq evil-visual-state-cursor `("#ff8800" (hbar . ,(eval height))))
+  (setq evil-emacs-state-cursor `("#ff0000" (hbar . ,(eval height))))
+  (setq evil-motion-state-cursor `("#0000ff" (hbar . ,(eval height))))
+  (setq evil-replace-state-cursor `("#00bbbb" (hbar . ,(eval height))))
+  (setq evil-operator-state-cursor `("#ff66ff" (hbar . ,(eval height)))))
 
 ;; initial states
 (add-hook 'with-editor-mode-hook 'evil-insert-state)
