@@ -20,17 +20,73 @@
 
 ;;; Code:
 
-(global-evil-leader-mode 1)
-(global-evil-matchit-mode 1)
-(global-evil-surround-mode 1)
-(global-evil-visualstar-mode 1)
+(use-package evil-leader
+  :config
+  (load "leader-config.el"))
+
+(use-package evil-matchit
+  :config
+  (global-evil-matchit-mode 1))
+
+(use-package evil-visualstar
+  :config
+  (global-evil-visualstar-mode 1))
+
 (global-company-mode 1)
 (dumb-jump-mode 1)
 (evil-mode 1)
-(evil-commentary-mode 1)
-(evil-vimish-fold-mode 1)
-(evil-exchange-install)
-(evil-escape-mode 1)
+
+(use-package evil-commentary
+  :diminish
+  evil-commentary-mode
+  :config
+  (evil-commentary-mode 1))
+
+(use-package evil-vimish-fold
+  :diminish evil-vimish-fold-mode
+  :config
+  (evil-vimish-fold-mode 1))
+
+(use-package exato)
+
+(use-package evil-exchange
+  :config
+  (evil-exchange-install))
+
+(use-package evil-escape
+  :diminish evil-escape-mode
+  :init
+  (setq-default evil-escape-key-sequence "kj")
+  (setq-default evil-escape-unordered-key-sequence t)
+  (setq-default evil-escape-delay 0.04)
+  :config
+  (evil-escape-mode 1))
+
+(use-package evil-numbers
+  :commands
+  evil-numbers/inc-at-point
+  evil-numbers/dev-at-point
+  :config
+  (require 'evil-numbers))
+
+(use-package evil-magit
+  :after
+  magit
+  :config
+  (require 'evil-magit)
+  (evil-define-key
+    evil-magit-state
+    magit-mode-map [escape] 'nil))
+
+(use-package evil-org
+  :diminish evil-org-mode
+  :after org
+  :init
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme))))
+
 (zoom-mode 1)
 
 ;; evil binds
@@ -157,4 +213,5 @@
  '(lambda () (evil-emacs-state)))
 
 (provide 'evil-config)
+
 ;;; evil-config.el ends here

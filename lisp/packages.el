@@ -58,12 +58,14 @@
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
 
-(use-package centered-cursor-mode)
+(use-package centered-cursor-mode
+  :commands
+  centered-cursor-mode)
 
 (use-package company
+  :defer t
   :ensure company-flx
-  :diminish
-  company-mode
+  :diminish company-mode
   :commands
   company-complete
   company-mode
@@ -124,11 +126,6 @@
   (setq diredp-hide-details-initially-flag nil)
   (setq dired-dwim-target t))
 
-(use-package disable-mouse
-  :diminish global-disable-mouse-mode
-  :config
-  (global-disable-mouse-mode))
-
 (use-package doom-themes
   :init
   (setq doom-themes-enable-bold t)
@@ -136,8 +133,7 @@
   (load-theme 'doom-vibrant t))
 
 (use-package dumb-jump
-  ;; smart jump calls require
-  :defer t
+  :after smart-jump
   :bind
   (:map dumb-jump-mode-map
         ("C-M-g" . nil)
@@ -159,74 +155,64 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
-(use-package evil-leader
+(use-package emmet-mode
   :commands
-  global-evil-leader-mode
+  emmet-mode
+  emmet-next-edit-point
+  emmet-prev-edit-point
+  :init
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook  'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode))
+
+(use-package erc
+  :commands erc
   :config
-  (load "leader-config.el"))
+  (require 'erc-services nil t)
+  (erc-services-mode 1)
+  (setq erc-prompt-for-nickserv-password nil)
+  (setq erc-hide-list '("PART" "QUIT" "JOIN"))
+  (setq erc-default-coding-system '(utf-8 . utf-8)
+        erc-server-coding-system '(utf-8 . utf-8)
+        erc-server "irc.freenode.net"
+        erc-nick "lagooned"
+        erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
+        erc-prompt-for-password nil
+        erc-prompt (lambda () (concat (buffer-name) ">"))
+        erc-server-send-ping-interval 10
+        erc-server-send-ping-timeout 180
+        erc-server-reconnect-timeout 60
+        erc-prompt-for-nickserv-password nil
+        ;; erc-kill-buffer-on-part t
+        ;; erc-server-auto-reconnect t
+        ;; erc-kill-server-buffer-on-quit t
+        erc-kill-queries-on-quit t))
 
 (use-package evil
-  :after evil-leader
-  :ensure evil-commentary
-  :ensure evil-ediff
-  :ensure evil-escape
-  :ensure evil-exchange
-  :ensure evil-leader
-  :ensure evil-matchit
-  :ensure evil-numbers
-  :ensure evil-surround
-  :ensure evil-vimish-fold
-  :ensure evil-visualstar
-  :ensure exato
-  :diminish evil-vimish-fold-mode
   :init
   (load "evil-init.el")
   :config
   (load "evil-config.el"))
 
-(use-package evil-commentary
-  :diminish
-  evil-commentary-mode
-  :commands
-  evil-commentary-mode
-  :config
-  (evil-commentary-mode))
-
-(use-package evil-escape
-  :diminish evil-escape-mode
-  :init
-  (setq-default evil-escape-key-sequence "kj")
-  (setq-default evil-escape-unordered-key-sequence t)
-  (setq-default evil-escape-delay 0.04))
-
-(use-package evil-magit
-  :after
-  magit
-  evil
-  :config
-  (require 'evil-magit)
-  (evil-define-key
-    evil-magit-state
-    magit-mode-map [escape] 'nil))
-
-(use-package evil-numbers
-  :commands
-  evil-numbers/inc-at-point
-  evil-numbers/dev-at-point
-  :config
-  (require 'evil-numbers))
-
-(use-package evil-org
-  :diminish evil-org-mode
-  :after org
-  :init
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme))))
-
 (use-package expand-region
   :commands er/expand-region)
+
+(use-package fix-word
+  :commands
+  fix-word-upcase
+  fix-word-downcase
+  fix-word-capitalize)
+
+(use-package flyspell
+  :init
+  (custom-set-faces
+   '(flyspell-duplicate ((t (:underline "Green"))))
+   '(flyspell-incorrect ((t (:underline "magenta")))))
+  (setq flyspell-issue-message-flag nil))
+
+(use-package focus
+  :commands
+  focus-mode)
 
 (use-package help
   :ensure nil
@@ -274,6 +260,17 @@
   (require 'ivy-hydra)
   (ivy-mode))
 
+(use-package linum-relative
+  :commands linum-relative-mode
+  :diminish linum-relative-mode
+  :init
+  (setq linum-relative-format "%5s "
+        linum-relative-current-symbol "")
+  (add-hook
+   'prog-mode-hook (lambda () (linum-relative-mode 1))))
+
+(use-package lorem-ipsum)
+
 (use-package magit
   :commands magit-status
   :init
@@ -288,69 +285,6 @@
     (add-to-list
      'Info-directory-list
      "~/.emacs.d/packages/magit/Documentation/")))
-
-(use-package linum-relative
-  :commands linum-relative-mode
-  :diminish linum-relative-mode
-  :init
-  (setq linum-relative-format "%5s "
-        linum-relative-current-symbol "")
-  (add-hook
-   'prog-mode-hook (lambda () (linum-relative-mode 1))))
-
-(use-package lorem-ipsum)
-
-(use-package emmet-mode
-  :commands
-  emmet-mode
-  emmet-next-edit-point
-  emmet-prev-edit-point
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook  'emmet-mode)
-  (add-hook 'css-mode-hook  'emmet-mode))
-
-(use-package erc
-  :commands erc
-  :config
-  (require 'erc-services nil t)
-  (erc-services-mode 1)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-hide-list '("PART" "QUIT" "JOIN"))
-  (setq erc-default-coding-system '(utf-8 . utf-8)
-        erc-server-coding-system '(utf-8 . utf-8)
-        erc-server "irc.freenode.net"
-        erc-nick "lagooned"
-        erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
-        erc-prompt-for-password nil
-        erc-prompt (lambda () (concat (buffer-name) ">"))
-        erc-server-send-ping-interval 10
-        erc-server-send-ping-timeout 180
-        erc-server-reconnect-timeout 60
-        erc-prompt-for-nickserv-password nil
-        ;; erc-kill-buffer-on-part t
-        ;; erc-server-auto-reconnect t
-        ;; erc-kill-server-buffer-on-quit t
-        erc-kill-queries-on-quit t))
-
-(use-package exato)
-
-(use-package fix-word
-  :commands
-  fix-word-upcase
-  fix-word-downcase
-  fix-word-capitalize)
-
-(use-package flyspell
-  :init
-  (custom-set-faces
-   '(flyspell-duplicate ((t (:underline "Green"))))
-   '(flyspell-incorrect ((t (:underline "magenta")))))
-  (setq flyspell-issue-message-flag nil))
-
-(use-package focus
-  :commands
-  focus-mode)
 
 (use-package org
   :commands
@@ -415,7 +349,6 @@
   (require 'ripgrep))
 
 (use-package smart-jump
-  :ensure dumb-jump
   :init
   (setq smart-jump-find-references-fallback-function nil
         smart-jump-bind-keys-for-evil nil
