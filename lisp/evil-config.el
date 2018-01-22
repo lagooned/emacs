@@ -154,6 +154,18 @@
        "?" 'evil-search-backward
        "." 'dired-omit-mode)))
 
+;; eshell
+(add-hook
+ 'eshell-mode-hook
+ (lambda ()
+   (progn
+     (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
+     (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
+     (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
+     (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
+     (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
+     (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))))
+
 ;; minibuffer
 (setq evil-insert-state-message nil
       evil-visual-state-message nil
