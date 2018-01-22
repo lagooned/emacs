@@ -87,6 +87,11 @@
             (lambda ()
               (evil-org-set-key-theme))))
 
+(use-package evil-surround
+  :diminish evil-surround-mode
+  :config
+  (global-evil-surround-mode 1))
+
 (zoom-mode 1)
 
 ;; evil binds
