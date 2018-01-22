@@ -37,6 +37,7 @@
   "b R" 'rename-buffer
   "b c" 'clean-buffer-list
   "b s" 'save-some-buffers
+  "TAB" 'evil-switch-to-windows-last-buffer
 
   ;; emacs
   "e r" 'restart-emacs
