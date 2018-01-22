@@ -77,7 +77,7 @@
       (selected-frame) 165 46)
      (setq initial-frame-alist
            '((left . 50)
-             (top  . 50))))))
+             (top  . 35))))))
 
 (provide 'init)
 ;;; init.el ends here
