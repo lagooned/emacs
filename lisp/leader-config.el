@@ -34,6 +34,7 @@
   "b k" 'kill-buffer
   "b l" 'list-buffers
   "b r" 'revert-buffer
+  "b R" 'rename-buffer
   "b c" 'clean-buffer-list
   "b s" 'save-some-buffers
 
