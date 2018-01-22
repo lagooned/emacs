@@ -348,6 +348,16 @@
   :init
   (require 'ripgrep))
 
+(use-package shell-pop
+  :init
+  (setq
+   shell-pop-shell-type (quote
+                         ("eshell" "*eshell*"
+                          (lambda nil
+                            (eshell shell-pop-term-shell))))
+   shell-pop-full-span t
+   shell-pop-window-position "bottom"))
+
 (use-package smart-jump
   :init
   (setq smart-jump-find-references-fallback-function nil
@@ -522,7 +532,19 @@
 (use-package zoom
   :diminish zoom-mode
   :config
-  (setq zoom-size '(0.618 . 0.618)))
+  (setq zoom-size '(0.618 . 0.618)
+        zoom-ignored-major-modes '(term-mode)
+        zoom-ignore-predicates
+        '((lambda ()
+            (string-match
+             "term"
+             (format
+              "%s"
+              (mapcar
+               '(lambda (window)
+                  (buffer-name
+                   (window-buffer window)))
+               (window-list))))))))
 
 (use-package zop-to-char)
 

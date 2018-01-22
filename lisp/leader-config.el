@@ -150,7 +150,8 @@
   "w C-r" 'winner-redo
 
   ;; command
-  ";" 'counsel-M-x)
+  ";" 'counsel-M-x
+  "`" 'shell-pop)
 
 (evil-leader/set-key-for-mode 'org-mode
   "j j" 'gmacs/org-link-jump
