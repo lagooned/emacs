@@ -471,7 +471,9 @@
   (which-key-setup-minibuffer)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
+    "SPC `" "eshell"
     "SPC b" "buffer"
+    "SPC TAB" "last buffer"
     "SPC e" "emacs"
     "SPC f" "file"
     "SPC g" "grep"
