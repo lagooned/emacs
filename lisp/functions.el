@@ -228,5 +228,9 @@ If not inside a project, call `counsel-projectile-switch-project'."
   (interactive)
   (unhighlight-regexp t))
 
+(defun gmacs/switch-to-scratch-buffer ()
+  (interactive)
+  (switch-to-buffer "*scratch*"))
+
 (provide 'functions)
 ;;; functions.el ends here
