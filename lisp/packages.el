@@ -378,7 +378,7 @@
 
 (use-package smartparens
   :commands smartparens-mode
-  :diminish smartparens-mode
+  :diminish smartparens-mode "sp"
   :init
   (add-hook 'prog-mode-hook #'smartparens-mode)
   :config
