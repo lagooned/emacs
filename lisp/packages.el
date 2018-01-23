@@ -204,10 +204,11 @@
   fix-word-capitalize)
 
 (use-package flyspell
+  :diminish flyspell-mode "spl"
   :init
   (custom-set-faces
    '(flyspell-duplicate ((t (:underline "Green"))))
-   '(flyspell-incorrect ((t (:underline "magenta")))))
+   '(flyspell-incorrect ((t (:underline "Magenta")))))
   (setq flyspell-issue-message-flag nil))
 
 (use-package focus
@@ -221,6 +222,7 @@
         ("C-j" . push-button)))
 
 (use-package hi-lock
+  :diminish hi-lock-mode "hi"
   :ensure nil
   :init
   (defface hi-magenta

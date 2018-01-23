@@ -226,7 +226,8 @@ If not inside a project, call `counsel-projectile-switch-project'."
 
 (defun gmacs/unhighlight-all ()
   (interactive)
-  (unhighlight-regexp t))
+  (unhighlight-regexp t)
+  (hi-lock-mode 0))
 
 (defun gmacs/switch-to-scratch-buffer ()
   (interactive)
