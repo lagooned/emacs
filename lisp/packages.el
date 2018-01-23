@@ -29,7 +29,7 @@
 
 (use-package all-the-icons)
 
-(use-package auto-revert
+(use-package autorevert
   :ensure nil
   :init
   (setq auto-revert-verbose nil)
