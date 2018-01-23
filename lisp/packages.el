@@ -497,11 +497,9 @@
     "SPC w" "window")
   (which-key-mode 1))
 
-(use-package whitespace-mode
+(use-package whitespace
   :ensure nil
   :init
-  (require 'whitespace)
-  (setq whitespace-line-column 100)
   ;; replace ascii spaces unicode spaces
   (advice-add
    'linum-relative :filter-return
@@ -509,7 +507,9 @@
      (if (not (get-text-property 0 'invisible num))
          (propertize
           (replace-regexp-in-string " " "\u2002" num)
-          'face (get-text-property 0 'face num))))))
+          'face (get-text-property 0 'face num)))))
+  :config
+  (setq whitespace-line-column 100))
 
 (use-package xref
   :ensure nil
