@@ -428,6 +428,14 @@
   :config
   (global-undo-tree-mode))
 
+(use-package uniquify
+  :ensure nil
+  :config
+  (setq uniquify-buffer-name-style 'reverse
+        uniquify-after-kill-buffer-p t
+        uniquify-separator ":"
+        uniquify-ignore-buffers-re "^\\*"))
+
 (use-package web-mode
   :commands web-mode
   :ensure web-mode

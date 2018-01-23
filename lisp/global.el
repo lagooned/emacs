@@ -102,13 +102,6 @@
 ;; cursor stretch
 (setq x-stretch-cursor t)
 
-;; unique buffer names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'reverse
-      uniquify-after-kill-buffer-p t
-      uniquify-separator ":"
-      uniquify-ignore-buffers-re "^\\*")
-
 ;; show inputs immediately
 (setq echo-keystrokes 0.01)
 
