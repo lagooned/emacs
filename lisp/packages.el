@@ -536,6 +536,7 @@
   (yas-minor-mode 1))
 
 (use-package zoom
+  :commands zoom-mode
   :diminish zoom-mode
   :config
   (setq zoom-size '(0.618 . 0.618)
