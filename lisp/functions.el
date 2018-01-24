@@ -20,6 +20,10 @@
 
 ;;; Code:
 
+(defun void ()
+  "no-op"
+  (interactive)
+
 (defun gmacs/load-config ()
   "load init.el"
   (interactive)

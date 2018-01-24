@@ -178,6 +178,8 @@
  (lambda ()
    (progn
      (define-key evil-insert-state-local-map (kbd "C-d") 'term-send-eof)
+     (define-key evil-normal-state-local-map (kbd "M-r") 'void)
+     (define-key evil-insert-state-local-map (kbd "M-r") 'term-send-reverse-search-history)
      (define-key evil-normal-state-local-map (kbd "C-c C-t") 'multi-term)
      (define-key evil-insert-state-local-map (kbd "C-c C-t") 'multi-term)
      (define-key evil-insert-state-local-map (kbd "C-c C-p") 'multi-term-prev)
