@@ -544,9 +544,10 @@
   :diminish zoom-mode
   :config
   (setq zoom-size '(0.618 . 0.618)
-        zoom-ignored-major-modes '(term-mode)
+        zoom-ignored-major-modes '(term-mode ediff-mode)
         zoom-ignore-predicates
         '((lambda ()
+            ;; active term window
             (string-match
              "term"
              (format
@@ -555,7 +556,10 @@
                '(lambda (window)
                   (buffer-name
                    (window-buffer window)))
-               (window-list))))))))
+               (window-list)))))
+          (lambda ()
+            ;; less than 20 lines
+            (> (count-lines (point-min) (point-max)) 20)))))
 
 (use-package zop-to-char)
 
