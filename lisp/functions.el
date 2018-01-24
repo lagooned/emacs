@@ -22,7 +22,7 @@
 
 (defun void ()
   "no-op"
-  (interactive)
+  (interactive))
 
 (defun gmacs/load-config ()
   "load init.el"
