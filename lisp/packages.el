@@ -288,6 +288,8 @@
      'Info-directory-list
      "~/.emacs.d/packages/magit/Documentation/")))
 
+(use-package multi-term)
+
 (use-package org
   :commands
   org-mode

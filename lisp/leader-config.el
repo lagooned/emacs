@@ -154,7 +154,8 @@
 
   ;; command
   ";" 'counsel-M-x
-  "`" 'shell-pop)
+  "SPC" 'shell-pop
+  "`" 'multi-term)
 
 (evil-leader/set-key-for-mode 'org-mode
   "j j" 'gmacs/org-link-jump

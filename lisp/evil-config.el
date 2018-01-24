@@ -164,6 +164,7 @@
  'eshell-mode-hook
  (lambda ()
    (progn
+     (define-key evil-insert-state-local-map (kbd "C-d") 'shell-pop)
      (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
@@ -176,6 +177,13 @@
  'term-mode-hook
  (lambda ()
    (progn
+     (define-key evil-insert-state-local-map (kbd "C-d") 'term-send-eof)
+     (define-key evil-normal-state-local-map (kbd "C-c C-t") 'multi-term)
+     (define-key evil-insert-state-local-map (kbd "C-c C-t") 'multi-term)
+     (define-key evil-insert-state-local-map (kbd "C-c C-p") 'multi-term-prev)
+     (define-key evil-normal-state-local-map (kbd "C-c C-p") 'multi-term-prev)
+     (define-key evil-insert-state-local-map (kbd "C-c C-n") 'multi-term-next)
+     (define-key evil-normal-state-local-map (kbd "C-c C-n") 'multi-term-next)
      (define-key evil-normal-state-local-map (kbd "RET") 'term-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'term-send-input)
      (define-key evil-normal-state-local-map (kbd "C-m") 'term-send-input)
