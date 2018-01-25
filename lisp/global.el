@@ -99,6 +99,9 @@
 ;; cursor stretch
 (setq x-stretch-cursor t)
 
+;; no cursor in other windows
+(setq default-cursor-in-non-selected-windows nil)
+
 ;; show inputs immediately
 (setq echo-keystrokes 0.01)
 
