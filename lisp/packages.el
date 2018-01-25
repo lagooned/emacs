@@ -555,7 +555,7 @@
         '((lambda ()
             ;; visible term or ediff window
             (string-match
-             "term\\|ediff"
+             "term\\|ediff\\|[^e]shell"
              (downcase
               (format
                "%s"
