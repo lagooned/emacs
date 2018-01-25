@@ -560,7 +560,7 @@
                (window-list)))))
           (lambda ()
             ;; less than 20 lines
-            (> (count-lines (point-min) (point-max)) 20)))))
+            (< (count-lines (point-min) (point-max)) 20)))))
 
 (use-package zop-to-char)
 
