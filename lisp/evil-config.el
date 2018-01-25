@@ -164,7 +164,7 @@
  'eshell-mode-hook
  (lambda ()
    (progn
-     (define-key evil-insert-state-local-map (kbd "C-d") 'shell-pop)
+     (define-key evil-insert-state-local-map (kbd "C-d") 'eshell-life-is-too-much)
      (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)

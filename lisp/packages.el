@@ -354,6 +354,10 @@
 
 (use-package shell-pop
   :init
+  (add-hook
+   'shell-pop-in-after-hook
+   (lambda ()
+     (define-key evil-insert-state-local-map (kbd "C-d") 'shell-pop)))
   (setq
    shell-pop-shell-type (quote
                          ("eshell" "*eshell*"
