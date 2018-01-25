@@ -20,17 +20,6 @@
 
 ;;; Code:
 
-;; preferred fonts list
-(let ((fonts '("Input"
-               "Source Code Pro"
-               "Monaco"
-               "Deja Vu Sans Mono"
-               "Consolas"
-               "Monospace")))
-  (dolist (font (reverse fonts) t)
-    (if (member font (font-family-list))
-        (set-face-attribute 'default nil :family font))))
-
 ;; osx
 (when (eq system-type 'darwin)
   (setq mac-pass-command-to-system nil)

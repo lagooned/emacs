@@ -170,5 +170,16 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 
+;; preferred fonts list
+(let ((fonts '("Input"
+               "Source Code Pro"
+               "Monaco"
+               "Deja Vu Sans Mono"
+               "Consolas"
+               "Monospace")))
+  (dolist (font (reverse fonts) t)
+    (if (member font (font-family-list))
+        (set-face-attribute 'default nil :family font))))
+
 (provide 'global)
 ;;; global.el ends here
