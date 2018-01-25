@@ -545,22 +545,20 @@
   :diminish zoom-mode
   :config
   (setq zoom-size '(0.618 . 0.618)
-        zoom-ignored-major-modes '(term-mode ediff-mode)
+        zoom-ignored-major-modes '(term-mode)
+        zoom-ignored-buffer-name-regexps '("^*calc")
         zoom-ignore-predicates
         '((lambda ()
-            ;; active term window
+            ;; visible term or ediff window
             (string-match
-             "term"
-             (format
-              "%s"
-              (mapcar
-               '(lambda (window)
-                  (buffer-name
-                   (window-buffer window)))
-               (window-list)))))
-          (lambda ()
-            ;; less than 20 lines
-            (< (count-lines (point-min) (point-max)) 20)))))
+             "term\\|ediff"
+             (downcase
+              (format
+               "%s"
+               (mapcar
+                '(lambda (window)
+                   (buffer-name (window-buffer window)))
+                (window-list)))))))))
 
 (use-package zop-to-char)
 
