@@ -61,6 +61,9 @@
 ;; load package config
 (load "packages")
 
+;; load per-environment config
+(load "environment")
+
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)

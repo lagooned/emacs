@@ -167,39 +167,5 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 
-;; preferred fonts list
-(let ((fonts '("Input"
-               "Source Code Pro"
-               "Monaco"
-               "Deja Vu Sans Mono"
-               "Consolas"
-               "Monospace")))
-  (dolist (font (reverse fonts) t)
-    (if (member font (font-family-list))
-        (set-face-attribute 'default nil :family font))))
-
-;; osx
-(when (eq system-type 'darwin)
-  (setq mac-pass-command-to-system nil)
-  (set-face-attribute 'default nil :weight 'bold)
-  (set-face-attribute 'default nil :height 130)
-  (unless (display-graphic-p) (menu-bar-mode -1))
-  (setq ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra"))
-  (setenv "SHELL" "/bin/zsh"))
-
-;; linux
-(when (eq system-type 'gnu/linux)
-  (set-face-attribute 'default nil :weight 'normal)
-  (set-face-attribute 'default nil :height 100)
-  (if (display-graphic-p) (menu-bar-mode -1))
-  (setenv "SHELL" "/bin/bash"))
-
-;; win
-(when (eq system-type 'windows-nt)
-  (set-face-attribute 'default nil :weight 'bold)
-  (set-face-attribute 'default nil :height 110)
-  (if (display-graphic-p) (menu-bar-mode -1)))
-
 (provide 'global)
 ;;; global.el ends here
