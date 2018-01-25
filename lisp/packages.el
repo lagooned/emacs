@@ -480,6 +480,7 @@
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
     "SPC `" "eshell"
+    "SPC !" "term"
     "SPC b" "buffer"
     "SPC TAB" "last buffer"
     "SPC e" "emacs"
