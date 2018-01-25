@@ -31,9 +31,6 @@
 ;; set max mem alloc before gc
 (setq gc-cons-threshold 50000000)
 
-;; no warnings
-(setq warning-minimum-level :emergency)
-
 ;; new fringe arrows
 (define-fringe-bitmap 'right-curly-arrow
   [#b00000000
