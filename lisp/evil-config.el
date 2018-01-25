@@ -156,6 +156,7 @@
        "v" 'evil-visual-char
        "V" 'evil-visual-line
        "C-v" 'evil-visual-block
+       "c" 'dired-do-copy
        "?" 'evil-search-backward
        "." 'dired-omit-mode)))
 
