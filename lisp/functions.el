@@ -145,10 +145,11 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
       (error "No region or thing selected"))))
 
 (defun gmacs/xref-find-apropos-symbol ()
+  "xref made to be used with smart jump"
   (interactive)
   (if (symbol-at-point)
       (xref-find-apropos (symbol-name (symbol-at-point)))
-    (error "No symbol selected")))
+    (message "No symbol selected")))
 
 (defun gmacs/ripgrep-regexp-git (regexp &optional args)
   "ripgrep with `regexp' from the nearest git project directory.
