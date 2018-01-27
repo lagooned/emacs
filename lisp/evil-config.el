@@ -125,6 +125,8 @@
 (define-key evil-visual-state-map (kbd "C-;")   'evil-commentary-line)
 (define-key evil-insert-state-map (kbd "C-;")   'evil-commentary-line)
 (define-key evil-normal-state-map (kbd "-")     'dired-jump)
+(define-key evil-normal-state-map (kbd "C-`")   'shell-pop)
+(define-key evil-insert-state-map (kbd "C-`")   'shell-pop)
 
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
@@ -165,7 +167,7 @@
  'eshell-mode-hook
  (lambda ()
    (progn
-     (define-key evil-insert-state-local-map (kbd "C-d") 'eshell-life-is-too-much)
+     (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
      (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
@@ -235,6 +237,7 @@
 (define-key evil-emacs-state-map (kbd "M-z") 'zop-to-char)
 (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
 (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
+(define-key evil-emacs-state-map (kbd "C-M-!") 'shell-command)
 (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
 
 ;; unbinds to clean up global bindspace
@@ -260,6 +263,7 @@
 (global-unset-key (kbd "C-M-o"))
 (global-unset-key (kbd "C-M-/"))
 (global-unset-key (kbd "C-M-."))
+(global-unset-key (kbd "C-M-!"))
 
 ;; emacs mode for minibuffer
 (add-hook

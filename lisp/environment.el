@@ -41,8 +41,7 @@
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :weight 'normal)
   (set-face-attribute 'default nil :height 105)
-  (if (display-graphic-p) (menu-bar-mode -1))
-  (evil-leader/set-key "!" 'shell))
+  (if (display-graphic-p) (menu-bar-mode -1)))
 
 (provide 'environment)
 ;;; environment.el ends here

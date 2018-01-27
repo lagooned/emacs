@@ -238,5 +238,10 @@ If not inside a project, call `counsel-projectile-switch-project'."
   (interactive)
   (switch-to-buffer "*scratch*"))
 
+(defun gmacs/eshell-send-eof ()
+  (interactive)
+  (newline)
+  (eshell-send-eof-to-process))
+
 (provide 'functions)
 ;;; functions.el ends here
