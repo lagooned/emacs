@@ -234,6 +234,10 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (interactive)
   (switch-to-buffer "*scratch*"))
 
+(defun gmacs/switch-to-messages-buffer ()
+  (interactive)
+  (switch-to-buffer "*Messages*"))
+
 (defun gmacs/eshell-send-eof ()
   (interactive)
   (newline)

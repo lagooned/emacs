@@ -35,6 +35,7 @@
   "b K" 'kill-this-buffer
   "b C-k" 'kill-matching-buffers
   "b h" 'gmacs/switch-to-scratch-buffer
+  "b m" 'gmacs/switch-to-messages-buffer
   "b l" 'list-buffers
   "b r" 'revert-buffer
   "b R" 'rename-buffer
