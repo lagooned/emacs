@@ -820,8 +820,8 @@ candidates list of `counsel-projectile-switch-project'."
 (counsel-projectile--defcustom-action
  'counsel-projectile-switch-project
  '(1
-   ("o" counsel-projectile-switch-project-action
-    "jump to a project buffer or file")
+   ("o" counsel-projectile-switch-project-action-open-root-dir
+    "jump to a project root")
    ("f" counsel-projectile-switch-project-action-find-file
     "jump to a project file")
    ("d" counsel-projectile-switch-project-action-find-dir
@@ -899,6 +899,13 @@ action."
   (let ((projectile-switch-project-action
          (lambda ()
            (counsel-projectile-find-file ivy-current-prefix-arg))))
+    (counsel-projectile-switch-project-by-name project)))
+
+(defun counsel-projectile-switch-project-action-open-root-dir (project)
+  "Call `dired' from PROJECT's root."
+  (let ((projectile-switch-project-action
+         (lambda ()
+           (dired project))))
     (counsel-projectile-switch-project-by-name project)))
 
 (defun counsel-projectile-switch-project-action-find-file-manually (project)
