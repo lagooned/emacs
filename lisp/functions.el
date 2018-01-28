@@ -243,5 +243,11 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (newline)
   (eshell-send-eof-to-process))
 
+(defun gmacs/projectile-root-dir ()
+  (interactive)
+  (if (not (projectile-project-p))
+      (error "Not in a git repository")
+    (dired (projectile-project-root))))
+
 (provide 'functions)
 ;;; functions.el ends here

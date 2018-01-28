@@ -105,6 +105,7 @@
   ;; project
   "p s" 'magit-status
   "p p" 'counsel-projectile-switch-project
+  "p r" 'gmacs/projectile-root-dir
   "p f" 'gmacs/counsel-git-region
   "p d" 'gmacs/counsel-projectile-find-dir-region
   "p D" 'magit-diff-popup
