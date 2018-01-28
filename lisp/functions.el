@@ -111,12 +111,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
 (defun gmacs/counsel-git-region ()
   "optionally run counsel-git on region"
   (interactive)
-  (gmacs/opt-region-helper 'counsel-git))
-
-(defun gmacs/counsel-projectile-region ()
-  "optionally run counsel-projectile on region"
-  (interactive)
-  (gmacs/opt-region-helper 'gmacs/counsel-projectile))
+  (gmacs/opt-region-helper 'gmacs/counsel-git-projectile))
 
 (defun gmacs/counsel-projectile-find-dir-region ()
   "optionally run counsel-find-dir on region"
@@ -189,26 +184,27 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
   (interactive)
   (xref-pop-marker-stack))
 
-(defun gmacs/counsel-projectile (&optional initial-input)
-  "Jump to a buffer or file in the current project.
-If not inside a project, call `counsel-projectile-switch-project'."
+(defun gmacs/counsel-git-projectile (&optional initial-input)
+  "Find file in the current Git repository."
   (interactive)
-  (if (not (projectile-project-p))
-      (counsel-projectile-switch-project)
-    (ivy-read (projectile-prepend-project-name "Load buffer or file: ")
-              (counsel-projectile--project-buffers-and-files)
+  (counsel-require-program (car (split-string counsel-git-cmd)))
+  (ivy-set-prompt 'counsel-git counsel-prompt-function)
+  (setq counsel--git-dir (expand-file-name
+                          (counsel-locate-git-root)))
+  (let* ((default-directory counsel--git-dir)
+         (cands (split-string
+                 (shell-command-to-string counsel-git-cmd) "\n" t)))
+    (ivy-read (projectile-prepend-project-name "find file") cands
               :initial-input initial-input
-              :matcher #'counsel-projectile--matcher
-              :require-match t
-              :action counsel-projectile-action
-              :caller 'counsel-projectile)))
+              :action #'counsel-git-action
+              :caller 'counsel-git)))
 
 (defun gmacs/counsel-projectile-find-dir (&optional initial-input)
   "Jump to a directory in the current project."
   (interactive)
   (if (not (projectile-project-p))
-      (counsel-projectile-switch-project)
-    (ivy-read (projectile-prepend-project-name "Find dir: ")
+      (error "Not in a git repository")
+    (ivy-read (projectile-prepend-project-name "find dir: ")
               (counsel-projectile--project-directories)
               :initial-input initial-input
               :require-match t
