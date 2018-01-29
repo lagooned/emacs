@@ -40,7 +40,7 @@
 ;; win
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :weight 'normal)
-  (set-face-attribute 'default nil :height 105)
+  (set-face-attribute 'default nil :height 100)
   (if (display-graphic-p) (menu-bar-mode -1)))
 
 (provide 'environment)
