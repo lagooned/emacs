@@ -146,6 +146,15 @@
   (when (eq system-type 'windows-nt)
     (setq dumb-jump-force-searcher 'rg)))
 
+(use-package ediff
+  :init
+  (setq ediff-diff-options "-w"
+        ediff-window-setup-function #'ediff-setup-windows-plain)
+  (setq ediff-split-window-function
+        (if (> (frame-width) 150)
+            'split-window-horizontally
+          'split-window-vertically)))
+
 (use-package eldoc
   :diminish eldoc-mode
   :commands turn-on-eldoc-mode
@@ -278,7 +287,6 @@
   :init
   (setq magit-push-always-verify nil
         magit-refresh-status-buffer nil
-        ediff-window-setup-function 'ediff-setup-windows-plain
         magit-refresh-verbose t)
   (setq vc-handled-backends (delq 'Git vc-handled-backends))
   :config
