@@ -405,6 +405,8 @@
   :commands
   swiper)
 
+(use-package suggest)
+
 (use-package telephone-line
   :init
   (require 'telephone-line-config)
