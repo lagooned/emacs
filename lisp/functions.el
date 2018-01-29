@@ -177,7 +177,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
          '((file . (lambda (args)
                      (progn (xref-push-marker-stack)
                             (find-file args)))))))
-    (org-open-at-point)))
+    (call-interactively #'org-open-at-point)))
 
 (defun gmacs/org-link-jump-back ()
   "pop marker stack to jump back to source org link"
