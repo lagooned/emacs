@@ -177,9 +177,10 @@
 
 ;; shell
 (add-hook
- 'shell-mode
+ 'shell-mode-hook
  (lambda ()
    (progn
+     (define-key evil-normal-state-local-map (kbd "C-d") 'evil-scroll-down)
      (define-key evil-insert-state-local-map (kbd "C-d") 'comint-send-eof)
      (define-key evil-normal-state-local-map (kbd "RET") 'comint-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'comint-send-input)
