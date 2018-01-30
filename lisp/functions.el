@@ -18,54 +18,66 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+;;; Commentary:
+
+;; Gmacs custom function definitions.
+
 ;;; Code:
 
 (defun void ()
-  "no-op"
+  "No-op."
   (interactive))
 
 (defun gmacs/load-config ()
-  "load init.el"
+  "Load init.el."
   (interactive)
   (save-some-buffers)
   (load-file "~/.emacs.d/init.el")
   (revert-buffer t t))
 
 (defun gmacs/open-init-config ()
+  "Open init.el."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 (defun gmacs/open-variables-config ()
+  "Open variables.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/variables.el"))
 
 (defun gmacs/open-functions-config ()
+  "Open functions.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/functions.el"))
 
 (defun gmacs/open-leader-config ()
+  "Open leader-config.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/leader-config.el"))
 
 (defun gmacs/open-global-config ()
+  "Open global.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/global.el"))
 
 (defun gmacs/open-environment-config ()
+  "Open environment.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/environment.el"))
 
 (defun gmacs/open-evil-config ()
+  "Open evil-config.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/evil-config.el"))
 
 (defun gmacs/open-packages-config ()
+  "Open packages.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/packages.el"))
 
 (defun gmacs/force-buffer-backup ()
-  "Make a special per session and per save backup at the
-first save of each gmacs session."
+  "Make a special per session and per save backup \
+at the first save of each gmacs session."
   (when (not buffer-backed-up)
     ;; Override the default parameters for per-session backups.
     (let ((backup-directory-alist
@@ -77,11 +89,13 @@ first save of each gmacs session."
 (add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
 (defun gmacs/check-large-file ()
-  "Check if the buffer's file is large (see `gmacs/large-file-size'). If so, ask
-for confirmation to open it literally (read-only, disabled undo and in
-fundamental-mode) for performance sake."
+  "Check if the buffer's file is large (see `gmacs/large-file-size').
+If so, ask for confirmation to open it literally (read-only, disabled
+undo and in `fundamental-mode' for performance sake."
   (let* ((filename (buffer-file-name))
          (size (nth 7 (file-attributes filename))))
+    (defvar gmacs/large-file-size)
+    (defvar gmacs/large-file-modes-list)
     (when (and (not (memq major-mode gmacs/large-file-modes-list))
                size (> size (* 1024 1024 gmacs/large-file-size))
                (y-or-n-p
@@ -95,13 +109,13 @@ fundamental-mode) for performance sake."
 (add-hook 'find-file-hook #'gmacs/check-large-file)
 
 (defvar gmacs/auto-minor-mode-alist ()
-  "Alist of filename patterns vs correpsonding minor mode functions, see
-  `auto-mode-alist' All elements of this alist are checked, meaning you can
-  enable multiple minor modes for the same regexp.")
+  "Alist of filename patterns vs correpsonding minor mode functions, see \
+`auto-mode-alist' All elements of this alist are checked, meaning you can
+enable multiple minor modes for the same regexp.")
 
 (defun gmacs/enable-minor-mode-based-on-extension ()
-  "check file name against gmacs/auto-minor-mode-alist to enable minor modes the
-checking happens for all pairs in gmacs/auto-minor-mode-alist"
+  "Check file name against gmacs/auto-minor-mode-alist to enable minor \
+modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
   (when buffer-file-name
     (let ((name buffer-file-name)
           (remote-id (file-remote-p buffer-file-name))
@@ -131,27 +145,28 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
     (error "Minibuffer is not active")))
 
 (defun gmacs/cleanup-file ()
+  "Remove tabs and trailing whitespace from buffer."
   (interactive)
   (gmacs/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
 (defun gmacs/counsel-rg-region ()
-  "optionally run ripgrep on region"
+  "Optionally run ripgrep on region."
   (interactive)
   (gmacs/opt-region-helper 'counsel-rg))
 
 (defun gmacs/counsel-git-region ()
-  "optionally run counsel-git on region"
+  "Optionally run counsel-git on region."
   (interactive)
   (gmacs/opt-region-helper 'gmacs/counsel-git-projectile))
 
 (defun gmacs/counsel-projectile-find-dir-region ()
-  "optionally run counsel-find-dir on region"
+  "Optionally run counsel-find-dir on region."
   (interactive)
   (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-dir))
 
 (defun gmacs/opt-region-helper (func)
-  "add region to kill ring and run func with optional region arg"
+  "Add region to kill ring and run `FUNC' with optional region arg."
   (if (use-region-p)
       (let ((string (buffer-substring-no-properties
                      (region-beginning) (region-end))))
@@ -160,27 +175,26 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
                (funcall-interactively func string)))
     (funcall-interactively func)))
 
-(defun gmacs/swiper-region-thing (beg end)
-  (interactive
-   (if (use-region-p)
-       (list (region-beginning) (region-end))
-     (list nil nil)))
-  (if (and beg end)
+(defun gmacs/swiper-region-thing ()
+  "Call swiper on the selected region or thing under cursor."
+  (interactive)
+  (if (use-region-p)
       (progn (deactivate-mark)
-             (swiper (buffer-substring-no-properties beg end)))
+             (swiper (buffer-substring-no-properties
+                      (region-beginning) (region-end))))
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
 (defun gmacs/xref-find-apropos-symbol ()
-  "xref made to be used with smart jump"
+  "X-ref made to be used with smart jump."
   (interactive)
   (if (symbol-at-point)
       (xref-find-apropos (symbol-name (symbol-at-point)))
     (message "No symbol selected")))
 
 (defun gmacs/ripgrep-regexp-git (regexp &optional args)
-  "ripgrep with `regexp' from the nearest git project directory.
-`args' provides ripgrep command line arguments."
+  "Ripgrep with `REGEXP' from the nearest git project directory.
+`ARGS' provides ripgrep command line arguments."
   (interactive
    (list (read-from-minibuffer
           "rg buffer: "
@@ -193,6 +207,9 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
         (message "not in a git project: using default-directory")
       (setq default-directory directory))
     (compilation-start
+     (defvar ripgrep-executable)
+     (defvar ripgrep-arguments)
+     (defvar ripgrep-highlight-search)
      (mapconcat 'identity
                 (append (list ripgrep-executable)
                         ripgrep-arguments
@@ -203,8 +220,9 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
      'ripgrep-search-mode)))
 
 (defun gmacs/org-link-jump ()
-  "push marker stack and follow org link"
+  "Push marker stack and follow org link."
   (interactive)
+  (defvar org-link-frame-setup)
   (let ((org-link-frame-setup
          '((file . (lambda (args)
                      (progn (xref-push-marker-stack)
@@ -212,13 +230,17 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
     (call-interactively #'org-open-at-point)))
 
 (defun gmacs/org-link-jump-back ()
-  "pop marker stack to jump back to source org link"
+  "Pop marker stack to jump back to source org link."
   (interactive)
   (xref-pop-marker-stack))
 
 (defun gmacs/counsel-git-projectile (&optional initial-input)
-  "Find file in the current Git repository."
+  "Find file in the current Git repository with initial input `INITIAL-INPUT'."
   (interactive)
+  (defvar counsel-require-program)
+  (defvar counsel-prompt-function)
+  (defvar counsel-git-cmd)
+  (defvar counsel--git-dir)
   (counsel-require-program (car (split-string counsel-git-cmd)))
   (ivy-set-prompt 'counsel-git counsel-prompt-function)
   (setq counsel--git-dir (expand-file-name
@@ -232,9 +254,11 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
               :caller 'counsel-git)))
 
 (defun gmacs/counsel-projectile-find-dir (&optional initial-input)
-  "Jump to a directory in the current project."
+  "Jump to a directory in the current project with initial input `INITIAL-INPUT'."
   (interactive)
+  (defvar counsel-projectile-find-dir-action)
   (if (not (projectile-project-p))
+      
       (error "Not in a git repository")
     (ivy-read (projectile-prepend-project-name "find dir: ")
               (counsel-projectile--project-directories)
@@ -244,6 +268,7 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
               :caller 'counsel-projectile-find-dir)))
 
 (defun gmacs/toggle-spelling ()
+  "Toggle flyspell."
   (interactive)
   (ispell-set-spellchecker-params)
   (if (bound-and-true-p flyspell-mode)
@@ -258,24 +283,30 @@ checking happens for all pairs in gmacs/auto-minor-mode-alist"
         (flyspell-mode +1)))))
 
 (defun gmacs/unhighlight-all ()
+  "Unhighlight all currently highlighted symbols and \
+disable `hi-lock-mode'."
   (interactive)
   (unhighlight-regexp t)
   (hi-lock-mode 0))
 
 (defun gmacs/switch-to-scratch-buffer ()
+  "Switch to initial scratch buffer."
   (interactive)
   (switch-to-buffer "*scratch*"))
 
 (defun gmacs/switch-to-messages-buffer ()
+  "Switch to Messages buffer."
   (interactive)
   (switch-to-buffer "*Messages*"))
 
 (defun gmacs/eshell-send-eof ()
+  "Send EOF to Eshell with newline."
   (interactive)
   (newline)
   (eshell-send-eof-to-process))
 
 (defun gmacs/projectile-root-dir ()
+  "Jump to the root directory of the current project."
   (interactive)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
