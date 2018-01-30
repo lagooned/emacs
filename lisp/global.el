@@ -68,13 +68,6 @@
 ;; let text breath
 (fringe-mode 4)
 
-;; setup user
-(setq user-full-name "Jared M. Engler"
-      user-mail-address "jared.lite@gmail.com"
-      calendar-latitude 40.52
-      calendar-longitude -88.99
-      calendar-location-name "Springfield, IL")
-
 ;; frame title format
 (setq frame-title-format
       '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))

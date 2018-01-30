@@ -1,0 +1,23 @@
+;; put user specific values in here
+
+;; setup user
+(setq user-full-name "John H. Doe"
+      user-mail-address "jhd@example.com"
+      calendar-latitude 39.782622
+      calendar-longitude -89.650934
+      calendar-location-name "Springfield, IL"
+      erc-nick "jhd")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

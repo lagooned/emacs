@@ -195,7 +195,6 @@
   (setq erc-hide-list '("PART" "QUIT" "JOIN"))
   (setq erc-server-coding-system '(utf-8 . utf-8)
         erc-server "irc.freenode.net"
-        erc-nick "lagooned"
         erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
         erc-prompt-for-password nil
         erc-prompt (lambda () (concat (buffer-name) ">"))
