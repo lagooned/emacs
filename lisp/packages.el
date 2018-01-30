@@ -168,7 +168,7 @@
 
 (use-package eldoc
   :diminish eldoc-mode
-  :commands turn-on-eldoc-mode
+  :commands eldoc-mode
   :defer t
   :init
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
@@ -193,8 +193,7 @@
   (defvar erc-prompt-for-nickserv-password)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-hide-list '("PART" "QUIT" "JOIN"))
-  (setq erc-default-coding-system '(utf-8 . utf-8)
-        erc-server-coding-system '(utf-8 . utf-8)
+  (setq erc-server-coding-system '(utf-8 . utf-8)
         erc-server "irc.freenode.net"
         erc-nick "lagooned"
         erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
