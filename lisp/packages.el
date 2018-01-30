@@ -28,6 +28,7 @@
     (progn
       (package-refresh-contents)
       (package-install 'use-package)))
+(defvar use-package-always-ensure)
 (setq use-package-always-ensure t)
 (require 'use-package)
 
@@ -36,6 +37,7 @@
 (use-package autorevert
   :ensure nil
   :init
+  (defvar auto-revert-verbose)
   (setq auto-revert-verbose nil)
   (add-hook
    'auto-revert-mode-hook
@@ -127,12 +129,14 @@
   :defer t
   :after dired-x
   :init
+  (defvar diredp-hide-details-initially-flag)
   (setq diredp-hide-details-initially-flag nil)
   (setq dired-dwim-target t))
 
 (use-package doom-themes
   :init
-  (setq doom-themes-enable-bold t)
+  (defvar doom-themes-enable-bold)
+  (setq doom-themes-enable-bold nil)
   :config
   (load-theme 'doom-vibrant t))
 
@@ -152,6 +156,9 @@
 
 (use-package ediff
   :init
+  (defvar ediff-diff-options)
+  (defvar ediff-window-setup-function)
+  (defvar ediff-split-window-function)
   (setq ediff-diff-options "-w"
         ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function
@@ -183,6 +190,7 @@
   :config
   (require 'erc-services nil t)
   (erc-services-mode 1)
+  (defvar erc-prompt-for-nickserv-password)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-hide-list '("PART" "QUIT" "JOIN"))
   (setq erc-default-coding-system '(utf-8 . utf-8)
@@ -223,6 +231,8 @@
    '(flycheck-error ((t (:foreground "red" :underline nil))))
    '(flycheck-info ((t (:foreground "green" :underline nil))))
    '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
+  (defvar flycheck-indication-mode)
+  (defvar flycheck-highlighting-mode)
   (setq flycheck-indication-mode nil
         flycheck-highlighting-mode 'lines))
 
@@ -253,6 +263,7 @@
       (t (:background "magenta")))
     "Custom magenta face for hi-lock mode."
     :group 'hi-lock-faces)
+  (defvar hi-lock-face-defaults)
   (setq hi-lock-face-defaults
         '("hi-yellow"
           "hi-pink"
@@ -299,6 +310,7 @@
 (use-package magit
   :commands magit-status
   :init
+  (defvar magit-push-always-verify)
   (setq magit-push-always-verify nil
         magit-refresh-status-buffer nil
         magit-refresh-verbose t)
@@ -376,6 +388,9 @@
 
 (use-package shell-pop
   :init
+  (defvar shell-pop-shell-type)
+  (defvar shell-pop-full-span)
+  (defvar shell-pop-window-position)
   (setq
    shell-pop-shell-type (quote
                          ("eshell" "*eshell*"
@@ -386,6 +401,11 @@
 
 (use-package smart-jump
   :init
+  (defvar smart-jump-find-references-fallback-function)
+  (defvar smart-jump-bind-keys-for-evil)
+  (defvar smart-jump-bind-keys)
+  (defvar smart-jump-refs-key)
+  (defvar smart-jump-pop-key)
   (setq smart-jump-find-references-fallback-function nil
         smart-jump-bind-keys-for-evil nil
         smart-jump-bind-keys nil
@@ -424,6 +444,11 @@
 (use-package telephone-line
   :init
   (require 'telephone-line-config)
+  (defvar telephone-line-height)
+  (defvar telephone-line-separator-extra-padding)
+  (defvar telephone-line-primary-left-separator)
+  (defvar telephone-line-secondary-left-separator)
+  (defvar telephone-line-lhs)
   (setq telephone-line-height 24
         telephone-line-separator-extra-padding 1
         telephone-line-primary-left-separator 'telephone-line-abs-left
@@ -432,6 +457,7 @@
                              (accent . (telephone-line-simple-minor-mode-segment))
                              (nil . (telephone-line-buffer-segment))
                              (nil . (telephone-line-airline-position-segment))))
+  (defvar telephone-line-rhs)
   (setq telephone-line-rhs nil)
   (custom-set-faces
    '(telephone-line-evil-normal
@@ -477,6 +503,7 @@
   (add-to-list
    'auto-mode-alist
    '("\\.x?html\\'" . web-mode))
+  (defvar gmacs/auto-minor-mode-alist)
   (add-to-list
    'gmacs/auto-minor-mode-alist
    '("\\.x?html\\'" . impatient-mode))

@@ -30,6 +30,8 @@
   (set-face-attribute 'default nil :weight 'normal)
   (set-face-attribute 'default nil :height 130)
   (unless (display-graphic-p) (menu-bar-mode -1))
+  (defvar ispell-program-name)
+  (defvar ispell-extra-args)
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra"))
   (setenv "SHELL" "/bin/zsh"))
