@@ -114,6 +114,7 @@
 (define-key evil-normal-state-map (kbd "C-a")   'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-b")   'evil-scroll-page-up)
 (define-key evil-insert-state-map (kbd "M-b")   'backward-word)
+(define-key evil-normal-state-map (kbd "C-s")   'swiper)
 (define-key evil-normal-state-map (kbd "C-=")   'er/expand-region)
 (define-key evil-visual-state-map (kbd "C-=")   'er/expand-region)
 (define-key evil-insert-state-map (kbd "TAB")   'tab-to-tab-stop)
