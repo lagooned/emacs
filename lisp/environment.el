@@ -23,7 +23,7 @@
 ;; osx
 (when (eq system-type 'darwin)
   (setq mac-pass-command-to-system nil)
-  (set-face-attribute 'default nil :weight 'bold)
+  (set-face-attribute 'default nil :weight 'normal)
   (set-face-attribute 'default nil :height 130)
   (unless (display-graphic-p) (menu-bar-mode -1))
   (setq ispell-program-name "aspell"
