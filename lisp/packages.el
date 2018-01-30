@@ -212,6 +212,16 @@
   fix-word-downcase
   fix-word-capitalize)
 
+(use-package flycheck
+  :diminish flycheck-mode "flycheck"
+  :init
+  (custom-set-faces
+   '(flycheck-error ((t (:foreground "red" :underline nil))))
+   '(flycheck-info ((t (:foreground "green" :underline nil))))
+   '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
+  (setq flycheck-indication-mode nil
+        flycheck-highlighting-mode 'lines))
+
 (use-package flyspell
   :diminish flyspell-mode "spl"
   :init
