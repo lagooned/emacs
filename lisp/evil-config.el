@@ -151,6 +151,8 @@
        "C-j" 'dired-find-file
        "K" 'dired-do-kill-lines
        "n" 'evil-search-next
+       "gg" 'evil-goto-first-line
+       "G" 'evil-goto-line
        "p" 'magit-status
        "N" 'evil-search-previous
        "r" 'revert-buffer
