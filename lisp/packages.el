@@ -224,7 +224,7 @@
   fix-word-capitalize)
 
 (use-package flycheck
-  :diminish flycheck-mode "flycheck"
+  :diminish flycheck-mode "chk"
   :init
   (custom-set-faces
    '(flycheck-error ((t (:foreground "red" :underline nil))))
