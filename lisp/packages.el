@@ -503,7 +503,7 @@
     "SPC !" "term"
     "SPC b" "buffer"
     "SPC TAB" "last buffer"
-    "SPC e" "emacs"
+    "SPC c" "config"
     "SPC f" "file"
     "SPC g" "grep"
     "SPC G" "grep buffer"
@@ -519,7 +519,8 @@
     "SPC t" "toggle"
     "SPC u" "univ arg"
     "SPC U" "negt arg"
-    "SPC w" "window")
+    "SPC w" "window"
+    "SPC q" "quit")
   (which-key-mode 1))
 
 (use-package whitespace

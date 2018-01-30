@@ -31,6 +31,38 @@
   (load-file "~/.emacs.d/init.el")
   (revert-buffer t t))
 
+(defun gmacs/open-init-config ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(defun gmacs/open-variables-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/variables.el"))
+
+(defun gmacs/open-functions-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/functions.el"))
+
+(defun gmacs/open-leader-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/leader-config.el"))
+
+(defun gmacs/open-global-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/global.el"))
+
+(defun gmacs/open-environment-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/environment.el"))
+
+(defun gmacs/open-evil-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/evil-config.el"))
+
+(defun gmacs/open-packages-config ()
+  (interactive)
+  (find-file "~/.emacs.d/lisp/packages.el"))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup at the
 first save of each gmacs session."

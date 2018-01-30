@@ -43,9 +43,16 @@
   "b s" 'save-some-buffers
   "TAB" 'evil-switch-to-windows-last-buffer
 
-  ;; emacs
-  "e r" 'restart-emacs
-  "e l" 'gmacs/load-config
+  ;; config
+  "c i" 'gmacs/open-init-config
+  "c f" 'gmacs/open-functions-config
+  "c v" 'gmacs/open-variables-config
+  "c l" 'gmacs/open-leader-config
+  "c g" 'gmacs/open-global-config
+  "c e" 'gmacs/open-environment-config
+  "c k" 'gmacs/open-evil-config
+  "c p" 'gmacs/open-packages-config
+  "c c" 'gmacs/load-config
 
   ;; file
   "f f" 'find-file
@@ -157,7 +164,11 @@
 
   ;; command
   ";" 'counsel-M-x
-  "!" 'shell-command)
+  "!" 'shell-command
+
+  ;; quit
+  "q q" 'save-buffers-kill-terminal
+  "q r" 'restart-emacs)
 
 (evil-leader/set-key-for-mode 'org-mode
   "j j" 'gmacs/org-link-jump
