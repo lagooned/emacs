@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; this file is executed by use-package before evil loads
+;; Gmacs evil-mode before-load configuration.
 
 ;;; Code:
 

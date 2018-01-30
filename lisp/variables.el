@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; gmacs config and helper vars
+;; Gmacs custom variable definitions.
 
 ;;; Code:
 
