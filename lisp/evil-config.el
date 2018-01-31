@@ -102,7 +102,13 @@
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
-(define-key evil-visual-state-map (kbd "k")     'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "gg")    'beginning-of-buffer)
+(define-key evil-visual-state-map (kbd "gg")    'beginning-of-buffer)
+(define-key evil-normal-state-map (kbd "G")     'end-of-buffer)
+(define-key evil-visual-state-map (kbd "G")     'end-of-buffer)
+(define-key evil-insert-state-map (kbd "M-.")   'end-of-buffer)
+(define-key evil-insert-state-map (kbd "M-,")   'beginning-of-buffer)
 (define-key evil-normal-state-map (kbd "RET")   'newline-and-indent)
 (define-key evil-insert-state-map (kbd "RET")   'newline-and-indent)
 (define-key evil-visual-state-map (kbd "RET")   'nil)
@@ -155,8 +161,8 @@
        "C-j" 'dired-find-file
        "K" 'dired-do-kill-lines
        "n" 'evil-search-next
-       "gg" 'evil-goto-first-line
-       "G" 'evil-goto-line
+       "gg" 'beginning-of-buffer
+       "G" 'end-of-buffer
        "p" 'magit-status
        "N" 'evil-search-previous
        "r" 'revert-buffer
@@ -252,6 +258,8 @@
 (define-key evil-emacs-state-map (kbd "M-,") 'xref-pop-marker-stack)
 (define-key evil-emacs-state-map (kbd "M-@") 'mark-word)
 (define-key evil-emacs-state-map (kbd "M-!") 'shell-command)
+(define-key evil-emacs-state-map (kbd "M-<") 'beginning-of-buffer)
+(define-key evil-emacs-state-map (kbd "M->") 'end-of-buffer)
 (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
 (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
 (define-key evil-emacs-state-map (kbd "C-M-h") 'mark-defun)
@@ -292,6 +300,8 @@
 (global-unset-key (kbd "M-z"))
 (global-unset-key (kbd "M-!"))
 (global-unset-key (kbd "M-@"))
+(global-unset-key (kbd "M->"))
+(global-unset-key (kbd "M-<"))
 (global-unset-key (kbd "C-x C-u"))
 (global-unset-key (kbd "C-x C-l"))
 (global-unset-key (kbd "C-M-j"))
