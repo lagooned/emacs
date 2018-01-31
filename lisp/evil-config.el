@@ -214,6 +214,7 @@
  'term-mode-hook
  (lambda ()
    (progn
+     (define-key evil-insert-state-local-map (kbd "TAB") 'term-send-raw)
      (define-key evil-insert-state-local-map (kbd "C-d") 'term-send-eof)
      (define-key evil-normal-state-local-map (kbd "C-c C-d") 'term-send-eof)
      (define-key evil-normal-state-local-map (kbd "M-r") 'void)
