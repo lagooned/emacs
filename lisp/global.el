@@ -177,5 +177,8 @@
     (if (member font (font-family-list))
         (set-face-attribute 'default nil :family font))))
 
+;; disable electric indent
+(electric-indent-mode -1)
+
 (provide 'global)
 ;;; global.el ends here

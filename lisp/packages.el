@@ -495,9 +495,6 @@
   :ensure emmet-mode
   :init
   (setq web-mode-enable-auto-pairing nil)
-  (add-hook
-   'web-mode-hook
-   'electric-indent-mode)
   (add-to-list
    'auto-mode-alist
    '("\\.x?html\\'" . web-mode))
