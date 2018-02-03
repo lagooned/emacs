@@ -49,5 +49,11 @@
   (set-face-attribute 'default nil :height 100)
   (if (display-graphic-p) (menu-bar-mode -1)))
 
+;; cygwin
+(when (eq system-type 'cygwin)
+  (set-face-attribute 'default nil :weight 'bold)
+  (set-face-attribute 'default nil :height 100)
+  (if (display-graphic-p) (menu-bar-mode -1)))
+
 (provide 'environment)
 ;;; environment.el ends here
