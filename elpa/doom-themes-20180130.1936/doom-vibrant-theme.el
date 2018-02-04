@@ -34,8 +34,8 @@ determine the exact padding."
   "A dark theme based off of doom-one with more vibrant colors."
 
   ;; name        gui       256       16
-  ((bg         '("#242730" nil       nil))
-   (bg-alt     '("#2a2e38" nil       nil))
+  ((bg         '("#181818" nil       nil))
+   (bg-alt     '("#2a2a2a" nil       nil))
    (base0      '("#1c1f24" "#101010" "black"        ))
    (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
    (base2      '("#21272d" "#21212d" "brightblack"  ))
