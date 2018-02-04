@@ -1,4 +1,4 @@
-;;; packages.el --- package configuragion            -*- lexical-binding: t; -*-
+;;; packages.el --- package configuration            -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
