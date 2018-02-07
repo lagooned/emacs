@@ -312,5 +312,18 @@ disable `hi-lock-mode'."
       (error "Not in a git repository")
     (dired (projectile-project-root))))
 
+(defun gmacs/create-visit-dir (dir)
+  "Open/create `DIR'"
+  (if (file-directory-p dir)
+      (dired dir)
+    (progn
+      (make-directory dir t)
+      (dired dir))))
+
+(defun gmacs/open-org-dir ()
+  "Open ~/org."
+  (interactive)
+  (gmacs/create-visit-dir "~/org"))
+
 (provide 'functions)
 ;;; functions.el ends here

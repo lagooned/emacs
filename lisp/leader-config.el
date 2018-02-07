@@ -112,6 +112,7 @@
   ;; org
   "o a" 'org-agenda
   "o b" 'org-iswitchb
+  "o d" 'gmacs/open-org-dir
 
   ;; project
   "p s" 'magit-status
