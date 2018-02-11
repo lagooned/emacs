@@ -66,7 +66,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 4)
+(fringe-mode)
 
 ;; frame title format
 (setq frame-title-format

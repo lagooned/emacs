@@ -246,6 +246,48 @@
   :commands
   focus-mode)
 
+(use-package git-gutter
+  :diminish git-gutter-mode "gitfng"
+  :config
+  (require 'git-gutter-fringe)
+  (set-face-foreground 'git-gutter-fr:modified "darkorange")
+  (set-face-foreground 'git-gutter-fr:added    "green")
+  (set-face-foreground 'git-gutter-fr:deleted  "red")
+  (fringe-helper-define 'git-gutter-fr:added nil
+    "..X....."
+    "..X....."
+    "XXXXX..."
+    "..X....."
+    "..X.....")
+  (fringe-helper-define 'git-gutter-fr:deleted nil
+    "XXXXX...")
+  (fringe-helper-define 'git-gutter-fr:modified nil
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX..."
+    "..XXX...")
+  (global-git-gutter-mode t))
+
 (use-package help
   :ensure nil
   :bind
