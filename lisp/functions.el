@@ -206,10 +206,10 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
     (if (not directory)
         (message "not in a git project: using default-directory")
       (setq default-directory directory))
+    (defvar ripgrep-executable)
+    (defvar ripgrep-arguments)
+    (defvar ripgrep-highlight-search)
     (compilation-start
-     (defvar ripgrep-executable)
-     (defvar ripgrep-arguments)
-     (defvar ripgrep-highlight-search)
      (mapconcat 'identity
                 (append (list ripgrep-executable)
                         ripgrep-arguments
