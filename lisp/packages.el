@@ -247,46 +247,90 @@
   focus-mode)
 
 (use-package git-gutter
-  :diminish git-gutter-mode "gitfng"
+  :diminish git-gutter-mode "gg"
   :config
   (require 'git-gutter-fringe)
-  (set-face-foreground 'git-gutter-fr:modified "darkorange")
-  (set-face-foreground 'git-gutter-fr:added    "green")
-  (set-face-foreground 'git-gutter-fr:deleted  "red")
+  (set-face-foreground 'git-gutter-fr:modified "darkmagenta")
+  (set-face-foreground 'git-gutter-fr:added    "darkgreen")
+  (set-face-foreground 'git-gutter-fr:deleted  "darkred")
   (fringe-helper-define 'git-gutter-fr:added nil
-    "..X....."
-    "..X....."
-    "XXXXX..."
-    "..X....."
-    "..X.....")
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......")
   (fringe-helper-define 'git-gutter-fr:deleted nil
-    "XXXXX...")
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......")
   (fringe-helper-define 'git-gutter-fr:modified nil
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX..."
-    "..XXX...")
-  (global-git-gutter-mode t))
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......"
+    "XX......")
+  (add-hook
+   'prog-mode-hook
+   (lambda () (git-gutter-mode 1))))
 
 (use-package help
   :ensure nil

@@ -138,6 +138,7 @@
   "t A" 'auto-revert-mode
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
+  "t g" 'git-gutter-mode
   "t f" 'focus-mode
   "t c" 'flycheck-mode
   "t s" 'gmacs/toggle-spelling
