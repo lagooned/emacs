@@ -178,7 +178,8 @@
 (use-package elscreen
   :init
   (setq elscreen-tab-display-kill-screen nil
-        elscreen-display-tab nil))
+        elscreen-display-tab nil)
+  (elscreen-start))
 
 (use-package emmet-mode
   :commands
@@ -537,17 +538,25 @@
   (defvar telephone-line-separator-extra-padding)
   (defvar telephone-line-primary-left-separator)
   (defvar telephone-line-secondary-left-separator)
-  (defvar telephone-line-lhs)
+
   (setq telephone-line-height 24
         telephone-line-separator-extra-padding 1
         telephone-line-primary-left-separator 'telephone-line-abs-left
         telephone-line-secondary-left-separator 'telephone-line-abs-left
-        telephone-line-lhs '((evil . (telephone-line-simple-major-mode-segment))
+        telephone-line-primary-right-separator 'telephone-line-abs-right
+        telephone-line-secondary-right-separator 'telephone-line-abs-right)
+
+  (defvar telephone-line-lhs)
+  (setq telephone-line-lhs '((evil . (telephone-line-simple-major-mode-segment))
                              (accent . (telephone-line-simple-minor-mode-segment))
                              (nil . (telephone-line-buffer-segment))
                              (nil . (telephone-line-airline-position-segment))))
+
   (defvar telephone-line-rhs)
-  (setq telephone-line-rhs nil)
+  (setq telephone-line-rhs '((nil . ())
+                             (evil . (telephone-line-elscreen-mode-line-string-segment))
+                             ))
+
   (custom-set-faces
    '(telephone-line-evil-normal
      ((t (:inherit telephone-line-evil :background "darkmagenta"))))
