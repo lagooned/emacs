@@ -90,11 +90,14 @@
   "Face used in evil color-coded segments when in Emacs state."
   :group 'telephone-line-evil)
 
+(defface telephone-line-elscreen '((t (:foreground "black" :background "grey77"))) "")
+
 (defcustom telephone-line-faces
   '((evil . telephone-line-modal-face)
     (modal . telephone-line-modal-face)
+    (elscreen . (telephone-line-elscreen . mode-line-inactive))
     (ryo . telephone-line-ryo-modal-face)
-    (accent . (telephone-line-accent-active . telephone-line-accent-inactive))
+    (accent . (telephone-line-accent-active . mode-line-inactive))
     (nil . (mode-line . mode-line-inactive)))
   "Alist providing all the available face symbols.
 
