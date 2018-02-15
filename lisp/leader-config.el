@@ -172,6 +172,13 @@
   ";" 'counsel-M-x
   "!" 'shell-command
 
+  ;; elscreen
+  "z z" 'elscreen-toggle
+  "z c" 'elscreen-create
+  "z x" 'elscreen-kill
+  "z n" 'elscreen-next
+  "z p" 'elscreen-previous
+
   ;; quit
   "q q" 'save-buffers-kill-terminal
   "q r" 'restart-emacs)

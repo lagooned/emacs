@@ -175,6 +175,11 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
+(use-package elscreen
+  :init
+  (setq elscreen-tab-display-kill-screen nil
+        elscreen-display-tab nil))
+
 (use-package emmet-mode
   :commands
   emmet-mode
