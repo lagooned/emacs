@@ -331,6 +331,10 @@
  'minibuffer-setup-hook
  '(lambda () (evil-emacs-state)))
 
+(eval-after-load 'evil-vars
+  '(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
+  '(define-key evil-ex-completion-map (kbd "C-d") 'delete-char))
+
 (provide 'evil-config)
 
 ;;; evil-config.el ends here
