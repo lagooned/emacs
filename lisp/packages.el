@@ -69,8 +69,6 @@
   centered-cursor-mode)
 
 (use-package company
-  :defer t
-  :ensure company-flx
   :diminish company-mode
   :commands
   company-complete
@@ -81,14 +79,29 @@
         ("C-n" . company-select-next-or-abort)
         ("C-p" . company-select-previous-or-abort)
         ("C-j" . company-complete-selection)
-        ("C-d" . company-show-doc-buffer)
+        ("C-m" . company-complete-selection)
+        ("C-v" . company-next-page)
+        ("M-v" . company-previous-page)
         ("M-n" . nil)
         ("M-p" . nil)
+        ("\e\e\e" . nil)
         ("<tab>" . nil))
   :init
   (setq company-idle-delay nil)
   :config
-  (global-company-mode 1)
+  (dotimes (i 10)
+    (define-key company-active-map
+      (read-kbd-macro (format "M-%d" i))
+      'void))
+  (dotimes (i 10)
+    (define-key company-active-map
+      (read-kbd-macro (format "C-%d" i))
+      'company-complete-number))
+  (global-company-mode 1))
+
+(use-package company-flx
+  :after company
+  :config
   (company-flx-mode +1))
 
 (use-package counsel
