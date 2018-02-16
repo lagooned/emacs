@@ -452,6 +452,8 @@
 
 (use-package projectile
   :diminish projectile-mode
+  :init
+  (setq projectile-indexing-method 'alien)
   :config
   (projectile-mode 1))
 
