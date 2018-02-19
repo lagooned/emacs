@@ -258,7 +258,6 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
   (interactive)
   (defvar counsel-projectile-find-dir-action)
   (if (not (projectile-project-p))
-      
       (error "Not in a git repository")
     (ivy-read (projectile-prepend-project-name "find dir: ")
               (counsel-projectile--project-directories)
