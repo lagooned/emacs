@@ -74,6 +74,7 @@
 
 (load "elisp-lang")
 (load "php-lang")
+(load "js-lang")
 
 (provide 'packages-lang)
 ;;; packages-lang.el ends here
