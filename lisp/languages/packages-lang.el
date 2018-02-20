@@ -73,6 +73,7 @@
         xref-after-return-hook '(recenter)))
 
 (load "elisp-lang")
+(load "php-lang")
 
 (provide 'packages-lang)
 ;;; packages-lang.el ends here
