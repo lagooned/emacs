@@ -153,20 +153,6 @@
   :config
   (load-theme 'doom-vibrant t))
 
-(use-package dumb-jump
-  :after smart-jump
-  :bind
-  (:map dumb-jump-mode-map
-        ("C-M-g" . nil)
-        ("C-M-p" . nil)
-        ("C-M-q" . nil))
-  :init
-  (setq dumb-jump-selector 'ivy
-        dumb-jump-prefer-searcher 'rg
-        dumb-jump-quiet t)
-  (when (eq system-type 'windows-nt)
-    (setq dumb-jump-force-searcher 'rg)))
-
 (use-package ediff
   :init
   (defvar ediff-diff-options)
@@ -178,15 +164,6 @@
         (if (> (frame-width) 150)
             'split-window-horizontally
           'split-window-vertically)))
-
-(use-package eldoc
-  :diminish eldoc-mode
-  :commands eldoc-mode
-  :defer t
-  :init
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
 (use-package elscreen
   :init
@@ -241,18 +218,6 @@
   fix-word-upcase
   fix-word-downcase
   fix-word-capitalize)
-
-(use-package flycheck
-  :diminish flycheck-mode "chk"
-  :init
-  (custom-set-faces
-   '(flycheck-error ((t (:foreground "red" :underline nil))))
-   '(flycheck-info ((t (:foreground "green" :underline nil))))
-   '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
-  (defvar flycheck-indication-mode)
-  (defvar flycheck-highlighting-mode)
-  (setq flycheck-indication-mode nil
-        flycheck-highlighting-mode 'lines))
 
 (use-package flyspell
   :diminish flyspell-mode "spl"
@@ -505,27 +470,6 @@
    shell-pop-full-span t
    shell-pop-window-position "bottom"))
 
-(use-package smart-jump
-  :init
-  (defvar smart-jump-find-references-fallback-function)
-  (defvar smart-jump-bind-keys-for-evil)
-  (defvar smart-jump-bind-keys)
-  (defvar smart-jump-refs-key)
-  (defvar smart-jump-pop-key)
-  (setq smart-jump-find-references-fallback-function nil
-        smart-jump-bind-keys-for-evil nil
-        smart-jump-bind-keys nil
-        smart-jump-refs-key nil
-        smart-jump-pop-key nil)
-  :config
-  (smart-jump-register :modes '(emacs-lisp-mode lisp-interaction-mode)
-                       :jump-fn 'xref-find-definitions
-                       :pop-fn 'pop-tag-mark
-                       :refs-fn 'gmacs/xref-find-apropos-symbol
-                       :should-jump t
-                       :heuristic 'error
-                       :async nil))
-
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode "sp"
@@ -679,15 +623,6 @@
           'face (get-text-property 0 'face num)))))
   :config
   (setq whitespace-line-column 100))
-
-(use-package xref
-  :ensure nil
-  :bind
-  (:map xref--button-map
-        ("C-j" . xref-goto-xref))
-  :init
-  (setq xref-after-jump-hook '(recenter)
-        xref-after-return-hook '(recenter)))
 
 (use-package yasnippet
   :diminish yas-minor-mode

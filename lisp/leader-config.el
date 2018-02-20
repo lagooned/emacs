@@ -51,7 +51,8 @@
   "c i" 'gmacs/open-init-config
   "c f" 'gmacs/open-functions-config
   "c v" 'gmacs/open-variables-config
-  "c l" 'gmacs/open-leader-config
+  "c SPC" 'gmacs/open-leader-config
+  "c l" 'gmacs/open-language-config
   "c g" 'gmacs/open-global-config
   "c e" 'gmacs/open-environment-config
   "c k" 'gmacs/open-evil-config

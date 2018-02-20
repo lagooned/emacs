@@ -65,6 +65,9 @@
 ;; load package config
 (load "packages")
 
+;; load language packages config
+(load "packages-lang")
+
 ;; load per-environment config
 (load "environment")
 

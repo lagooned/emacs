@@ -75,6 +75,11 @@
   (interactive)
   (find-file "~/.emacs.d/lisp/packages.el"))
 
+(defun gmacs/open-language-config ()
+  "Open languages/packages-lang.el."
+  (interactive)
+  (find-file "~/.emacs.d/lisp/languages/packages-lang.el"))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup \
 at the first save of each gmacs session."
