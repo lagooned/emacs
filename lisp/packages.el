@@ -557,7 +557,7 @@
   (defvar telephone-line-primary-right-separator)
   (defvar telephone-line-secondary-right-separator)
 
-  (setq telephone-line-height 22
+  (setq telephone-line-height 28
         telephone-line-separator-extra-padding 1
         telephone-line-primary-left-separator 'telephone-line-abs-left
         telephone-line-secondary-left-separator 'telephone-line-abs-left
