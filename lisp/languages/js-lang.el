@@ -31,7 +31,22 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package xref-js2
-  :after js2-mode)
+  :after js2-mode
+  :config
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (add-hook
+               'xref-backend-functions
+               #'xref-js2-xref-backend nil t))))
+
+(use-package smart-jump
+  :config
+  (smart-jump-register :modes '(js2-mode)
+                       :jump-fn 'xref-find-definitions
+                       :pop-fn 'pop-tag-mark
+                       :should-jump t
+                       :heuristic 'error
+                       :async nil))
 
 (use-package js2-refactor)
 
