@@ -182,6 +182,44 @@
        "?" 'evil-search-backward
        "." 'dired-omit-mode)))
 
+;; doc-view
+(evil-set-initial-state 'doc-view-mode 'normal)
+(add-hook 'doc-view-mode-hook
+          (lambda ()
+            (set (make-local-variable 'evil-normal-state-cursor) (list nil))
+            (set (make-local-variable 'evil-visual-state-cursor) (list nil))
+            (set (make-local-variable 'evil-movement-state-cursor) (list nil))
+            (set (make-local-variable 'evil-emacs-state-cursor) (list nil))))
+(evil-define-key 'normal doc-view-mode-map
+  "q" 'quit-window
+  "v" 'void
+  "V" 'void
+  "j" 'doc-view-next-page
+  "k" 'doc-view-previous-page
+  "C-d" 'image-scroll-up
+  "C-u" 'image-scroll-down
+  "J" 'doc-view-next-line-or-next-page
+  "K" 'doc-view-previous-line-or-previous-page
+  "gg" 'doc-view-first-page
+  "G" 'doc-view-last-page
+  "gj" 'doc-view-goto-page
+  "=" 'doc-view-enlarge
+  "0" 'doc-view-scale-reset
+  "-" 'doc-view-shrink
+  "W" 'doc-view-fit-width-to-window
+  "H" 'doc-view-fit-height-to-window
+  "P" 'doc-view-fit-page-to-window
+  "ss" 'doc-view-set-slice
+  "sm" 'doc-view-set-slice-using-mouse
+  "sb" 'doc-view-set-slice-from-bounding-box
+  "sr" 'doc-view-reset-slice
+  "/" 'doc-view-search
+  "?" 'doc-view-search-backward
+  "C-t" 'doc-view-show-tooltip
+  "C-c C-c" 'doc-view-toggle-display
+  "C-c C-t" 'doc-view-open-text
+  "gr" 'doc-view-revert-buffer)
+
 ;; eshell
 (add-hook
  'eshell-mode-hook
