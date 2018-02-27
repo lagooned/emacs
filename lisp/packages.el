@@ -488,7 +488,9 @@
 (use-package swiper
   :commands swiper)
 
-(use-package suggest)
+(use-package suggest
+  :defer t
+  :commands suggest)
 
 (use-package telephone-line
   :init
