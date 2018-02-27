@@ -427,7 +427,9 @@
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package recentf
+  :defer t
   :ensure nil
+  :commands counsel-recentf
   :config
   (setq recentf-max-menu-items 0
         recentf-max-saved-items 300
