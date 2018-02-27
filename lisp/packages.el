@@ -655,7 +655,8 @@
                    (buffer-name (window-buffer window)))
                 (window-list)))))))))
 
-(use-package zop-to-char)
+(use-package zop-to-char
+  :commands zop-to-char)
 
 (provide 'packages)
 ;;; packages.el ends here
