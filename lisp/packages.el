@@ -458,6 +458,8 @@
   (require 'ripgrep))
 
 (use-package shell-pop
+  :defer t
+  :commands shell-pop
   :init
   (defvar shell-pop-shell-type)
   (defvar shell-pop-full-span)
