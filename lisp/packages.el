@@ -500,24 +500,20 @@
   (defvar telephone-line-secondary-left-separator)
   (defvar telephone-line-primary-right-separator)
   (defvar telephone-line-secondary-right-separator)
-
   (setq telephone-line-height 28
         telephone-line-separator-extra-padding 1
         telephone-line-primary-left-separator 'telephone-line-abs-left
         telephone-line-secondary-left-separator 'telephone-line-abs-left
         telephone-line-primary-right-separator 'telephone-line-abs-right
         telephone-line-secondary-right-separator 'telephone-line-abs-right)
-
   (defvar telephone-line-lhs)
   (setq telephone-line-lhs '((elscreen . (telephone-line-elscreen-mode-line-string-segment))
                              (evil . (telephone-line-simple-major-mode-segment))
                              (accent . (telephone-line-simple-minor-mode-segment))
                              (nil . (telephone-line-buffer-segment))
                              (nil . (telephone-line-airline-position-segment))))
-
   (defvar telephone-line-rhs)
   (setq telephone-line-rhs '((nil . ())))
-
   (custom-set-faces
    '(telephone-line-evil-normal
      ((t (:inherit telephone-line-evil :background "darkmagenta"))))
