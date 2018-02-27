@@ -340,7 +340,9 @@
           "hi-blue"
           "hi-magenta")))
 
-(use-package indent-guide)
+(use-package indent-guide
+  :defer t
+  :commands indent-guide-mode)
 
 (use-package impatient-mode
   :commands impatient-mode)
