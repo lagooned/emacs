@@ -486,8 +486,7 @@
   (add-hook 'evil-replace-state-exit-hook  #'turn-on-smartparens-mode))
 
 (use-package swiper
-  :commands
-  swiper)
+  :commands swiper)
 
 (use-package suggest)
 
