@@ -526,7 +526,8 @@
   (add-hook 'minibuffer-exit-hook #'redraw-display))
 
 (use-package try
-  :defer t)
+  :defer t
+  :commands try)
 
 (use-package undo-tree
   :diminish undo-tree-mode
