@@ -40,7 +40,7 @@
   "b C-k" 'kill-matching-buffers
   "b h" 'gmacs/switch-to-scratch-buffer
   "b m" 'gmacs/switch-to-messages-buffer
-  "b l" 'list-buffers
+  "b l" 'ibuffer
   "b r" 'revert-buffer
   "b R" 'rename-buffer
   "b c" 'clean-buffer-list
