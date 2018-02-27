@@ -220,7 +220,9 @@
   fix-word-capitalize)
 
 (use-package flyspell
+  :defer t
   :diminish flyspell-mode "spl"
+  :commands flyspell-mode
   :init
   (custom-set-faces
    '(flyspell-duplicate ((t (:underline "Green"))))
