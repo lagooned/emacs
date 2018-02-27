@@ -451,6 +451,10 @@
    '("\\.rest\\'" . restclient-mode)))
 
 (use-package ripgrep
+  :defer t
+  :commands
+  ripgrep
+  gmacs/ripgrep-regexp-git
   :bind
   (:map ripgrep-search-mode-map
         ("C-j" . compile-goto-error))
