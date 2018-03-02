@@ -123,6 +123,7 @@
   "p d" 'gmacs/counsel-projectile-find-dir-region
   "p D" 'magit-diff-popup
   "p F" 'magit-file-popup
+  "p b" 'magit-blame
 
   ;; search
   "s s" 'gmacs/swiper-region-thing
