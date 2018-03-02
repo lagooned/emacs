@@ -106,7 +106,6 @@
 (define-key evil-normal-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-normal-state-map (kbd "M-n")   'evil-search-word-forward)
-(define-key evil-normal-state-map (kbd "M-p")   'evil-search-word-backward)
 (define-key evil-normal-state-map (kbd "M-N")   'evil-search-word-backward)
 (define-key evil-visual-state-map (kbd "M-n")   'evil-visualstar/begin-search-forward)
 (define-key evil-visual-state-map (kbd "M-p")   'evil-visualstar/begin-search-backward)
