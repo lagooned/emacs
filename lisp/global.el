@@ -190,5 +190,8 @@
 ;; disable electric indent
 (electric-indent-mode -1)
 
+;; weird next-line bug
+(setq auto-window-vscroll nil)
+
 (provide 'global)
 ;;; global.el ends here
