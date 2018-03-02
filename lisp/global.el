@@ -66,7 +66,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 20)
+(fringe-mode 14)
 
 ;; no fringes in minibuffer
 (add-hook
