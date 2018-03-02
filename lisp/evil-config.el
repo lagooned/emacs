@@ -57,15 +57,6 @@
   :config
   (evil-exchange-install))
 
-(use-package evil-escape
-  :diminish evil-escape-mode
-  :init
-  (setq-default evil-escape-key-sequence "kj")
-  (setq-default evil-escape-unordered-key-sequence t)
-  (setq-default evil-escape-delay 0.04)
-  :config
-  (evil-escape-mode 1))
-
 (use-package evil-numbers
   :commands
   evil-numbers/inc-at-point
