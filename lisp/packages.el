@@ -369,6 +369,13 @@
   (require 'ivy-hydra)
   (ivy-mode))
 
+(use-package linum-relative
+  :commands linum-relative-mode
+  :diminish linum-relative-mode
+  :init
+  (setq linum-relative-format "%5s "
+        linum-relative-current-symbol ""))
+
 (use-package lorem-ipsum)
 
 (use-package magit
