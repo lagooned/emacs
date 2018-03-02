@@ -66,7 +66,17 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 8)
+(fringe-mode 20)
+
+;; no fringes in minibuffer
+(add-hook
+ 'after-init-hook
+ '(lambda ()
+    (progn
+      (set-window-fringes (minibuffer-window) 0 0 nil)
+      (add-hook
+       'minibuffer-setup-hook
+       '(lambda () (set-window-fringes (minibuffer-window) 0 0 nil))))))
 
 ;; frame title format
 (setq frame-title-format
