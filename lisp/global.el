@@ -28,8 +28,14 @@
   (setq x-select-request-type
         '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
 
-;; set max mem alloc before gc
-(setq gc-cons-threshold 50000000)
+;; set max mem alloc before gc for startup
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+(add-hook
+ 'emacs-startup-hook
+ '(lambda () (setq gc-cons-threshold 16777216
+              gc-cons-percentage 0.1)))
 
 ;; no warnings
 (setq warning-minimum-level :emergency)
