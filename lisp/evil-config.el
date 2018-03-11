@@ -190,8 +190,10 @@
      "q" 'quit-window
      "v" 'image-scroll-up
      "V" 'image-scroll-down
+     "h" 'doc-view-previous-page
      "j" 'doc-view-next-line-or-next-page
      "k" 'doc-view-previous-line-or-previous-page
+     "l" 'doc-view-next-page
      "f" 'doc-view-next-line-or-next-page
      "b" 'doc-view-previous-line-or-previous-page
      "gg" 'doc-view-first-page
@@ -200,9 +202,9 @@
      "=" 'doc-view-enlarge
      "0" 'doc-view-scale-reset
      "-" 'doc-view-shrink
-     "fw" 'doc-view-fit-width-to-window
-     "fh" 'doc-view-fit-height-to-window
-     "fp" 'doc-view-fit-page-to-window
+     "wf" 'doc-view-fit-width-to-window
+     "wh" 'doc-view-fit-height-to-window
+     "wp" 'doc-view-fit-page-to-window
      "ss" 'doc-view-set-slice
      "sm" 'doc-view-set-slice-using-mouse
      "sb" 'doc-view-set-slice-from-bounding-box
