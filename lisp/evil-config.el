@@ -199,9 +199,7 @@
      "gg" 'doc-view-first-page
      "G" 'doc-view-last-page
      "gj" 'doc-view-goto-page
-     "=" 'doc-view-enlarge
-     "0" 'doc-view-scale-reset
-     "-" 'doc-view-shrink
+     "-" 'dired-jump
      "wf" 'doc-view-fit-width-to-window
      "wh" 'doc-view-fit-height-to-window
      "wp" 'doc-view-fit-page-to-window
@@ -215,7 +213,6 @@
      "C-c C-c" 'doc-view-toggle-display
      "C-c C-t" 'doc-view-open-text
      "gr" 'doc-view-revert-buffer
-     "s" 'void
      "c" 'void)))
 
 
