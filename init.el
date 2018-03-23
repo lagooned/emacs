@@ -86,5 +86,13 @@
            '((left . 50)
              (top  . 35))))))
 
+;; write startup log
+(add-hook
+ 'emacs-startup-hook
+ '(lambda ()
+    (progn
+      (gmacs/write-startup-log)
+      (kill-buffer "*Messages*"))))
+
 (provide 'init)
 ;;; init.el ends here

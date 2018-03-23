@@ -27,3 +27,4 @@ games
 /elpa/archives
 /elpa/*.signed
 /places
+/startup.log

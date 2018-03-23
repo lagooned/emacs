@@ -329,5 +329,10 @@ disable `hi-lock-mode'."
   (interactive)
   (gmacs/create-visit-dir "~/org"))
 
+(defun gmacs/write-startup-log ()
+  (save-current-buffer
+    (set-buffer "*Messages*")
+    (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")))
+
 (provide 'functions)
 ;;; functions.el ends here
