@@ -135,7 +135,9 @@
   :ensure nil
   :after dired
   :config
-  (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+  (setq dired-omit-files
+        (concat dired-omit-files
+                "\\|^\\..+$\\|^~.+$\\|^#.+$"))
   (setq dired-omit-mode t))
 
 (use-package dired+
