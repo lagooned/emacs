@@ -143,7 +143,8 @@
   :after dired-x
   :init
   (defvar diredp-hide-details-initially-flag)
-  (setq diredp-hide-details-initially-flag nil)
+  (setq diredp-hide-details-initially-flag t)
+  ;; (setq diredp-hide-details-initially-flag nil)
   (setq dired-dwim-target t))
 
 (use-package doom-themes
