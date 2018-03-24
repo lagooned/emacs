@@ -234,8 +234,8 @@
   :config
   (require 'git-gutter-fringe)
   (set-face-foreground 'git-gutter-fr:modified "darkorange")
-  (set-face-foreground 'git-gutter-fr:added    "darkgreen")
-  (set-face-foreground 'git-gutter-fr:deleted  "darkred")
+  (set-face-foreground 'git-gutter-fr:added    "darkorange")
+  (set-face-foreground 'git-gutter-fr:deleted  "darkorange")
   (fringe-helper-define 'git-gutter-fr:added nil
     "XXX....."
     "XXX....."
