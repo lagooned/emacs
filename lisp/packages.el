@@ -87,7 +87,9 @@
         ("\e\e\e" . nil)
         ("<tab>" . nil))
   :init
-  (setq company-idle-delay nil)
+  (setq company-idle-delay 0.01)
+  (setq company-minimum-prefix-length 1)
+  (setq company-require-match nil)
   :config
   (dotimes (i 10)
     (define-key company-active-map
@@ -97,12 +99,13 @@
     (define-key company-active-map
       (read-kbd-macro (format "C-%d" i))
       'company-complete-number))
+  (setq company-backends
+        '((company-files
+           company-keywords
+           company-capf
+           company-yasnippet
+           company-dabbrev)))
   (global-company-mode 1))
-
-(use-package company-flx
-  :after company
-  :config
-  (company-flx-mode +1))
 
 (use-package counsel
   :ensure counsel-projectile
