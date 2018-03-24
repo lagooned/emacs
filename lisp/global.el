@@ -72,7 +72,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 14)
+(fringe-mode 6)
 
 ;; no fringes in minibuffer
 (add-hook
