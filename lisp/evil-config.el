@@ -369,6 +369,7 @@
 
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
 (define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
+(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
 
 (provide 'evil-config)
 
