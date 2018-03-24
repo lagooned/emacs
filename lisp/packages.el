@@ -175,16 +175,6 @@
   :config
   (elscreen-start))
 
-(use-package emmet-mode
-  :commands
-  emmet-mode
-  emmet-next-edit-point
-  emmet-prev-edit-point
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook  'emmet-mode)
-  (add-hook 'css-mode-hook  'emmet-mode))
-
 (use-package erc
   :commands erc
   :config
@@ -563,26 +553,6 @@
         uniquify-after-kill-buffer-p t
         uniquify-separator ":"
         uniquify-ignore-buffers-re "^\\*"))
-
-(use-package web-mode
-  :commands web-mode
-  :ensure web-mode
-  :ensure impatient-mode
-  :ensure emmet-mode
-  :init
-  (setq web-mode-enable-auto-pairing nil)
-  (add-to-list
-   'auto-mode-alist
-   '("\\.x?html\\'" . web-mode))
-  (defvar gmacs/auto-minor-mode-alist)
-  (add-to-list
-   'gmacs/auto-minor-mode-alist
-   '("\\.x?html\\'" . impatient-mode))
-  (add-to-list
-   'auto-mode-alist
-   '("\\.blade.php\\'" . web-mode))
-  :config
-  (emmet-mode 1))
 
 (use-package winner
   :ensure nil
