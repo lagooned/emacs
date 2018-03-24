@@ -1,4 +1,4 @@
-;;; php-lang.el --- javascript langauge tools  -*- lexical-binding: t; -*-
+;;; php-lang.el --- php langauge tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared Matthew Engler
 
@@ -25,6 +25,20 @@
 ;;; Code:
 
 (use-package php-mode)
+
+(flycheck-define-checker gmacs-php
+  "A PHP syntax checker using the PHP command line interpreter.
+See URL `http://php.net/manual/en/features.commandline.php'."
+  :command ("php" "-l" "-d" "error_reporting=E_ALL" "-d" "display_errors=1"
+            "-d" "log_errors=0" source)
+  :error-patterns
+  ((error line-start (or "Parse" "Fatal" "syntax") " error" (any ":" ",") " "
+          (message) " in " (file-name) " on line " line line-end))
+  :modes (php-mode web-mode)
+  :next-checkers ((warning . php-phpmd)
+                  (warning . php-phpcs)))
+
+(add-hook 'web-mode-hook (lambda () (flycheck-select-checker 'gmacs-php)))
 
 (provide 'php-lang)
 ;;; php-lang.el ends here
