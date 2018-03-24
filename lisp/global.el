@@ -105,8 +105,7 @@
 (column-number-mode 1)
 
 ;; cursor blink
-(blink-cursor-mode t)
-(setq blink-cursor-blinks -1)
+(blink-cursor-mode -1)
 
 ;; cursor stretch
 (setq x-stretch-cursor t)
