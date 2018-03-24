@@ -111,6 +111,9 @@
 ;; cursor stretch
 (setq x-stretch-cursor t)
 
+;; disable eldoc to enable it later
+(global-eldoc-mode -1)
+
 ;; no cursor in other windows
 (setq default-cursor-in-non-selected-windows nil)
 
