@@ -91,6 +91,7 @@
   (setq company-minimum-prefix-length 1)
   (setq company-require-match nil)
   (setq company-dabbrev-downcase nil)
+  (setq company-show-numbers t)
   :config
   (dotimes (i 10)
     (define-key company-active-map
