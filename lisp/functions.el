@@ -317,7 +317,7 @@ disable `hi-lock-mode'."
     (dired (projectile-project-root))))
 
 (defun gmacs/create-visit-dir (dir)
-  "Open/create `DIR'"
+  "Open/create `DIR'."
   (if (file-directory-p dir)
       (dired dir)
     (progn
@@ -330,6 +330,7 @@ disable `hi-lock-mode'."
   (gmacs/create-visit-dir "~/org"))
 
 (defun gmacs/write-startup-log ()
+  "Write ~/.emacs.d/startup.log."
   (save-current-buffer
     (set-buffer "*Messages*")
     (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")))
