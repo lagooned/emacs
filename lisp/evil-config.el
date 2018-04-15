@@ -40,12 +40,6 @@
 (dumb-jump-mode 1)
 (evil-mode 1)
 
-(use-package evil-commentary
-  :diminish
-  evil-commentary-mode
-  :config
-  (evil-commentary-mode 1))
-
 (use-package evil-vimish-fold
   :diminish evil-vimish-fold-mode
   :config
@@ -130,8 +124,8 @@
 (define-key evil-insert-state-map (kbd "M-/")   'yas-expand)
 (define-key evil-insert-state-map (kbd "C-.")   'company-complete)
 (define-key evil-normal-state-map (kbd "C-;")   'comment-line)
-(define-key evil-visual-state-map (kbd "C-;")   'evil-commentary-line)
-(define-key evil-insert-state-map (kbd "C-;")   'evil-commentary-line)
+(define-key evil-visual-state-map (kbd "C-;")   'comment-dwim)
+(define-key evil-insert-state-map (kbd "C-;")   'comment-dwim)
 (define-key evil-normal-state-map (kbd "-")     'dired-jump)
 (define-key evil-normal-state-map (kbd "C-`")   'shell-pop)
 (define-key evil-insert-state-map (kbd "C-`")   'shell-pop)
