@@ -597,7 +597,8 @@
     "SPC u" "univ arg"
     "SPC U" "negt arg"
     "SPC w" "window"
-    "SPC q" "quit")
+    "SPC q" "quit"
+    "SPC z" "screen")
   (which-key-mode 1))
 
 (use-package whitespace
