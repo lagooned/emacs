@@ -210,6 +210,8 @@
  'eshell-mode-hook
  (lambda ()
    (progn
+     (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
+     (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
      (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
      (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)

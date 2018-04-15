@@ -345,5 +345,36 @@ disable `hi-lock-mode'."
   (company-abort)
   (evil-complete-next))
 
+(defun gmacs/counsel-yank-eshell-history ()
+  "Yank from eshell history."
+  (interactive)
+  (let (collection val)
+    (setq collection
+          (nreverse
+           (split-string
+            (with-temp-buffer
+              (insert-file-contents (file-truename "~/.emacs.d/eshell/history"))
+              (buffer-string)) "\n" t)))
+    (when (and collection (> (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "yank eshell history: ") collection))))
+      (kill-new val)
+      (message "%s => kill-ring" val))))
+
+(defun gmacs/counsel-insert-eshell-history ()
+  "Insert at point from eshell history."
+  (interactive)
+  (let (collection val)
+    (setq collection
+          (nreverse
+           (split-string
+            (with-temp-buffer
+              (insert-file-contents (file-truename "~/.emacs.d/eshell/history"))
+              (buffer-string)) "\n" t)))
+    (when (and collection (> (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "insert eshell history: ") collection))))
+      (insert val))))
+
 (provide 'functions)
 ;;; functions.el ends here
