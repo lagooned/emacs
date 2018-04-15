@@ -376,5 +376,15 @@ disable `hi-lock-mode'."
                            (ivy-read (format "insert eshell history: ") collection))))
       (insert val))))
 
+(defun gmacs/eshell-clear ()
+  "Clear terminal."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (setq-local gmacs/eshell-message
+                (concat (string-trim gmacs/eshell-message) "\n"))
+    (eshell-banner-initialize)
+    (eshell-send-input)))
+
 (provide 'functions)
 ;;; functions.el ends here
