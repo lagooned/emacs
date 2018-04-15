@@ -27,8 +27,7 @@
 (use-package php-mode)
 
 (flycheck-define-checker gmacs-php
-  "A PHP syntax checker using the PHP command line interpreter.
-See URL `http://php.net/manual/en/features.commandline.php'."
+  "A PHP syntax checker using the PHP command line interpreter."
   :command ("php" "-l" "-d" "error_reporting=E_ALL" "-d" "display_errors=1"
             "-d" "log_errors=0" source)
   :error-patterns
