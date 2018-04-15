@@ -73,17 +73,19 @@
   :commands company-mode
   :bind
   (:map company-active-map
-        ("<tab>"  . company-complete-common-or-cycle)
+        ("<tab>"  . nil)
+        ("<return>" . nil)
+        ("RET" . nil)
+        ("\e\e\e" . nil)
         ("M-n"    . company-select-next-or-abort)
         ("M-p"    . company-select-previous-or-abort)
-        ("C-i"    . company-complete-common)
+        ("M-i"    . company-complete-common-or-cycle)
         ("C-n"    . gmacs/company-cancel-complete-next)
         ("C-p"    . gmacs/company-cancel-complete-prev)
-        ("C-j"    . company-complete-selection)
-        ("C-m"    . company-complete-selection)
+        ("M-j"    . company-complete-selection)
+        ("M-m"    . company-complete-selection)
         ("C-v"    . company-next-page)
-        ("M-v"    . company-previous-page)
-        ("\e\e\e" . nil))
+        ("M-v"    . company-previous-page))
   :init
   (setq company-idle-delay 0.01)
   (setq company-minimum-prefix-length 1)
