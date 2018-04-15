@@ -70,42 +70,31 @@
 
 (use-package company
   :diminish company-mode
-  :commands
-  company-complete
-  company-mode
-  global-company-mode
+  :commands company-mode
   :bind
   (:map company-active-map
-        ("C-n" . company-select-next-or-abort)
-        ("C-p" . company-select-previous-or-abort)
-        ("C-j" . company-complete-selection)
-        ("C-m" . company-complete-selection)
-        ("C-v" . company-next-page)
-        ("M-v" . company-previous-page)
-        ("M-n" . nil)
-        ("M-p" . nil)
+        ("<tab>"  . nil)
+        ("<return>" . nil)
+        ("RET" . nil)
         ("\e\e\e" . nil)
-        ("<tab>" . nil))
+        ("M-n"    . company-select-next-or-abort)
+        ("M-p"    . company-select-previous-or-abort)
+        ("M-i"    . company-complete-common-or-cycle)
+        ("C-n"    . gmacs/company-cancel-complete-next)
+        ("C-p"    . gmacs/company-cancel-complete-prev)
+        ("M-j"    . company-complete-selection)
+        ("M-m"    . company-complete-selection)
+        ("C-v"    . company-next-page)
+        ("M-v"    . company-previous-page))
   :init
   (setq company-idle-delay 0.01)
   (setq company-minimum-prefix-length 1)
   (setq company-require-match nil)
+  (setq company-dabbrev-downcase nil)
+  (setq company-show-numbers t)
   :config
-  (dotimes (i 10)
-    (define-key company-active-map
-      (read-kbd-macro (format "M-%d" i))
-      'void))
-  (dotimes (i 10)
-    (define-key company-active-map
-      (read-kbd-macro (format "C-%d" i))
-      'company-complete-number))
   (setq company-backends
-        '((company-files
-           company-keywords
-           company-capf
-           company-yasnippet
-           company-dabbrev)))
-  (global-company-mode 1))
+        '((company-files company-dabbrev))))
 
 (use-package counsel
   :ensure counsel-projectile
@@ -468,6 +457,8 @@
   (defvar shell-pop-shell-type)
   (defvar shell-pop-full-span)
   (defvar shell-pop-window-position)
+  (defvar eshell-banner-message)
+  (setq eshell-banner-message 'gmacs/eshell-message)
   (setq
    shell-pop-shell-type (quote
                          ("eshell" "*eshell*"
@@ -595,7 +586,8 @@
     "SPC u" "univ arg"
     "SPC U" "negt arg"
     "SPC w" "window"
-    "SPC q" "quit")
+    "SPC q" "quit"
+    "SPC z" "screen")
   (which-key-mode 1))
 
 (use-package whitespace

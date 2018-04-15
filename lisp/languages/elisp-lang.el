@@ -43,5 +43,12 @@
                        :heuristic 'error
                        :async nil))
 
+(add-hook
+ 'emacs-lisp-mode-hook
+ (lambda ()
+   (set (make-local-variable 'company-backends)
+        (list (cons 'company-capf
+                    (car company-backends))))))
+
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here

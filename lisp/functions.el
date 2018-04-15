@@ -317,7 +317,7 @@ disable `hi-lock-mode'."
     (dired (projectile-project-root))))
 
 (defun gmacs/create-visit-dir (dir)
-  "Open/create `DIR'"
+  "Open/create `DIR'."
   (if (file-directory-p dir)
       (dired dir)
     (progn
@@ -330,9 +330,61 @@ disable `hi-lock-mode'."
   (gmacs/create-visit-dir "~/org"))
 
 (defun gmacs/write-startup-log ()
+  "Write ~/.emacs.d/startup.log."
   (save-current-buffer
     (set-buffer "*Messages*")
     (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")))
+
+(defun gmacs/company-cancel-complete-prev ()
+  (interactive)
+  (company-abort)
+  (evil-complete-previous))
+
+(defun gmacs/company-cancel-complete-next ()
+  (interactive)
+  (company-abort)
+  (evil-complete-next))
+
+(defun gmacs/counsel-yank-eshell-history ()
+  "Yank from eshell history."
+  (interactive)
+  (let (collection val)
+    (setq collection
+          (nreverse
+           (split-string
+            (with-temp-buffer
+              (insert-file-contents (file-truename "~/.emacs.d/eshell/history"))
+              (buffer-string)) "\n" t)))
+    (when (and collection (> (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "yank eshell history: ") collection))))
+      (kill-new val)
+      (message "%s => kill-ring" val))))
+
+(defun gmacs/counsel-insert-eshell-history ()
+  "Insert at point from eshell history."
+  (interactive)
+  (let (collection val)
+    (setq collection
+          (nreverse
+           (split-string
+            (with-temp-buffer
+              (insert-file-contents (file-truename "~/.emacs.d/eshell/history"))
+              (buffer-string)) "\n" t)))
+    (when (and collection (> (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "insert eshell history: ") collection))))
+      (insert val))))
+
+(defun gmacs/eshell-clear ()
+  "Clear terminal."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (setq-local gmacs/eshell-message
+                (concat (string-trim gmacs/eshell-message) "\n"))
+    (eshell-banner-initialize)
+    (eshell-send-input)))
 
 (provide 'functions)
 ;;; functions.el ends here

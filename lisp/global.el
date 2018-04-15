@@ -184,6 +184,9 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 
+;; enable erase buffer
+(put 'erase-buffer 'disabled nil)
+
 ;; preferred fonts list
 (let ((fonts '("Input"
                "Source Code Pro"

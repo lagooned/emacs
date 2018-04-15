@@ -36,15 +36,8 @@
   :config
   (global-evil-visualstar-mode 1))
 
-(global-company-mode 1)
 (dumb-jump-mode 1)
 (evil-mode 1)
-
-(use-package evil-commentary
-  :diminish
-  evil-commentary-mode
-  :config
-  (evil-commentary-mode 1))
 
 (use-package evil-vimish-fold
   :diminish evil-vimish-fold-mode
@@ -105,21 +98,18 @@
 (define-key evil-visual-state-map (kbd "RET")   'nil)
 (define-key evil-normal-state-map (kbd "M-y")   'counsel-yank-pop)
 (define-key evil-insert-state-map (kbd "M-y")   'counsel-yank-pop)
-;; (define-key evil-normal-state-map (kbd "M-n")   'evil-search-word-forward)
-;; (define-key evil-normal-state-map (kbd "M-N")   'evil-search-word-backward)
-;; (define-key evil-visual-state-map (kbd "M-n")   'evil-visualstar/begin-search-forward)
-;; (define-key evil-visual-state-map (kbd "M-p")   'evil-visualstar/begin-search-backward)
-(define-key evil-normal-state-map (kbd "M-j")   'indent-new-comment-line)
-(define-key evil-insert-state-map (kbd "M-j")   'indent-new-comment-line)
-(define-key evil-normal-state-map (kbd "M-m")   'indent-new-comment-line)
-(define-key evil-insert-state-map (kbd "M-m")   'indent-new-comment-line)
 (define-key evil-visual-state-map (kbd "M-N")   'evil-visualstar/begin-search-backward)
 (define-key evil-insert-state-map (kbd "M-\\")  'evil-execute-in-emacs-state)
 (define-key evil-normal-state-map (kbd "C-a")   'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-b")   'evil-scroll-page-up)
 (define-key evil-normal-state-map (kbd "C-j")   'newline)
 (define-key evil-insert-state-map (kbd "C-j")   'newline)
+(define-key evil-normal-state-map (kbd "C-m")   'newline-and-indent)
 (define-key evil-insert-state-map (kbd "C-m")   'newline-and-indent)
+(define-key evil-normal-state-map (kbd "M-j")   'indent-new-comment-line)
+(define-key evil-insert-state-map (kbd "M-j")   'indent-new-comment-line)
+(define-key evil-normal-state-map (kbd "M-m")   'indent-new-comment-line)
+(define-key evil-insert-state-map (kbd "M-m")   'indent-new-comment-line)
 (define-key evil-insert-state-map (kbd "M-b")   'backward-word)
 (define-key evil-normal-state-map (kbd "C-s")   'swiper)
 (define-key evil-normal-state-map (kbd "C-=")   'er/expand-region)
@@ -130,8 +120,8 @@
 (define-key evil-insert-state-map (kbd "M-/")   'yas-expand)
 (define-key evil-insert-state-map (kbd "C-.")   'company-complete)
 (define-key evil-normal-state-map (kbd "C-;")   'comment-line)
-(define-key evil-visual-state-map (kbd "C-;")   'evil-commentary-line)
-(define-key evil-insert-state-map (kbd "C-;")   'evil-commentary-line)
+(define-key evil-visual-state-map (kbd "C-;")   'comment-dwim)
+(define-key evil-insert-state-map (kbd "C-;")   'comment-dwim)
 (define-key evil-normal-state-map (kbd "-")     'dired-jump)
 (define-key evil-normal-state-map (kbd "C-`")   'shell-pop)
 (define-key evil-insert-state-map (kbd "C-`")   'shell-pop)
@@ -215,12 +205,15 @@
      "gr" 'doc-view-revert-buffer
      "c" 'void)))
 
-
 ;; eshell
 (add-hook
  'eshell-mode-hook
  (lambda ()
    (progn
+     (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
+     (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
+     (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
+     (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
      (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
      (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
@@ -265,16 +258,6 @@
      (define-key evil-insert-state-local-map (kbd "RET") 'term-send-input)
      (define-key evil-insert-state-local-map (kbd "C-j") 'term-send-input)
      (define-key evil-insert-state-local-map (kbd "C-m") 'term-send-input))))
-
-;; minibuffer
-(setq evil-insert-state-message nil
-      evil-visual-state-message nil
-      evil-replace-state-message nil
-      evil-normal-state-message nil
-      evil-emacs-state-message nil
-      evil-motion-state-message nil
-      evil-insert-state-message nil
-      evil-operator-state-message nil)
 
 ;; emacs binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
@@ -362,6 +345,16 @@
 (global-unset-key (kbd "C-M-/"))
 (global-unset-key (kbd "C-M-."))
 
+;; minibuffer
+(setq evil-insert-state-message nil
+      evil-visual-state-message nil
+      evil-replace-state-message nil
+      evil-normal-state-message nil
+      evil-emacs-state-message nil
+      evil-motion-state-message nil
+      evil-insert-state-message nil
+      evil-operator-state-message nil)
+
 ;; emacs mode for minibuffer
 (add-hook
  'minibuffer-setup-hook
@@ -370,6 +363,15 @@
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
 (define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
 (define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
+
+(add-hook
+ 'c-mode-common-hook
+ (lambda ()
+   (progn
+     (define-key evil-normal-state-map (kbd "M-j") 'c-indent-new-comment-line)
+     (define-key evil-insert-state-map (kbd "M-j") 'c-indent-new-comment-line)
+     (define-key evil-normal-state-map (kbd "M-m") 'c-indent-new-comment-line)
+     (define-key evil-insert-state-map (kbd "M-m") 'c-indent-new-comment-line))))
 
 (provide 'evil-config)
 

@@ -77,5 +77,17 @@
 (load "js-lang")
 (load "web-lang")
 
+(add-hook
+ 'emacs-lisp-mode-hook
+ (lambda ()
+   (defvar company-backends)
+   (set (make-local-variable 'company-backends)
+        (list (cons 'company-dabbrev-code
+                    (car company-backends))))))
+
+(add-hook
+ 'prog-mode-hook
+ (lambda () (company-mode 1)))
+
 (provide 'packages-lang)
 ;;; packages-lang.el ends here
