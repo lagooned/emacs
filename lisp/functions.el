@@ -335,5 +335,15 @@ disable `hi-lock-mode'."
     (set-buffer "*Messages*")
     (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")))
 
+(defun gmacs/company-cancel-complete-prev ()
+  (interactive)
+  (company-abort)
+  (evil-complete-previous))
+
+(defun gmacs/company-cancel-complete-next ()
+  (interactive)
+  (company-abort)
+  (evil-complete-next))
+
 (provide 'functions)
 ;;; functions.el ends here

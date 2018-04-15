@@ -77,5 +77,9 @@
 (load "js-lang")
 (load "web-lang")
 
+(add-hook
+ 'prog-mode-hook
+ (lambda () (company-mode 1)))
+
 (provide 'packages-lang)
 ;;; packages-lang.el ends here

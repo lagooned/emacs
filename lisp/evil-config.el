@@ -36,7 +36,6 @@
   :config
   (global-evil-visualstar-mode 1))
 
-(global-company-mode 1)
 (dumb-jump-mode 1)
 (evil-mode 1)
 

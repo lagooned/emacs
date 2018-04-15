@@ -70,22 +70,20 @@
 
 (use-package company
   :diminish company-mode
-  :commands
-  company-complete
-  company-mode
-  global-company-mode
+  :commands company-mode
   :bind
   (:map company-active-map
-        ("C-n" . company-select-next-or-abort)
-        ("C-p" . company-select-previous-or-abort)
-        ("C-j" . company-complete-selection)
-        ("C-m" . company-complete-selection)
-        ("C-v" . company-next-page)
-        ("M-v" . company-previous-page)
-        ("M-n" . nil)
-        ("M-p" . nil)
-        ("\e\e\e" . nil)
-        ("<tab>" . nil))
+        ("<tab>"  . company-complete-common-or-cycle)
+        ("M-n"    . company-select-next-or-abort)
+        ("M-p"    . company-select-previous-or-abort)
+        ("C-i"    . company-complete-common)
+        ("C-n"    . gmacs/company-cancel-complete-next)
+        ("C-p"    . gmacs/company-cancel-complete-prev)
+        ("C-j"    . company-complete-selection)
+        ("C-m"    . company-complete-selection)
+        ("C-v"    . company-next-page)
+        ("M-v"    . company-previous-page)
+        ("\e\e\e" . nil))
   :init
   (setq company-idle-delay 0.01)
   (setq company-minimum-prefix-length 1)
@@ -93,21 +91,8 @@
   (setq company-dabbrev-downcase nil)
   (setq company-show-numbers t)
   :config
-  (dotimes (i 10)
-    (define-key company-active-map
-      (read-kbd-macro (format "M-%d" i))
-      'void))
-  (dotimes (i 10)
-    (define-key company-active-map
-      (read-kbd-macro (format "C-%d" i))
-      'company-complete-number))
   (setq company-backends
-        '((company-files
-           company-keywords
-           company-capf
-           company-yasnippet
-           company-dabbrev)))
-  (global-company-mode 1))
+        '((company-files company-dabbrev))))
 
 (use-package counsel
   :ensure counsel-projectile
