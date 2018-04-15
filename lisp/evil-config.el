@@ -206,7 +206,6 @@
      "gr" 'doc-view-revert-buffer
      "c" 'void)))
 
-
 ;; eshell
 (add-hook
  'eshell-mode-hook
@@ -256,16 +255,6 @@
      (define-key evil-insert-state-local-map (kbd "RET") 'term-send-input)
      (define-key evil-insert-state-local-map (kbd "C-j") 'term-send-input)
      (define-key evil-insert-state-local-map (kbd "C-m") 'term-send-input))))
-
-;; minibuffer
-(setq evil-insert-state-message nil
-      evil-visual-state-message nil
-      evil-replace-state-message nil
-      evil-normal-state-message nil
-      evil-emacs-state-message nil
-      evil-motion-state-message nil
-      evil-insert-state-message nil
-      evil-operator-state-message nil)
 
 ;; emacs binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
@@ -352,6 +341,16 @@
 (global-unset-key (kbd "C-M-o"))
 (global-unset-key (kbd "C-M-/"))
 (global-unset-key (kbd "C-M-."))
+
+;; minibuffer
+(setq evil-insert-state-message nil
+      evil-visual-state-message nil
+      evil-replace-state-message nil
+      evil-normal-state-message nil
+      evil-emacs-state-message nil
+      evil-motion-state-message nil
+      evil-insert-state-message nil
+      evil-operator-state-message nil)
 
 ;; emacs mode for minibuffer
 (add-hook
