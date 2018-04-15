@@ -455,6 +455,8 @@
   (defvar shell-pop-shell-type)
   (defvar shell-pop-full-span)
   (defvar shell-pop-window-position)
+  (defvar eshell-banner-message)
+  (setq eshell-banner-message 'gmacs/eshell-message)
   (setq
    shell-pop-shell-type (quote
                          ("eshell" "*eshell*"
