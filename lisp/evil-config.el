@@ -114,6 +114,7 @@
 (define-key evil-normal-state-map (kbd "C-s")   'swiper)
 (define-key evil-normal-state-map (kbd "C-=")   'er/expand-region)
 (define-key evil-visual-state-map (kbd "C-=")   'er/expand-region)
+(define-key evil-motion-state-map (kbd "C-=")   'er/expand-region)
 (define-key evil-insert-state-map (kbd "TAB")   'tab-to-tab-stop)
 (define-key evil-normal-state-map (kbd "U")     'undo-tree-visualize)
 (define-key evil-normal-state-map (kbd "M-/")   'yas-expand)
