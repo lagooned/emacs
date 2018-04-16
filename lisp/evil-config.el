@@ -170,7 +170,7 @@
    (set (make-local-variable 'evil-normal-state-cursor) (list nil))
    (set (make-local-variable 'evil-insert-state-cursor) (list nil))
    (set (make-local-variable 'evil-visual-state-cursor) (list nil))
-   (set (make-local-variable 'evil-movement-state-cursor) (list nil))
+   (set (make-local-variable 'evil-motion-state-cursor) (list nil))
    (set (make-local-variable 'evil-emacs-state-cursor) (list nil))
    (evil-define-key 'normal doc-view-mode-map
      "p" 'doc-view-previous-page
