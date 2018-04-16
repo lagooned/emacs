@@ -28,17 +28,17 @@
   :commands
   js2-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (setq js--prettify-symbols-alist nil))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package xref-js2
   :after js2-mode
   :config
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (add-hook
-               'xref-backend-functions
-               #'xref-js2-xref-backend nil t))))
+  (add-hook
+   'js2-mode-hook
+   (lambda ()
+     (add-hook
+      'xref-backend-functions
+      #'xref-js2-xref-backend nil t))))
 
 (use-package smart-jump
   :config
@@ -50,6 +50,16 @@
                        :async nil))
 
 (use-package js2-refactor)
+
+(use-package nodejs-repl
+  :init
+  (evil-leader/set-key-for-mode 'js2-mode
+    "m e" 'nodejs-repl-send-last-expression
+    "m l" 'nodejs-repl-send-line
+    "m r" 'nodejs-repl-send-region
+    "m f" 'nodejs-repl-load-file
+    "m w" 'nodejs-repl-switch-to-repl
+    "m q" 'nodejs-repl-quit-or-cancel))
 
 (provide 'js-lang)
 ;;; js-lang.el ends here
