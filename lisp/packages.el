@@ -94,7 +94,7 @@
   (setq company-show-numbers t)
   :config
   (setq company-backends
-        '((company-files company-dabbrev))))
+        '((company-dabbrev-code company-dabbrev))))
 
 (use-package counsel
   :ensure counsel-projectile
