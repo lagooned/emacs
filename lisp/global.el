@@ -136,9 +136,6 @@
 ;; no scroll bar
 (scroll-bar-mode -1)
 
-;; symbols
-(global-prettify-symbols-mode t)
-
 ;; truncate and wrap lines
 (add-hook
  'prog-mode-hook
