@@ -28,7 +28,8 @@
   :commands
   js2-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (setq js--prettify-symbols-alist nil))
 
 (use-package xref-js2
   :after js2-mode
