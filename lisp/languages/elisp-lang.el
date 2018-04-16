@@ -50,5 +50,14 @@
         (list (cons 'company-capf
                     (car company-backends))))))
 
+(add-hook 'emacs-lisp-mode-hook
+          'prettify-symbols-mode)
+
+(evil-leader/set-key-for-mode 'emacs-lisp-mode
+  "m e" 'eval-last-sexp)
+
+(evil-leader/set-key-for-mode 'lisp-interaction-mode
+  "m e" 'eval-last-sexp)
+
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here
