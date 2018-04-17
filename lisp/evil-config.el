@@ -119,7 +119,7 @@
 (define-key evil-normal-state-map (kbd "U")     'undo-tree-visualize)
 (define-key evil-normal-state-map (kbd "M-/")   'yas-expand)
 (define-key evil-insert-state-map (kbd "M-/")   'yas-expand)
-(define-key evil-insert-state-map (kbd "C-.")   'company-complete)
+(define-key evil-insert-state-map (kbd "M-.")   'company-complete)
 (define-key evil-normal-state-map (kbd "C-;")   'comment-line)
 (define-key evil-visual-state-map (kbd "C-;")   'comment-dwim)
 (define-key evil-insert-state-map (kbd "C-;")   'comment-dwim)
