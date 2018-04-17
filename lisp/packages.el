@@ -480,7 +480,8 @@
         sp-show-pair-delay 0
         sp-max-pair-length 3)
   (add-hook 'evil-replace-state-entry-hook #'turn-off-smartparens-mode)
-  (add-hook 'evil-replace-state-exit-hook  #'turn-on-smartparens-mode))
+  (add-hook 'evil-replace-state-exit-hook  #'turn-on-smartparens-mode)
+  (add-hook 'web-mode-hook (lambda () (sp-local-pair 'web-mode "<" ""))))
 
 (use-package swiper
   :commands swiper)
