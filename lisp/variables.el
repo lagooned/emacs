@@ -50,5 +50,11 @@ modes are active and the buffer is read-only.")
 (defvar gmacs/eshell-message "Gshell \\(^.^\\)\n\n"
   "Message shown when starting Eshell.")
 
+(defvar mc-evil-compat/evil-prev-state nil
+  "Saves the previous evil state as a string.")
+
+(defvar mc-evil-compat/mark-was-active nil
+  "Saves the previous state of the mark.")
+
 (provide 'variables)
 ;;; variables.el ends here
