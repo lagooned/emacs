@@ -51,15 +51,6 @@
 
 (use-package js2-refactor)
 
-(use-package nodejs-repl
-  :init
-  (evil-leader/set-key-for-mode 'js2-mode
-    "m e" 'nodejs-repl-send-last-expression
-    "m l" 'nodejs-repl-send-line
-    "m r" 'nodejs-repl-send-region
-    "m f" 'nodejs-repl-load-file
-    "m w" 'nodejs-repl-switch-to-repl
-    "m q" 'nodejs-repl-quit-or-cancel))
 
 (provide 'js-lang)
 ;;; js-lang.el ends here
