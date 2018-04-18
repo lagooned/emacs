@@ -47,8 +47,7 @@ modes are active and the buffer is read-only.")
     pdf-view-mode)
   "Major modes that `gmacs/check-large-file' will ignore.")
 
-(defvar gmacs/eshell-message
-  "Gshell \\(^.^\\)\n\n"
+(defvar gmacs/eshell-message "Gshell \\(^.^\\)\n\n"
   "Message shown when starting Eshell.")
 
 (provide 'variables)
