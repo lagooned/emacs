@@ -49,8 +49,9 @@
                        :heuristic 'error
                        :async nil))
 
-(use-package js2-refactor)
-
+(use-package js2-refactor
+  :config
+  (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
 (provide 'js-lang)
 ;;; js-lang.el ends here
