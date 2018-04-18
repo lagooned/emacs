@@ -53,5 +53,8 @@
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
+(evil-leader/set-key-for-mode 'js2-mode
+  "m r" 'js2r-rename-var)
+
 (provide 'js-lang)
 ;;; js-lang.el ends here
