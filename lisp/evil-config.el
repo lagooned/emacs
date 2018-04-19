@@ -376,6 +376,13 @@
      (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
      (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))))
 
+;; company abort on exit insert mode
+(add-hook
+ 'evil-insert-state-exit-hook
+ (lambda ()
+   (if (bound-and-true-p company-mode)
+       (company-abort))))
+
 (provide 'evil-config)
 
 ;;; evil-config.el ends here
