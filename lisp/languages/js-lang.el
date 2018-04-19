@@ -53,6 +53,16 @@
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
+(use-package indium
+  :config
+  (add-hook
+   'js2-mode-hook
+   (lambda () (indium-interaction-mode 1)))
+  (add-hook
+   'indium-interaction-mode-hook
+   (lambda ()
+     (diminish 'indium-interaction-mode "int"))))
+
 (evil-leader/set-key-for-mode 'js2-mode
   "m r" 'js2r-rename-var)
 
