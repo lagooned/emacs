@@ -198,6 +198,8 @@
 (use-package expand-region
   :commands er/expand-region)
 
+(use-package exec-path-from-shell)
+
 (use-package fix-word
   :commands
   fix-word-upcase

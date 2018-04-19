@@ -34,7 +34,8 @@
   (defvar ispell-extra-args)
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra"))
-  (setenv "SHELL" "/bin/zsh"))
+  (setenv "SHELL" "/usr/local/bin/bash")
+  (exec-path-from-shell-initialize))
 
 ;; linux
 (when (eq system-type 'gnu/linux)
