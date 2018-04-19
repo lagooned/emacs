@@ -91,6 +91,7 @@
   (setq company-minimum-prefix-length 1)
   (setq company-require-match nil)
   (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-code-ignore-case t)
   (setq company-show-numbers t)
   :config
   (setq company-backends
