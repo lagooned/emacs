@@ -369,10 +369,10 @@
  'c-mode-common-hook
  (lambda ()
    (progn
-     (define-key evil-normal-state-map (kbd "M-j") 'c-indent-new-comment-line)
-     (define-key evil-insert-state-map (kbd "M-j") 'c-indent-new-comment-line)
-     (define-key evil-normal-state-map (kbd "M-m") 'c-indent-new-comment-line)
-     (define-key evil-insert-state-map (kbd "M-m") 'c-indent-new-comment-line))))
+     (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
+     (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
+     (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
+     (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))))
 
 (provide 'evil-config)
 

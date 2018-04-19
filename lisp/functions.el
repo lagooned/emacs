@@ -386,5 +386,32 @@ disable `hi-lock-mode'."
     (eshell-banner-initialize)
     (eshell-send-input)))
 
+(defun gmacs/evil-visual-or-normal-p ()
+  "True if evil mode is enabled, and we are in normal or visual mode."
+  (and (bound-and-true-p evil-mode)
+       (not (memq evil-state '(insert emacs)))))
+
+(defun mc-evil-compat/switch-to-emacs-state ()
+  (when (gmacs/evil-visual-or-normal-p)
+    (setq mc-evil-compat/evil-prev-state evil-state)
+    (when (region-active-p)
+      (setq mc-evil-compat/mark-was-active t))
+    (let ((mark-before (mark))
+          (point-before (point)))
+      (evil-emacs-state 1)
+      (when (or mc-evil-compat/mark-was-active (region-active-p))
+        (goto-char point-before)
+        (set-mark mark-before)))))
+
+(defun mc-evil-compat/back-to-previous-state ()
+  (when mc-evil-compat/evil-prev-state
+    (unwind-protect
+        (case mc-evil-compat/evil-prev-state
+          ((normal visual) (evil-force-normal-state))
+          (t (message "Don't know how to handle previous state: %S"
+                      mc-evil-compat/evil-prev-state)))
+      (setq mc-evil-compat/evil-prev-state nil)
+      (setq mc-evil-compat/mark-was-active nil))))
+
 (provide 'functions)
 ;;; functions.el ends here

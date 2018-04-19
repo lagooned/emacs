@@ -49,17 +49,12 @@
                        :heuristic 'error
                        :async nil))
 
-(use-package js2-refactor)
+(use-package js2-refactor
+  :config
+  (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
-(use-package nodejs-repl
-  :init
-  (evil-leader/set-key-for-mode 'js2-mode
-    "m e" 'nodejs-repl-send-last-expression
-    "m l" 'nodejs-repl-send-line
-    "m r" 'nodejs-repl-send-region
-    "m f" 'nodejs-repl-load-file
-    "m w" 'nodejs-repl-switch-to-repl
-    "m q" 'nodejs-repl-quit-or-cancel))
+(evil-leader/set-key-for-mode 'js2-mode
+  "m r" 'js2r-rename-var)
 
 (provide 'js-lang)
 ;;; js-lang.el ends here

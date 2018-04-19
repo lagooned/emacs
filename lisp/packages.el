@@ -380,6 +380,13 @@
      'Info-directory-list
      "~/.emacs.d/packages/magit/Documentation/")))
 
+(use-package multiple-cursors
+  :config
+  (add-hook 'multiple-cursors-mode-enabled-hook
+            'mc-evil-compat/switch-to-emacs-state)
+  (add-hook 'multiple-cursors-mode-disabled-hook
+            'mc-evil-compat/back-to-previous-state))
+
 (use-package multi-term)
 
 (use-package org

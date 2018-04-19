@@ -145,13 +145,13 @@
        (mapc (lambda (beg)
 	       (when (not (= beg current-start))
 		 (goto-char beg)
-		 (set-mark (+ beg len))
+		 ;; (set-mark (+ beg len))
 		 (mc/create-fake-cursor-at-point)))
 	     (js2r--local-var-positions current-node)))
-     (push-mark current-end)
+     ;; (push-mark current-end)
      (goto-char current-start)
-     (activate-mark))
-   (mc/maybe-multiple-cursors-mode)))
+     ;; (activate-mark))
+   (mc/maybe-multiple-cursors-mode))))
 
 (add-to-list 'mc--default-cmds-to-run-once 'js2r-rename-var)
 

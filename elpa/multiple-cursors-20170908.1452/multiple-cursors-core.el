@@ -394,7 +394,7 @@ the original cursor, to inform about the lack of support."
   (unless mc--executing-command-for-fake-cursor
 
     (if (eq 1 (mc/num-cursors)) ;; no fake cursors? disable mc-mode
-        (multiple-cursors-mode 0)
+        (multiple-cursors-mode 1)
       (when this-original-command
         (let ((original-command (or mc--this-command
                                     (command-remapping this-original-command)
@@ -551,7 +551,7 @@ They are temporarily disabled when multiple-cursors are active.")
   "Enable multiple-cursors-mode if there is more than one currently active cursor."
   (if (> (mc/num-cursors) 1)
       (multiple-cursors-mode 1)
-    (multiple-cursors-mode 0)))
+    (multiple-cursors-mode 1)))
 
 (defmacro unsupported-cmd (cmd msg)
   "Adds command to list of unsupported commands and prevents it
