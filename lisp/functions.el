@@ -113,11 +113,6 @@ undo and in `fundamental-mode' for performance sake."
 
 (add-hook 'find-file-hook #'gmacs/check-large-file)
 
-(defvar gmacs/auto-minor-mode-alist ()
-  "Alist of filename patterns vs correpsonding minor mode functions, see \
-`auto-mode-alist' All elements of this alist are checked, meaning you can
-enable multiple minor modes for the same regexp.")
-
 (defun gmacs/enable-minor-mode-based-on-extension ()
   "Check file name against gmacs/auto-minor-mode-alist to enable minor \
 modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
