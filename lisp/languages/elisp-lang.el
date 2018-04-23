@@ -48,8 +48,7 @@
  (lambda () (if (not (member 'company-capf company-backends))
                 (push 'company-capf company-backends))))
 
-(add-hook 'emacs-lisp-mode-hook
-          'prettify-symbols-mode)
+(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "m e" 'eval-last-sexp)
