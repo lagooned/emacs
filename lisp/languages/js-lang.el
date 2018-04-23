@@ -64,6 +64,9 @@
      (diminish 'indium-interaction-mode "int"))))
 
 (evil-leader/set-key-for-mode 'js2-mode
+  "m f" 'js2-mode-toggle-hide-functions
+  "m c" 'js2-mode-toggle-hide-comments
+  "m e" 'js2-mode-toggle-element
   "m r" 'js2r-rename-var)
 
 (provide 'js-lang)
