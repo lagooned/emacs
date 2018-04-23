@@ -72,10 +72,25 @@
   (setq xref-after-jump-hook '(recenter)
         xref-after-return-hook '(recenter)))
 
+(use-package lsp-mode
+  :init
+  (setq lsp-enable-eldoc nil)
+  :config
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (add-hook
+   'lsp-mode-hook
+   (lambda ()
+     (diminish 'lsp-mode "lsp"))))
+
+(use-package lsp-ui
+  :config
+  (add-hook 'lsp-ui-mode-hook '(lambda () (lsp-ui-sideline-mode 0))))
+
 (load "elisp-lang")
 (load "php-lang")
 (load "js-lang")
 (load "web-lang")
+(load "java-lang")
 
 (add-hook
  'prog-mode-hook
