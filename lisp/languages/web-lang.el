@@ -50,7 +50,8 @@
    'auto-mode-alist
    '("\\.blade.php\\'" . web-mode))
   :config
-  (emmet-mode 1))
+  (emmet-mode 1)
+  (add-hook 'web-mode-hook (lambda () (sp-local-pair 'web-mode "<" ""))))
 
 (provide 'web-lang)
 ;;; web-lang.el ends here
