@@ -114,6 +114,7 @@
   "o a" 'org-agenda
   "o b" 'org-iswitchb
   "o f" 'gmacs/open-org-dir
+  "o d" 'gmacs/open-downloads-dir
 
   ;; project
   "p s" 'magit-status
