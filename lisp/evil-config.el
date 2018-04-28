@@ -91,6 +91,7 @@
 (define-key evil-visual-state-map (kbd "gg")    'beginning-of-buffer)
 (define-key evil-normal-state-map (kbd "G")     'end-of-buffer)
 (define-key evil-visual-state-map (kbd "G")     'end-of-buffer)
+(define-key evil-visual-state-map (kbd "$")     'evil-end-of-visual-line)
 (define-key evil-insert-state-map (kbd "M->")   'end-of-buffer)
 (define-key evil-insert-state-map (kbd "M-<")   'beginning-of-buffer)
 (define-key evil-normal-state-map (kbd "RET")   'newline-and-indent)
