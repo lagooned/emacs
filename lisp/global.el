@@ -188,7 +188,7 @@
 (let ((fonts '("Input"
                "Source Code Pro"
                "Monaco"
-               "Deja Vu Sans Mono"
+               "DejaVu Sans Mono"
                "Consolas"
                "Monospace")))
   (dolist (font (reverse fonts) t)
