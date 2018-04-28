@@ -87,8 +87,8 @@
         ("C-v"    . company-next-page)
         ("M-v"    . company-previous-page))
   :init
-  (setq company-idle-delay 0.01)
-  (setq company-minimum-prefix-length 1)
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 2)
   (setq company-require-match nil)
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-code-ignore-case t)
