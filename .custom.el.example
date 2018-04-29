@@ -8,6 +8,13 @@
       calendar-location-name "Springfield, IL"
       erc-nick "jhd")
 
+;; setup java workspace folders
+;; (setq lsp-java--workspace-folders
+;;       (list
+;;        "~/code/java/project1"
+;;        "~/code/java/project2"
+;;        ))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
