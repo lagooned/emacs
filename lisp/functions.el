@@ -266,6 +266,13 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
               :action counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
 
+(defun gmacs/magit-status ()
+  "Wrap magit-status with projectile-project-p."
+  (interactive)
+  (if (not (projectile-project-p))
+      (error "Not in a git repository")
+    (magit-status)))
+
 (defun gmacs/toggle-spelling ()
   "Toggle flyspell."
   (interactive)

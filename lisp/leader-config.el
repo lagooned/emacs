@@ -117,7 +117,7 @@
   "o d" 'gmacs/open-downloads-dir
 
   ;; project
-  "p s" 'magit-status
+  "p s" 'gmacs/magit-status
   "p p" 'counsel-projectile-switch-project
   "p r" 'gmacs/projectile-root-dir
   "p f" 'gmacs/counsel-git-region
