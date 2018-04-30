@@ -110,10 +110,9 @@
   "n p" 'narrow-to-page
   "n w" 'widen
 
-  ;; org
+  ;; open
   "o a" 'org-agenda
-  "o b" 'org-iswitchb
-  "o f" 'gmacs/open-org-dir
+  "o o" 'gmacs/open-org-dir
   "o d" 'gmacs/open-downloads-dir
 
   ;; project
