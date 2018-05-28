@@ -336,6 +336,10 @@ disable `hi-lock-mode'."
   (interactive)
   (gmacs/create-visit-dir "~/Downloads"))
 
+(defun gmacs/open-code-dir ()
+  (interactive)
+  (gmacs/create-visit-dir "~/code"))
+
 (defun gmacs/write-startup-log ()
   "Write ~/.emacs.d/startup.log."
   (save-current-buffer
