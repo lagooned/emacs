@@ -64,10 +64,14 @@
      (diminish 'indium-interaction-mode "int"))))
 
 (evil-leader/set-key-for-mode 'js2-mode
-  "m f" 'js2-mode-toggle-hide-functions
-  "m c" 'js2-mode-toggle-hide-comments
-  "m e" 'js2-mode-toggle-element
-  "m r" 'js2r-rename-var)
+  "m f s" 'js2-mode-toggle-hide-functions
+  "m f c" 'js2-mode-toggle-hide-comments
+  "m f f" 'js2-mode-toggle-element
+  "m r" 'indium-switch-to-repl-buffer
+  "m v" 'js2r-rename-var)
+
+(which-key-add-key-based-replacements
+  "SPC m f" "fold")
 
 (provide 'js-lang)
 ;;; js-lang.el ends here
