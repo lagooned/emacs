@@ -170,6 +170,8 @@
   "w m" 'gmacs/switch-to-minibuffer
   "w u" 'winner-undo
   "w C-r" 'winner-redo
+  "]" 'gmacs/enlarge-window-horizontally
+  "[" 'gmacs/shrink-window-horizontally
 
   ;; command
   ";" 'counsel-M-x

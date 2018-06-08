@@ -424,5 +424,15 @@ disable `hi-lock-mode'."
       (setq mc-evil-compat/evil-prev-state nil)
       (setq mc-evil-compat/mark-was-active nil))))
 
+(defun gmacs/shrink-window-horizontally ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'shrink-window-horizontally)))
+
+(defun gmacs/enlarge-window-horizontally ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'enlarge-window-horizontally)))
+
 (provide 'functions)
 ;;; functions.el ends here
