@@ -80,7 +80,7 @@
   :config
   (global-evil-surround-mode 1))
 
-(zoom-mode 1)
+;; (zoom-mode 1)
 
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
