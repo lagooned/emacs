@@ -508,16 +508,12 @@
   (defvar telephone-line-secondary-left-separator)
   (defvar telephone-line-primary-right-separator)
   (defvar telephone-line-secondary-right-separator)
-  (setq telephone-line-height 28
+  (setq telephone-line-height 18
         telephone-line-separator-extra-padding 1
-        ;; telephone-line-primary-left-separator 'telephone-line-abs-left
-        ;; telephone-line-secondary-left-separator 'telephone-line-abs-left
-        ;; telephone-line-primary-right-separator 'telephone-line-abs-right
-        ;; telephone-line-secondary-right-separator 'telephone-line-abs-right
-        telephone-line-primary-left-separator 'telephone-line-flat
-        telephone-line-secondary-left-separator 'telephone-line-flat
-        telephone-line-primary-right-separator 'telephone-line-flat
-        telephone-line-secondary-right-separator 'telephone-line-flat)
+        telephone-line-primary-left-separator 'telephone-line-abs-left
+        telephone-line-secondary-left-separator 'telephone-line-abs-left
+        telephone-line-primary-right-separator 'telephone-line-abs-right
+        telephone-line-secondary-right-separator 'telephone-line-abs-right)
   (defvar telephone-line-lhs)
   (setq telephone-line-lhs '((elscreen . (telephone-line-elscreen-mode-line-string-segment))
                              (evil . (telephone-line-simple-major-mode-segment))
