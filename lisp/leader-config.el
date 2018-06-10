@@ -118,6 +118,7 @@
 
   ;; project
   "p s" 'gmacs/magit-status
+  "p e" 'projectile-run-eshell
   "p p" 'counsel-projectile-switch-project
   "p r" 'gmacs/projectile-root-dir
   "p f" 'gmacs/counsel-git-region
