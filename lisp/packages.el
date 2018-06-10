@@ -515,6 +515,17 @@
         telephone-line-primary-right-separator 'telephone-line-abs-right
         telephone-line-secondary-right-separator 'telephone-line-abs-right)
   (defvar telephone-line-lhs)
+  (defface telephone-line-elscreen '((t (:foreground "black" :background "grey77")))
+    "Elscreen telephone-line segment theme.")
+  (setq telephone-line-faces
+        '((evil . telephone-line-modal-face)
+          (modal . telephone-line-modal-face)
+          (elscreen . (telephone-line-elscreen . mode-line-inactive))
+          (ryo . telephone-line-ryo-modal-face)
+          (accent . (telephone-line-accent-active . mode-line-inactive))
+          (nil . (mode-line . mode-line-inactive))))
+  (telephone-line-defsegment* telephone-line-elscreen-mode-line-string-segment ()
+    (telephone-line-raw elscreen-mode-line-string t))
   (setq telephone-line-lhs '((elscreen . (telephone-line-elscreen-mode-line-string-segment))
                              (evil . (telephone-line-simple-major-mode-segment))
                              (accent . (telephone-line-simple-minor-mode-segment))
