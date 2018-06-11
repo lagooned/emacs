@@ -544,6 +544,10 @@
   ;; fix in-window modeline fragements on quit
   (add-hook 'minibuffer-exit-hook #'redraw-display))
 
+(use-package tiny
+  :config
+  (tiny-setup-default))
+
 (use-package try
   :defer t
   :commands try)
