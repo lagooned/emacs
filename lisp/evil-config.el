@@ -272,6 +272,7 @@
 (define-key evil-emacs-state-map (kbd "M-w") 'kill-ring-save)
 (define-key evil-emacs-state-map (kbd "M-v") 'scroll-down-command)
 (define-key evil-emacs-state-map (kbd "M-m") 'back-to-indentation)
+(define-key evil-emacs-state-map (kbd "M-j") 'back-to-indentation)
 (define-key evil-emacs-state-map (kbd "M-k") 'kill-sentence)
 (define-key evil-emacs-state-map (kbd "M-u") 'fix-word-upcase)
 (define-key evil-emacs-state-map (kbd "M-l") 'fix-word-downcase)
