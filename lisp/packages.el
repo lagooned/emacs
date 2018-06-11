@@ -164,6 +164,7 @@
 (use-package elscreen
   :init
   (setq elscreen-tab-display-kill-screen nil
+        elscreen-tab-display-control nil
         elscreen-display-tab nil)
   :config
   (elscreen-start))
