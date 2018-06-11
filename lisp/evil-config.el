@@ -319,7 +319,7 @@
 (global-unset-key (kbd "M-c"))
 (global-unset-key (kbd "M-h"))
 (global-unset-key (kbd "M-r"))
-(global-unset-key (kbd "M-r"))
+(global-unset-key (kbd "M-m"))
 (global-unset-key (kbd "M-."))
 (global-unset-key (kbd "M-,"))
 (global-unset-key (kbd "M-?"))
