@@ -219,7 +219,7 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
                         (list (shell-quote-argument regexp) ".")) " ")
      'ripgrep-search-mode)))
 
-(defun gmacs/org-link-jump ()
+(defun gmacs/org-link-follow ()
   "Push marker stack and follow org link."
   (interactive)
   (defvar org-link-frame-setup)
@@ -228,11 +228,6 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
                      (progn (xref-push-marker-stack)
                             (find-file args)))))))
     (call-interactively #'org-open-at-point)))
-
-(defun gmacs/org-link-jump-back ()
-  "Pop marker stack to jump back to source org link."
-  (interactive)
-  (xref-pop-marker-stack))
 
 (defun gmacs/counsel-git-projectile (&optional initial-input)
   "Find file in the current Git repository with initial input `INITIAL-INPUT'."

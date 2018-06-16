@@ -102,7 +102,8 @@
   "j j" 'smart-jump-go
   "j b" 'smart-jump-back
   "j r" 'smart-jump-references
-  "j s" 'org-store-link
+  ;; link
+  "l s" 'org-store-link
 
   ;; narrow
   "n r" 'narrow-to-region
@@ -206,9 +207,8 @@
   "q r" 'restart-emacs)
 
 (evil-leader/set-key-for-mode 'org-mode
-  "j j" 'gmacs/org-link-jump
-  "j b" 'gmacs/org-link-jump-back
-  "j i" 'org-insert-link-global
+  "l l" 'gmacs/org-link-follow
+  "l i" 'org-insert-link-global
   "m c" 'org-toggle-checkbox
   "m e" 'org-export-dispatch
   "n e" 'org-narrow-to-element
