@@ -80,6 +80,11 @@
   (interactive)
   (find-file "~/.emacs.d/lisp/languages/packages-lang.el"))
 
+(defun gmacs/open-custom-config ()
+  "Open .custom.el."
+  (interactive)
+  (find-file "~/.emacs.d/.custom.el"))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup \
 at the first save of each gmacs session."

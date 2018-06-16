@@ -52,6 +52,7 @@
   "c f" 'gmacs/open-functions-config
   "c v" 'gmacs/open-variables-config
   "c ," 'gmacs/open-leader-config
+  "c ." 'gmacs/open-custom-config
   "c l" 'gmacs/open-language-config
   "c g" 'gmacs/open-global-config
   "c e" 'gmacs/open-environment-config
