@@ -509,12 +509,21 @@
   (defvar telephone-line-secondary-left-separator)
   (defvar telephone-line-primary-right-separator)
   (defvar telephone-line-secondary-right-separator)
-  (setq telephone-line-height 18
-        telephone-line-separator-extra-padding 1
-        telephone-line-primary-left-separator 'telephone-line-abs-left
-        telephone-line-secondary-left-separator 'telephone-line-abs-left
-        telephone-line-primary-right-separator 'telephone-line-abs-right
-        telephone-line-secondary-right-separator 'telephone-line-abs-right)
+  (setq telephone-line-height 20
+        ;; telephone-line-separator-extra-padding 1
+        ;; telephone-line-primary-left-separator 'telephone-line-identity-left
+        ;; telephone-line-secondary-left-separator 'telephone-line-identity-left
+        ;; telephone-line-primary-right-separator 'telephone-line-identity-right
+        ;; telephone-line-secondary-right-separator 'telephone-line-identity-right
+        ;; telephone-line-primary-left-separator 'telephone-line-abs-left
+        ;; telephone-line-secondary-left-separator 'telephone-line-abs-left
+        ;; telephone-line-primary-right-separator 'telephone-line-abs-right
+        ;; telephone-line-secondary-right-separator 'telephone-line-abs-right
+        telephone-line-primary-left-separator 'telephone-line-flat
+        telephone-line-secondary-left-separator 'telephone-line-flat
+        telephone-line-primary-right-separator 'telephone-line-flat
+        telephone-line-secondary-right-separator 'telephone-line-flat
+        )
   (defvar telephone-line-lhs)
   (defface telephone-line-elscreen '((t (:foreground "black" :background "grey77")))
     "Elscreen telephone-line segment theme.")
@@ -587,7 +596,6 @@
   (which-key-setup-minibuffer)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
-    "SPC `" "eshell"
     "SPC !" "term"
     "SPC b" "buffer"
     "SPC TAB" "last buffer"
@@ -610,7 +618,9 @@
     "SPC U" "negt arg"
     "SPC w" "window"
     "SPC q" "quit"
-    "SPC z" "screen")
+    "SPC z" "screen"
+    "SPC ]" "win size++"
+    "SPC [" "win size--")
   (which-key-mode 1))
 
 (use-package whitespace
