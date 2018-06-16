@@ -46,7 +46,7 @@
 (add-hook
  'emacs-lisp-mode-hook
  (lambda () (if (not (member 'company-capf company-backends))
-                (push 'company-capf company-backends))))
+           (push 'company-capf company-backends))))
 
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 
