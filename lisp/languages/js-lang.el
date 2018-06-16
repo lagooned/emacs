@@ -40,15 +40,6 @@
       'xref-backend-functions
       #'xref-js2-xref-backend nil t))))
 
-(use-package smart-jump
-  :config
-  (smart-jump-register :modes '(js2-mode)
-                       :jump-fn 'xref-find-definitions
-                       :pop-fn 'pop-tag-mark
-                       :should-jump t
-                       :heuristic 'error
-                       :async nil))
-
 (use-package js2-refactor
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode))

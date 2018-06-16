@@ -33,16 +33,6 @@
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
-(use-package smart-jump
-  :config
-  (smart-jump-register :modes '(emacs-lisp-mode lisp-interaction-mode)
-                       :jump-fn 'xref-find-definitions
-                       :pop-fn 'pop-tag-mark
-                       :refs-fn 'gmacs/xref-find-apropos-symbol
-                       :should-jump t
-                       :heuristic 'error
-                       :async nil))
-
 (add-hook
  'emacs-lisp-mode-hook
  (lambda () (if (not (member 'company-capf company-backends))

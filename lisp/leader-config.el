@@ -98,10 +98,6 @@
   "i l s" 'lorem-ipsum-insert-sentences
   "i l p" 'Lorem-ipsum-insert-paragraphs
 
-  ;; jump
-  "j j" 'smart-jump-go
-  "j b" 'smart-jump-back
-  "j r" 'smart-jump-references
   ;; link
   "l s" 'org-store-link
 

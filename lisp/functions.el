@@ -185,8 +185,15 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
+(defun gmacs/xref-find-definitions-symbol ()
+  "X-ref-find-definitions that doesn't fall back."
+  (interactive)
+  (if (symbol-at-point)
+      (xref-find-definitions (symbol-name (symbol-at-point)))
+    (message "No symbol selected")))
+
 (defun gmacs/xref-find-apropos-symbol ()
-  "X-ref made to be used with smart jump."
+  "X-ref-find-apropos that doesn't fall back."
   (interactive)
   (if (symbol-at-point)
       (xref-find-apropos (symbol-name (symbol-at-point)))

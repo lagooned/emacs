@@ -24,20 +24,6 @@
 
 ;;; Code:
 
-(use-package dumb-jump
-  :after smart-jump
-  :bind
-  (:map dumb-jump-mode-map
-        ("C-M-g" . nil)
-        ("C-M-p" . nil)
-        ("C-M-q" . nil))
-  :init
-  (setq dumb-jump-selector 'ivy
-        dumb-jump-prefer-searcher 'rg
-        dumb-jump-quiet t)
-  (when (eq system-type 'windows-nt)
-    (setq dumb-jump-force-searcher 'rg)))
-
 (use-package flycheck
   :diminish flycheck-mode "chk"
   :init
@@ -49,19 +35,6 @@
   (defvar flycheck-highlighting-mode)
   (setq flycheck-indication-mode nil
         flycheck-highlighting-mode 'lines))
-
-(use-package smart-jump
-  :init
-  (defvar smart-jump-find-references-fallback-function)
-  (defvar smart-jump-bind-keys-for-evil)
-  (defvar smart-jump-bind-keys)
-  (defvar smart-jump-refs-key)
-  (defvar smart-jump-pop-key)
-  (setq smart-jump-find-references-fallback-function nil
-        smart-jump-bind-keys-for-evil nil
-        smart-jump-bind-keys nil
-        smart-jump-refs-key nil
-        smart-jump-pop-key nil))
 
 (use-package xref
   :ensure nil
