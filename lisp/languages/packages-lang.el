@@ -47,7 +47,8 @@
 
 (use-package lsp-mode
   :init
-  (setq lsp-enable-eldoc nil)
+  (setq lsp-enable-eldoc nil
+        lsp-inhibit-message t)
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook
@@ -56,6 +57,9 @@
      (diminish 'lsp-mode "lsp"))))
 
 (use-package lsp-ui
+  :init
+  (setq lsp-ui-flycheck-enable nil
+        lsp-ui-doc-enable nil)
   :config
   (add-hook 'lsp-ui-mode-hook '(lambda () (lsp-ui-sideline-mode 0))))
 
