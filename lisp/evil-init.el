@@ -25,7 +25,6 @@
 ;;; Code:
 
 (setq evil-move-cursor-back nil)
-(setq evil-want-C-u-scroll t)
 
 (let ((height (eval gmacs/evil-base-cursor-height)))
   (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
