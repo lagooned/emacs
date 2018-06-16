@@ -59,9 +59,8 @@
 (use-package lsp-ui
   :init
   (setq lsp-ui-flycheck-enable nil
-        lsp-ui-doc-enable nil)
-  :config
-  (add-hook 'lsp-ui-mode-hook '(lambda () (lsp-ui-sideline-mode 0))))
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable nil))
 
 (load "elisp-lang")
 (load "php-lang")
