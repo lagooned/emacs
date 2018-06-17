@@ -171,6 +171,8 @@
   "w r" 'winner-redo
   "]" 'gmacs/enlarge-window-horizontally
   "[" 'gmacs/shrink-window-horizontally
+  "=" 'gmacs/enlarge-window
+  "-" 'gmacs/shrink-window
 
   ;; command
   ";" 'counsel-M-x

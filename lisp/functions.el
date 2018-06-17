@@ -447,5 +447,15 @@ disable `hi-lock-mode'."
     (call-interactively 'end-of-line)
     (call-interactively 'eval-last-sexp)))
 
+(defun gmacs/enlarge-window ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'enlarge-window)))
+
+(defun gmacs/shrink-window ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'shrink-window)))
+
 (provide 'functions)
 ;;; functions.el ends here

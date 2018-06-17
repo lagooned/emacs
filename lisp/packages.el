@@ -619,8 +619,10 @@
     "SPC w" "window"
     "SPC q" "quit"
     "SPC z" "screen"
-    "SPC ]" "win size++"
-    "SPC [" "win size--")
+    "SPC =" "^v ++"
+    "SPC -" "^v --"
+    "SPC ]" "<> ++"
+    "SPC [" "<> --")
   (which-key-mode 1))
 
 (use-package whitespace
