@@ -430,14 +430,16 @@
   :commands counsel-recentf
   :config
   (setq recentf-max-menu-items 0
-        recentf-max-saved-items 300
+        recentf-max-saved-items 999
         recentf-filename-handlers '(file-truename)
         recentf-exclude
-        (list "^/tmp/" "^/ssh:"
+        (list "^/tmp/"
+              "^/ssh:"
               "\\.?ido\\.last$"
               "\\.revive$"
               "/TAGS$"
               "^/var/folders/.+$"
+              (concat "^" (expand-file-name "~/.emacs.d/workspace") "/.+$")
               "^#")))
 
 (use-package restart-emacs
