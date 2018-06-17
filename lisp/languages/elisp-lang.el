@@ -48,5 +48,9 @@
   "C-e" 'gmacs/move-eol-eval-last-sexp
   "e" 'eval-last-sexp)
 
+(which-key-add-key-based-replacements
+  "SPC e" "eval-sexp"
+  "SPC C-e" "eval-eol")
+
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here
