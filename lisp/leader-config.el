@@ -101,6 +101,7 @@
 
   ;; link
   "l s" 'org-store-link
+  "l v" 'browse-url-at-point
 
   ;; narrow
   "n r" 'narrow-to-region
