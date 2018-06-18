@@ -315,8 +315,8 @@ disable `hi-lock-mode'."
 (defun gmacs/eshell-send-eof ()
   "Send EOF to Eshell with newline."
   (interactive)
-  (newline)
-  (eshell-send-eof-to-process))
+  (call-interactively 'newline)
+  (call-interactively 'eshell-send-eof-to-process))
 
 (defun gmacs/projectile-root-dir ()
   "Jump to the root directory of the current project."
