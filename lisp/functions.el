@@ -325,6 +325,11 @@ disable `hi-lock-mode'."
       (error "Not in a git repository")
     (dired (projectile-project-root))))
 
+(defun gmacs/open-home-dir ()
+  "Open ~."
+  (interactive)
+  (dired "~"))
+
 (defun gmacs/create-visit-dir (dir)
   "Open/create `DIR'."
   (if (file-directory-p dir)

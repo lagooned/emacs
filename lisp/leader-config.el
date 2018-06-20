@@ -114,6 +114,7 @@
   "o o" 'gmacs/open-org-dir
   "o d" 'gmacs/open-downloads-dir
   "o c" 'gmacs/open-code-dir
+  "o h" 'gmacs/open-home-dir
 
   ;; project
   "p s" 'gmacs/magit-status
