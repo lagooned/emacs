@@ -237,8 +237,9 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
   (defvar org-link-frame-setup)
   (let ((org-link-frame-setup
          '((file . (lambda (args)
-                     (progn (xref-push-marker-stack)
-                            (find-file args)))))))
+                     (progn
+                       ;; (xref-push-marker-stack)
+                       (find-file args)))))))
     (call-interactively #'org-open-at-point)))
 
 (defun gmacs/counsel-git-projectile (&optional initial-input)
