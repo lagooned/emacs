@@ -268,6 +268,13 @@
      (define-key evil-insert-state-local-map (kbd "C-j") 'term-send-input)
      (define-key evil-insert-state-local-map (kbd "C-m") 'term-send-input))))
 
+;; org
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   (progn
+     (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))))
+
 ;; emacs binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
 (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
