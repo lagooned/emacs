@@ -120,7 +120,8 @@
      (progn
        (toggle-truncate-lines 1)
        (message nil))))
-  (setq-default dired-omit-files-p t)
+  (setq-default dired-omit-files-p t
+                dired-hide-details-hide-symlink-targets nil)
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package dired-x
