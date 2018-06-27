@@ -93,7 +93,7 @@
     (progn
       (gmacs/write-startup-log)
       (kill-buffer "*Messages*")
-      (setq default-directory "~/.emacs.d"))))
+      (setq default-directory "~/.emacs.d/"))))
 
 (provide 'init)
 ;;; init.el ends here
