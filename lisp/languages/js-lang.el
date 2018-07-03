@@ -28,6 +28,8 @@
   :commands
   js2-mode
   :init
+  (setq js2-strict-missing-semi-warning nil
+        js2-missing-semi-one-line-override nil)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package xref-js2
