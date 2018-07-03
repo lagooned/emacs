@@ -178,7 +178,9 @@
 
   ;; command
   ";" 'counsel-M-x
+  "`" 'eshell
   "!" 'shell-command
+  "@" 'async-shell-command
 
   ;; elscreen
   "1"   'elscreen-jump
