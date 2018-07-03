@@ -421,6 +421,10 @@
    (if (bound-and-true-p company-mode)
        (company-abort))))
 
+;; add evil-ex-history to .savehist file
+(if (not (member 'evil-ex-history savehist-additional-variables))
+    (push 'evil-ex-history savehist-additional-variables))
+
 (provide 'evil-config)
 
 ;;; evil-config.el ends here

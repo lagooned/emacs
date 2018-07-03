@@ -84,10 +84,6 @@
        'minibuffer-setup-hook
        '(lambda () (set-window-fringes (minibuffer-window) 0 0 nil))))))
 
-;; frame title format
-(setq frame-title-format
-      '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-
 ;; backups
 (setq version-control t
       kept-new-versions 10
@@ -209,6 +205,10 @@
       jit-lock-stealth-nice 0.1
       jit-lock-stealth-time 0.2
       jit-lock-stealth-verbose nil)
+
+;; save history
+(setq savehist-additional-variables
+      '(kill-ring search-ring regexp-search-ring))
 
 (provide 'global)
 ;;; global.el ends here

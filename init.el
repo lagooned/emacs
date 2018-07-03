@@ -71,6 +71,10 @@
 ;; load per-environment config
 (load "environment")
 
+;; enable savehist
+(setq savehist-file "~/.emacs.d/.savehist")
+(savehist-mode 1)
+
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
