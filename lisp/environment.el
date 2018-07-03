@@ -26,6 +26,8 @@
 
 ;; osx
 (when (eq system-type 'darwin)
+  ;; $ brew tap railwaycat/emacsmacport
+  ;; $ brew install emacs-mac --with-natural-title-bar
   (setq mac-pass-command-to-system nil)
   (set-face-attribute 'default nil :weight 'normal)
   (set-face-attribute 'default nil :height 130)
@@ -34,7 +36,11 @@
   (defvar ispell-extra-args)
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra"))
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil))
 
 ;; linux
 (when (eq system-type 'gnu/linux)
