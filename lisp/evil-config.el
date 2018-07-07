@@ -329,6 +329,7 @@
 (define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
 (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
 (define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
+(define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
 
 ;; unbinds to clean up global bindspace
 (global-unset-key (kbd "C-k"))
@@ -346,6 +347,7 @@
 (global-unset-key (kbd "M-u"))
 (global-unset-key (kbd "M-v"))
 (global-unset-key (kbd "M-l"))
+(global-unset-key (kbd "M-i"))
 (global-unset-key (kbd "M-c"))
 (global-unset-key (kbd "M-h"))
 (global-unset-key (kbd "M-r"))
