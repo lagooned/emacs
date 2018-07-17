@@ -110,7 +110,7 @@
 (global-eldoc-mode -1)
 
 ;; no cursor in other windows
-(setq default-cursor-in-non-selected-windows nil)
+(setq-default cursor-in-non-selected-windows nil)
 
 ;; show inputs immediately
 (setq echo-keystrokes 0.01)
