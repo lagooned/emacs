@@ -29,7 +29,6 @@
   :init
   (setq lsp-java-save-action-organize-imports nil)
   (defun gmacs/lsp-java-enable ()
-    (yas-minor-mode-on)
     (make-variable-buffer-local 'company-backends)
     (if (not (member 'company-lsp company-backends))
         (push 'company-lsp company-backends))
