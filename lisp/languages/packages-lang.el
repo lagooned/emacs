@@ -46,6 +46,7 @@
         xref-after-return-hook '(recenter)))
 
 (use-package lsp-mode
+  :commands lsp-mode
   :init
   (setq lsp-enable-eldoc nil
         lsp-inhibit-message t)
@@ -57,10 +58,18 @@
      (diminish 'lsp-mode "lsp"))))
 
 (use-package lsp-ui
+  :commands lsp-ui-mode
   :init
   (setq lsp-ui-flycheck-enable nil
         lsp-ui-doc-enable nil
         lsp-ui-sideline-enable nil))
+
+(use-package company-lsp
+  :after lsp-mode
+  :config
+  (setq company-lsp-cache-candidates 'auto
+        company-lsp-enable-snippet t
+        company-lsp-enable-recompletion t))
 
 (load "elisp-lang")
 (load "php-lang")

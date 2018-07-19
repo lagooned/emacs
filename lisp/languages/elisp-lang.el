@@ -24,21 +24,24 @@
 
 ;;; Code:
 
+(use-package emacs-lisp-mode
+  :ensure nil
+  :init
+  (defun gmacs/emacs-lisp-mode-hook ()
+    (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+    (make-variable-buffer-local 'company-backends)
+    (if (not (member 'company-capf company-backends))
+        (push 'company-capf company-backends)))
+  (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-mode-hook))
+
 (use-package eldoc
+  :defer t
   :diminish eldoc-mode
   :commands eldoc-mode
-  :defer t
   :init
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
-
-(add-hook
- 'emacs-lisp-mode-hook
- (lambda () (if (not (member 'company-capf company-backends))
-           (push 'company-capf company-backends))))
-
-(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "C-e" 'gmacs/move-eol-eval-last-sexp

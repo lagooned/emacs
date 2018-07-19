@@ -24,15 +24,17 @@
 
 ;;; Code:
 
-(use-package lsp-java)
-
-(add-hook
- 'java-mode-hook
- (lambda () (if (not (member 'company-capf company-backends))
-           (push 'company-capf company-backends))))
-
-(add-hook
- 'java-mode-hook #'lsp-java-enable)
+(use-package lsp-java
+  :commands lsp-java-enable
+  :init
+  (setq lsp-java-save-action-organize-imports nil)
+  (defun gmacs/lsp-java-enable ()
+    (yas-minor-mode-on)
+    (make-variable-buffer-local 'company-backends)
+    (if (not (member 'company-lsp company-backends))
+        (push 'company-lsp company-backends))
+    (lsp-java-enable))
+  (add-hook 'java-mode-hook #'gmacs/lsp-java-enable))
 
 (provide 'java-lang)
 ;;; java-lang.el ends here

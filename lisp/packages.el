@@ -89,13 +89,9 @@
   :init
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 2)
-  (setq company-require-match nil)
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-code-ignore-case t)
   (setq company-show-numbers t)
   :config
-  (setq company-backends
-        '((company-dabbrev-code company-dabbrev))))
+  (setq company-backends nil))
 
 (use-package counsel
   :ensure counsel-projectile
@@ -647,18 +643,16 @@
   (setq whitespace-line-column 100))
 
 (use-package yasnippet
-  :diminish yas-minor-mode
   :commands
-  yas-minor-mode
-  yas-insert-snippet
+  yas-minor-mode-on
   :init
-  (require 'yasnippet)
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (define-key yas-minor-mode-map (kbd "C-i") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (yas-reload-all)
   :config
+  (require 'yasnippet)
+  (yas-reload-all)
   (yas-minor-mode 1))
 
 (use-package zoom
