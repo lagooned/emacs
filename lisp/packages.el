@@ -646,14 +646,13 @@
   :commands
   yas-minor-mode-on
   :init
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (add-hook 'prog-mode-hook #'yas-minor-mode-on)
+  :config
+  (require 'yasnippet)
   (define-key yas-minor-mode-map (kbd "C-i") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  :config
-  (require 'yasnippet)
-  (yas-reload-all)
-  (yas-minor-mode 1))
+  (yas-reload-all))
 
 (use-package zoom
   :commands zoom-mode
