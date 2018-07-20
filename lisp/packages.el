@@ -469,6 +469,7 @@
   (defvar shell-pop-window-position)
   (defvar eshell-banner-message)
   (setq eshell-banner-message 'gmacs/eshell-message)
+  (add-to-list 'eshell-visual-commands "ngrok" t)
   (setq
    shell-pop-shell-type (quote
                          ("eshell" "*eshell*"
