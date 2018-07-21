@@ -196,6 +196,7 @@
   "z z" 'elscreen-toggle
   "z l" 'elscreen-display-screen-name-list
   "z c" 'elscreen-clone
+  "z C" 'elscreen-create
   "z k" 'elscreen-kill
   "z r" 'elscreen-screen-nickname
   "z K" 'elscreen-kill-others
