@@ -72,7 +72,8 @@
 (load "environment")
 
 ;; enable savehist
-(setq savehist-file "~/.emacs.d/.savehist")
+(setq savehist-file "~/.emacs.d/.savehist"
+      history-delete-duplicates t)
 (savehist-mode 1)
 
 ;; customs
