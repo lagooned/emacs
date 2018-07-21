@@ -188,6 +188,13 @@
         ;; erc-kill-server-buffer-on-quit t
         erc-kill-queries-on-quit t))
 
+(use-package eshell
+  :init
+  (setq eshell-banner-message 'gmacs/eshell-message
+        shell-hist-ignoredups t)
+  :config
+  (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands)))
+
 (use-package evil
   :init
   (load "evil-init.el")
@@ -467,16 +474,9 @@
   (defvar shell-pop-shell-type)
   (defvar shell-pop-full-span)
   (defvar shell-pop-window-position)
-  (defvar eshell-banner-message)
-  (setq eshell-banner-message 'gmacs/eshell-message)
-  (add-to-list 'eshell-visual-commands "ngrok" t)
-  (setq
-   shell-pop-shell-type (quote
-                         ("eshell" "*eshell*"
-                          (lambda nil
-                            (eshell shell-pop-term-shell))))
-   shell-pop-full-span t
-   shell-pop-window-position "bottom"))
+  (setq shell-pop-shell-type '("eshell" "*eshell*" (lambda nil (eshell shell-pop-term-shell)))
+        shell-pop-full-span t
+        shell-pop-window-position "bottom"))
 
 (use-package smartparens
   :commands smartparens-mode
