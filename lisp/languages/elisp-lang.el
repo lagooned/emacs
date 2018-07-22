@@ -30,8 +30,7 @@
   (defun gmacs/emacs-lisp-mode-hook ()
     (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
     (make-variable-buffer-local 'company-backends)
-    (if (not (member 'company-capf company-backends))
-        (push 'company-capf company-backends)))
+    (push '(company-capf company-yasnippet) company-backends))
   (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-mode-hook))
 
 (use-package eldoc
