@@ -229,7 +229,8 @@
      (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
      (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
-     (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))))
+     (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input)
+     (define-key evil-normal-state-local-map (kbd "dd") 'gmacs/eshell-delete-current-command-or-line))))
 
 ;; shell
 (add-hook

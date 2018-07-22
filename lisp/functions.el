@@ -410,6 +410,15 @@ disable `hi-lock-mode'."
     (eshell-banner-initialize)
     (eshell-send-input)))
 
+(defun gmacs/eshell-delete-current-command-or-line ()
+  "Clear current eshell command."
+  (interactive)
+  (let ((inhibit-read-only t)
+        (current-line (string-trim (thing-at-point 'line t))))
+    (if (string-match eshell-prompt-regexp current-line)
+        (progn (kill-whole-line) (eshell-send-eof-to-process))
+      (kill-whole-line))))
+
 (defun gmacs/evil-visual-or-normal-p ()
   "True if evil mode is enabled, and we are in normal or visual mode."
   (and (bound-and-true-p evil-mode)
