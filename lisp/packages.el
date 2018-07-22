@@ -190,10 +190,10 @@
 
 (use-package eshell
   :init
-  (setq eshell-banner-message 'gmacs/eshell-message
-        shell-hist-ignoredups t)
+  (setq eshell-banner-message 'gmacs/eshell-message)
   :config
-  (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands)))
+  (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
+  (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))
 
 (use-package evil
   :init
