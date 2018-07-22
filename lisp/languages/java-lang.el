@@ -24,15 +24,19 @@
 
 ;;; Code:
 
+(defun gmacs/lsp-java-enable ()
+  (make-variable-buffer-local 'company-backends)
+  (push 'company-lsp company-backends)
+  (lsp-java-enable)
+  (evil-leader/set-key-for-mode 'java-mode
+    "m r" 'lsp-restart-workspace
+    "m o" 'lsp-java-organize-imports
+    "m b" 'lsp-java-build-project))
+
 (use-package lsp-java
   :commands lsp-java-enable
   :init
   (setq lsp-java-save-action-organize-imports nil)
-  (defun gmacs/lsp-java-enable ()
-    (make-variable-buffer-local 'company-backends)
-    (if (not (member 'company-lsp company-backends))
-        (push 'company-lsp company-backends))
-    (lsp-java-enable))
   (add-hook 'java-mode-hook #'gmacs/lsp-java-enable))
 
 (provide 'java-lang)
