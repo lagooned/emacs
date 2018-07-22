@@ -30,6 +30,7 @@ games
 /startup.log
 /workspace
 /.mc-lists.el
-eclipse.jdt.ls/server/config_mac/org.eclipse.*
-eclipse.jdt.ls/server/config_linux/org.eclipse.*
-eclipse.jdt.ls/server/config_win/org.eclipse.*
+/eclipse.jdt.ls/server/config_mac/org.eclipse.*
+/eclipse.jdt.ls/server/config_linux/org.eclipse.*
+/eclipse.jdt.ls/server/config_win/org.eclipse.*
+/.savehist

@@ -408,6 +408,7 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
+;; c derivatives comments
 (add-hook
  'c-mode-common-hook
  (lambda ()
