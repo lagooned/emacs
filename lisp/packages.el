@@ -190,7 +190,9 @@
 
 (use-package eshell
   :init
-  (setq eshell-banner-message 'gmacs/eshell-message)
+  (setq eshell-banner-message 'gmacs/eshell-message
+        eshell-prompt-function 'gmacs/eshell-prompt-function
+        eshell-prompt-regexp 'gmacs/eshell-prompt-regexp)
   :config
   (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
   (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))

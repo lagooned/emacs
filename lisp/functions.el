@@ -405,19 +405,16 @@ disable `hi-lock-mode'."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)
-    (setq-local gmacs/eshell-message
-                (concat (string-trim gmacs/eshell-message) "\n"))
+    (setq-local gmacs/eshell-message (string-trim gmacs/eshell-message))
     (eshell-banner-initialize)
     (eshell-send-input)))
 
-(defun gmacs/eshell-delete-current-command-or-line ()
-  "Clear current eshell command."
-  (interactive)
-  (let ((inhibit-read-only t)
-        (current-line (string-trim (thing-at-point 'line t))))
-    (if (string-match eshell-prompt-regexp current-line)
-        (progn (kill-whole-line) (eshell-send-eof-to-process))
-      (kill-whole-line))))
+(defun gmacs/eshell-prompt-function ()
+  "A function that returns the Eshell prompt string.
+Make sure to update `gmacs/eshell-prompt-regexp' so that it will match your
+prompt."
+  (concat "\n[" (abbreviate-file-name (eshell/pwd)) "] \n"
+          (if (= (user-uid) 0) "# " "$ ")))
 
 (defun gmacs/evil-visual-or-normal-p ()
   "True if evil mode is enabled, and we are in normal or visual mode."

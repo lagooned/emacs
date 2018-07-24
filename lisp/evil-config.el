@@ -211,6 +211,28 @@
      "c" 'void)))
 
 ;; eshell
+(evil-define-operator evil-eshell-delete
+  (beg end type register yank-handler)
+  "Like evil-delete, but inhibit read only."
+  (interactive "<R><x><y>")
+  (let ((inhibit-read-only t))
+    ;;
+    ;; todo: nasty hack-
+    ;;       check if beg-1 is a \n
+    ;;       and if beg is a $/# (maybe use some unicode char)
+    ;;       then evil-delete from beg + 2
+    ;;       cursor will get moved to prev line
+    ;;       then delete whole line and send input
+    ;;       else just do normal delete
+    ;;
+    ;; todo: figure out what do if visually selecting prompt
+    ;;
+    ;; todo: maybe don't do any of this and live with it
+    ;;
+    (evil-delete beg end type register yank-handler)))
+
+(evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
+
 (add-hook
  'eshell-mode-hook
  (lambda ()
@@ -229,8 +251,7 @@
      (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
      (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
-     (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input)
-     (define-key evil-normal-state-local-map (kbd "dd") 'gmacs/eshell-delete-current-command-or-line))))
+     (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))))
 
 ;; shell
 (add-hook
