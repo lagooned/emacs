@@ -86,7 +86,9 @@ START and END are buffer positions."
   :init
   (setq mmm-submode-decoration-level 0))
 
-(use-package vue-mode)
+(use-package vue-mode
+  :config
+  (add-hook 'vue-mode-hook 'turn-off-evil-matchit-mode))
 
 (provide 'web-lang)
 ;;; web-lang.el ends here
