@@ -95,6 +95,9 @@
 
 (add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
+;; confirm literal large file load
+(add-hook 'find-file-hook #'gmacs/check-large-file)
+
 ;; auto save to temp
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))

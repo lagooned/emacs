@@ -115,9 +115,6 @@ undo and in `fundamental-mode' for performance sake."
       (buffer-disable-undo)
       (fundamental-mode))))
 
-(add-hook 'find-file-hook #'gmacs/check-large-file)
-
-
 (defun gmacs/untabify-except-makefiles ()
   "Replace tabs with spaces except in makefiles."
   (unless (derived-mode-p 'makefile-mode)
