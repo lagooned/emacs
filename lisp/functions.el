@@ -96,7 +96,6 @@ at the first save of each gmacs session."
       (backup-buffer)))
   (let ((buffer-backed-up nil))
     (backup-buffer)))
-(add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
 (defun gmacs/check-large-file ()
   "Check if the buffer's file is large (see `gmacs/large-file-size').

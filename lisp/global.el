@@ -93,6 +93,8 @@
       vc-make-backup-files t
       backup-directory-alist '(("" . "~/.emacs.d/backup/save")))
 
+(add-hook 'before-save-hook 'gmacs/force-buffer-backup)
+
 ;; auto save to temp
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
