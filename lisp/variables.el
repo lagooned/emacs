@@ -47,11 +47,6 @@ modes are active and the buffer is read-only.")
     pdf-view-mode)
   "Major modes that `gmacs/check-large-file' will ignore.")
 
-(defvar gmacs/auto-minor-mode-alist ()
-  "Alist of filename patterns vs correpsonding minor mode functions, see \
-`auto-mode-alist' All elements of this alist are checked, meaning you can
-enable multiple minor modes for the same regexp.")
-
 (defvar gmacs/eshell-message "Gshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 

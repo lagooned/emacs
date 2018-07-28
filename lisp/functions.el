@@ -118,24 +118,6 @@ undo and in `fundamental-mode' for performance sake."
 
 (add-hook 'find-file-hook #'gmacs/check-large-file)
 
-(defun gmacs/enable-minor-mode-based-on-extension ()
-  "Check file name against gmacs/auto-minor-mode-alist to enable minor \
-modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
-  (when buffer-file-name
-    (let ((name buffer-file-name)
-          (remote-id (file-remote-p buffer-file-name))
-          (alist gmacs/auto-minor-mode-alist))
-      ;; Remove backup-suffixes from file name.
-      (setq name (file-name-sans-versions name))
-      ;; Remove remote file name identification.
-      (when (and (stringp remote-id)
-                 (string-match-p (regexp-quote remote-id) name))
-        (setq name (substring name (match-end 0))))
-      (while (and alist (caar alist) (cdar alist))
-        (if (string-match (caar alist) name)
-            (funcall (cdar alist) 1))
-        (setq alist (cdr alist))))))
-(add-hook 'find-file-hook 'gmacs/enable-minor-mode-based-on-extension)
 
 (defun gmacs/untabify-except-makefiles ()
   "Replace tabs with spaces except in makefiles."
