@@ -116,11 +116,7 @@
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(defadvice kill-buffer (around kill-buffer-around-advice activate)
-  (let ((buffer-to-kill (ad-get-arg 0)))
-    (if (equal buffer-to-kill "*scratch*")
-        (bury-buffer)
-      ad-do-it)))
+(add-hook 'kill-buffer-query-functions 'gmacs/dont-kill-scratch)
 
 ;; no tool bar
 (tool-bar-mode -1)

@@ -469,5 +469,11 @@ prompt."
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window)))
 
+(defun gmacs/dont-kill-scratch ()
+  "Don't kill but burry *scratch* buffer."
+  (if (equal (buffer-name (current-buffer)) "*scratch*")
+      (progn (bury-buffer) nil)
+    t))
+
 (provide 'functions)
 ;;; functions.el ends here
