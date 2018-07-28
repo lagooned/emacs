@@ -32,13 +32,6 @@
   (add-hook 'web-mode-hook  'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode))
 
-(use-package impatient-mode
-  :init
-  (defvar gmacs/auto-minor-mode-alist)
-  (add-to-list
-   'gmacs/auto-minor-mode-alist
-   '("\\.x?html\\'" . impatient-mode)))
-
 (use-package web-mode
   :commands web-mode
   :init
