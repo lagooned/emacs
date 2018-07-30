@@ -50,7 +50,7 @@ modes are active and the buffer is read-only.")
 (defvar gmacs/eshell-message "Gshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 
-(defvar gmacs/eshell-prompt-regexp "^\n\\[[^#$\n]*\\] \n[#$]"
+(defvar gmacs/eshell-prompt-regexp "^[#$] "
   "A regexp which fully matches your eshell prompt.
 This setting is important, since it affects how eshell will interpret
 the lines that are passed to it.
