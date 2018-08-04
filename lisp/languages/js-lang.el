@@ -28,6 +28,8 @@
   :commands
   js2-mode
   :init
+  (setq js2-strict-missing-semi-warning nil
+        js2-missing-semi-one-line-override nil)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package xref-js2
@@ -39,15 +41,6 @@
      (add-hook
       'xref-backend-functions
       #'xref-js2-xref-backend nil t))))
-
-(use-package smart-jump
-  :config
-  (smart-jump-register :modes '(js2-mode)
-                       :jump-fn 'xref-find-definitions
-                       :pop-fn 'pop-tag-mark
-                       :should-jump t
-                       :heuristic 'error
-                       :async nil))
 
 (use-package js2-refactor
   :config
@@ -64,10 +57,14 @@
      (diminish 'indium-interaction-mode "int"))))
 
 (evil-leader/set-key-for-mode 'js2-mode
-  "m f" 'js2-mode-toggle-hide-functions
-  "m c" 'js2-mode-toggle-hide-comments
-  "m e" 'js2-mode-toggle-element
-  "m r" 'js2r-rename-var)
+  "m f s" 'js2-mode-toggle-hide-functions
+  "m f c" 'js2-mode-toggle-hide-comments
+  "m f f" 'js2-mode-toggle-element
+  "m r" 'indium-switch-to-repl-buffer
+  "m v" 'js2r-rename-var)
+
+(which-key-add-key-based-replacements
+  "SPC m f" "fold")
 
 (provide 'js-lang)
 ;;; js-lang.el ends here

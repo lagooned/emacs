@@ -87,15 +87,11 @@
         ("C-v"    . company-next-page)
         ("M-v"    . company-previous-page))
   :init
-  (setq company-idle-delay 0.01)
-  (setq company-minimum-prefix-length 1)
-  (setq company-require-match nil)
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-code-ignore-case t)
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 2)
   (setq company-show-numbers t)
   :config
-  (setq company-backends
-        '((company-dabbrev-code company-dabbrev))))
+  (setq company-backends nil))
 
 (use-package counsel
   :ensure counsel-projectile
@@ -120,7 +116,8 @@
      (progn
        (toggle-truncate-lines 1)
        (message nil))))
-  (setq-default dired-omit-files-p t)
+  (setq-default dired-omit-files-p t
+                dired-hide-details-hide-symlink-targets nil)
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package dired-x
@@ -164,6 +161,7 @@
 (use-package elscreen
   :init
   (setq elscreen-tab-display-kill-screen nil
+        elscreen-tab-display-control nil
         elscreen-display-tab nil)
   :config
   (elscreen-start))
@@ -189,6 +187,15 @@
         ;; erc-server-auto-reconnect t
         ;; erc-kill-server-buffer-on-quit t
         erc-kill-queries-on-quit t))
+
+(use-package eshell
+  :init
+  (setq eshell-banner-message 'gmacs/eshell-message
+        eshell-prompt-function 'gmacs/eshell-prompt-function
+        eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
+  :config
+  (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
+  (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))
 
 (use-package evil
   :init
@@ -429,14 +436,16 @@
   :commands counsel-recentf
   :config
   (setq recentf-max-menu-items 0
-        recentf-max-saved-items 300
+        recentf-max-saved-items 999
         recentf-filename-handlers '(file-truename)
         recentf-exclude
-        (list "^/tmp/" "^/ssh:"
+        (list "^/tmp/"
+              "^/ssh:"
               "\\.?ido\\.last$"
               "\\.revive$"
               "/TAGS$"
               "^/var/folders/.+$"
+              (concat "^" (expand-file-name "~/\\(.emacs.d\\|emacs\\)/workspace") "/.+$")
               "^#")))
 
 (use-package restart-emacs
@@ -467,15 +476,9 @@
   (defvar shell-pop-shell-type)
   (defvar shell-pop-full-span)
   (defvar shell-pop-window-position)
-  (defvar eshell-banner-message)
-  (setq eshell-banner-message 'gmacs/eshell-message)
-  (setq
-   shell-pop-shell-type (quote
-                         ("eshell" "*eshell*"
-                          (lambda nil
-                            (eshell shell-pop-term-shell))))
-   shell-pop-full-span t
-   shell-pop-window-position "bottom"))
+  (setq shell-pop-shell-type '("eshell" "*eshell*" (lambda nil (eshell shell-pop-term-shell)))
+        shell-pop-full-span t
+        shell-pop-window-position "bottom"))
 
 (use-package smartparens
   :commands smartparens-mode
@@ -508,8 +511,12 @@
   (defvar telephone-line-secondary-left-separator)
   (defvar telephone-line-primary-right-separator)
   (defvar telephone-line-secondary-right-separator)
-  (setq telephone-line-height 28
-        telephone-line-separator-extra-padding 1
+  (setq telephone-line-height 20
+        ;; telephone-line-separator-extra-padding 1
+        ;; telephone-line-primary-left-separator 'telephone-line-identity-left
+        ;; telephone-line-secondary-left-separator 'telephone-line-identity-left
+        ;; telephone-line-primary-right-separator 'telephone-line-identity-right
+        ;; telephone-line-secondary-right-separator 'telephone-line-identity-right
         ;; telephone-line-primary-left-separator 'telephone-line-abs-left
         ;; telephone-line-secondary-left-separator 'telephone-line-abs-left
         ;; telephone-line-primary-right-separator 'telephone-line-abs-right
@@ -517,8 +524,20 @@
         telephone-line-primary-left-separator 'telephone-line-flat
         telephone-line-secondary-left-separator 'telephone-line-flat
         telephone-line-primary-right-separator 'telephone-line-flat
-        telephone-line-secondary-right-separator 'telephone-line-flat)
+        telephone-line-secondary-right-separator 'telephone-line-flat
+        )
   (defvar telephone-line-lhs)
+  (defface telephone-line-elscreen '((t (:foreground "black" :background "grey77")))
+    "Elscreen telephone-line segment theme.")
+  (setq telephone-line-faces
+        '((evil . telephone-line-modal-face)
+          (modal . telephone-line-modal-face)
+          (elscreen . (telephone-line-elscreen . mode-line-inactive))
+          (ryo . telephone-line-ryo-modal-face)
+          (accent . (telephone-line-accent-active . mode-line-inactive))
+          (nil . (mode-line . mode-line-inactive))))
+  (telephone-line-defsegment* telephone-line-elscreen-mode-line-string-segment ()
+    (telephone-line-raw elscreen-mode-line-string t))
   (setq telephone-line-lhs '((elscreen . (telephone-line-elscreen-mode-line-string-segment))
                              (evil . (telephone-line-simple-major-mode-segment))
                              (accent . (telephone-line-simple-minor-mode-segment))
@@ -536,6 +555,10 @@
   (telephone-line-mode 1)
   ;; fix in-window modeline fragements on quit
   (add-hook 'minibuffer-exit-hook #'redraw-display))
+
+(use-package tiny
+  :config
+  (tiny-setup-default))
 
 (use-package try
   :defer t
@@ -575,7 +598,6 @@
   (which-key-setup-minibuffer)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
-    "SPC `" "eshell"
     "SPC !" "term"
     "SPC b" "buffer"
     "SPC TAB" "last buffer"
@@ -588,6 +610,7 @@
     "SPC h v" "view"
     "SPC i" "insert"
     "SPC j" "jump"
+    "SPC m" "mode"
     "SPC n" "narrow"
     "SPC o" "org"
     "SPC p" "project"
@@ -597,7 +620,11 @@
     "SPC U" "negt arg"
     "SPC w" "window"
     "SPC q" "quit"
-    "SPC z" "screen")
+    "SPC z" "screen"
+    "SPC =" "^v ++"
+    "SPC -" "^v --"
+    "SPC ]" "<> ++"
+    "SPC [" "<> --")
   (which-key-mode 1))
 
 (use-package whitespace
@@ -619,19 +646,16 @@
   (setq whitespace-line-column 100))
 
 (use-package yasnippet
-  :diminish yas-minor-mode
   :commands
-  yas-minor-mode
-  yas-insert-snippet
+  yas-minor-mode-on
   :init
+  (add-hook 'prog-mode-hook #'yas-minor-mode-on)
+  :config
   (require 'yasnippet)
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
   (define-key yas-minor-mode-map (kbd "C-i") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (yas-reload-all)
-  :config
-  (yas-minor-mode 1))
+  (yas-reload-all))
 
 (use-package zoom
   :commands zoom-mode

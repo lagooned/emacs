@@ -428,7 +428,8 @@ Evaluate CALLBACK with the completion candidates."
 	 (repl-buffer (current-buffer))
 	 (string (buffer-substring-no-properties start end)))
     (with-current-buffer
-	(get-buffer-create "*indium-fontification*")
+	;; (get-buffer-create "*indium-fontification*")
+	(get-buffer-create " indium-fontification")
       (let ((inhibit-modification-hooks nil))
 	(js-mode)
 	(erase-buffer)

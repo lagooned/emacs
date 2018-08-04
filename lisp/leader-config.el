@@ -52,6 +52,7 @@
   "c f" 'gmacs/open-functions-config
   "c v" 'gmacs/open-variables-config
   "c ," 'gmacs/open-leader-config
+  "c ." 'gmacs/open-custom-config
   "c l" 'gmacs/open-language-config
   "c g" 'gmacs/open-global-config
   "c e" 'gmacs/open-environment-config
@@ -98,11 +99,9 @@
   "i l s" 'lorem-ipsum-insert-sentences
   "i l p" 'Lorem-ipsum-insert-paragraphs
 
-  ;; jump
-  "j j" 'smart-jump-go
-  "j b" 'smart-jump-back
-  "j r" 'smart-jump-references
-  "j s" 'org-store-link
+  ;; link
+  "l s" 'org-store-link
+  "l l" 'browse-url-at-point
 
   ;; narrow
   "n r" 'narrow-to-region
@@ -110,14 +109,16 @@
   "n p" 'narrow-to-page
   "n w" 'widen
 
-  ;; org
+  ;; open
   "o a" 'org-agenda
-  "o b" 'org-iswitchb
-  "o f" 'gmacs/open-org-dir
+  "o o" 'gmacs/open-org-dir
   "o d" 'gmacs/open-downloads-dir
+  "o c" 'gmacs/open-code-dir
+  "o h" 'gmacs/open-home-dir
 
   ;; project
-  "p s" 'magit-status
+  "p s" 'gmacs/magit-status
+  "p e" 'projectile-run-eshell
   "p p" 'counsel-projectile-switch-project
   "p r" 'gmacs/projectile-root-dir
   "p f" 'gmacs/counsel-git-region
@@ -169,27 +170,49 @@
   "w f" 'reposition-window
   "w m" 'gmacs/switch-to-minibuffer
   "w u" 'winner-undo
-  "w C-r" 'winner-redo
+  "w r" 'winner-redo
+  "]" 'gmacs/enlarge-window-horizontally
+  "[" 'gmacs/shrink-window-horizontally
+  "=" 'gmacs/enlarge-window
+  "-" 'gmacs/shrink-window
 
   ;; command
   ";" 'counsel-M-x
+  "`" 'eshell
   "!" 'shell-command
+  "@" 'async-shell-command
 
   ;; elscreen
+  "1"   'elscreen-jump
+  "2"   'elscreen-jump
+  "3"   'elscreen-jump
+  "4"   'elscreen-jump
+  "5"   'elscreen-jump
+  "6"   'elscreen-jump
+  "7"   'elscreen-jump
+  "8"   'elscreen-jump
+  "9"   'elscreen-jump
+  "0"   'elscreen-jump
   "z z" 'elscreen-toggle
+  "z l" 'elscreen-display-screen-name-list
   "z c" 'elscreen-create
-  "z x" 'elscreen-kill
+  "z C" 'elscreen-clone
+  "z k" 'elscreen-kill
+  "z r" 'elscreen-screen-nickname
+  "z K" 'elscreen-kill-others
   "z n" 'elscreen-next
   "z p" 'elscreen-previous
+  "z ;" 'elscreen-execute-extended-command
+  "z d" 'elscreen-dired
+  "z s" 'elscreen-swap
 
   ;; quit
   "q q" 'save-buffers-kill-terminal
   "q r" 'restart-emacs)
 
 (evil-leader/set-key-for-mode 'org-mode
-  "j j" 'gmacs/org-link-jump
-  "j b" 'gmacs/org-link-jump-back
-  "j i" 'org-insert-link-global
+  "l l" 'gmacs/org-link-follow
+  "l i" 'org-insert-link-global
   "m c" 'org-toggle-checkbox
   "m e" 'org-export-dispatch
   "n e" 'org-narrow-to-element

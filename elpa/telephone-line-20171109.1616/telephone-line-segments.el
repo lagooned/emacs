@@ -62,9 +62,6 @@
 (telephone-line-defsegment* telephone-line-simple-minor-mode-segment ()
   (telephone-line-raw minor-mode-alist t))
 
-(telephone-line-defsegment* telephone-line-elscreen-mode-line-string-segment ()
-  (telephone-line-raw elscreen-mode-line-string t))
-
 (telephone-line-defsegment telephone-line-narrow-segment ()
   "%n")
 

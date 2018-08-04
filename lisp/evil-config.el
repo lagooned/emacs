@@ -80,7 +80,7 @@
   :config
   (global-evil-surround-mode 1))
 
-(zoom-mode 1)
+;; (zoom-mode 1)
 
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
@@ -91,6 +91,7 @@
 (define-key evil-visual-state-map (kbd "gg")    'beginning-of-buffer)
 (define-key evil-normal-state-map (kbd "G")     'end-of-buffer)
 (define-key evil-visual-state-map (kbd "G")     'end-of-buffer)
+(define-key evil-visual-state-map (kbd "$")     'evil-end-of-visual-line)
 (define-key evil-insert-state-map (kbd "M->")   'end-of-buffer)
 (define-key evil-insert-state-map (kbd "M-<")   'beginning-of-buffer)
 (define-key evil-normal-state-map (kbd "RET")   'newline-and-indent)
@@ -126,6 +127,9 @@
 (define-key evil-normal-state-map (kbd "-")     'dired-jump)
 (define-key evil-normal-state-map (kbd "C-`")   'shell-pop)
 (define-key evil-insert-state-map (kbd "C-`")   'shell-pop)
+(define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
+(define-key evil-motion-state-map (kbd "C-u")   'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-]")   'gmacs/xref-find-definitions-symbol)
 
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
@@ -207,6 +211,28 @@
      "c" 'void)))
 
 ;; eshell
+(evil-define-operator evil-eshell-delete
+  (beg end type register yank-handler)
+  "Like evil-delete, but inhibit read only."
+  (interactive "<R><x><y>")
+  (let ((inhibit-read-only t))
+    ;;
+    ;; todo: nasty hack-
+    ;;       check if beg-1 is a \n
+    ;;       and if beg is a $/# (maybe use some unicode char)
+    ;;       then evil-delete from beg + 2
+    ;;       cursor will get moved to prev line
+    ;;       then delete whole line and send input
+    ;;       else just do normal delete
+    ;;
+    ;; todo: figure out what do if visually selecting prompt
+    ;;
+    ;; todo: maybe don't do any of this and live with it
+    ;;
+    (evil-delete beg end type register yank-handler)))
+
+(evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
+
 (add-hook
  'eshell-mode-hook
  (lambda ()
@@ -216,6 +242,10 @@
      (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
      (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
      (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
+     (define-key evil-insert-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+     (define-key evil-normal-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+     (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
+     (define-key evil-normal-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
      (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
      (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
@@ -260,6 +290,13 @@
      (define-key evil-insert-state-local-map (kbd "C-j") 'term-send-input)
      (define-key evil-insert-state-local-map (kbd "C-m") 'term-send-input))))
 
+;; org
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   (progn
+     (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))))
+
 ;; emacs binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
 (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
@@ -268,21 +305,35 @@
 (define-key evil-emacs-state-map (kbd "M-r") 'move-to-window-line-top-bottom)
 (define-key evil-emacs-state-map (kbd "M-a") 'backward-sentence)
 (define-key evil-emacs-state-map (kbd "M-b") 'backward-word)
+(define-key evil-emacs-state-map (kbd "M-e") 'forward-sentence)
 (define-key evil-emacs-state-map (kbd "M-w") 'kill-ring-save)
+(define-key evil-emacs-state-map (kbd "M-d") 'kill-word)
 (define-key evil-emacs-state-map (kbd "M-v") 'scroll-down-command)
 (define-key evil-emacs-state-map (kbd "M-m") 'back-to-indentation)
+(define-key evil-emacs-state-map (kbd "M-j") 'back-to-indentation)
 (define-key evil-emacs-state-map (kbd "M-k") 'kill-sentence)
 (define-key evil-emacs-state-map (kbd "M-u") 'fix-word-upcase)
 (define-key evil-emacs-state-map (kbd "M-l") 'fix-word-downcase)
 (define-key evil-emacs-state-map (kbd "M-c") 'fix-word-capitalize)
 (define-key evil-emacs-state-map (kbd "M-z") 'zop-to-char)
 (define-key evil-emacs-state-map (kbd "M-.") 'xref-find-definitions)
+(define-key evil-emacs-state-map (kbd "M-&") 'async-shell-command)
+(define-key evil-emacs-state-map (kbd "M-^") 'delete-indentation)
 (define-key evil-emacs-state-map (kbd "M-,") 'xref-pop-marker-stack)
 (define-key evil-emacs-state-map (kbd "M-?") 'xref-find-references)
 (define-key evil-emacs-state-map (kbd "M-@") 'mark-word)
 (define-key evil-emacs-state-map (kbd "M-!") 'shell-command)
 (define-key evil-emacs-state-map (kbd "M-<") 'beginning-of-buffer)
 (define-key evil-emacs-state-map (kbd "M->") 'end-of-buffer)
+;; (define-key evil-emacs-state-map (kbd "M-o b") 'facemenu-set-bold)
+;; (define-key evil-emacs-state-map (kbd "M-o d") 'facemenu-set-default)
+;; (define-key evil-emacs-state-map (kbd "M-o i") 'facemenu-set-italic)
+;; (define-key evil-emacs-state-map (kbd "M-o l") 'facemenu-set-bold-italic)
+;; (define-key evil-emacs-state-map (kbd "M-o o") 'facemenu-set-face)
+;; (define-key evil-emacs-state-map (kbd "M-o u") 'facemenu-set-underline)
+;; (define-key evil-emacs-state-map (kbd "M-o M-o") 'font-lock-fontify-block)
+;; (define-key evil-emacs-state-map (kbd "M-o M-s") 'center-line)
+;; (define-key evil-emacs-state-map (kbd "M-o M-S") 'center-paragraph)
 (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
 (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
 (define-key evil-emacs-state-map (kbd "C-M-h") 'mark-defun)
@@ -299,6 +350,8 @@
 (define-key evil-emacs-state-map (kbd "C-M-t") 'transpose-sexps)
 (define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
 (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
+(define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
+(define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
 
 ;; unbinds to clean up global bindspace
 (global-unset-key (kbd "C-k"))
@@ -308,22 +361,28 @@
 (global-unset-key (kbd "M-j"))
 (global-unset-key (kbd "M-a"))
 (global-unset-key (kbd "M-b"))
+(global-unset-key (kbd "M-e"))
 (global-unset-key (kbd "M-w"))
+(global-unset-key (kbd "M-d"))
 (global-unset-key (kbd "M-m"))
 (global-unset-key (kbd "M-k"))
 (global-unset-key (kbd "M-u"))
 (global-unset-key (kbd "M-v"))
 (global-unset-key (kbd "M-l"))
+(global-unset-key (kbd "M-i"))
 (global-unset-key (kbd "M-c"))
 (global-unset-key (kbd "M-h"))
 (global-unset-key (kbd "M-r"))
-(global-unset-key (kbd "M-r"))
+(global-unset-key (kbd "M-m"))
 (global-unset-key (kbd "M-."))
+(global-unset-key (kbd "M-^"))
 (global-unset-key (kbd "M-,"))
+(global-unset-key (kbd "M-;"))
 (global-unset-key (kbd "M-?"))
 (global-unset-key (kbd "M-z"))
 (global-unset-key (kbd "M-!"))
 (global-unset-key (kbd "M-@"))
+(global-unset-key (kbd "M-&"))
 (global-unset-key (kbd "M->"))
 (global-unset-key (kbd "M-<"))
 (global-unset-key (kbd "C-x C-u"))
@@ -342,9 +401,10 @@
 (global-unset-key (kbd "C-M-l"))
 (global-unset-key (kbd "C-M-n"))
 (global-unset-key (kbd "C-M-p"))
-(global-unset-key (kbd "C-M-o"))
 (global-unset-key (kbd "C-M-/"))
 (global-unset-key (kbd "C-M-."))
+;; (global-unset-key (kbd "M-o"))
+;; (global-unset-key (kbd "C-M-o"))
 
 ;; minibuffer
 (setq evil-insert-state-message nil
@@ -359,7 +419,9 @@
 ;; emacs mode for minibuffer
 (add-hook
  'minibuffer-setup-hook
- '(lambda () (evil-emacs-state)))
+ '(lambda () (evil-emacs-state)
+    (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
+    (define-key evil-emacs-state-local-map (kbd "M-j") 'void)))
 
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
 (define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
@@ -367,6 +429,7 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
+;; c derivatives comments
 (add-hook
  'c-mode-common-hook
  (lambda ()
@@ -382,6 +445,10 @@
  (lambda ()
    (if (bound-and-true-p company-mode)
        (company-abort))))
+
+;; add evil-ex-history to .savehist file
+(if (not (member 'evil-ex-history savehist-additional-variables))
+    (push 'evil-ex-history savehist-additional-variables))
 
 (provide 'evil-config)
 

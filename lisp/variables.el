@@ -47,13 +47,15 @@ modes are active and the buffer is read-only.")
     pdf-view-mode)
   "Major modes that `gmacs/check-large-file' will ignore.")
 
-(defvar gmacs/auto-minor-mode-alist ()
-  "Alist of filename patterns vs correpsonding minor mode functions, see \
-`auto-mode-alist' All elements of this alist are checked, meaning you can
-enable multiple minor modes for the same regexp.")
-
-(defvar gmacs/eshell-message "Gshell \\(^.^\\)\n\n"
+(defvar gmacs/eshell-message "Gshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
+
+(defvar gmacs/eshell-prompt-regexp "^[#$] "
+  "A regexp which fully matches your eshell prompt.
+This setting is important, since it affects how eshell will interpret
+the lines that are passed to it.
+If this variable is changed, all Eshell buffers must be exited and
+re-entered for it to take effect.")
 
 (defvar mc-evil-compat/evil-prev-state nil
   "Saves the previous evil state as a string.")

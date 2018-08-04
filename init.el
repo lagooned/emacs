@@ -71,6 +71,11 @@
 ;; load per-environment config
 (load "environment")
 
+;; enable savehist
+(setq savehist-file "~/.emacs.d/.savehist"
+      history-delete-duplicates t)
+(savehist-mode 1)
+
 ;; customs
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
@@ -92,7 +97,8 @@
  '(lambda ()
     (progn
       (gmacs/write-startup-log)
-      (kill-buffer "*Messages*"))))
+      (kill-buffer "*Messages*")
+      (setq default-directory "~/.emacs.d/"))))
 
 (provide 'init)
 ;;; init.el ends here

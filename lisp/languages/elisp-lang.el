@@ -24,37 +24,35 @@
 
 ;;; Code:
 
+(use-package emacs-lisp-mode
+  :ensure nil
+  :init
+  (defun gmacs/emacs-lisp-mode-hook ()
+    (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+    (make-variable-buffer-local 'company-backends)
+    (push '(company-capf company-yasnippet) company-backends))
+  (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-mode-hook))
+
 (use-package eldoc
+  :defer t
   :diminish eldoc-mode
   :commands eldoc-mode
-  :defer t
   :init
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
 
-(use-package smart-jump
-  :config
-  (smart-jump-register :modes '(emacs-lisp-mode lisp-interaction-mode)
-                       :jump-fn 'xref-find-definitions
-                       :pop-fn 'pop-tag-mark
-                       :refs-fn 'gmacs/xref-find-apropos-symbol
-                       :should-jump t
-                       :heuristic 'error
-                       :async nil))
-
-(add-hook
- 'emacs-lisp-mode-hook
- (lambda () (if (not (member 'company-capf company-backends))
-                (push 'company-capf company-backends))))
-
-(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "m e" 'eval-last-sexp)
+  "C-e" 'gmacs/move-eol-eval-last-sexp
+  "e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
-  "m e" 'eval-last-sexp)
+  "C-e" 'gmacs/move-eol-eval-last-sexp
+  "e" 'eval-last-sexp)
+
+(which-key-add-key-based-replacements
+  "SPC e" "eval-sexp"
+  "SPC C-e" "eval-eol")
 
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here

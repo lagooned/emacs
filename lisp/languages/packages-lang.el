@@ -24,20 +24,6 @@
 
 ;;; Code:
 
-(use-package dumb-jump
-  :after smart-jump
-  :bind
-  (:map dumb-jump-mode-map
-        ("C-M-g" . nil)
-        ("C-M-p" . nil)
-        ("C-M-q" . nil))
-  :init
-  (setq dumb-jump-selector 'ivy
-        dumb-jump-prefer-searcher 'rg
-        dumb-jump-quiet t)
-  (when (eq system-type 'windows-nt)
-    (setq dumb-jump-force-searcher 'rg)))
-
 (use-package flycheck
   :diminish flycheck-mode "chk"
   :init
@@ -50,19 +36,6 @@
   (setq flycheck-indication-mode nil
         flycheck-highlighting-mode 'lines))
 
-(use-package smart-jump
-  :init
-  (defvar smart-jump-find-references-fallback-function)
-  (defvar smart-jump-bind-keys-for-evil)
-  (defvar smart-jump-bind-keys)
-  (defvar smart-jump-refs-key)
-  (defvar smart-jump-pop-key)
-  (setq smart-jump-find-references-fallback-function nil
-        smart-jump-bind-keys-for-evil nil
-        smart-jump-bind-keys nil
-        smart-jump-refs-key nil
-        smart-jump-pop-key nil))
-
 (use-package xref
   :ensure nil
   :bind
@@ -73,8 +46,10 @@
         xref-after-return-hook '(recenter)))
 
 (use-package lsp-mode
+  :commands lsp-mode
   :init
-  (setq lsp-enable-eldoc nil)
+  (setq lsp-enable-eldoc nil
+        lsp-inhibit-message t)
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook
@@ -83,8 +58,18 @@
      (diminish 'lsp-mode "lsp"))))
 
 (use-package lsp-ui
+  :commands lsp-ui-mode
+  :init
+  (setq lsp-ui-flycheck-enable nil
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable nil))
+
+(use-package company-lsp
+  :after lsp-mode
   :config
-  (add-hook 'lsp-ui-mode-hook '(lambda () (lsp-ui-sideline-mode 0))))
+  (setq company-lsp-cache-candidates 'auto
+        company-lsp-enable-snippet t
+        company-lsp-enable-recompletion t))
 
 (load "elisp-lang")
 (load "php-lang")

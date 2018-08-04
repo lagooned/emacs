@@ -80,6 +80,11 @@
   (interactive)
   (find-file "~/.emacs.d/lisp/languages/packages-lang.el"))
 
+(defun gmacs/open-custom-config ()
+  "Open .custom.el."
+  (interactive)
+  (find-file "~/.emacs.d/.custom.el"))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup \
 at the first save of each gmacs session."
@@ -91,7 +96,6 @@ at the first save of each gmacs session."
       (backup-buffer)))
   (let ((buffer-backed-up nil))
     (backup-buffer)))
-(add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
 (defun gmacs/check-large-file ()
   "Check if the buffer's file is large (see `gmacs/large-file-size').
@@ -110,27 +114,6 @@ undo and in `fundamental-mode' for performance sake."
       (setq buffer-read-only t)
       (buffer-disable-undo)
       (fundamental-mode))))
-
-(add-hook 'find-file-hook #'gmacs/check-large-file)
-
-(defun gmacs/enable-minor-mode-based-on-extension ()
-  "Check file name against gmacs/auto-minor-mode-alist to enable minor \
-modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
-  (when buffer-file-name
-    (let ((name buffer-file-name)
-          (remote-id (file-remote-p buffer-file-name))
-          (alist gmacs/auto-minor-mode-alist))
-      ;; Remove backup-suffixes from file name.
-      (setq name (file-name-sans-versions name))
-      ;; Remove remote file name identification.
-      (when (and (stringp remote-id)
-                 (string-match-p (regexp-quote remote-id) name))
-        (setq name (substring name (match-end 0))))
-      (while (and alist (caar alist) (cdar alist))
-        (if (string-match (caar alist) name)
-            (funcall (cdar alist) 1))
-        (setq alist (cdr alist))))))
-(add-hook 'find-file-hook 'gmacs/enable-minor-mode-based-on-extension)
 
 (defun gmacs/untabify-except-makefiles ()
   "Replace tabs with spaces except in makefiles."
@@ -185,8 +168,15 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
+(defun gmacs/xref-find-definitions-symbol ()
+  "X-ref-find-definitions that doesn't fall back."
+  (interactive)
+  (if (symbol-at-point)
+      (xref-find-definitions (symbol-name (symbol-at-point)))
+    (message "No symbol selected")))
+
 (defun gmacs/xref-find-apropos-symbol ()
-  "X-ref made to be used with smart jump."
+  "X-ref-find-apropos that doesn't fall back."
   (interactive)
   (if (symbol-at-point)
       (xref-find-apropos (symbol-name (symbol-at-point)))
@@ -219,20 +209,16 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
                         (list (shell-quote-argument regexp) ".")) " ")
      'ripgrep-search-mode)))
 
-(defun gmacs/org-link-jump ()
+(defun gmacs/org-link-follow ()
   "Push marker stack and follow org link."
   (interactive)
   (defvar org-link-frame-setup)
   (let ((org-link-frame-setup
          '((file . (lambda (args)
-                     (progn (xref-push-marker-stack)
-                            (find-file args)))))))
+                     (progn
+                       ;; (xref-push-marker-stack)
+                       (find-file args)))))))
     (call-interactively #'org-open-at-point)))
-
-(defun gmacs/org-link-jump-back ()
-  "Pop marker stack to jump back to source org link."
-  (interactive)
-  (xref-pop-marker-stack))
 
 (defun gmacs/counsel-git-projectile (&optional initial-input)
   "Find file in the current Git repository with initial input `INITIAL-INPUT'."
@@ -265,6 +251,13 @@ modes the checking happens for all pairs in `gmacs/auto-minor-mode-alist'."
               :require-match t
               :action counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
+
+(defun gmacs/magit-status ()
+  "Wrap magit-status with projectile-project-p."
+  (interactive)
+  (if (not (projectile-project-p))
+      (error "Not in a git repository")
+    (magit-status)))
 
 (defun gmacs/toggle-spelling ()
   "Toggle flyspell."
@@ -301,8 +294,8 @@ disable `hi-lock-mode'."
 (defun gmacs/eshell-send-eof ()
   "Send EOF to Eshell with newline."
   (interactive)
-  (newline)
-  (eshell-send-eof-to-process))
+  (call-interactively 'newline)
+  (call-interactively 'eshell-send-eof-to-process))
 
 (defun gmacs/projectile-root-dir ()
   "Jump to the root directory of the current project."
@@ -310,6 +303,11 @@ disable `hi-lock-mode'."
   (if (not (projectile-project-p))
       (error "Not in a git repository")
     (dired (projectile-project-root))))
+
+(defun gmacs/open-home-dir ()
+  "Open ~."
+  (interactive)
+  (dired "~"))
 
 (defun gmacs/create-visit-dir (dir)
   "Open/create `DIR'."
@@ -328,6 +326,10 @@ disable `hi-lock-mode'."
   "Open ~/Downloads."
   (interactive)
   (gmacs/create-visit-dir "~/Downloads"))
+
+(defun gmacs/open-code-dir ()
+  (interactive)
+  (gmacs/create-visit-dir "~/code"))
 
 (defun gmacs/write-startup-log ()
   "Write ~/.emacs.d/startup.log."
@@ -381,10 +383,16 @@ disable `hi-lock-mode'."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)
-    (setq-local gmacs/eshell-message
-                (concat (string-trim gmacs/eshell-message) "\n"))
+    (setq-local gmacs/eshell-message (string-trim gmacs/eshell-message))
     (eshell-banner-initialize)
     (eshell-send-input)))
+
+(defun gmacs/eshell-prompt-function ()
+  "A function that returns the Eshell prompt string.
+Make sure to update `gmacs/eshell-prompt-regexp' so that it will match your
+prompt."
+  (concat "\n[" (abbreviate-file-name (eshell/pwd)) "] \n"
+          (if (= (user-uid) 0) "# " "$ ")))
 
 (defun gmacs/evil-visual-or-normal-p ()
   "True if evil mode is enabled, and we are in normal or visual mode."
@@ -412,6 +420,38 @@ disable `hi-lock-mode'."
                       mc-evil-compat/evil-prev-state)))
       (setq mc-evil-compat/evil-prev-state nil)
       (setq mc-evil-compat/mark-was-active nil))))
+
+(defun gmacs/shrink-window-horizontally ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'shrink-window-horizontally)))
+
+(defun gmacs/enlarge-window-horizontally ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'enlarge-window-horizontally)))
+
+(defun gmacs/move-eol-eval-last-sexp ()
+  (interactive)
+  (save-excursion
+    (call-interactively 'end-of-line)
+    (call-interactively 'eval-last-sexp)))
+
+(defun gmacs/enlarge-window ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'enlarge-window)))
+
+(defun gmacs/shrink-window ()
+  (interactive)
+  (let ((current-prefix-arg `(4)))
+    (call-interactively 'shrink-window)))
+
+(defun gmacs/dont-kill-scratch ()
+  "Don't kill but burry *scratch* buffer."
+  (if (equal (buffer-name (current-buffer)) "*scratch*")
+      (progn (bury-buffer) nil)
+    t))
 
 (provide 'functions)
 ;;; functions.el ends here

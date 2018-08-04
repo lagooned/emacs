@@ -24,15 +24,20 @@
 
 ;;; Code:
 
-(use-package lsp-java)
+(defun gmacs/lsp-java-enable ()
+  (make-variable-buffer-local 'company-backends)
+  (push 'company-lsp company-backends)
+  (lsp-java-enable)
+  (evil-leader/set-key-for-mode 'java-mode
+    "m r" 'lsp-restart-workspace
+    "m o" 'lsp-java-organize-imports
+    "m b" 'lsp-java-build-project))
 
-(add-hook
- 'java-mode-hook
- (lambda () (if (not (member 'company-capf company-backends))
-           (push 'company-capf company-backends))))
-
-(add-hook
- 'java-mode-hook #'lsp-java-enable)
+(use-package lsp-java
+  :commands lsp-java-enable
+  :init
+  (setq lsp-java-save-action-organize-imports nil)
+  (add-hook 'java-mode-hook #'gmacs/lsp-java-enable))
 
 (provide 'java-lang)
 ;;; java-lang.el ends here

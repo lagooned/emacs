@@ -77,7 +77,8 @@ If a connection is already open, close it."
   (indium-maybe-quit)
   (unless indium-current-connection
     (let ((process (make-process :name "indium-nodejs-process"
-				 :buffer "*node process*"
+				 ;; :buffer "*node process*"
+				 :buffer " node process*"
 				 :filter #'indium-nodejs--process-filter
 				 :command (list shell-file-name
 						shell-command-switch

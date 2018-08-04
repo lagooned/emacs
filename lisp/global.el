@@ -84,10 +84,6 @@
        'minibuffer-setup-hook
        '(lambda () (set-window-fringes (minibuffer-window) 0 0 nil))))))
 
-;; frame title format
-(setq frame-title-format
-      '((buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-
 ;; backups
 (setq version-control t
       kept-new-versions 10
@@ -96,6 +92,11 @@
       backup-by-copying t
       vc-make-backup-files t
       backup-directory-alist '(("" . "~/.emacs.d/backup/save")))
+
+(add-hook 'before-save-hook 'gmacs/force-buffer-backup)
+
+;; confirm literal large file load
+(add-hook 'find-file-hook #'gmacs/check-large-file)
 
 ;; auto save to temp
 (setq auto-save-file-name-transforms
@@ -114,17 +115,13 @@
 (global-eldoc-mode -1)
 
 ;; no cursor in other windows
-(setq default-cursor-in-non-selected-windows nil)
+(setq-default cursor-in-non-selected-windows nil)
 
 ;; show inputs immediately
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(defadvice kill-buffer (around kill-buffer-around-advice activate)
-  (let ((buffer-to-kill (ad-get-arg 0)))
-    (if (equal buffer-to-kill "*scratch*")
-        (bury-buffer)
-      ad-do-it)))
+(add-hook 'kill-buffer-query-functions 'gmacs/dont-kill-scratch)
 
 ;; no tool bar
 (tool-bar-mode -1)
@@ -188,7 +185,7 @@
 (let ((fonts '("Input"
                "Source Code Pro"
                "Monaco"
-               "Deja Vu Sans Mono"
+               "DejaVu Sans Mono"
                "Consolas"
                "Monospace")))
   (dolist (font (reverse fonts) t)
@@ -209,6 +206,10 @@
       jit-lock-stealth-nice 0.1
       jit-lock-stealth-time 0.2
       jit-lock-stealth-verbose nil)
+
+;; save history
+(setq savehist-additional-variables
+      '(kill-ring search-ring regexp-search-ring))
 
 (provide 'global)
 ;;; global.el ends here
