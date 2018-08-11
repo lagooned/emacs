@@ -171,6 +171,7 @@
   "w m" 'gmacs/switch-to-minibuffer
   "w u" 'winner-undo
   "w r" 'winner-redo
+  "w RET" 'toggle-frame-fullscreen
   "]" 'gmacs/enlarge-window-horizontally
   "[" 'gmacs/shrink-window-horizontally
   "=" 'gmacs/enlarge-window
