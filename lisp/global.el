@@ -72,7 +72,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 6)
+(fringe-mode 20)
 
 ;; no fringes in minibuffer
 (add-hook
@@ -157,7 +157,7 @@
 (setq sentence-end-double-space nil)
 
 ;; line spaceing
-(setq-default line-spacing 3)
+(setq-default line-spacing 6)
 
 ;; no tooltips
 (tooltip-mode 0)
