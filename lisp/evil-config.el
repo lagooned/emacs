@@ -39,11 +39,6 @@
 (dumb-jump-mode 1)
 (evil-mode 1)
 
-(use-package evil-vimish-fold
-  :diminish evil-vimish-fold-mode
-  :config
-  (evil-vimish-fold-mode 1))
-
 (use-package exato)
 
 (use-package evil-exchange
