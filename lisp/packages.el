@@ -227,7 +227,12 @@
   focus-mode)
 
 (use-package git-gutter
+  :commands git-gutter-mode
   :diminish git-gutter-mode "gg"
+  :init
+  (add-hook
+   'prog-mode-hook
+   (lambda () (git-gutter-mode 1)))
   :config
   (require 'git-gutter-fringe)
   (set-face-foreground 'git-gutter-fr:modified "darkorange")
@@ -265,10 +270,7 @@
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."
-    "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX...")
-  (add-hook
-   'prog-mode-hook
-   (lambda () (git-gutter-mode 1))))
+    "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."))
 
 (use-package help
   :ensure nil
