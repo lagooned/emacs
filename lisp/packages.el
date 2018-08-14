@@ -47,16 +47,14 @@
 (use-package avy)
 
 (use-package adaptive-wrap
-  :commands global-visual-line-mode
+  :commands visual-line-mode
   :init
   (setq-default adaptive-wrap-extra-indent 2)
-  :config
   (add-hook
    'visual-line-mode-hook
    (lambda ()
      (adaptive-wrap-prefix-mode +1)
-     (diminish 'visual-line-mode)))
-  (global-visual-line-mode +1))
+     (diminish 'visual-line-mode))))
 
 (use-package aggressive-indent
   :commands aggressive-indent-mode
