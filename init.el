@@ -76,7 +76,9 @@
       history-delete-duplicates t)
 (savehist-mode 1)
 
-;; write startup log
+;; write startup log, kill messages
+;; for updated modeline, and set
+;; dir to ~/.emacs.d
 (add-hook
  'emacs-startup-hook
  '(lambda ()
