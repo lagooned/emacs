@@ -76,21 +76,6 @@
       history-delete-duplicates t)
 (savehist-mode 1)
 
-;; customs
-(setq custom-file "~/.emacs.d/.custom.el")
-(load custom-file 'noerror)
-
-;; initial window size
-(add-hook
- 'emacs-startup-hook
- (lambda ()
-   (when window-system
-     (set-frame-size
-      (selected-frame) 165 46)
-     (setq initial-frame-alist
-           '((left . 50)
-             (top  . 35))))))
-
 ;; write startup log
 (add-hook
  'emacs-startup-hook
@@ -99,6 +84,10 @@
       (gmacs/write-startup-log)
       (kill-buffer "*Messages*")
       (setq default-directory "~/.emacs.d/"))))
+
+;; customs
+(setq custom-file "~/.emacs.d/.custom.el")
+(load custom-file 'noerror)
 
 (provide 'init)
 ;;; init.el ends here
