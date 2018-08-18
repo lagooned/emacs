@@ -470,22 +470,10 @@
   (defvar telephone-line-primary-right-separator)
   (defvar telephone-line-secondary-right-separator)
   (setq telephone-line-height 20
-        ;; telephone-line-separator-extra-padding 1
-        ;; telephone-line-primary-left-separator 'telephone-line-identity-left
-        ;; telephone-line-secondary-left-separator 'telephone-line-identity-left
-        ;; telephone-line-primary-right-separator 'telephone-line-identity-right
-        ;; telephone-line-secondary-right-separator 'telephone-line-identity-right
-        ;; telephone-line-primary-left-separator 'telephone-line-abs-left
-        ;; telephone-line-secondary-left-separator 'telephone-line-abs-left
-        ;; telephone-line-primary-right-separator 'telephone-line-abs-right
-        ;; telephone-line-secondary-right-separator 'telephone-line-abs-right
-        telephone-line-primary-left-separator 'telephone-line-flat
-        telephone-line-secondary-left-separator 'telephone-line-flat
-        telephone-line-primary-right-separator 'telephone-line-flat
-        telephone-line-secondary-right-separator 'telephone-line-flat
-        )
-  (defvar telephone-line-lhs)
-  (defface telephone-line-elscreen '((t (:foreground "black" :background "grey77")))
+        telephone-line-primary-left-separator 'telephone-line-abs-left
+        telephone-line-secondary-left-separator 'telephone-line-abs-left)
+  (defface telephone-line-elscreen
+    '((t (:foreground "black" :background "grey70" :weight bold)))
     "Elscreen telephone-line segment theme.")
   (setq telephone-line-faces
         '((evil . telephone-line-modal-face)
@@ -494,6 +482,8 @@
           (ryo . telephone-line-ryo-modal-face)
           (accent . (telephone-line-accent-active . mode-line-inactive))
           (nil . (mode-line . mode-line-inactive))))
+  (telephone-line-defsegment* telephone-line-empty-segment ()
+    (telephone-line-raw "" t))
   (telephone-line-defsegment* telephone-line-elscreen-mode-line-string-segment ()
     (telephone-line-raw elscreen-mode-line-string t))
   (setq telephone-line-lhs '((elscreen . (telephone-line-elscreen-mode-line-string-segment))
@@ -501,7 +491,6 @@
                              (accent . (telephone-line-simple-minor-mode-segment))
                              (nil . (telephone-line-buffer-segment))
                              (nil . (telephone-line-airline-position-segment))))
-  (defvar telephone-line-rhs)
   (setq telephone-line-rhs '((nil . ())))
   (custom-set-faces
    '(telephone-line-evil-normal
