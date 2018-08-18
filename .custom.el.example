@@ -1,20 +1,56 @@
-;; put user specific values in here
+;; environment specific values
 
 ;; setup user
 (setq user-full-name "John H. Doe"
       user-mail-address "jhd@example.com"
-      calendar-latitude 39.782622
-      calendar-longitude -89.650934
-      calendar-location-name "Springfield, IL"
+      calendar-latitude 29.8724
+      calendar-longitude -95.57
+      calendar-location-name "Houston, TX"
       erc-nick "jhd")
 
 ;; setup java workspace folders
 (setq lsp-java--workspace-folders
       (list
        "~/code/java/project1"
-       "~/code/java/project2"
        ))
 
+;; preferred fonts list
+(let ((fonts '("Input"
+               "Source Code Pro"
+               "Monaco"
+               "DejaVu Sans Mono"
+               "Consolas"
+               "Monospace")))
+  (dolist (font (reverse fonts) t)
+    (if (member font (font-family-list))
+        (set-face-attribute 'default nil :family font))))
+
+;; font attributes
+(set-face-attribute 'default nil :weight 'normal)
+(set-face-attribute 'default nil :height 100)
+
+;; spelling binary
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra"))
+
+;; menu-bar-display
+(if (display-graphic-p) (menu-bar-mode -1))
+
+;; telephone-line height
+(setq telephone-line-height 70)
+
+;; icon in title bar
+(setq ns-use-proxy-icon nil)
+
+;; title bar name command
+(setq frame-title-format 'buffer-file-truename)
+
+;; grab env path
+(exec-path-from-shell-initialize)
+
+;; enable full screen
+(if (not (frame-parameter nil 'fullscreen))
+    (toggle-frame-fullscreen))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

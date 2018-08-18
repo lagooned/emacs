@@ -181,17 +181,6 @@
 ;; enable erase buffer
 (put 'erase-buffer 'disabled nil)
 
-;; preferred fonts list
-(let ((fonts '("Input"
-               "Source Code Pro"
-               "Monaco"
-               "DejaVu Sans Mono"
-               "Consolas"
-               "Monospace")))
-  (dolist (font (reverse fonts) t)
-    (if (member font (font-family-list))
-        (set-face-attribute 'default nil :family font))))
-
 ;; disable electric indent
 (electric-indent-mode -1)
 

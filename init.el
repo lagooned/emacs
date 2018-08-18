@@ -68,9 +68,6 @@
 ;; load language packages config
 (load "packages-lang")
 
-;; load per-environment config
-(load "environment")
-
 ;; enable savehist
 (setq savehist-file "~/.emacs.d/.savehist"
       history-delete-duplicates t)
