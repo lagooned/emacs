@@ -518,7 +518,8 @@
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-diff t)
   :config
-  (global-undo-tree-mode))
+  (add-hook 'text-mode-hook 'undo-tree-mode)
+  (add-hook 'prog-mode-hook 'undo-tree-mode))
 
 (use-package uniquify
   :ensure nil
