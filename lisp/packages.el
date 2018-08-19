@@ -329,7 +329,15 @@
   (setq linum-relative-format "%5s "
         linum-relative-current-symbol ""))
 
-(use-package lorem-ipsum)
+(use-package lorem-ipsum
+  :commands
+  lorem-ipsum-insert-list
+  lorem-ipsum-insert-sentences
+  Lorem-ipsum-insert-list
+  Lorem-ipsum-insert-paragraphs
+  lorem-ipsum-insert-paragraphs
+  Lorem-ipsum-insert-sentences
+  lorem-ipsum-use-default-bindings)
 
 (use-package magit
   :commands magit-status
@@ -406,8 +414,7 @@
               (concat "^" (expand-file-name "~/\\(.emacs.d\\|emacs\\)/workspace") "/.+$")
               "^#")))
 
-(use-package restart-emacs
-  :commands restart-emacs)
+(use-package restart-emacs)
 
 (use-package restclient
   :commands restclient-mode
@@ -457,7 +464,6 @@
   :commands swiper)
 
 (use-package suggest
-  :defer t
   :commands suggest)
 
 (use-package telephone-line
@@ -508,7 +514,6 @@
   (tiny-setup-default))
 
 (use-package try
-  :defer t
   :commands try)
 
 (use-package undo-tree
