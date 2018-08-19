@@ -599,26 +599,6 @@
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (yas-reload-all))
 
-(use-package zoom
-  :commands zoom-mode
-  :diminish zoom-mode
-  :config
-  (setq zoom-size '(0.618 . 0.618)
-        zoom-ignored-major-modes '(term-mode)
-        zoom-ignored-buffer-name-regexps '("^*calc")
-        zoom-ignore-predicates
-        '((lambda ()
-            ;; visible term or ediff window
-            (string-match
-             "term\\|ediff\\|[^e]shell"
-             (downcase
-              (format
-               "%s"
-               (mapcar
-                '(lambda (window)
-                   (buffer-name (window-buffer window)))
-                (window-list)))))))))
-
 (use-package zop-to-char
   :commands zop-to-char)
 
