@@ -197,9 +197,20 @@
 
 (use-package evil
   :init
-  (load "evil-init.el")
+  (setq evil-move-cursor-back nil)
+  (add-hook 'with-editor-mode-hook 'evil-insert-state)
+  (add-hook 'term-mode-hook 'evil-emacs-state)
+  (add-hook 'ansi-term-mode-hook 'evil-emacs-state)
+  (let ((height (eval gmacs/evil-base-cursor-height)))
+    (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
+    (setq evil-insert-state-cursor `("#00e000" (hbar . ,(eval height))))
+    (setq evil-visual-state-cursor `("#ff8800" (hbar . ,(eval height))))
+    (setq evil-emacs-state-cursor `("#ff0000" (hbar . ,(eval height))))
+    (setq evil-motion-state-cursor `("#0000ff" (hbar . ,(eval height))))
+    (setq evil-replace-state-cursor `("#00bbbb" (hbar . ,(eval height))))
+    (setq evil-operator-state-cursor `("#ff66ff" (hbar . ,(eval height)))))
   :config
-  (load "evil-config.el"))
+  (load "evil-config"))
 
 (use-package expand-region
   :commands er/expand-region)
