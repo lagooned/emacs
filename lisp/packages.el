@@ -551,7 +551,8 @@
   (which-key-setup-minibuffer)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
-    "SPC !" "term"
+    "SPC !" "shell command"
+    "SPC @" "async shell command"
     "SPC b" "buffer"
     "SPC TAB" "last buffer"
     "SPC c" "config"
