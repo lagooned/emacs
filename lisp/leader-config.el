@@ -24,10 +24,6 @@
 
 ;;; Code:
 
-(require 'evil-leader)
-
-(global-evil-leader-mode 1)
-
 (setq evil-leader/in-all-states 1)
 
 (evil-leader/set-leader "<SPC>")
@@ -219,6 +215,8 @@
   "n e" 'org-narrow-to-element
   "n b" 'org-narrow-to-block
   "n s" 'org-narrow-to-subtree)
+
+(global-evil-leader-mode 1)
 
 (provide 'leader-config)
 ;;; leader-config.el ends here
