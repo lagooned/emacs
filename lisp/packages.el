@@ -434,17 +434,6 @@
   :init
   (require 'ripgrep))
 
-(use-package shell-pop
-  :defer t
-  :commands shell-pop
-  :init
-  (defvar shell-pop-shell-type)
-  (defvar shell-pop-full-span)
-  (defvar shell-pop-window-position)
-  (setq shell-pop-shell-type '("eshell" "*eshell*" (lambda nil (eshell shell-pop-term-shell)))
-        shell-pop-full-span t
-        shell-pop-window-position "bottom"))
-
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode "sp"
