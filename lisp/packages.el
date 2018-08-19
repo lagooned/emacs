@@ -306,7 +306,6 @@
   :diminish ivy-mode
   :ensure ivy-hydra
   :ensure counsel
-  :ensure swiper
   :ensure avy
   :bind
   (:map ivy-minibuffer-map
