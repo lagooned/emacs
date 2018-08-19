@@ -204,5 +204,9 @@
 (add-hook 'prog-mode-hook (lambda () (visual-line-mode +1)))
 (add-hook 'text-mode-hook (lambda () (visual-line-mode +1)))
 
+;; no bell
+(setq ring-bell-function 'ignore)
+(setq visible-bell nil)
+
 (provide 'global)
 ;;; global.el ends here
