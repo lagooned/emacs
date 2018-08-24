@@ -34,3 +34,4 @@ games
 /eclipse.jdt.ls/server/config_linux/org.eclipse.*
 /eclipse.jdt.ls/server/config_win/org.eclipse.*
 /.savehist
+session.*
