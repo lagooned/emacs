@@ -453,5 +453,11 @@ prompt."
       (progn (bury-buffer) nil)
     t))
 
+(defun gmacs/emacs-lisp-setup ()
+  (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+  (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
+  (make-variable-buffer-local 'company-backends)
+  (push '(company-capf company-yasnippet) company-backends))
+
 (provide 'functions)
 ;;; functions.el ends here

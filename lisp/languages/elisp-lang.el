@@ -27,11 +27,7 @@
 (use-package emacs-lisp-mode
   :ensure nil
   :init
-  (defun gmacs/emacs-lisp-mode-hook ()
-    (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-    (make-variable-buffer-local 'company-backends)
-    (push '(company-capf company-yasnippet) company-backends))
-  (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-mode-hook))
+  (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-setup))
 
 (use-package eldoc
   :defer t
