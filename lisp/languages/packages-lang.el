@@ -24,6 +24,10 @@
 
 ;;; Code:
 
+(add-hook
+ 'prog-mode-hook
+ (lambda () (company-mode 1)))
+
 (use-package flycheck
   :diminish flycheck-mode "chk"
   :init
@@ -76,10 +80,6 @@
 (load "js-lang")
 (load "web-lang")
 (load "java-lang")
-
-(add-hook
- 'prog-mode-hook
- (lambda () (company-mode 1)))
 
 (provide 'packages-lang)
 ;;; packages-lang.el ends here
