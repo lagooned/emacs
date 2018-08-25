@@ -417,6 +417,7 @@
         recentf-exclude
         (list "^/tmp/"
               "^/ssh:"
+              "^/sudo:"
               "\\.?ido\\.last$"
               "\\.revive$"
               "/TAGS$"
@@ -461,6 +462,8 @@
 
 (use-package swiper
   :commands swiper)
+
+(use-package sudo-edit)
 
 (use-package suggest
   :commands suggest)
