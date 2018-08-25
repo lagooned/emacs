@@ -517,10 +517,14 @@
 
 (use-package undo-tree
   :diminish undo-tree-mode
-  :commands undo-tree-visualize
+  :commands
+  undo-tree-mode
+  undo-tree-visualize
   :init
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-diff t)
+  (setq undo-tree-visualizer-timestamps t
+        undo-tree-visualizer-diff t
+        undo-tree-auto-save-history t
+        undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   :config
   (add-hook 'text-mode-hook 'undo-tree-mode)
   (add-hook 'prog-mode-hook 'undo-tree-mode))
