@@ -34,6 +34,10 @@
 
 (use-package all-the-icons)
 
+(use-package abbrev
+  :ensure nil
+  :diminish abbrev-mode "ab")
+
 (use-package autorevert
   :ensure nil
   :init
