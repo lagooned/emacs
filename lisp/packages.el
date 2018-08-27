@@ -373,6 +373,11 @@
 
 (use-package multi-term)
 
+(use-package nxml-mode
+  :ensure nil
+  :init
+  (setq nxml-child-indent 4))
+
 (use-package org
   :commands
   org-mode
@@ -444,6 +449,10 @@
         ("C-j" . compile-goto-error))
   :init
   (require 'ripgrep))
+
+(use-package sgml-mode
+  :init
+  (setq sgml-basic-offset 4))
 
 (use-package smartparens
   :commands smartparens-mode

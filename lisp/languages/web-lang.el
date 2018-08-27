@@ -35,7 +35,8 @@
 (use-package web-mode
   :commands web-mode
   :init
-  (setq web-mode-enable-auto-pairing nil)
+  (setq web-mode-enable-auto-pairing nil
+        web-mode-markup-indent-offset 4)
   (add-to-list
    'auto-mode-alist
    '("\\.x?html\\'" . web-mode))
@@ -80,6 +81,8 @@ START and END are buffer positions."
   (setq mmm-submode-decoration-level 0))
 
 (use-package vue-mode
+  :init
+  (setq vue-html-tab-width 4)
   :config
   (add-hook 'vue-mode-hook 'turn-off-evil-matchit-mode))
 
