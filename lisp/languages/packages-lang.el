@@ -29,14 +29,12 @@
  (lambda () (company-mode 1)))
 
 (use-package flycheck
-  :diminish flycheck-mode "chk"
+  :diminish flycheck-mode "flyc"
   :init
   (custom-set-faces
    '(flycheck-error ((t (:foreground "red" :underline nil))))
    '(flycheck-info ((t (:foreground "green" :underline nil))))
    '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
-  (defvar flycheck-indication-mode)
-  (defvar flycheck-highlighting-mode)
   (setq flycheck-indication-mode nil
         flycheck-highlighting-mode 'lines))
 
@@ -56,15 +54,12 @@
         lsp-inhibit-message t)
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (add-hook
-   'lsp-mode-hook
-   (lambda ()
-     (diminish 'lsp-mode "lsp"))))
+  (add-hook 'lsp-mode-hook (lambda () (diminish 'lsp-mode "lsp"))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
   :init
-  (setq lsp-ui-flycheck-enable nil
+  (setq lsp-ui-flycheck-enable t
         lsp-ui-doc-enable nil
         lsp-ui-sideline-enable nil))
 

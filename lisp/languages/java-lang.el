@@ -27,6 +27,7 @@
 (defun gmacs/lsp-java-enable ()
   (make-variable-buffer-local 'company-backends)
   (push 'company-lsp company-backends)
+  (flycheck-mode 1)
   (lsp-java-enable)
   (evil-leader/set-key-for-mode 'java-mode
     "m r" 'lsp-restart-workspace
