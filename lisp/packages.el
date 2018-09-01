@@ -116,6 +116,8 @@
    'dired-mode-hook
    (lambda ()
      (progn
+       (dired-hide-details-mode t)
+       (dired-omit-mode t)
        (toggle-truncate-lines 1)
        (message nil))))
   (setq-default dired-omit-files-p t
@@ -129,17 +131,7 @@
   :config
   (setq dired-omit-files
         (concat dired-omit-files
-                "\\|^\\..+$\\|^~.+$\\|^#.+$"))
-  (setq dired-omit-mode t))
-
-(use-package dired+
-  :defer t
-  :after dired-x
-  :init
-  (defvar diredp-hide-details-initially-flag)
-  (setq diredp-hide-details-initially-flag t)
-  ;; (setq diredp-hide-details-initially-flag nil)
-  (setq dired-dwim-target t))
+                "\\|^\\..+$\\|^~.+$\\|^#.+$")))
 
 (use-package doom-themes
   :init
