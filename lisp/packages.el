@@ -32,8 +32,6 @@
 (setq use-package-always-ensure t)
 (require 'use-package)
 
-(use-package all-the-icons)
-
 (use-package abbrev
   :ensure nil
   :diminish abbrev-mode "ab")
