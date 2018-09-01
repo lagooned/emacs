@@ -332,7 +332,7 @@
   :commands linum-relative-mode
   :diminish linum-relative-mode
   :init
-  (setq linum-relative-format "%5s "
+  (setq linum-relative-format "%5s"
         linum-relative-current-symbol ""))
 
 (use-package lorem-ipsum
@@ -589,14 +589,6 @@
         '((tab-mark ?\t [?› ?\t])
           (newline-mark ?\n [?¬ ?\n])
           (space-mark ?\  [?·] [?.])))
-  ;; replace ascii spaces unicode spaces
-  (advice-add
-   'linum-relative :filter-return
-   (lambda (num)
-     (if (not (get-text-property 0 'invisible num))
-         (propertize
-          (replace-regexp-in-string " " "\u2002" num)
-          'face (get-text-property 0 'face num)))))
   :config
   (setq whitespace-line-column 100))
 
