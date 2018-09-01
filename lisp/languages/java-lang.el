@@ -24,20 +24,6 @@
 
 ;;; Code:
 
-(defun gmacs/lsp-java-enable ()
-  (make-variable-buffer-local 'company-backends)
-  (push 'company-lsp company-backends)
-  (flycheck-mode 1)
-  (lsp-java-enable)
-  (evil-leader/set-key-for-mode 'java-mode
-    "m r" 'lsp-rename
-    "m R" 'lsp-restart-workspace
-    "m f" 'lsp-format-buffer
-    "m h" 'lsp-describe-thing-at-point
-    "m H" 'lsp-highlight-symbol-at-point
-    "m o" 'lsp-java-organize-imports
-    "m b" 'lsp-java-build-project))
-
 (use-package lsp-java
   :commands lsp-java-enable
   :init
