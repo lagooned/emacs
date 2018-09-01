@@ -47,7 +47,6 @@
         ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
         ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
-(package-initialize)
 
 ;; add load path
 (let ((default-directory "~/.emacs.d/lisp/"))
