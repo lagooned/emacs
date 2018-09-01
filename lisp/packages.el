@@ -367,8 +367,6 @@
   (add-hook 'multiple-cursors-mode-disabled-hook
             'mc-evil-compat/back-to-previous-state))
 
-(use-package multi-term)
-
 (use-package nxml-mode
   :ensure nil
   :init
