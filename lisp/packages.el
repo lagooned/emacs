@@ -612,8 +612,5 @@
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (yas-reload-all))
 
-(use-package zop-to-char
-  :commands zop-to-char)
-
 (provide 'packages)
 ;;; packages.el ends here
