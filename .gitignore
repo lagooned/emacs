@@ -8,6 +8,7 @@
 .cask
 
 # Everything Else
+.#*
 *.dat
 *.data
 ido*
