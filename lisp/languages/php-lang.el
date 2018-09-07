@@ -33,11 +33,9 @@
   :error-patterns
   ((error line-start (or "Parse" "Fatal" "syntax") " error" (any ":" ",") " "
           (message) " in " (file-name) " on line " line line-end))
-  :modes (php-mode web-mode)
+  :modes (php-mode)
   :next-checkers ((warning . php-phpmd)
                   (warning . php-phpcs)))
-
-(add-hook 'web-mode-hook (lambda () (flycheck-select-checker 'gmacs-php)))
 
 (provide 'php-lang)
 ;;; php-lang.el ends here
