@@ -465,6 +465,7 @@ prompt."
   (flycheck-mode 1)
   (lsp-java-enable)
   (evil-leader/set-key-for-mode 'java-mode
+    "m a" 'lsp-execute-code-action
     "m r" 'lsp-rename
     "m R" 'lsp-restart-workspace
     "m f" 'lsp-format-buffer
