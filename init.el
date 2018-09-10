@@ -53,6 +53,9 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; unbind
+(load "setup")
+
 ;; load custom vars
 (load "variables")
 
