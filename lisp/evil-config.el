@@ -360,7 +360,8 @@
  'minibuffer-setup-hook
  '(lambda () (evil-emacs-state)
     (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
-    (define-key evil-emacs-state-local-map (kbd "M-j") 'void)))
+    (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
+    (define-key evil-emacs-state-local-map (kbd "C-s") 'void)))
 
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
 (define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
