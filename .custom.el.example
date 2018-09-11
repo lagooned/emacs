@@ -8,27 +8,6 @@
       calendar-location-name "Houston, TX"
       erc-nick "jhd")
 
-;; setup java workspace folders
-(setq lsp-java--workspace-folders
-      (list
-       "~/code/java/project"
-       ))
-
-;; preferred fonts list
-(let ((fonts '("Input"
-               "Source Code Pro"
-               "Monaco"
-               "DejaVu Sans Mono"
-               "Consolas"
-               "Monospace")))
-  (dolist (font (reverse fonts) t)
-    (if (member font (font-family-list))
-        (set-face-attribute 'default nil :family font))))
-
-;; font attributes
-(set-face-attribute 'default nil :weight 'normal)
-(set-face-attribute 'default nil :height 100)
-
 ;; spelling binary
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
@@ -48,12 +27,18 @@
 ;; grab env path
 (exec-path-from-shell-initialize)
 
+;; git gutter interval
+(setq git-gutter:update-interval 1)
+
+;; setup java workspace folders
+(setq lsp-java--workspace-folders
+      (list
+       "~/code/java"
+       ))
+
 ;; enable full screen
 (if (not (frame-parameter nil 'fullscreen))
     (toggle-frame-fullscreen))
-
-;; git gutter interval
-(setq git-gutter:update-interval 1)
 
 ;; custom vars
 (custom-set-variables
