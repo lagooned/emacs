@@ -71,6 +71,16 @@
    #b00000000
    #b00000000])
 
+(define-fringe-bitmap 'left-arrow
+  [#b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000
+   #b00000000])
+
 ;; let text breath
 (fringe-mode 20)
 
