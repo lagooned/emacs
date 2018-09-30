@@ -133,8 +133,7 @@
   "t l" 'linum-relative-mode
   "t w" 'whitespace-mode
   "t -" 'centered-cursor-mode
-  "t I" 'aggressive-indent-mode
-  "t i" 'indent-guide-mode
+  "t i" 'aggressive-indent-mode
   "t A" 'auto-revert-mode
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode

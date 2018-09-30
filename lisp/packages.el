@@ -290,10 +290,6 @@
           "hi-blue"
           "hi-magenta")))
 
-(use-package indent-guide
-  :defer t
-  :commands indent-guide-mode)
-
 (use-package ivy
   :diminish ivy-mode
   :ensure ivy-hydra
