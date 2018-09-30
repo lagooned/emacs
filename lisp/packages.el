@@ -294,9 +294,6 @@
   :defer t
   :commands indent-guide-mode)
 
-(use-package impatient-mode
-  :commands impatient-mode)
-
 (use-package ivy
   :diminish ivy-mode
   :ensure ivy-hydra
