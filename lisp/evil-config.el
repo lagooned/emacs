@@ -117,8 +117,6 @@
 (define-key evil-visual-state-map (kbd "C-;")   'comment-dwim)
 (define-key evil-insert-state-map (kbd "C-;")   'comment-dwim)
 (define-key evil-normal-state-map (kbd "-")     'dired-jump)
-(define-key evil-normal-state-map (kbd "C-`")   'shell-pop)
-(define-key evil-insert-state-map (kbd "C-`")   'shell-pop)
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-motion-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-]")   'gmacs/xref-find-definitions-symbol)
