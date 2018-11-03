@@ -139,9 +139,9 @@ undo and in `fundamental-mode' for performance sake."
   (gmacs/opt-region-helper 'counsel-rg))
 
 (defun gmacs/counsel-projectile-find-file-region ()
-  "Optionally run counsel-projectile-find-file on region."
+  "Optionally run counsel-git on region."
   (interactive)
-  (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-file))
+  (gmacs/opt-region-helper 'gmacs/counsel-git))
 
 (defun gmacs/counsel-projectile-find-dir-region ()
   "Optionally run counsel-projectile-find-dir on region."
@@ -220,18 +220,20 @@ undo and in `fundamental-mode' for performance sake."
                        (find-file args)))))))
     (call-interactively #'org-open-at-point)))
 
-(defun gmacs/counsel-projectile-find-file (&optional initial-input)
-  "Jump to a file in the current project with initial input `INITIAL-INPUT'."
+(defun gmacs/counsel-git (&optional initial-input)
+  "Find file in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input."
   (interactive)
-  (defvar counsel-projectile-find-file-action)
-  (if (not (projectile-project-p))
-      (error "Not in a git repository")
-    (ivy-read (projectile-prepend-project-name "find file: ")
-              (counsel-projectile--project-buffers-and-files)
+  (counsel-require-program (car (split-string counsel-git-cmd)))
+  (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
+         (cands (split-string
+                 (shell-command-to-string counsel-git-cmd)
+                 "\n"
+                 t)))
+    (ivy-read (projectile-prepend-project-name "Find file") cands
               :initial-input initial-input
-              :require-match t
-              :action counsel-projectile-find-file-action
-              :caller 'counsel-projectile-find-file)))
+              :action #'counsel-git-action
+              :caller 'counsel-git)))
 
 (defun gmacs/counsel-projectile-find-dir (&optional initial-input)
   "Jump to a directory in the current project with initial input `INITIAL-INPUT'."
@@ -239,7 +241,7 @@ undo and in `fundamental-mode' for performance sake."
   (defvar counsel-projectile-find-dir-action)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
-    (ivy-read (projectile-prepend-project-name "find dir: ")
+    (ivy-read (projectile-prepend-project-name "Find dir: ")
               (counsel-projectile--project-directories)
               :initial-input initial-input
               :require-match t
