@@ -202,6 +202,7 @@
         eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
   :config
   (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
+  (with-eval-after-load 'em-term (push "npm" eshell-visual-commands))
   (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))
 
 (use-package evil
