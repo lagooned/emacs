@@ -106,6 +106,9 @@
      (progn
        (dired-hide-details-mode t)
        (dired-omit-mode t)
+       (add-hook
+        'dired-omit-mode-hook
+        (lambda () (diminish 'dired-omit-mode "om")))
        (toggle-truncate-lines 1)
        (message nil))))
   (setq-default dired-omit-files-p t
