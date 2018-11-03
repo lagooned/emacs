@@ -138,13 +138,13 @@ undo and in `fundamental-mode' for performance sake."
   (interactive)
   (gmacs/opt-region-helper 'counsel-rg))
 
-(defun gmacs/counsel-git-region ()
-  "Optionally run counsel-git on region."
+(defun gmacs/counsel-projectile-find-file-region ()
+  "Optionally run counsel-projectile-find-file on region."
   (interactive)
-  (gmacs/opt-region-helper 'gmacs/counsel-git-projectile))
+  (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-file))
 
 (defun gmacs/counsel-projectile-find-dir-region ()
-  "Optionally run counsel-find-dir on region."
+  "Optionally run counsel-projectile-find-dir on region."
   (interactive)
   (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-dir))
 
@@ -220,24 +220,18 @@ undo and in `fundamental-mode' for performance sake."
                        (find-file args)))))))
     (call-interactively #'org-open-at-point)))
 
-(defun gmacs/counsel-git-projectile (&optional initial-input)
-  "Find file in the current Git repository with initial input `INITIAL-INPUT'."
+(defun gmacs/counsel-projectile-find-file (&optional initial-input)
+  "Jump to a file in the current project with initial input `INITIAL-INPUT'."
   (interactive)
-  (defvar counsel-require-program)
-  (defvar counsel-prompt-function)
-  (defvar counsel-git-cmd)
-  (defvar counsel--git-dir)
-  (counsel-require-program (car (split-string counsel-git-cmd)))
-  (ivy-set-prompt 'counsel-git counsel-prompt-function)
-  (setq counsel--git-dir (expand-file-name
-                          (counsel-locate-git-root)))
-  (let* ((default-directory counsel--git-dir)
-         (cands (split-string
-                 (shell-command-to-string counsel-git-cmd) "\n" t)))
-    (ivy-read (projectile-prepend-project-name "find file") cands
+  (defvar counsel-projectile-find-file-action)
+  (if (not (projectile-project-p))
+      (error "Not in a git repository")
+    (ivy-read (projectile-prepend-project-name "find file: ")
+              (counsel-projectile--project-buffers-and-files)
               :initial-input initial-input
-              :action #'counsel-git-action
-              :caller 'counsel-git)))
+              :require-match t
+              :action counsel-projectile-find-file-action
+              :caller 'counsel-projectile-find-file)))
 
 (defun gmacs/counsel-projectile-find-dir (&optional initial-input)
   "Jump to a directory in the current project with initial input `INITIAL-INPUT'."

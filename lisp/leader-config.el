@@ -117,7 +117,7 @@
   "p e" 'projectile-run-eshell
   "p p" 'counsel-projectile-switch-project
   "p r" 'gmacs/projectile-root-dir
-  "p f" 'gmacs/counsel-git-region
+  "p f" 'gmacs/counsel-projectile-find-file-region
   "p d" 'gmacs/counsel-projectile-find-dir-region
   "p D" 'magit-diff-popup
   "p F" 'magit-file-popup
