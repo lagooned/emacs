@@ -36,6 +36,7 @@
 (defun evil-collection-dired-setup ()
   "Set up `evil' bindings for `dired'."
   (evil-collection-define-key 'normal 'dired-mode-map
+    "-" 'dired-jump
     "q" 'quit-window
     "j" 'dired-next-line
     "k" 'dired-previous-line
@@ -43,7 +44,8 @@
     [follow-link] 'mouse-face
     ;; Commands to mark or flag certain categories of files
     "#" 'dired-flag-auto-save-files
-    "." 'dired-clean-directory
+    ;; "." 'dired-clean-directory
+    "." 'dired-omit-mode
     "~" 'dired-flag-backup-files
     ;; Upper case keys (except !) for operating on the marked files
     "A" 'dired-do-find-regexp
@@ -51,11 +53,14 @@
     "B" 'dired-do-byte-compile
     "D" 'dired-do-delete
     "gG" 'dired-do-chgrp ;; FIXME: This can probably live on a better binding.
+    "gg" 'beginning-of-buffer
+    "G" 'end-of-buffer
     "H" 'dired-do-hardlink
     "L" 'dired-do-load
     "M" 'dired-do-chmod
     "O" 'dired-do-chown
     "P" 'dired-do-print
+    "p" 'magit-status
     "Q" 'dired-do-find-regexp-and-replace
     "R" 'dired-do-rename
     "S" 'dired-do-symlink
@@ -117,10 +122,14 @@
     "d" 'dired-flag-file-deletion
     "gf" 'dired-find-file
     (kbd "C-m") 'dired-find-file
+    (kbd "C-j") 'dired-find-file-other-window
     "gr" 'revert-buffer
     "i" 'dired-toggle-read-only
     "I" 'dired-maybe-insert-subdir
     "J" 'dired-goto-file
+    "v" 'evil-visual-char
+    "V" 'evil-visual-line
+    (kbd "C-v") 'evil-visual-block
     "K" 'dired-do-kill-lines
     "r" 'dired-do-redisplay
     "m" 'dired-mark
@@ -160,6 +169,10 @@
     (kbd "M-s a M-C-s") 'dired-do-isearch-regexp
     (kbd "M-s f C-s")   'dired-isearch-filenames
     (kbd "M-s f M-C-s") 'dired-isearch-filenames-regexp
+    "/" 'evil-search-forward
+    "?" 'evil-search-backward
+    "n" 'evil-search-next
+    "N" 'evil-search-previous
     ;; misc
     [remap read-only-mode] 'dired-toggle-read-only
     ;; `toggle-read-only' is an obsolete alias for `read-only-mode'

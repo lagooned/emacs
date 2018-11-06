@@ -78,7 +78,8 @@
   :init
   (evil-collection-minibuffer nil)
   :config
-  (evil-collection-init 'help))
+  (evil-collection-init 'help)
+  (evil-collection-init 'dired))
 
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
@@ -155,38 +156,6 @@
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
 (evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
-
-;; dired
-(eval-after-load 'dired
-  '(progn
-     ;; use the standard dired bindings as a base
-     (evil-make-overriding-map dired-mode-map 'normal t)
-     (evil-define-key 'normal dired-mode-map
-       "-" 'dired-jump
-       "h" 'evil-backward-char
-       "j" 'evil-next-line
-       "k" 'evil-previous-line
-       "l" 'evil-forward-char
-       "C-j" 'dired-find-file
-       "K" 'dired-do-kill-lines
-       "n" 'evil-search-next
-       "gg" 'beginning-of-buffer
-       "G" 'end-of-buffer
-       "p" 'magit-status
-       "N" 'evil-search-previous
-       "r" 'revert-buffer
-       "$" 'evil-end-of-line
-       "0" 'evil-beginning-of-line
-       "b" 'evil-backward-word-begin
-       "B" 'evil-backward-WORD-begin
-       "w" 'evil-forward-word-begin
-       "W" 'evil-forward-WORD-begin
-       "v" 'evil-visual-char
-       "V" 'evil-visual-line
-       "C-v" 'evil-visual-block
-       "c" 'dired-do-copy
-       "?" 'evil-search-backward
-       "." 'dired-omit-mode)))
 
 ;; doc-view
 (evil-set-initial-state 'doc-view-mode 'normal)
