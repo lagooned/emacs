@@ -128,6 +128,30 @@
 (define-key evil-motion-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-]")   'gmacs/xref-find-definitions-symbol)
 
+;; minibuffer setup
+(setq evil-insert-state-message nil
+      evil-visual-state-message nil
+      evil-replace-state-message nil
+      evil-normal-state-message nil
+      evil-emacs-state-message nil
+      evil-motion-state-message nil
+      evil-insert-state-message nil
+      evil-operator-state-message nil)
+
+(add-hook
+ 'minibuffer-setup-hook
+ '(lambda () (evil-emacs-state)
+    (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
+    (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
+    (define-key evil-emacs-state-local-map (kbd "C-s") 'void)))
+
+;; ex mode setup
+(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
+(define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
+(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
+(define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
+(define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
+
 ;; web-mode
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
 (evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
@@ -349,30 +373,6 @@
 (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
 (define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
-
-;; minibuffer
-(setq evil-insert-state-message nil
-      evil-visual-state-message nil
-      evil-replace-state-message nil
-      evil-normal-state-message nil
-      evil-emacs-state-message nil
-      evil-motion-state-message nil
-      evil-insert-state-message nil
-      evil-operator-state-message nil)
-
-;; emacs mode for minibuffer
-(add-hook
- 'minibuffer-setup-hook
- '(lambda () (evil-emacs-state)
-    (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
-    (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
-    (define-key evil-emacs-state-local-map (kbd "C-s") 'void)))
-
-(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
-(define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
-(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
-(define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
-(define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
 ;; c derivatives comments
 (add-hook
