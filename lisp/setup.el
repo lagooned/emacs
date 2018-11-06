@@ -77,6 +77,5 @@
 (global-unset-key (kbd "M-o"))
 (global-unset-key (kbd "C-M-o"))
 
-
 (provide 'setup)
 ;;; setup.el ends here
