@@ -74,7 +74,11 @@
   :config
   (global-evil-surround-mode 1))
 
-(use-package evil-collection)
+(use-package evil-collection
+  :init
+  (evil-collection-minibuffer nil)
+  :config
+  (evil-collection-init 'help))
 
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)

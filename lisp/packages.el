@@ -293,12 +293,6 @@
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."))
 
-(use-package help
-  :ensure nil
-  :bind
-  (:map help-mode-map
-        ("C-j" . push-button)))
-
 (use-package hi-lock
   :diminish hi-lock-mode "hi"
   :ensure nil
