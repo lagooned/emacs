@@ -74,6 +74,8 @@
   :config
   (global-evil-surround-mode 1))
 
+(use-package evil-collection)
+
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-visual-state-map (kbd "j")     'evil-next-visual-line)
@@ -316,15 +318,15 @@
 (define-key evil-emacs-state-map (kbd "M-!") 'shell-command)
 (define-key evil-emacs-state-map (kbd "M-<") 'beginning-of-buffer)
 (define-key evil-emacs-state-map (kbd "M->") 'end-of-buffer)
-;; (define-key evil-emacs-state-map (kbd "M-o b") 'facemenu-set-bold)
-;; (define-key evil-emacs-state-map (kbd "M-o d") 'facemenu-set-default)
-;; (define-key evil-emacs-state-map (kbd "M-o i") 'facemenu-set-italic)
-;; (define-key evil-emacs-state-map (kbd "M-o l") 'facemenu-set-bold-italic)
-;; (define-key evil-emacs-state-map (kbd "M-o o") 'facemenu-set-face)
-;; (define-key evil-emacs-state-map (kbd "M-o u") 'facemenu-set-underline)
-;; (define-key evil-emacs-state-map (kbd "M-o M-o") 'font-lock-fontify-block)
-;; (define-key evil-emacs-state-map (kbd "M-o M-s") 'center-line)
-;; (define-key evil-emacs-state-map (kbd "M-o M-S") 'center-paragraph)
+(define-key evil-emacs-state-map (kbd "M-o b") 'facemenu-set-bold)
+(define-key evil-emacs-state-map (kbd "M-o d") 'facemenu-set-default)
+(define-key evil-emacs-state-map (kbd "M-o i") 'facemenu-set-italic)
+(define-key evil-emacs-state-map (kbd "M-o l") 'facemenu-set-bold-italic)
+(define-key evil-emacs-state-map (kbd "M-o o") 'facemenu-set-face)
+(define-key evil-emacs-state-map (kbd "M-o u") 'facemenu-set-underline)
+(define-key evil-emacs-state-map (kbd "M-o M-o") 'font-lock-fontify-block)
+(define-key evil-emacs-state-map (kbd "M-o M-s") 'center-line)
+(define-key evil-emacs-state-map (kbd "M-o M-S") 'center-paragraph)
 (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
 (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
 (define-key evil-emacs-state-map (kbd "C-M-h") 'mark-defun)
