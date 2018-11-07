@@ -78,8 +78,7 @@
   :init
   (evil-collection-minibuffer nil)
   :config
-  (evil-collection-init 'help)
-  (evil-collection-init 'dired))
+  (evil-collection-init))
 
 ;; evil binds
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
@@ -158,68 +157,12 @@
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
 (evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
 
-;; doc-view
-(evil-set-initial-state 'doc-view-mode 'normal)
-(add-hook
- 'doc-view-mode-hook
- (lambda ()
-   (set (make-local-variable 'evil-normal-state-cursor) (list nil))
-   (set (make-local-variable 'evil-insert-state-cursor) (list nil))
-   (set (make-local-variable 'evil-visual-state-cursor) (list nil))
-   (set (make-local-variable 'evil-motion-state-cursor) (list nil))
-   (set (make-local-variable 'evil-emacs-state-cursor) (list nil))
-   (evil-define-key 'normal doc-view-mode-map
-     "p" 'doc-view-previous-page
-     "n" 'doc-view-next-page
-     "d" 'image-scroll-up
-     "u" 'image-scroll-down
-     "q" 'quit-window
-     "v" 'image-scroll-up
-     "V" 'image-scroll-down
-     "h" 'doc-view-previous-page
-     "j" 'doc-view-next-line-or-next-page
-     "k" 'doc-view-previous-line-or-previous-page
-     "l" 'doc-view-next-page
-     "f" 'doc-view-next-line-or-next-page
-     "b" 'doc-view-previous-line-or-previous-page
-     "gg" 'doc-view-first-page
-     "G" 'doc-view-last-page
-     "gj" 'doc-view-goto-page
-     "-" 'dired-jump
-     "wf" 'doc-view-fit-width-to-window
-     "wh" 'doc-view-fit-height-to-window
-     "wp" 'doc-view-fit-page-to-window
-     "ss" 'doc-view-set-slice
-     "sm" 'doc-view-set-slice-using-mouse
-     "sb" 'doc-view-set-slice-from-bounding-box
-     "sr" 'doc-view-reset-slice
-     "/" 'doc-view-search
-     "?" 'doc-view-search-backward
-     "C-t" 'doc-view-show-tooltip
-     "C-c C-c" 'doc-view-toggle-display
-     "C-c C-t" 'doc-view-open-text
-     "gr" 'doc-view-revert-buffer
-     "c" 'void)))
-
 ;; eshell
 (evil-define-operator evil-eshell-delete
   (beg end type register yank-handler)
   "Like evil-delete, but inhibit read only."
   (interactive "<R><x><y>")
   (let ((inhibit-read-only t))
-    ;;
-    ;; todo: nasty hack-
-    ;;       check if beg-1 is a \n
-    ;;       and if beg is a $/# (maybe use some unicode char)
-    ;;       then evil-delete from beg + 2
-    ;;       cursor will get moved to prev line
-    ;;       then delete whole line and send input
-    ;;       else just do normal delete
-    ;;
-    ;; todo: figure out what do if visually selecting prompt
-    ;;
-    ;; todo: maybe don't do any of this and live with it
-    ;;
     (evil-delete beg end type register yank-handler)))
 
 (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
