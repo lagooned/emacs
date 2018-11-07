@@ -65,9 +65,7 @@
   :after org
   :init
   (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme))))
+  (add-hook 'evil-org-mode-hook 'evil-org-set-key-theme))
 
 (use-package evil-surround
   :diminish evil-surround-mode
@@ -229,9 +227,10 @@
  'org-mode-hook
  (lambda ()
    (progn
-     (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))))
+     (define-key
+       evil-normal-state-local-map (kbd "M-i") 'org-cycle))))
 
-;; emacs binds
+;; emacs mode binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
 (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
 (define-key evil-emacs-state-map (kbd "C-w") 'kill-region)
@@ -298,11 +297,9 @@
      (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))))
 
 ;; company abort on exit insert mode
-(add-hook
- 'evil-insert-state-exit-hook
- (lambda ()
-   (if (bound-and-true-p company-mode)
-       (company-abort))))
+(add-hook 'evil-insert-state-exit-hook
+          (lambda () (if (bound-and-true-p company-mode)
+                    (company-abort))))
 
 ;; add evil-ex-history to .savehist file
 (if (not (member 'evil-ex-history savehist-additional-variables))
