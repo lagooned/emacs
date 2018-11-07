@@ -470,5 +470,10 @@ prompt."
     "m o" 'lsp-java-organize-imports
     "m b" 'lsp-java-build-project))
 
+(defun gmacs/looking-at-eshell-prompt-regexp-p (loc)
+  (save-excursion
+    (goto-char loc)
+    (looking-at-p gmacs/eshell-prompt-regexp)))
+
 (provide 'functions)
 ;;; functions.el ends here

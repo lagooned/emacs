@@ -156,12 +156,20 @@
 (evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
 
 ;; eshell
-(evil-define-operator evil-eshell-delete
-  (beg end type register yank-handler)
-  "Like evil-delete, but inhibit read only."
+(evil-define-operator evil-eshell-delete (beg end type register yank-handler)
+  "Like evil-delete, but inhibit read only and when the eshell prompt is
+involved re-emit it."
   (interactive "<R><x><y>")
   (let ((inhibit-read-only t))
-    (evil-delete beg end type register yank-handler)))
+    (if (gmacs/looking-at-eshell-prompt-regexp-p beg)
+        (progn
+          ;; prompt should be separated into upper
+          ;; and lower prompt so that this 2 doesn't
+          ;; have to be hardcoded :p
+          (evil-delete (+ beg 2) end type register yank-handler)
+          (kill-line) (pop kill-ring)
+          (eshell-emit-prompt))
+      (evil-delete beg end type register yank-handler))))
 
 (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
 
@@ -174,6 +182,7 @@
      (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
      (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
      (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
+     (define-key evil-insert-state-local-map (kbd "C-i") 'eshell-pcomplete)
      (define-key evil-insert-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
      (define-key evil-normal-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
      (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
