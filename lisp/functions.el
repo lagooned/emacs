@@ -470,6 +470,41 @@ prompt."
     "m o" 'lsp-java-organize-imports
     "m b" 'lsp-java-build-project))
 
+(defun gmacs/setup-eshell-mode ()
+  (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
+    "Like evil-delete, but inhibit read only and when the eshell prompt is
+involved re-emit it."
+    (interactive "<R><x><y>")
+    (let ((inhibit-read-only t))
+      (if (gmacs/looking-at-eshell-prompt-regexp-p beg)
+          (progn
+            ;; prompt should be separated into upper
+            ;; and lower prompt so that this 2 doesn't
+            ;; have to be hardcoded :p
+            (evil-delete (+ beg 2) end type register yank-handler)
+            ;; todo: delete-region back the length of the prompt
+            (kill-line) (pop kill-ring)
+            (eshell-emit-prompt))
+        (evil-delete beg end type register yank-handler))))
+  (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
+  (setq-local inhibit-read-only t)
+  (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
+  (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
+  (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
+  (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
+  (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-insert-state-local-map (kbd "C-i") 'eshell-pcomplete)
+  (define-key evil-insert-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-normal-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
+  (define-key evil-normal-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
+  (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
+  (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
+  (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
+  (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
+  (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
+  (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))
+
 (defun gmacs/looking-at-eshell-prompt-regexp-p (loc)
   (save-excursion
     (goto-char loc)
