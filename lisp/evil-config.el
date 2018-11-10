@@ -137,43 +137,6 @@
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
 (evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
 
-;; shell
-(add-hook
- 'shell-mode-hook
- (lambda ()
-   (progn
-     (define-key evil-normal-state-local-map (kbd "C-d") 'evil-scroll-down)
-     (define-key evil-insert-state-local-map (kbd "C-d") 'comint-send-eof)
-     (define-key evil-normal-state-local-map (kbd "RET") 'comint-send-input)
-     (define-key evil-normal-state-local-map (kbd "C-j") 'comint-send-input)
-     (define-key evil-normal-state-local-map (kbd "C-m") 'comint-send-input)
-     (define-key evil-insert-state-local-map (kbd "RET") 'comint-send-input)
-     (define-key evil-insert-state-local-map (kbd "C-j") 'comint-send-input)
-     (define-key evil-insert-state-local-map (kbd "C-m") 'comint-send-input))))
-
-;; term
-(add-hook
- 'term-mode-hook
- (lambda ()
-   (progn
-     (define-key evil-insert-state-local-map (kbd "TAB") 'term-send-raw)
-     (define-key evil-insert-state-local-map (kbd "C-d") 'term-send-eof)
-     (define-key evil-normal-state-local-map (kbd "C-c C-d") 'term-send-eof)
-     (define-key evil-normal-state-local-map (kbd "M-r") 'void)
-     (define-key evil-insert-state-local-map (kbd "M-r") 'term-send-reverse-search-history)
-     (define-key evil-normal-state-local-map (kbd "C-c C-t") 'multi-term)
-     (define-key evil-insert-state-local-map (kbd "C-c C-t") 'multi-term)
-     (define-key evil-insert-state-local-map (kbd "C-c C-p") 'multi-term-prev)
-     (define-key evil-normal-state-local-map (kbd "C-c C-p") 'multi-term-prev)
-     (define-key evil-insert-state-local-map (kbd "C-c C-n") 'multi-term-next)
-     (define-key evil-normal-state-local-map (kbd "C-c C-n") 'multi-term-next)
-     (define-key evil-normal-state-local-map (kbd "RET") 'term-send-input)
-     (define-key evil-normal-state-local-map (kbd "C-j") 'term-send-input)
-     (define-key evil-normal-state-local-map (kbd "C-m") 'term-send-input)
-     (define-key evil-insert-state-local-map (kbd "RET") 'term-send-input)
-     (define-key evil-insert-state-local-map (kbd "C-j") 'term-send-input)
-     (define-key evil-insert-state-local-map (kbd "C-m") 'term-send-input))))
-
 ;; org
 (add-hook
  'org-mode-hook
