@@ -476,7 +476,7 @@ match your prompt."
     "m o" 'lsp-java-organize-imports
     "m b" 'lsp-java-build-project))
 
-(defun gmacs/setup-eshell-mode ()
+(defun gmacs/evil-eshell-mode-setup ()
   (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
     "Like evil-delete, but inhibit read only and when the eshell prompt is
 involved re-emit it."

@@ -196,13 +196,11 @@
         erc-kill-queries-on-quit t))
 
 (use-package eshell
-  :after evil
   :init
   (setq eshell-banner-message 'gmacs/eshell-message
         eshell-prompt-function 'gmacs/eshell-prompt-function
         eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
   :config
-  (add-hook 'eshell-mode-hook 'gmacs/setup-eshell-mode)
   (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
   (with-eval-after-load 'em-term (push "npm" eshell-visual-commands))
   (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))

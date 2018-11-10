@@ -256,6 +256,9 @@
 (define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
 
+;; eshell
+(add-hook 'eshell-mode-hook 'gmacs/evil-eshell-mode-setup)
+
 ;; c derivatives comments
 (add-hook
  'c-mode-common-hook
