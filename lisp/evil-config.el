@@ -126,13 +126,6 @@
 (define-key evil-motion-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-]")   'gmacs/xref-find-definitions-symbol)
 
-;; ex mode setup
-(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
-(define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
-(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
-(define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
-(define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
-
 ;; emacs mode binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
 (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
@@ -188,6 +181,13 @@
 (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
 (define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
+
+;; ex mode
+(define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
+(define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
+(define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
+(define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
+(define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
 ;; minibuffer
 (add-hook 'minibuffer-setup-hook 'gmacs/evil-minibuffer-setup)
