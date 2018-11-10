@@ -383,12 +383,18 @@ disable `hi-lock-mode'."
     (eshell-banner-initialize)
     (eshell-send-input)))
 
+(defun gmacs/eshell-top-prompt-function ()
+  (concat "[" (abbreviate-file-name (eshell/pwd)) "]"))
+
+(defun gmacs/eshell-bottom-prompt-function ()
+  (if (= (user-uid) 0) "# " "$ "))
+
 (defun gmacs/eshell-prompt-function ()
-  "A function that returns the Eshell prompt string.
-Make sure to update `gmacs/eshell-prompt-regexp' so that it will match your
-prompt."
-  (concat "\n[" (abbreviate-file-name (eshell/pwd)) "] \n"
-          (if (= (user-uid) 0) "# " "$ ")))
+  "A function that returns the Eshell prompt string. Make
+sure to update `gmacs/eshell-prompt-regexp' so that it will
+match your prompt."
+  (concat "\n" (gmacs/eshell-top-prompt-function) " \n"
+          (gmacs/eshell-bottom-prompt-function)))
 
 (defun gmacs/evil-visual-or-normal-p ()
   "True if evil mode is enabled, and we are in normal or visual mode."
@@ -475,17 +481,20 @@ prompt."
     "Like evil-delete, but inhibit read only and when the eshell prompt is
 involved re-emit it."
     (interactive "<R><x><y>")
-    (let ((inhibit-read-only t))
+    (let ((inhibit-read-only t)
+          (total-prompt-length (length (gmacs/eshell-prompt-function)))
+          (bottom-prompt-length (length (gmacs/eshell-bottom-prompt-function))))
       (if (gmacs/looking-at-eshell-prompt-regexp-p beg)
           (progn
-            ;; prompt should be separated into upper
-            ;; and lower prompt so that this 2 doesn't
-            ;; have to be hardcoded :p
-            (evil-delete (+ beg 2) end type register yank-handler)
-            ;; todo: delete-region back the length of the prompt
-            (kill-line) (pop kill-ring)
+            (evil-delete
+             (+ beg bottom-prompt-length)
+             end type register yank-handler)
+            (delete-region
+             (- (+ beg bottom-prompt-length) total-prompt-length)
+             (+ beg bottom-prompt-length))
             (eshell-emit-prompt))
         (evil-delete beg end type register yank-handler))))
+  ;; todo custom paste (p) operator too pls
   (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
   (setq-local inhibit-read-only t)
   (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
