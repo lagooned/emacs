@@ -126,14 +126,6 @@
 (define-key evil-motion-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-]")   'gmacs/xref-find-definitions-symbol)
 
-(add-hook
- 'minibuffer-setup-hook
- '(lambda () (evil-emacs-state)
-    (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
-    (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
-    (define-key evil-emacs-state-local-map (kbd "C-s") 'void)
-    (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done-hydra)))
-
 ;; ex mode setup
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
 (define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
@@ -245,6 +237,9 @@
 (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
 (define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
+
+;; minibuffer
+(add-hook 'minibuffer-setup-hook 'gmacs/evil-minibuffer-setup)
 
 ;; eshell
 (add-hook 'eshell-mode-hook 'gmacs/evil-eshell-mode-setup)

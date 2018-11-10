@@ -519,6 +519,13 @@ involved re-emit it."
     (goto-char loc)
     (looking-at-p gmacs/eshell-prompt-regexp)))
 
+(defun gmacs/evil-minibuffer-setup ()
+  (evil-emacs-state)
+  (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
+  (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
+  (define-key evil-emacs-state-local-map (kbd "C-s") 'void)
+  (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done-hydra))
+
 (defun gmacs/evil-c-common-mode-setup ()
   (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
