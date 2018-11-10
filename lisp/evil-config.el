@@ -126,16 +126,6 @@
 (define-key evil-motion-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-]")   'gmacs/xref-find-definitions-symbol)
 
-;; minibuffer setup
-(setq evil-insert-state-message nil
-      evil-visual-state-message nil
-      evil-replace-state-message nil
-      evil-normal-state-message nil
-      evil-emacs-state-message nil
-      evil-motion-state-message nil
-      evil-insert-state-message nil
-      evil-operator-state-message nil)
-
 (add-hook
  'minibuffer-setup-hook
  '(lambda () (evil-emacs-state)
