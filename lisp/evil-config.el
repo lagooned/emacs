@@ -204,7 +204,7 @@
 ;; org
 (add-hook 'org-mode-hook 'gmacs/evil-org-mode-setup)
 
-;; c derivatives comments
+;; c derivs setup
 (add-hook 'c-mode-common-hook 'gmacs/evil-c-common-mode-setup)
 
 ;; company abort on exit insert mode
