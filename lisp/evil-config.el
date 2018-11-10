@@ -137,14 +137,6 @@
 (evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
 (evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
 
-;; org
-(add-hook
- 'org-mode-hook
- (lambda ()
-   (progn
-     (define-key
-       evil-normal-state-local-map (kbd "M-i") 'org-cycle))))
-
 ;; emacs mode binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
 (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
@@ -206,6 +198,9 @@
 
 ;; eshell
 (add-hook 'eshell-mode-hook 'gmacs/evil-eshell-mode-setup)
+
+;; org
+(add-hook 'org-mode-hook 'gmacs/evil-org-mode-setup)
 
 ;; c derivatives comments
 (add-hook 'c-mode-common-hook 'gmacs/evil-c-common-mode-setup)

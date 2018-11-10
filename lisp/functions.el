@@ -526,6 +526,9 @@ involved re-emit it."
   (define-key evil-emacs-state-local-map (kbd "C-s") 'void)
   (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done-hydra))
 
+(defun gmacs/evil-org-mode-setup ()
+  (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))
+
 (defun gmacs/evil-c-common-mode-setup ()
   (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
