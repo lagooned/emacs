@@ -133,10 +133,6 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
-;; web-mode
-(evil-define-key 'insert web-mode-map (kbd "C-c n") 'emmet-next-edit-point)
-(evil-define-key 'insert web-mode-map (kbd "C-c p") 'emmet-prev-edit-point)
-
 ;; emacs mode binds
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
 (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
