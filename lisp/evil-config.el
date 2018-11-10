@@ -208,9 +208,7 @@
 (add-hook 'c-mode-common-hook 'gmacs/evil-c-common-mode-setup)
 
 ;; company abort on exit insert mode
-(add-hook 'evil-insert-state-exit-hook
-          (lambda () (if (bound-and-true-p company-mode)
-                    (company-abort))))
+(add-hook 'evil-insert-state-exit-hook 'gmacs/evil-company-abort-on-insert-leave)
 
 ;; add evil-ex-history to .savehist file
 (if (not (member 'evil-ex-history savehist-additional-variables))

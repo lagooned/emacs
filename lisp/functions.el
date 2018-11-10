@@ -535,5 +535,9 @@ involved re-emit it."
   (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
 
+(defun gmacs/evil-company-abort-on-insert-leave ()
+  (if (bound-and-true-p company-mode)
+      (company-abort)))
+
 (provide 'functions)
 ;;; functions.el ends here
