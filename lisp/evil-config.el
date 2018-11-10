@@ -250,14 +250,7 @@
 (add-hook 'eshell-mode-hook 'gmacs/evil-eshell-mode-setup)
 
 ;; c derivatives comments
-(add-hook
- 'c-mode-common-hook
- (lambda ()
-   (progn
-     (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
-     (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
-     (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
-     (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))))
+(add-hook 'c-mode-common-hook 'gmacs/evil-c-common-mode-setup)
 
 ;; company abort on exit insert mode
 (add-hook 'evil-insert-state-exit-hook

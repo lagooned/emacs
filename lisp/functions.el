@@ -519,5 +519,11 @@ involved re-emit it."
     (goto-char loc)
     (looking-at-p gmacs/eshell-prompt-regexp)))
 
+(defun gmacs/evil-c-common-mode-setup ()
+  (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
+  (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
+  (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
+  (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
+
 (provide 'functions)
 ;;; functions.el ends here
