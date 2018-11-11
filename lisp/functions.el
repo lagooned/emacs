@@ -85,6 +85,11 @@
   (interactive)
   (find-file "~/.emacs.d/.custom.el"))
 
+(defun gmacs/open-startup-log ()
+  "open startup.log"
+  (interactive)
+  (find-file "~/.emacs.d/startup.log"))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup \
 at the first save of each gmacs session."
