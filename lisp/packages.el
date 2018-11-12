@@ -36,6 +36,8 @@
   :ensure nil
   :diminish abbrev-mode "ab")
 
+(use-package alpha)
+
 (use-package autorevert
   :ensure nil
   :init
