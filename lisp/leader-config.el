@@ -144,7 +144,6 @@
   "t s" 'gmacs/toggle-spelling
   "t h" 'highlight-symbol-at-point
   "t H" 'gmacs/unhighlight-all
-  "t z" 'zoom-mode
 
   ;; universal
   "u" 'universal-argument
