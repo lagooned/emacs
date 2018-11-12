@@ -455,7 +455,7 @@ match your prompt."
     (call-interactively 'shrink-window)))
 
 (defun gmacs/dont-kill-scratch ()
-  "Don't kill but burry *scratch* buffer."
+  "Don't kill but bury *scratch* buffer."
   (if (equal (buffer-name (current-buffer)) "*scratch*")
       (progn (bury-buffer) nil)
     t))
