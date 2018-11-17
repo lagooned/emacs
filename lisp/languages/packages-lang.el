@@ -24,9 +24,7 @@
 
 ;;; Code:
 
-(add-hook
- 'prog-mode-hook
- (lambda () (company-mode 1)))
+(add-hook 'prog-mode-hook 'company-mode)
 
 (use-package flycheck
   :diminish flycheck-mode "flyc"

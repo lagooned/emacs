@@ -111,6 +111,7 @@
   "o d" 'gmacs/open-downloads-dir
   "o c" 'gmacs/open-code-dir
   "o h" 'gmacs/open-home-dir
+  "o l" 'gmacs/open-startup-log
 
   ;; project
   "p s" 'gmacs/magit-status
@@ -143,7 +144,6 @@
   "t s" 'gmacs/toggle-spelling
   "t h" 'highlight-symbol-at-point
   "t H" 'gmacs/unhighlight-all
-  "t z" 'zoom-mode
 
   ;; universal
   "u" 'universal-argument

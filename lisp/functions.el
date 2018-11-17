@@ -85,6 +85,11 @@
   (interactive)
   (find-file "~/.emacs.d/.custom.el"))
 
+(defun gmacs/open-startup-log ()
+  "open startup.log"
+  (interactive)
+  (find-file "~/.emacs.d/startup.log"))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup \
 at the first save of each gmacs session."
@@ -383,12 +388,18 @@ disable `hi-lock-mode'."
     (eshell-banner-initialize)
     (eshell-send-input)))
 
+(defun gmacs/eshell-top-prompt-function ()
+  (concat "[" (abbreviate-file-name (eshell/pwd)) "]"))
+
+(defun gmacs/eshell-bottom-prompt-function ()
+  (if (= (user-uid) 0) "# " "$ "))
+
 (defun gmacs/eshell-prompt-function ()
-  "A function that returns the Eshell prompt string.
-Make sure to update `gmacs/eshell-prompt-regexp' so that it will match your
-prompt."
-  (concat "\n[" (abbreviate-file-name (eshell/pwd)) "] \n"
-          (if (= (user-uid) 0) "# " "$ ")))
+  "A function that returns the Eshell prompt string. Make
+sure to update `gmacs/eshell-prompt-regexp' so that it will
+match your prompt."
+  (concat "\n" (gmacs/eshell-top-prompt-function) " \n"
+          (gmacs/eshell-bottom-prompt-function)))
 
 (defun gmacs/evil-visual-or-normal-p ()
   "True if evil mode is enabled, and we are in normal or visual mode."
@@ -444,7 +455,7 @@ prompt."
     (call-interactively 'shrink-window)))
 
 (defun gmacs/dont-kill-scratch ()
-  "Don't kill but burry *scratch* buffer."
+  "Don't kill but bury *scratch* buffer."
   (if (equal (buffer-name (current-buffer)) "*scratch*")
       (progn (bury-buffer) nil)
     t))
@@ -469,6 +480,69 @@ prompt."
     "m H" 'lsp-highlight-symbol-at-point
     "m o" 'lsp-java-organize-imports
     "m b" 'lsp-java-build-project))
+
+(defun gmacs/evil-eshell-mode-setup ()
+  (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
+    "Like evil-delete, but inhibit read only and when the eshell prompt is
+involved re-emit it."
+    (interactive "<R><x><y>")
+    (let ((inhibit-read-only t)
+          (total-prompt-length (length (gmacs/eshell-prompt-function)))
+          (bottom-prompt-length (length (gmacs/eshell-bottom-prompt-function))))
+      (if (gmacs/looking-at-eshell-prompt-regexp-p beg)
+          (progn
+            (evil-delete
+             (+ beg bottom-prompt-length)
+             end type register yank-handler)
+            (delete-region
+             (- (+ beg bottom-prompt-length) total-prompt-length)
+             (+ beg bottom-prompt-length))
+            (eshell-emit-prompt))
+        (evil-delete beg end type register yank-handler))))
+  ;; todo custom paste (p) operator too pls
+  (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
+  (setq-local inhibit-read-only t)
+  (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
+  (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
+  (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
+  (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
+  (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-insert-state-local-map (kbd "C-i") 'eshell-pcomplete)
+  (define-key evil-insert-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-normal-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
+  (define-key evil-normal-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
+  (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
+  (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
+  (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
+  (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
+  (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
+  (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))
+
+(defun gmacs/looking-at-eshell-prompt-regexp-p (loc)
+  (save-excursion
+    (goto-char loc)
+    (looking-at-p gmacs/eshell-prompt-regexp)))
+
+(defun gmacs/evil-minibuffer-setup ()
+  (evil-emacs-state)
+  (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
+  (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
+  (define-key evil-emacs-state-local-map (kbd "C-s") 'void)
+  (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done-hydra))
+
+(defun gmacs/evil-org-mode-setup ()
+  (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))
+
+(defun gmacs/evil-c-common-mode-setup ()
+  (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
+  (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
+  (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
+  (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
+
+(defun gmacs/evil-company-abort-on-insert-leave ()
+  (if (bound-and-true-p company-mode)
+      (company-abort)))
 
 (provide 'functions)
 ;;; functions.el ends here

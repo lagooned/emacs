@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(use-package emacs-lisp-mode
+(use-package elisp-mode
   :ensure nil
   :init
   (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-setup))

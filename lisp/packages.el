@@ -36,6 +36,8 @@
   :ensure nil
   :diminish abbrev-mode "ab")
 
+(use-package alpha)
+
 (use-package autorevert
   :ensure nil
   :init
@@ -207,7 +209,15 @@
 
 (use-package evil
   :init
-  (setq evil-move-cursor-back nil)
+  (setq evil-move-cursor-back nil
+        evil-insert-state-message nil
+        evil-visual-state-message nil
+        evil-replace-state-message nil
+        evil-normal-state-message nil
+        evil-emacs-state-message nil
+        evil-motion-state-message nil
+        evil-insert-state-message nil
+        evil-operator-state-message nil)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
   (add-hook 'term-mode-hook 'evil-emacs-state)
   (add-hook 'ansi-term-mode-hook 'evil-emacs-state)
@@ -292,12 +302,6 @@
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."
     "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..." "XXXXX..."))
-
-(use-package help
-  :ensure nil
-  :bind
-  (:map help-mode-map
-        ("C-j" . push-button)))
 
 (use-package hi-lock
   :diminish hi-lock-mode "hi"
