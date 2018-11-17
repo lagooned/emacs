@@ -59,7 +59,9 @@
   :init
   (setq lsp-ui-flycheck-enable t
         lsp-ui-doc-enable nil
-        lsp-ui-sideline-enable nil))
+        lsp-ui-sideline-enable nil)
+  :config
+  (remove-hook 'lsp-eldoc-hook 'lsp-document-highlight))
 
 (use-package company-lsp
   :after lsp-mode
