@@ -30,12 +30,6 @@
 ;; git gutter interval
 (setq git-gutter:update-interval 1)
 
-;; setup java workspace folders
-(setq lsp-java--workspace-folders
-      (list
-       "~/code/java"
-       ))
-
 ;; enable full screen
 (if (not (frame-parameter nil 'fullscreen))
     (toggle-frame-fullscreen))

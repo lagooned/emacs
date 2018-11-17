@@ -30,5 +30,9 @@
   (setq lsp-java-save-action-organize-imports nil)
   (add-hook 'java-mode-hook #'gmacs/lsp-java-enable))
 
+(use-package dap-java
+  :ensure nil
+  :after lsp-java)
+
 (provide 'java-lang)
 ;;; java-lang.el ends here
