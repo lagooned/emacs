@@ -48,7 +48,7 @@
 (use-package lsp-mode
   :commands lsp-mode
   :init
-  (setq lsp-enable-eldoc nil
+  (setq lsp-eldoc-render-all nil
         lsp-inhibit-message t)
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
@@ -59,14 +59,22 @@
   :init
   (setq lsp-ui-flycheck-enable t
         lsp-ui-doc-enable nil
-        lsp-ui-sideline-enable nil))
+        lsp-ui-sideline-enable nil)
+  :config
+  (remove-hook 'lsp-eldoc-hook 'lsp-document-highlight))
 
 (use-package company-lsp
   :after lsp-mode
   :config
-  (setq company-lsp-cache-candidates 'auto
+  (setq company-lsp-cache-candidates t
         company-lsp-enable-snippet t
         company-lsp-enable-recompletion t))
+
+(use-package dap-mode
+  :after lsp-mode
+  :config
+  (dap-mode 1)
+  (dap-ui-mode 1))
 
 (load "elisp-lang")
 (load "php-lang")
