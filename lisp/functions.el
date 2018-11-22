@@ -218,12 +218,10 @@ undo and in `fundamental-mode' for performance sake."
   "Push marker stack and follow org link."
   (interactive)
   (defvar org-link-frame-setup)
-  (let ((org-link-frame-setup
-         '((file . (lambda (args)
-                     (progn
-                       ;; (xref-push-marker-stack)
-                       (find-file args)))))))
-    (call-interactively #'org-open-at-point)))
+  (if (thing-at-point-url-at-point)
+      (browse-url-at-point)
+    (let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
+      (call-interactively #'org-open-at-point))))
 
 (defun gmacs/counsel-git (&optional initial-input)
   "Find file in the current Git repository.
