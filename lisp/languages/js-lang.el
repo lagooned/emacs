@@ -25,14 +25,14 @@
 ;;; Code:
 
 (use-package js2-mode
-  :commands
-  js2-mode
+  :commands js2-mode
   :init
   (setq js2-strict-missing-semi-warning nil
         js2-missing-semi-one-line-override nil)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package xref-js2
+  ;; note: if x-ref isn't working in js2 mode, install ag
   :after js2-mode
   :config
   (add-hook
@@ -43,24 +43,14 @@
       #'xref-js2-xref-backend nil t))))
 
 (use-package js2-refactor
+  :after js2-mode
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
-
-(use-package indium
-  :config
-  (add-hook
-   'js2-mode-hook
-   (lambda () (indium-interaction-mode 1)))
-  (add-hook
-   'indium-interaction-mode-hook
-   (lambda ()
-     (diminish 'indium-interaction-mode "int"))))
 
 (evil-leader/set-key-for-mode 'js2-mode
   "m f s" 'js2-mode-toggle-hide-functions
   "m f c" 'js2-mode-toggle-hide-comments
   "m f f" 'js2-mode-toggle-element
-  "m r" 'indium-switch-to-repl-buffer
   "m v" 'js2r-rename-var)
 
 (which-key-add-key-based-replacements
