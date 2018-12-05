@@ -32,9 +32,12 @@
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (use-package xref-js2
-  ;; note: if x-ref isn't working in js2 mode, install ag
   :after js2-mode
+  :init
+  (setq xref-js2-ignored-dirs nil)
   :config
+  (if (not (executable-find "ag"))
+      (y-or-n-p "Please install silversearcher-ag to use xref-js2"))
   (add-hook
    'js2-mode-hook
    (lambda ()
