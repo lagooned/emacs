@@ -78,6 +78,7 @@
 
 (load "elisp-lang")
 (load "php-lang")
+(load "python-lang")
 (load "js-lang")
 (load "web-lang")
 (load "java-lang")

@@ -542,5 +542,12 @@ involved re-emit it."
   (if (bound-and-true-p company-mode)
       (company-abort)))
 
+(defun gmacs/lsp-python-enable ()
+  (make-variable-buffer-local 'company-backends)
+  (push 'company-lsp company-backends)
+  (lsp-python-enable)
+  (eldoc-mode 0)
+  (message nil))
+
 (provide 'functions)
 ;;; functions.el ends here
