@@ -39,6 +39,9 @@
 ;; this buffer is for text that is not saved, and for lisp evaluation.
 ;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
 
+;; prevent load of old elc files
+(setq load-prefer-newer t)
+
 (require 'package)
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")

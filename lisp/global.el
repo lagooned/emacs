@@ -210,10 +210,6 @@
 (setq savehist-additional-variables
       '(kill-ring search-ring regexp-search-ring))
 
-;; visual-line-mode
-;; (add-hook 'prog-mode-hook (lambda () (visual-line-mode +1)))
-;; (add-hook 'text-mode-hook (lambda () (visual-line-mode +1)))
-
 ;; no bell
 (setq ring-bell-function 'ignore)
 (setq visible-bell nil)
