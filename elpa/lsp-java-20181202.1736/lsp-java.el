@@ -985,31 +985,13 @@ PROJECT-URI uri of the item."
   '(lsp-register-client
     (make-lsp--client
      :new-connection (lsp-stdio-connection 'lsp-java--ls-command)
-     :major-modes '(java-mode)
-     :server-id 'jdtls
-     :multi-root t
      :notification-handlers (lsp-ht ("language/status" 'lsp-java--language-status-callback)
                                     ("language/actionableNotification" 'lsp-java--actionable-notification-callback)
                                     ("language/progressReport" 'lsp-java--progress-report)
                                     ("workspace/notify" 'lsp-java--workspace-notify))
      :action-handlers (lsp-ht ("java.apply.workspaceEdit" 'lsp-java--apply-workspace-edit))
      :uri-handlers (lsp-ht ("jdt" 'lsp-java--resolve-uri)
-                           ("chelib" 'lsp-java--resolve-uri))
-     :initialization-options (lambda ()
-                               (list :settings (lsp-java--settings)
-                                     :extendedClientCapabilities (list :progressReportProvider t
-                                                                       :classFileContentsSupport t)
-                                     :bundles (lsp-java--bundles)))
-     :library-folders-fn (lambda (_workspace) (list lsp-java-workspace-cache-dir))
-     :before-file-open-fn (lambda (workspace)
-                            (let ((metadata-file-name (lsp-java--get-metadata-location buffer-file-name)))
-                              (setq-local lsp-buffer-uri
-                                          (when (file-exists-p metadata-file-name)
-                                            (with-temp-buffer (insert-file-contents metadata-file-name)
-                                                              (buffer-string))))))
-     :initialized-fn (lambda (workspace)
-                       (with-lsp-workspace workspace
-                         (lsp-java-update-project-uris))))))
+                           ("chelib" 'lsp-java--resolve-uri)))))
 
 (provide 'lsp-java)
 ;;; lsp-java.el ends here
