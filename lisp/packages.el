@@ -433,6 +433,8 @@
               "\\.revive$"
               "/TAGS$"
               "^/var/folders/.+$"
+              "^/usr/lib/.+$"
+              "^.+gz$"
               (concat "^" (expand-file-name "~/\\(.emacs.d\\|emacs\\)/workspace") "/.+$")
               "^#")))
 
