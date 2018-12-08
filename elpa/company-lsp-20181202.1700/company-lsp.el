@@ -1,7 +1,7 @@
 ;;; company-lsp.el --- Company completion backend for lsp-mode.  -*- lexical-binding: t -*-
 
 ;; Version: 2.0.2
-;; Package-Version: 20181105.1644
+;; Package-Version: 20181202.1700
 ;; Package-Requires: ((emacs "25.1") (lsp-mode "3.4") (company "0.9.0") (s "1.2.0") (dash "2.11.0"))
 ;; URL: https://github.com/tigersoldier/company-lsp
 
@@ -208,9 +208,7 @@ It looks for function corresponding to the language in
 ITEM is a hashtable of the CompletionItem message.
 
 Return a string of the snippet to expand, or nil if no snippet is available."
-  (-when-let* ((language-id-fn (lsp--client-language-id (lsp--workspace-client lsp--cur-workspace)))
-               (language-id (funcall language-id-fn (current-buffer)))
-               (fn-cons (assoc language-id company-lsp--snippet-functions))
+  (-when-let* ((fn-cons (assoc (lsp-buffer-language) company-lsp--snippet-functions))
                (fn (cdr fn-cons)))
     (funcall fn item)))
 
