@@ -144,12 +144,7 @@
 (scroll-bar-mode -1)
 
 ;; truncate and wrap lines
-(add-hook
- 'prog-mode-hook
- (lambda ()
-   (progn
-     (toggle-truncate-lines 1)
-     (message nil))))
+(add-hook 'prog-mode-hook #'gmacs/disable-truncate-lines-no-message)
 
 (setq-default word-wrap t)
 

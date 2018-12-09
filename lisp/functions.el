@@ -559,5 +559,8 @@ involved re-emit it."
 (defun gmacs/disable-truncate-lines-no-message ()
   (gmacs/toggle-truncate-lines-mode-no-message 1))
 
+(defun gmacs/enable-truncate-lines-no-message ()
+  (gmacs/toggle-truncate-lines-mode-no-message 0))
+
 (provide 'functions)
 ;;; functions.el ends here

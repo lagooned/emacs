@@ -122,11 +122,7 @@
   :ensure nil
   :init
   (put 'dired-find-alternate-file 'disabled nil)
-  (add-hook
-   'dired-mode-hook
-   '(lambda ()
-      (toggle-truncate-lines 1)
-      (message nil))))
+  (add-hook 'dired-mode-hook #'gmacs/disable-truncate-lines-no-message))
 
 (use-package dired-x
   :ensure nil
@@ -190,6 +186,7 @@
   (setq eshell-banner-message 'gmacs/eshell-message
         eshell-prompt-function 'gmacs/eshell-prompt-function
         eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
+  (add-hook 'eshell-mode-hook #'gmacs/disable-truncate-lines-no-message)
   :config
   (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
   (with-eval-after-load 'em-term (push "npm" eshell-visual-commands))
@@ -385,12 +382,7 @@
   :config
   (add-to-list 'org-file-apps '(directory . emacs))
   (set-face-attribute 'org-level-1 nil :height 1.0)
-  (add-hook
-   'org-mode-hook
-   (lambda ()
-     (progn
-       (toggle-truncate-lines 0)
-       (message nil)))))
+  (add-hook 'org-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
 (use-package projectile
   :diminish projectile-mode
