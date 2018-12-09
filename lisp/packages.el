@@ -204,8 +204,6 @@
         evil-insert-state-message nil
         evil-operator-state-message nil)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
-  (add-hook 'term-mode-hook 'evil-emacs-state)
-  (add-hook 'ansi-term-mode-hook 'evil-emacs-state)
   (let ((height (eval gmacs/evil-base-cursor-height)))
     (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
     (setq evil-insert-state-cursor `("#00e000" (hbar . ,(eval height))))
