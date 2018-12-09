@@ -118,30 +118,17 @@
             ("Oa" counsel-projectile-switch-project-action-org-agenda "open project agenda"))))
 
 (use-package dired
-  :defer t
-  :after evil
+  :commands dired
   :ensure nil
-  :bind
-  (:map dired-mode-map
-        ("C-j" . dired-find-file))
   :init
+  (put 'dired-find-alternate-file 'disabled nil)
   (add-hook
    'dired-mode-hook
-   (lambda ()
-     (progn
-       (dired-hide-details-mode t)
-       (dired-omit-mode t)
-       (add-hook
-        'dired-omit-mode-hook
-        (lambda () (diminish 'dired-omit-mode "om")))
-       (toggle-truncate-lines 1)
-       (message nil))))
-  (setq-default dired-omit-files-p t
-                dired-hide-details-hide-symlink-targets nil)
-  (put 'dired-find-alternate-file 'disabled nil))
+   '(lambda ()
+      (toggle-truncate-lines 1)
+      (message nil))))
 
 (use-package dired-x
-  :defer t
   :ensure nil
   :after dired
   :config
@@ -433,6 +420,8 @@
               "\\.revive$"
               "/TAGS$"
               "^/var/folders/.+$"
+              "^/usr/lib/.+$"
+              "^.+gz$"
               (concat "^" (expand-file-name "~/\\(.emacs.d\\|emacs\\)/workspace") "/.+$")
               "^#")))
 
