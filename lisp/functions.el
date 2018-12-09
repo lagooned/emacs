@@ -544,9 +544,12 @@ involved re-emit it."
 
 (defun gmacs/lsp-python-enable ()
   (make-variable-buffer-local 'company-backends)
-  (push 'company-lsp company-backends)
-  (lsp-python-enable)
-  (eldoc-mode 0)
+  (if (projectile-project-p)
+      (progn (push 'company-lsp company-backends)
+             (flycheck-mode 1)
+             (lsp-python-enable)
+             (eldoc-mode 0)))
+  (prettify-symbols-mode 1)
   (message nil))
 
 (provide 'functions)
