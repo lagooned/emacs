@@ -552,5 +552,12 @@ involved re-emit it."
   (prettify-symbols-mode 1)
   (message nil))
 
+(defun gmacs/toggle-truncate-lines-mode-no-message (arg)
+  (progn (toggle-truncate-lines arg)
+         (message nil)))
+
+(defun gmacs/disable-truncate-lines-no-message ()
+  (gmacs/toggle-truncate-lines-mode-no-message 1))
+
 (provide 'functions)
 ;;; functions.el ends here
