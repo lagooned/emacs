@@ -84,15 +84,8 @@
 ;; let text breath
 (fringe-mode 20)
 
-;; no fringes in minibuffer
-(add-hook
- 'after-init-hook
- '(lambda ()
-    (progn
-      (set-window-fringes (minibuffer-window) 0 0 nil)
-      (add-hook
-       'minibuffer-setup-hook
-       '(lambda () (set-window-fringes (minibuffer-window) 0 0 nil))))))
+;; decouple window and minibuffer fringes
+(add-hook 'after-init-hook #'gmacs/minibuffer-fringe-setup)
 
 ;; backups
 (setq version-control t

@@ -90,6 +90,13 @@
   (interactive)
   (find-file "~/.emacs.d/startup.log"))
 
+(defun gmacs/minibuffer-fringe-setup ()
+  (set-window-fringes (minibuffer-window) 0 0 nil)
+  (add-hook 'minibuffer-setup-hook #'gmacs/disable-minibuffer-fringe))
+
+(defun gmacs/disable-minibuffer-fringe ()
+  (set-window-fringes (minibuffer-window) 0 0 nil))
+
 (defun gmacs/force-buffer-backup ()
   "Make a special per session and per save backup \
 at the first save of each gmacs session."
