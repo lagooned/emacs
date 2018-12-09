@@ -25,7 +25,7 @@
 ;;; Code:
 
 (defun void ()
-  "No-op."
+  "Interactive No-op."
   (interactive))
 
 (defun gmacs/load-config ()
@@ -86,7 +86,7 @@
   (find-file "~/.emacs.d/.custom.el"))
 
 (defun gmacs/open-startup-log ()
-  "open startup.log"
+  "Open startup.log."
   (interactive)
   (find-file "~/.emacs.d/startup.log"))
 
