@@ -143,9 +143,10 @@
 ;; no scroll bar
 (scroll-bar-mode -1)
 
-;; truncate and wrap lines
+;; truncate prog mode
 (add-hook 'prog-mode-hook #'gmacs/disable-truncate-lines-no-message)
 
+;; wrap words
 (setq-default word-wrap t)
 
 ;; set default tab display width to 4 spaces
