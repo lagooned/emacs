@@ -35,7 +35,7 @@ set by (line-pixel-height)")
 to avoid performance issues. Opening literally means that no major or minor
 modes are active and the buffer is read-only.")
 
-(defvar gmacs/large-file-modes-list
+(defvar gmacs/large-file-modes-ignore-list
   '(archive-mode
     tar-mode
     jka-compr

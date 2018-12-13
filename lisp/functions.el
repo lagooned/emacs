@@ -122,7 +122,7 @@ undo and in `fundamental-mode' for performance sake."
          (size (nth 7 (file-attributes filename))))
     (defvar gmacs/large-file-size)
     (defvar gmacs/large-file-modes-list)
-    (when (and (not (memq major-mode gmacs/large-file-modes-list))
+    (when (and (not (memq major-mode gmacs/large-file-modes-ignore-list))
                size (> size (* 1024 1024 gmacs/large-file-size))
                (y-or-n-p
                 (format (concat "%s is a large file, open literally to "
