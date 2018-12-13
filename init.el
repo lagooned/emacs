@@ -82,18 +82,10 @@
       history-delete-duplicates t)
 (savehist-mode 1)
 
-;; write startup log, kill messages
-;; for updated modeline, and set
-;; dir to ~/.emacs.d
-(add-hook
- 'emacs-startup-hook
- '(lambda ()
-    (progn
-      (gmacs/write-startup-log)
-      (kill-buffer "*Messages*")
-      (setq default-directory "~/.emacs.d/"))))
+;; write startup log, fix messages modeline, set dir to ~/.emacs.d
+(add-hook 'emacs-startup-hook #'gmacs/emacs-startup-hook)
 
-;; customs
+;; customs file
 (setq custom-file "~/.emacs.d/.custom.el")
 (load custom-file 'noerror)
 

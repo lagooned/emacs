@@ -28,6 +28,11 @@
   "Interactive No-op."
   (interactive))
 
+(defun gmacs/emacs-startup-hook ()
+  (gmacs/write-startup-log)
+  (kill-buffer "*Messages*")
+  (setq default-directory "~/.emacs.d/"))
+
 (defun gmacs/load-config ()
   "Load init.el."
   (interactive)
@@ -473,18 +478,20 @@ match your prompt."
 
 (defun gmacs/lsp-java-enable ()
   (make-variable-buffer-local 'company-backends)
-  (push 'company-lsp company-backends)
-  (flycheck-mode 1)
-  (lsp-java-enable)
-  (evil-leader/set-key-for-mode 'java-mode
-    "m a" 'lsp-execute-code-action
-    "m r" 'lsp-rename
-    "m R" 'lsp-restart-workspace
-    "m f" 'lsp-format-buffer
-    "m h" 'lsp-describe-thing-at-point
-    "m H" 'lsp-highlight-symbol-at-point
-    "m o" 'lsp-java-organize-imports
-    "m b" 'lsp-java-build-project))
+  (if (projectile-project-p)
+      (progn
+        (push 'company-lsp company-backends)
+        (flycheck-mode 1)
+        (lsp-java-enable)
+        (evil-leader/set-key-for-mode 'java-mode
+          "m a" 'lsp-execute-code-action
+          "m r" 'lsp-rename
+          "m R" 'lsp-restart-workspace
+          "m f" 'lsp-format-buffer
+          "m h" 'lsp-describe-thing-at-point
+          "m H" 'lsp-highlight-symbol-at-point
+          "m o" 'lsp-java-organize-imports
+          "m b" 'lsp-java-build-project))))
 
 (defun gmacs/evil-eshell-mode-setup ()
   (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
