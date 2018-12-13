@@ -98,7 +98,8 @@
 (defun gmacs/open-startup-log ()
   "Open startup.log."
   (interactive)
-  (find-file "~/.emacs.d/startup.log"))
+  (find-file "~/.emacs.d/startup.log")
+  (end-of-buffer))
 
 (defun gmacs/minibuffer-fringe-setup ()
   (set-window-fringes (minibuffer-window) 0 0 nil)
@@ -351,7 +352,10 @@ disable `hi-lock-mode'."
   "Write ~/.emacs.d/startup.log."
   (save-current-buffer
     (set-buffer "*Messages*")
-    (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")))
+    (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")
+    (message
+     (substitute-command-keys
+      "To view starup log, type \\[gmacs/open-startup-log]"))))
 
 (defun gmacs/company-cancel-complete-prev ()
   (interactive)
