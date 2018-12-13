@@ -29,9 +29,14 @@
   (interactive))
 
 (defun gmacs/emacs-startup-hook ()
+  (gmacs/reset-gc-threshold-percentage)
   (gmacs/write-startup-log)
   (kill-buffer "*Messages*")
   (setq default-directory "~/.emacs.d/"))
+
+(defun gmacs/reset-gc-threshold-percentage ()
+  (setq gc-cons-threshold 16777216
+        gc-cons-percentage 0.1))
 
 (defun gmacs/load-config ()
   "Load init.el."
