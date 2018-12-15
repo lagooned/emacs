@@ -8,19 +8,21 @@
 .cask
 
 # Everything Else
-.#*
-*.dat
-*.data
+/**/*.swp
+/**/.#*
+/**/#*#
+/**/*.dat
+/**/*.data
 ido*
 auto-save-list
 eshell
-*.eld
+/**/*.eld
 .DS_Store
 tutorial
 url
 /.custom.el
 /recentf
-games
+/games
 /tramp
 /.gnus.el
 /server
@@ -35,6 +37,6 @@ games
 /eclipse.jdt.ls/server/config_linux/org.eclipse.*
 /eclipse.jdt.ls/server/config_win/org.eclipse.*
 /.savehist
-session.*
-undo/*
-undo
+/session.*
+/undo/*
+/undo
