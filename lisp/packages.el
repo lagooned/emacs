@@ -457,7 +457,8 @@
 (use-package swiper
   :commands swiper)
 
-(use-package sudo-edit)
+(if (eq system-type 'gnu/linux)
+    (use-package sudo-edit))
 
 (use-package suggest
   :commands suggest)
