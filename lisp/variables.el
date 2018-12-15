@@ -57,7 +57,7 @@ the lines that are passed to it.
 If this variable is changed, all Eshell buffers must be exited and
 re-entered for it to take effect.")
 
-(defvar gmacs/mc-evil-evil-prev-state nil
+(defvar gmacs/mc-evil-prev-state nil
   "Saves the previous evil state as a string.")
 
 (defvar gmacs/mc-evil-mark-was-active nil
