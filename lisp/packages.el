@@ -80,9 +80,9 @@
         ("C-v"      . company-next-page)
         ("M-v"      . company-previous-page))
   :init
-  (setq company-idle-delay 0.1)
-  (setq company-minimum-prefix-length 2)
-  (setq company-show-numbers t)
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 2
+        company-show-numbers t)
   :config
   (setq company-backends nil))
 
