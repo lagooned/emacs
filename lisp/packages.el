@@ -355,10 +355,8 @@
 
 (use-package multiple-cursors
   :config
-  (add-hook 'multiple-cursors-mode-enabled-hook
-            'mc-evil-compat/switch-to-emacs-state)
-  (add-hook 'multiple-cursors-mode-disabled-hook
-            'mc-evil-compat/back-to-previous-state))
+  (add-hook 'multiple-cursors-mode-enabled-hook #'gmacs/mc-evil-switch-to-emacs-state)
+  (add-hook 'multiple-cursors-mode-disabled-hook #'gmacs/mc-evil-back-to-previous-state))
 
 (use-package nxml-mode
   :ensure nil

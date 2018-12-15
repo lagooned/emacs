@@ -425,27 +425,27 @@ match your prompt."
   (and (bound-and-true-p evil-mode)
        (not (memq evil-state '(insert emacs)))))
 
-(defun mc-evil-compat/switch-to-emacs-state ()
+(defun gmacs/mc-evil-switch-to-emacs-state ()
   (when (gmacs/evil-visual-or-normal-p)
-    (setq mc-evil-compat/evil-prev-state evil-state)
+    (setq gmacs/evil-compat-evil-prev-state evil-state)
     (when (region-active-p)
-      (setq mc-evil-compat/mark-was-active t))
+      (setq gmacs/evil-compat-mark-was-active t))
     (let ((mark-before (mark))
           (point-before (point)))
       (evil-emacs-state 1)
-      (when (or mc-evil-compat/mark-was-active (region-active-p))
+      (when (or gmacs/evil-compat-mark-was-active (region-active-p))
         (goto-char point-before)
         (set-mark mark-before)))))
 
-(defun mc-evil-compat/back-to-previous-state ()
-  (when mc-evil-compat/evil-prev-state
+(defun gmacs/mc-evil-back-to-previous-state ()
+  (when gmacs/evil-compat-evil-prev-state
     (unwind-protect
-        (case mc-evil-compat/evil-prev-state
+        (case gmacs/evil-compat-evil-prev-state
           ((normal visual) (evil-force-normal-state))
           (t (message "Don't know how to handle previous state: %S"
-                      mc-evil-compat/evil-prev-state)))
-      (setq mc-evil-compat/evil-prev-state nil)
-      (setq mc-evil-compat/mark-was-active nil))))
+                      gmacs/evil-compat-evil-prev-state)))
+      (setq gmacs/evil-compat-evil-prev-state nil)
+      (setq gmacs/evil-compat-mark-was-active nil))))
 
 (defun gmacs/shrink-window-horizontally ()
   (interactive)
