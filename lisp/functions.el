@@ -572,12 +572,14 @@ involved re-emit it."
   (gmacs/lsp-python-enable))
 
 (defun gmacs/lsp-python-enable ()
+  (if (projectile-project-p) (gmacs/lsp-python-prompt-maybe-enable)))
+
+(defun gmacs/lsp-python-prompt-maybe-enable ()
   (if (not gmacs/python-lsp-dialog-confirmed-p)
       (let ((answer (y-or-n-p "Enable Python LSP on this Env?")))
         (customize-save-variable 'gmacs/python-lsp-dialog-confirmed-p t)
         (customize-save-variable 'gmacs/python-enable-lsp-p answer)))
-  (if (and (projectile-project-p)
-           gmacs/python-enable-lsp-p)
+  (if gmacs/python-enable-lsp-p
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
              (lsp-python-enable)
