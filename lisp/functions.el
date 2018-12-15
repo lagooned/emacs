@@ -585,5 +585,8 @@ involved re-emit it."
 (defun gmacs/enable-truncate-lines-no-message ()
   (gmacs/toggle-truncate-lines-mode-no-message 0))
 
+(defun gmacs/add-xref-js2-xref-backend ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
+
 (provide 'functions)
 ;;; functions.el ends here

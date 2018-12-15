@@ -63,5 +63,8 @@ re-entered for it to take effect.")
 (defvar gmacs/mc-evil-mark-was-active nil
   "Saves the previous state of the mark.")
 
+(defvar gmacs/js2-xref-accept-ag nil
+  "Determines whether or not to show the xref-ag confirmation.")
+
 (provide 'variables)
 ;;; variables.el ends here

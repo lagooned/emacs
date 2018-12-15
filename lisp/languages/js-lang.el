@@ -36,14 +36,12 @@
   :init
   (setq xref-js2-ignored-dirs nil)
   :config
-  (if (not (executable-find "ag"))
-      (y-or-n-p "Please install silversearcher-ag to use xref-js2"))
-  (add-hook
-   'js2-mode-hook
-   (lambda ()
-     (add-hook
-      'xref-backend-functions
-      #'xref-js2-xref-backend nil t))))
+  (if (executable-find "ag")
+      (add-hook 'js2-mode-hook #'gmacs/add-xref-js2-xref-backend)
+    (if (and (not gmacs/js2-xref-accept-ag)
+             (y-or-n-p "Please install silversearcher-ag to use xref-js2! \
+(Press 'y' to never show again): "))
+        (customize-save-variable 'gmacs/js2-xref-accept-ag t))))
 
 (use-package js2-refactor
   :after js2-mode
