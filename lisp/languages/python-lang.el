@@ -24,7 +24,11 @@
 
 ;;; Code:
 
-(add-hook 'python-mode-hook #'gmacs/python-mode-hook)
+(use-package python-mode
+  :ensure nil
+  :commands python-mode
+  :init
+  (add-hook 'python-mode-hook #'gmacs/python-mode-hook))
 
 (use-package lsp-python
   :commands lsp-python-enable
