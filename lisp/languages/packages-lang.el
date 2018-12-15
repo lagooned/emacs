@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(add-hook 'prog-mode-hook 'company-mode)
+(add-hook 'prog-mode-hook 'gmacs/enable-company-mode)
 
 (use-package flycheck
   :diminish flycheck-mode "flyc"

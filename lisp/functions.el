@@ -486,7 +486,6 @@ match your prompt."
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun gmacs/lsp-java-enable ()
-  (make-variable-buffer-local 'company-backends)
   (if (projectile-project-p)
       (progn
         (push 'company-lsp company-backends)
@@ -566,7 +565,6 @@ involved re-emit it."
       (company-abort)))
 
 (defun gmacs/lsp-python-enable ()
-  (make-variable-buffer-local 'company-backends)
   (if (projectile-project-p)
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
@@ -587,6 +585,10 @@ involved re-emit it."
 
 (defun gmacs/add-xref-js2-xref-backend ()
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
+
+(defun gmacs/enable-company-mode ()
+  (make-variable-buffer-local 'company-backends)
+  (company-mode))
 
 (provide 'functions)
 ;;; functions.el ends here
