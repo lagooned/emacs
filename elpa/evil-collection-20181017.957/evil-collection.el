@@ -101,7 +101,7 @@ See https://github.com/emacs-evil/evil-collection/issues/60 for more details.")
     cider
     cmake-mode
     comint
-    company
+    ;; company
     compile
     custom
     cus-theme
