@@ -24,10 +24,12 @@
 
 ;;; Code:
 
+(add-hook 'python-mode-hook #'gmacs/python-mode-hook)
+
 (use-package lsp-python
   :commands lsp-python-enable
   :init
-  (add-hook 'python-mode-hook #'gmacs/lsp-python-enable))
+  (add-hook 'python-mode-hook #'gmacs/lsp-python-mode-hook))
 
 (provide 'python-lang)
 ;;; python-lang.el ends here

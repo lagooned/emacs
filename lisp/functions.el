@@ -564,14 +564,24 @@ involved re-emit it."
   (if (bound-and-true-p company-mode)
       (company-abort)))
 
+(defun gmacs/python-mode-hook ()
+  (prettify-symbols-mode 1)
+  (message nil))
+
+(defun gmacs/lsp-python-mode-hook ()
+  (gmacs/lsp-python-enable))
+
 (defun gmacs/lsp-python-enable ()
-  (if (projectile-project-p)
+  (if (not gmacs/python-lsp-dialog-confirmed-p)
+      (let ((answer (y-or-n-p "Enable Python LSP on this Env?")))
+        (customize-save-variable 'gmacs/python-lsp-dialog-confirmed-p t)
+        (customize-save-variable 'gmacs/python-enable-lsp-p answer)))
+  (if (and (projectile-project-p)
+           gmacs/python-enable-lsp-p)
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
              (lsp-python-enable)
-             (eldoc-mode 0)))
-  (prettify-symbols-mode 1)
-  (message nil))
+             (eldoc-mode 0))))
 
 (defun gmacs/toggle-truncate-lines-mode-no-message (arg)
   (progn (toggle-truncate-lines arg)
