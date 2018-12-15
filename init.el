@@ -42,6 +42,10 @@
 ;; prevent load of old elc files
 (setq load-prefer-newer t)
 
+;; set max mem alloc before gc for startup
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
 (require 'package)
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
