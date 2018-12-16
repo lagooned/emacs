@@ -67,7 +67,6 @@
 
   ;; grep
   "g" 'gmacs/counsel-rg-region
-  "G" 'gmacs/ripgrep-regexp-git
 
   ;; help
   "h a"   'about-emacs

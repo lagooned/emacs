@@ -205,33 +205,6 @@ undo and in `fundamental-mode' for performance sake."
       (xref-find-apropos (symbol-name (symbol-at-point)))
     (message "No symbol selected")))
 
-(defun gmacs/ripgrep-regexp-git (regexp &optional args)
-  "Ripgrep with `REGEXP' from the nearest git project directory.
-`ARGS' provides ripgrep command line arguments."
-  (interactive
-   (list (read-from-minibuffer
-          "rg buffer: "
-          (if (use-region-p)
-              (let ((string (buffer-substring-no-properties
-                             (region-beginning) (region-end))))
-                (progn (kill-new string) (deactivate-mark) string))))))
-  (let ((directory (locate-dominating-file default-directory ".git")))
-    (if (not directory)
-        (message "not in a git project: using default-directory")
-      (setq default-directory directory))
-    (defvar ripgrep-executable)
-    (defvar ripgrep-arguments)
-    (defvar ripgrep-highlight-search)
-    (compilation-start
-     (mapconcat 'identity
-                (append (list ripgrep-executable)
-                        ripgrep-arguments
-                        args
-                        '("--no-heading --vimgrep -ni ")
-                        (when ripgrep-highlight-search '("--color=always"))
-                        (list (shell-quote-argument regexp) ".")) " ")
-     'ripgrep-search-mode)))
-
 (defun gmacs/org-link-follow ()
   "Push marker stack and follow org link."
   (interactive)
