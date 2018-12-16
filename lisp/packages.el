@@ -569,6 +569,8 @@
   :config
   (setq whitespace-line-column 100))
 
+(use-package wgrep)
+
 (use-package yasnippet
   :commands
   yas-minor-mode-on
