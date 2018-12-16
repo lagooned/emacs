@@ -156,6 +156,44 @@ undo and in `fundamental-mode' for performance sake."
   (gmacs/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
+(defun gmacs/run-grep ()
+  (interactive)
+  (if (executable-find "rg")
+      (call-interactively 'gmacs/counsel-rg-region)
+    (if projectile-project-p
+        (call-interactively 'gmacs/counsel-git-grep-region)
+      (call-interactively 'gmacs/rgrep-region))))
+
+(defun gmacs/rgrep (&optional initial)
+  (gmacs/grep initial "-R ."))
+
+(defun gmacs/grep (&optional initial grep-args)
+  (if initial
+      (let ((args
+             (concat
+              (eval grep-command)
+              grep-args " -e "
+              (string-utils/add-quotes
+               (if initial (concat (string-utils/escape-command-str initial))
+                 nil)))))
+        (progn (message args) (grep args)))
+    (grep
+     (string-utils/escape-command-str
+      (read-string
+       "Grep Command: "
+       (concat (eval grep-command) grep-args " -e "))))))
+
+(defun string-utils/add-quotes (str)
+  (concat "\"" str "\""))
+
+(defun string-utils/escape-command-str (str)
+  (string-utils/escape-parens-str str))
+
+(defun string-utils/escape-parens-str (str)
+  (replace-regexp-in-string
+   "(" "\(" (replace-regexp-in-string
+             ")" "\)" str)))
+
 (defun gmacs/counsel-rg-region ()
   "Optionally run ripgrep on region."
   (interactive)
@@ -165,6 +203,11 @@ undo and in `fundamental-mode' for performance sake."
   "Optionally run counsel-git-grep on region."
   (interactive)
   (gmacs/opt-region-helper '(lambda (&optional initial) (counsel-git-grep nil initial))))
+
+(defun gmacs/rgrep-region ()
+  "Optionally run recursive grep on region."
+  (interactive)
+  (gmacs/opt-region-helper 'gmacs/rgrep))
 
 (defun gmacs/counsel-projectile-find-file-region ()
   "Optionally run counsel-git on region."
