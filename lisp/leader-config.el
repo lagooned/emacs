@@ -122,6 +122,7 @@
   "p D" 'magit-diff-popup
   "p F" 'magit-file-popup
   "p b" 'magit-blame
+  "p g" 'gmacs/counsel-git-grep-region
 
   ;; search
   "s s" 'gmacs/swiper-region-thing

@@ -161,6 +161,11 @@ undo and in `fundamental-mode' for performance sake."
   (interactive)
   (gmacs/opt-region-helper 'counsel-rg))
 
+(defun gmacs/counsel-git-grep-region ()
+  "Optionally run counsel-git-grep on region."
+  (interactive)
+  (gmacs/opt-region-helper '(lambda (&optional initial) (counsel-git-grep nil initial))))
+
 (defun gmacs/counsel-projectile-find-file-region ()
   "Optionally run counsel-git on region."
   (interactive)
