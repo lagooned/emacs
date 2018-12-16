@@ -65,9 +65,6 @@
   "f s" 'save-buffer
   "f w" 'write-file
 
-  ;; grep
-  "g" 'gmacs/counsel-rg-region
-
   ;; help
   "h a"   'about-emacs
   "h i"   'info
