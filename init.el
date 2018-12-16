@@ -39,9 +39,6 @@
 ;; this buffer is for text that is not saved, and for lisp evaluation.
 ;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
 
-;; prevent load of old elc files
-(setq load-prefer-newer t)
-
 ;; set max mem alloc before gc for startup
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6)
