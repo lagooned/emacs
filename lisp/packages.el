@@ -122,7 +122,7 @@
   :ensure nil
   :init
   (put 'dired-find-alternate-file 'disabled nil)
-  (add-hook 'dired-mode-hook #'gmacs/disable-truncate-lines-no-message))
+  (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
 (use-package dired-x
   :ensure nil
@@ -186,7 +186,7 @@
   (setq eshell-banner-message 'gmacs/eshell-message
         eshell-prompt-function 'gmacs/eshell-prompt-function
         eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
-  (add-hook 'eshell-mode-hook #'gmacs/disable-truncate-lines-no-message)
+  (add-hook 'eshell-mode-hook #'gmacs/enable-truncate-lines-no-message)
   :config
   (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
   (with-eval-after-load 'em-term (push "npm" eshell-visual-commands))

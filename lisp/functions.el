@@ -607,10 +607,10 @@ involved re-emit it."
          (message nil)))
 
 (defun gmacs/disable-truncate-lines-no-message ()
-  (gmacs/toggle-truncate-lines-mode-no-message 1))
+  (gmacs/toggle-truncate-lines-mode-no-message 0))
 
 (defun gmacs/enable-truncate-lines-no-message ()
-  (gmacs/toggle-truncate-lines-mode-no-message 0))
+  (gmacs/toggle-truncate-lines-mode-no-message 1))
 
 (defun gmacs/add-xref-js2-xref-backend ()
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
