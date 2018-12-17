@@ -162,10 +162,7 @@ undo and in `fundamental-mode' for performance sake."
       (call-interactively 'gmacs/counsel-rg-region)
     (if projectile-project-p
         (call-interactively 'gmacs/counsel-git-grep-region)
-      (call-interactively 'gmacs/rgrep-region))))
-
-(defun gmacs/rgrep (&optional initial)
-  (gmacs/grep initial "-R ."))
+      (call-interactively 'gmacs/lrgrep-region))))
 
 (defun gmacs/grep (&optional initial grep-args)
   (if initial
@@ -204,10 +201,10 @@ undo and in `fundamental-mode' for performance sake."
   (interactive)
   (gmacs/opt-region-helper '(lambda (&optional initial) (counsel-git-grep nil initial))))
 
-(defun gmacs/rgrep-region ()
-  "Optionally run recursive grep on region."
+(defun gmacs/grep-region ()
+  "Optionally run grep on region."
   (interactive)
-  (gmacs/opt-region-helper 'gmacs/rgrep))
+  (gmacs/opt-region-helper '(lambda (&optional initial) (gmacs/grep initial nil))))
 
 (defun gmacs/counsel-projectile-find-file-region ()
   "Optionally run counsel-git on region."
