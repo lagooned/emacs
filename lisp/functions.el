@@ -199,12 +199,16 @@ undo and in `fundamental-mode' for performance sake."
 (defun gmacs/counsel-git-grep-region ()
   "Optionally run counsel-git-grep on region."
   (interactive)
-  (gmacs/opt-region-helper '(lambda (&optional initial) (counsel-git-grep nil initial))))
+  (gmacs/opt-region-helper
+   '(lambda (&optional initial)
+      (counsel-git-grep nil initial))))
 
 (defun gmacs/grep-region ()
   "Optionally run grep on region."
   (interactive)
-  (gmacs/opt-region-helper '(lambda (&optional initial) (gmacs/grep initial nil))))
+  (gmacs/opt-region-helper
+   '(lambda (&optional initial)
+      (gmacs/grep initial nil))))
 
 (defun gmacs/counsel-projectile-find-file-region ()
   "Optionally run counsel-git on region."
