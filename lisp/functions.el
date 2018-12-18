@@ -508,19 +508,26 @@ match your prompt."
 
 (defun gmacs/lsp-java-enable ()
   (if (projectile-project-p)
-      (progn
-        (push 'company-lsp company-backends)
-        (flycheck-mode 1)
-        (lsp-java-enable)
-        (evil-leader/set-key-for-mode 'java-mode
-          "m a" 'lsp-execute-code-action
-          "m r" 'lsp-rename
-          "m R" 'lsp-restart-workspace
-          "m f" 'lsp-format-buffer
-          "m h" 'lsp-describe-thing-at-point
-          "m H" 'lsp-highlight-symbol-at-point
-          "m o" 'lsp-java-organize-imports
-          "m b" 'lsp-java-build-project))))
+      (gmacs/lsp-java-prompt-maybe-enable)))
+
+(defun gmacs/lsp-java-prompt-maybe-enable ()
+  (if (not gmacs/java-lsp-dialog-confirmed-p)
+      (let ((answer (y-or-n-p "Enable Java LSP on this Env?")))
+        (customize-save-variable 'gmacs/java-lsp-dialog-confirmed-p t)
+        (customize-save-variable 'gmacs/java-enable-lsp-p answer)))
+  (if gmacs/java-enable-lsp-p
+      (progn (push 'company-lsp company-backends)
+             (flycheck-mode 1)
+             (lsp-java-enable)
+             (evil-leader/set-key-for-mode 'java-mode
+               "m a" 'lsp-execute-code-action
+               "m r" 'lsp-rename
+               "m R" 'lsp-restart-workspace
+               "m f" 'lsp-format-buffer
+               "m h" 'lsp-describe-thing-at-point
+               "m H" 'lsp-highlight-symbol-at-point
+               "m o" 'lsp-java-organize-imports
+               "m b" 'lsp-java-build-project))))
 
 (defun gmacs/evil-eshell-mode-setup ()
   (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
@@ -593,7 +600,8 @@ involved re-emit it."
   (gmacs/lsp-python-enable))
 
 (defun gmacs/lsp-python-enable ()
-  (if (projectile-project-p) (gmacs/lsp-python-prompt-maybe-enable)))
+  (if (projectile-project-p)
+      (gmacs/lsp-python-prompt-maybe-enable)))
 
 (defun gmacs/lsp-python-prompt-maybe-enable ()
   (if (not gmacs/python-lsp-dialog-confirmed-p)
