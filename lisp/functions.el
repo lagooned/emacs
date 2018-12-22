@@ -511,11 +511,11 @@ match your prompt."
       (gmacs/lsp-java-prompt-maybe-enable)))
 
 (defun gmacs/lsp-java-prompt-maybe-enable ()
-  (if (not gmacs/java-lsp-dialog-confirmed-p)
-      (let ((answer (y-or-n-p "Enable Java LSP on this Env?")))
-        (customize-save-variable 'gmacs/java-lsp-dialog-confirmed-p t)
-        (customize-save-variable 'gmacs/java-enable-lsp-p answer)))
-  (gmacs/lsp-java-setup))
+  (gmacs/prompt-maybe-run
+   'gmacs/java-lsp-dialog-confirmed-p
+   "Enable Java LSP on this ENV?"
+   'gmacs/java-enable-lsp-p
+   #'gmacs/lsp-java-setup))
 
 (defun gmacs/lsp-java-setup ()
   (if gmacs/java-enable-lsp-p
@@ -607,11 +607,11 @@ involved re-emit it."
       (gmacs/lsp-python-prompt-maybe-enable)))
 
 (defun gmacs/lsp-python-prompt-maybe-enable ()
-  (if (not gmacs/python-lsp-dialog-confirmed-p)
-      (let ((answer (y-or-n-p "Enable Python LSP on this Env?")))
-        (customize-save-variable 'gmacs/python-lsp-dialog-confirmed-p t)
-        (customize-save-variable 'gmacs/python-enable-lsp-p answer)))
-  (gmacs/lsp-python-setup))
+  (gmacs/prompt-maybe-run
+   'gmacs/python-lsp-dialog-confirmed-p
+   "Enable Python LSP on this ENV?"
+   'gmacs/python-enable-lsp-p
+   #'gmacs/lsp-python-setup))
 
 (defun gmacs/lsp-python-setup ()
   (if gmacs/python-enable-lsp-p
@@ -619,6 +619,13 @@ involved re-emit it."
              (flycheck-mode 1)
              (lsp-python-enable)
              (eldoc-mode 0))))
+
+(defun gmacs/prompt-maybe-run (confirmed-var question enabled-var init-func)
+  (if (not (eval confirmed-var))
+      (let ((answer (y-or-n-p question)))
+        (customize-save-variable confirmed-var t)
+        (customize-save-variable enabled-var answer)))
+  (funcall init-func))
 
 (defun gmacs/toggle-truncate-lines-mode-no-message (arg)
   (progn (toggle-truncate-lines arg)
