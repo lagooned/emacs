@@ -515,6 +515,9 @@ match your prompt."
       (let ((answer (y-or-n-p "Enable Java LSP on this Env?")))
         (customize-save-variable 'gmacs/java-lsp-dialog-confirmed-p t)
         (customize-save-variable 'gmacs/java-enable-lsp-p answer)))
+  (gmacs/lsp-java-setup))
+
+(defun gmacs/lsp-java-setup ()
   (if gmacs/java-enable-lsp-p
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
@@ -608,6 +611,9 @@ involved re-emit it."
       (let ((answer (y-or-n-p "Enable Python LSP on this Env?")))
         (customize-save-variable 'gmacs/python-lsp-dialog-confirmed-p t)
         (customize-save-variable 'gmacs/python-enable-lsp-p answer)))
+  (gmacs/lsp-python-setup))
+
+(defun gmacs/lsp-python-setup ()
   (if gmacs/python-enable-lsp-p
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
