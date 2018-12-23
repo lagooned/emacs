@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(require 'cl)
 (require 'curry-compose)
 
 (defun void ()
@@ -159,7 +160,11 @@ undo and in `fundamental-mode' for performance sake."
   (delete-trailing-whitespace))
 
 (defun gmacs/run-grep ()
+  "Gmacs grep function. Will try `gmacs/counsel-rg-region', \
+`gmacs/counsel-git-grep-region', and `gmacs/grep-region' \
+in order."
   (interactive)
+  (defvar projectile-project-p)
   (if (executable-find "rg")
       (call-interactively 'gmacs/counsel-rg-region)
     (if projectile-project-p
@@ -171,27 +176,29 @@ undo and in `fundamental-mode' for performance sake."
       (let ((args
              (concat
               (eval grep-command)
-              grep-args " -e "
-              (string-utils/add-quotes
-               (if initial (concat (string-utils/escape-command-str initial))
-                 nil)))))
+              " " grep-args " -e "
+              (if initial (concat (string-utils/escape-command-str initial))
+                nil))))
         (progn (message args) (grep args)))
     (grep
      (string-utils/escape-command-str
       (read-string
        "Grep Command: "
-       (concat (eval grep-command) grep-args " -e "))))))
+       (concat (eval grep-command) " " grep-args " -e "))))))
 
 (defun string-utils/add-quotes (str)
   (concat "\"" str "\""))
 
 (defun string-utils/escape-command-str (str)
-  (string-utils/escape-parens-str str))
+  (funcall
+   (reduce #'compose
+           (mapcar (lambda (char) (curry 'string-utils/escape-character-str char)) ["(" ")"])) str))
 
-(defun string-utils/escape-parens-str (str)
-  (replace-regexp-in-string
-   "(" "\(" (replace-regexp-in-string
-             ")" "\)" str)))
+(defun string-utils/escape-character-str (char str)
+  (string-utils/replace-in-string char (concat "\\" char) str))
+
+(defun string-utils/replace-in-string (what with in)
+  (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
 
 (defun gmacs/counsel-rg-region ()
   "Optionally run ripgrep on region."
@@ -199,7 +206,7 @@ undo and in `fundamental-mode' for performance sake."
   (gmacs/opt-region-helper 'counsel-rg))
 
 (defun gmacs/counsel-git-grep-region ()
-  "Optionally run counsel-git-grep on region."
+  "Optionally run `counsel-git-grep' on region."
   (interactive)
   (gmacs/opt-region-helper
    '(lambda (&optional initial)
@@ -210,7 +217,7 @@ undo and in `fundamental-mode' for performance sake."
   (interactive)
   (gmacs/opt-region-helper
    '(lambda (&optional initial)
-      (gmacs/grep initial nil))))
+      (gmacs/grep initial "-F"))))
 
 (defun gmacs/counsel-projectile-find-file-region ()
   "Optionally run counsel-git on region."
