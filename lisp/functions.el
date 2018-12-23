@@ -24,6 +24,8 @@
 
 ;;; Code:
 
+(require 'curry-compose)
+
 (defun void ()
   "Interactive No-op."
   (interactive))
