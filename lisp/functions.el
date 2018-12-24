@@ -478,6 +478,7 @@ normal or visual mode."
        (not (memq evil-state '(insert emacs)))))
 
 (defun gmacs/mc-evil-switch-to-emacs-state ()
+  "When using multiple-cursors, switch to evil-mode Emacs state."
   (when (gmacs/evil-visual-or-normal-p)
     (setq gmacs/mc-evil-prev-state evil-state)
     (when (region-active-p)
