@@ -307,7 +307,7 @@ INITIAL-INPUT can be given as the initial minibuffer input."
               :caller 'counsel-projectile-find-dir)))
 
 (defun gmacs/magit-status ()
-  "Wrap magit-status with projectile-project-p."
+  "Wrap `magit-status' with `projectile-project-p'."
   (interactive)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
