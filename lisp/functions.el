@@ -674,19 +674,24 @@ stateful confirmation dialog.
   (funcall init-func))
 
 (defun gmacs/toggle-truncate-lines-mode-no-message (arg)
+  "Run `toggle-truncate-lines' with `ARG' and swallow the message."
   (progn (toggle-truncate-lines arg)
          (message nil)))
 
 (defun gmacs/disable-truncate-lines-no-message ()
+  "Disable `toggle-truncate-lines' and swallow the message."
   (gmacs/toggle-truncate-lines-mode-no-message 0))
 
 (defun gmacs/enable-truncate-lines-no-message ()
+  "Enable `toggle-truncate-lines' and swallow the message."
   (gmacs/toggle-truncate-lines-mode-no-message 1))
 
 (defun gmacs/add-xref-js2-xref-backend ()
+  "Add `js2-xref-backend' to `xref-backend-functions'."
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
 
 (defun gmacs/enable-company-mode ()
+  "Enable Company Mode."
   (make-variable-buffer-local 'company-backends)
   (company-mode))
 
