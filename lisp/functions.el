@@ -633,22 +633,23 @@ Note: effective as an evil-insert-state-exit-hook."
       (company-abort)))
 
 (defun gmacs/python-mode-hook ()
+  "Python mode setup."
   (prettify-symbols-mode 1)
   (message nil))
 
 (defun gmacs/lsp-python-mode-hook ()
+  "Python LSP Enable."
   (gmacs/lsp-python-enable))
 
 (defun gmacs/lsp-python-enable ()
+  "Enable Python LSP if in project and confirmation prompt \
+has been accepted."
   (if (projectile-project-p)
-      (gmacs/lsp-python-prompt-maybe-enable)))
-
-(defun gmacs/lsp-python-prompt-maybe-enable ()
-  (gmacs/prompt-maybe-run
-   'gmacs/python-lsp-dialog-confirmed-p
-   "Enable Python LSP on this ENV?"
-   'gmacs/python-enable-lsp-p
-   #'gmacs/lsp-python-setup))
+      (gmacs/prompt-maybe-run
+       'gmacs/python-lsp-dialog-confirmed-p
+       "Enable Python LSP on this ENV?"
+       'gmacs/python-enable-lsp-p
+       #'gmacs/lsp-python-setup)))
 
 (defun gmacs/lsp-python-setup ()
   (if gmacs/python-enable-lsp-p
