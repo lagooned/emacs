@@ -608,6 +608,7 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
     (looking-at-p gmacs/eshell-prompt-regexp)))
 
 (defun gmacs/evil-minibuffer-setup ()
+  "Setup the minibuffer."
   (evil-emacs-state)
   (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
   (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
