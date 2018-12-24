@@ -627,6 +627,8 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
   (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
 
 (defun gmacs/evil-company-abort-on-insert-leave ()
+  "If company mode is currently enabled, run company abort. \
+Note: effective as an evil-insert-state-exit-hook."
   (if (bound-and-true-p company-mode)
       (company-abort)))
 
