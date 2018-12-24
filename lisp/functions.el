@@ -540,6 +540,7 @@ evil-mode state."
     t))
 
 (defun gmacs/emacs-lisp-setup ()
+  "Setup Emacs Lisp Mode."
   (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
   (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
   (push '(company-capf company-yasnippet) company-backends))
