@@ -199,9 +199,11 @@ extra `GREP-ARGS'."
   (concat "\"" str "\""))
 
 (defun string-utils/escape-parens (str)
+  "Escape parens in `STR'."
   (string-utils/escape-command-str str ["(" ")"]))
 
 (defun string-utils/escape-command-str (str charlist)
+  "Escapes all instances of each element of `CHARLIST' in `STR'."
   (funcall
    (reduce
     #'compose
@@ -209,9 +211,11 @@ extra `GREP-ARGS'."
    str))
 
 (defun string-utils/escape-character-str (char str)
+  "Escapes every instance of `CHAR' in `STR'."
   (string-utils/replace-in-string char (concat "\\" char) str))
 
 (defun string-utils/replace-in-string (what with in)
+  "Replace `WHAT' `WITH' `IN'."
   (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
 
 (defun gmacs/counsel-rg-region ()
