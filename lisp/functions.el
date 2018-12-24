@@ -620,6 +620,7 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
   (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))
 
 (defun gmacs/evil-c-common-mode-setup ()
+  "Setup C mode and it's derivatives."
   (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
   (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
