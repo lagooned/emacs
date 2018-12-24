@@ -131,16 +131,18 @@ at the first save of each gmacs session."
   "Check if the buffer's file is large (see `gmacs/large-file-size').
 If so, ask for confirmation to open it literally (read-only, disabled
 undo and in `fundamental-mode' for performance sake."
+  (defvar gmacs/large-file-size)
+  (defvar gmacs/large-file-modes-ignore-list)
   (let* ((filename (buffer-file-name))
          (size (nth 7 (file-attributes filename))))
-    (defvar gmacs/large-file-size)
-    (defvar gmacs/large-file-modes-list)
     (when (and (not (memq major-mode gmacs/large-file-modes-ignore-list))
                size (> size (* 1024 1024 gmacs/large-file-size))
                (y-or-n-p
-                (format (concat "%s is a large file, open literally to "
-                                "avoid performance issues?")
-                        (file-relative-name filename))))
+                (format
+                 (concat
+                  "%s is a large file, open literally"
+                  " to avoid performance issues?")
+                 (file-relative-name filename))))
       (setq buffer-read-only t)
       (buffer-disable-undo)
       (fundamental-mode))))
