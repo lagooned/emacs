@@ -509,6 +509,7 @@ evil-mode state."
     (call-interactively 'shrink-window-horizontally)))
 
 (defun gmacs/enlarge-window-horizontally ()
+  "Enlarge the active window horizontally."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'enlarge-window-horizontally)))
