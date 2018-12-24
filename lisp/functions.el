@@ -189,7 +189,7 @@ extra `GREP-ARGS'."
                 nil))))
         (progn (message args) (grep args)))
     (grep
-     (string-utils/escape-command-str
+     (string-utils/escape-parens
       (read-string
        "Grep Command: "
        (concat (eval grep-command) " " grep-args " -e "))))))
