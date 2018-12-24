@@ -104,13 +104,15 @@ to sane runtime defaults."
   "Open startup.log."
   (interactive)
   (find-file "~/.emacs.d/startup.log")
-  (end-of-buffer))
+  (goto-char (point-max)))
 
 (defun gmacs/minibuffer-fringe-setup ()
+  "Decouples the minibuffer's fringe from that of the main buffer."
   (set-window-fringes (minibuffer-window) 0 0 nil)
   (add-hook 'minibuffer-setup-hook #'gmacs/disable-minibuffer-fringe))
 
 (defun gmacs/disable-minibuffer-fringe ()
+  "Disable minibuffer fringe."
   (set-window-fringes (minibuffer-window) 0 0 nil))
 
 (defun gmacs/force-buffer-backup ()
