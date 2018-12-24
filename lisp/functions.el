@@ -382,6 +382,7 @@ disable command `hi-lock-mode'."
   (gmacs/create-visit-dir "~/Downloads"))
 
 (defun gmacs/open-code-dir ()
+  "Open ~/code."
   (interactive)
   (gmacs/create-visit-dir "~/code"))
 
