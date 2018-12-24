@@ -459,12 +459,6 @@
 (use-package telephone-line
   :init
   (require 'telephone-line-config)
-  (defvar telephone-line-height)
-  (defvar telephone-line-separator-extra-padding)
-  (defvar telephone-line-primary-left-separator)
-  (defvar telephone-line-secondary-left-separator)
-  (defvar telephone-line-primary-right-separator)
-  (defvar telephone-line-secondary-right-separator)
   (setq telephone-line-height 20
         telephone-line-primary-left-separator 'telephone-line-abs-left
         telephone-line-secondary-left-separator 'telephone-line-abs-left)
@@ -591,3 +585,7 @@
 
 (provide 'packages)
 ;;; packages.el ends here
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
