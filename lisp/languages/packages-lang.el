@@ -34,7 +34,8 @@
    '(flycheck-info ((t (:foreground "green" :underline nil))))
    '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
   (setq flycheck-indication-mode nil
-        flycheck-highlighting-mode 'lines))
+        flycheck-highlighting-mode 'lines
+        flycheck-emacs-lisp-load-path 'inherit))
 
 (use-package xref
   :ensure nil
