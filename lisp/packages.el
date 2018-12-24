@@ -28,7 +28,6 @@
     (progn
       (package-refresh-contents)
       (package-install 'use-package)))
-(defvar use-package-always-ensure)
 (setq use-package-always-ensure t)
 (require 'use-package)
 
@@ -41,7 +40,6 @@
 (use-package autorevert
   :ensure nil
   :init
-  (defvar auto-revert-verbose)
   (setq auto-revert-verbose nil)
   (add-hook
    'auto-revert-mode-hook
@@ -134,16 +132,12 @@
 
 (use-package doom-themes
   :init
-  (defvar doom-themes-enable-bold)
   (setq doom-themes-enable-bold nil)
   :config
   (load-theme 'doom-vibrant t))
 
 (use-package ediff
   :init
-  (defvar ediff-diff-options)
-  (defvar ediff-window-setup-function)
-  (defvar ediff-split-window-function)
   (setq ediff-diff-options "-w"
         ediff-window-setup-function #'ediff-setup-windows-plain)
   (setq ediff-split-window-function
@@ -164,7 +158,6 @@
   :config
   (require 'erc-services nil t)
   (erc-services-mode 1)
-  (defvar erc-prompt-for-nickserv-password)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-hide-list '("PART" "QUIT" "JOIN"))
   (setq erc-server-coding-system '(utf-8 . utf-8)
@@ -300,7 +293,6 @@
       (t (:background "magenta")))
     "Custom magenta face for hi-lock mode."
     :group 'hi-lock-faces)
-  (defvar hi-lock-face-defaults)
   (setq hi-lock-face-defaults
         '("hi-yellow"
           "hi-pink"
@@ -347,7 +339,6 @@
 (use-package magit
   :commands magit-status
   :init
-  (defvar magit-push-always-verify)
   (setq magit-push-always-verify nil
         magit-refresh-status-buffer nil
         magit-refresh-verbose t)
