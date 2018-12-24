@@ -202,5 +202,5 @@
 ;;; global.el ends here
 
 ;; Local Variables:
-;; byte-compile-warnings: (not free-vars cl-functions make-local)
+;; byte-compile-warnings: (not free-vars)
 ;; End:
