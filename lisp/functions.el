@@ -31,12 +31,15 @@
   (interactive))
 
 (defun gmacs/emacs-startup-hook ()
+  "Gmacs startup function."
   (gmacs/reset-gc-threshold-percentage)
   (gmacs/write-startup-log)
   (kill-buffer "*Messages*")
   (setq default-directory "~/.emacs.d/"))
 
 (defun gmacs/reset-gc-threshold-percentage ()
+  "Reset `gc-cons-threshold' and `gc-cons-percentage' \
+to sane runtime defaults."
   (setq gc-cons-threshold 16777216
         gc-cons-percentage 0.1))
 
