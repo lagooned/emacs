@@ -601,6 +601,8 @@ has been accepted."
   (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))
 
 (defun gmacs/looking-at-eshell-prompt-regexp-p (loc)
+  "Truthy value for evil-eshell-delete which determines if \
+the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
   (save-excursion
     (goto-char loc)
     (looking-at-p gmacs/eshell-prompt-regexp)))
