@@ -515,6 +515,7 @@ evil-mode state."
     (call-interactively 'enlarge-window-horizontally)))
 
 (defun gmacs/move-eol-eval-last-sexp ()
+  "Eval the current line as if you were at the eol."
   (interactive)
   (save-excursion
     (call-interactively 'end-of-line)
