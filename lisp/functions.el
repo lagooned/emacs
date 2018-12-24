@@ -616,6 +616,7 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
   (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done-hydra))
 
 (defun gmacs/evil-org-mode-setup ()
+  "Setup org mode."
   (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle))
 
 (defun gmacs/evil-c-common-mode-setup ()
