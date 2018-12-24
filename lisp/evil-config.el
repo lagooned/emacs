@@ -1,4 +1,4 @@
-;;; evil-config.el --- evil config                          -*- lexical-binding: t; -*-
+;;; evil-config.el --- evil config  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 

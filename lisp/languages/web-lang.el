@@ -1,9 +1,9 @@
-;;; web-lang.el --- gmacs web tools                  -*- lexical-binding: t; -*-
+;;; web-lang.el --- gmacs web tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: lisp, tools, convenience
+;; Keywords: gmacs, config, languages, web, css, vue, emmet, html
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

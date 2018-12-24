@@ -1,9 +1,9 @@
-;;; haskell-lang.el --- haskell language tools       -*- lexical-binding: t; -*-
+;;; haskell-lang.el --- gmacs haskell language tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared Matthew Engler
 
-;; Author: Jared Matthew Engler <jared@MacBook-Pro.attlocal.net>
-;; Keywords: languages
+;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: gmacs, config, languages, haskell
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

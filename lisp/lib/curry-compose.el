@@ -20,8 +20,7 @@
 
 ;;; Commentary:
 
-;; Leverages `lexical-binding: t' to define some neat higher order
-;; functions and enables pretty print for them..
+;; Leverages `lexical-binding: t' to define some neat higher order functions.
 
 ;;; Code:
 

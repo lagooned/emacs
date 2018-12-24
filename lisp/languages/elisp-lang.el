@@ -3,7 +3,7 @@
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: languages, lisp, help
+;; Keywords: gmacs, config, languages, elisp
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

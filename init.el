@@ -1,9 +1,9 @@
-;;; init.el --- Jared Engler Emacs Config            -*- lexical-binding: t; -*-
+;;; init.el --- Jared Engler Emacs Config  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, init
+;; Keywords: gmacs, config, init
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

@@ -1,9 +1,9 @@
-;;; global.el --- main emacs config                  -*- lexical-binding: t; -*-
+;;; global.el --- gmacs main config  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: c, data, docs, faces, wp, local, multimedia, vc, calendar, maint
+;; Keywords: gmacs, config, defaults, encoding, fringe, bell, cursor, warnings
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -17,6 +17,10 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;; Gmacs sane defaults configuration.
 
 ;;; Code:
 
@@ -196,3 +200,7 @@
 
 (provide 'global)
 ;;; global.el ends here
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars cl-functions make-local)
+;; End:

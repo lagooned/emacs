@@ -1,9 +1,9 @@
-;;; packages.el --- package configuration            -*- lexical-binding: t; -*-
+;;; packages.el --- package configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, packages
+;; Keywords: gmacs, config, packages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2018  Jared Matthew Engler
 
-;; Author: Jared Matthew Engler <jared@MacBook-Pro>
-;; Keywords: tools, languages, lisp, help
+;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: gmacs, config, languages, php, syntax
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

@@ -1,9 +1,9 @@
-;;; python-lang.el --- gmacs python language tools   -*- lexical-binding: t; -*-
+;;; python-lang.el --- gmacs python language tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared M. Engler
 
-;; Author: Jared M. Engler;;; python-lang.el --- gmacs python language tools   -*- lexical-binding: t; -*- <jared.lite@gmail.com>
-;; Keywords: languages, convenience, languages, tools
+;; Author: Jared M. Engler <jared.lite@gmail.com>
+;; Keywords: gmacs, config, languages, python, lsp
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
