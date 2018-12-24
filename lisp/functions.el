@@ -178,12 +178,14 @@ in order."
       (call-interactively 'gmacs/lrgrep-region))))
 
 (defun gmacs/grep (&optional initial grep-args)
+  "Gmacs grep wrapper to take optional `INITIAL' input and \
+extra `GREP-ARGS'."
   (if initial
       (let ((args
              (concat
               (eval grep-command)
               " " grep-args " -e "
-              (if initial (concat (string-utils/escape-command-str initial))
+              (if initial (concat (string-utils/escape-parens initial))
                 nil))))
         (progn (message args) (grep args)))
     (grep
@@ -193,12 +195,18 @@ in order."
        (concat (eval grep-command) " " grep-args " -e "))))))
 
 (defun string-utils/add-quotes (str)
+  "Surround `STR' in quotes."
   (concat "\"" str "\""))
 
-(defun string-utils/escape-command-str (str)
+(defun string-utils/escape-parens (str)
+  (string-utils/escape-command-str str ["(" ")"]))
+
+(defun string-utils/escape-command-str (str charlist)
   (funcall
-   (reduce #'compose
-           (mapcar (lambda (char) (curry 'string-utils/escape-character-str char)) ["(" ")"])) str))
+   (reduce
+    #'compose
+    (mapcar (lambda (char) (curry 'string-utils/escape-character-str char)) charlist))
+   str))
 
 (defun string-utils/escape-character-str (char str)
   (string-utils/replace-in-string char (concat "\\" char) str))
