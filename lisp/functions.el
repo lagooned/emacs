@@ -291,9 +291,10 @@ extra `GREP-ARGS'."
       (call-interactively #'org-open-at-point))))
 
 (defun gmacs/counsel-git (&optional initial-input)
-  "Find file in the current Git repository.
-INITIAL-INPUT can be given as the initial minibuffer input."
+  "Find file in the current Git repository. `INITIAL-INPUT' \
+can be given as the initial minibuffer input."
   (interactive)
+  (defvar counsel-git-cmd)
   (counsel-require-program (car (split-string counsel-git-cmd)))
   (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
          (cands (split-string
