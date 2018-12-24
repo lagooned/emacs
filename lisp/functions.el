@@ -226,12 +226,12 @@ in order."
       (gmacs/grep initial "-F"))))
 
 (defun gmacs/counsel-projectile-find-file-region ()
-  "Optionally run counsel-git on region."
+  "Optionally run `counsel-git' on region."
   (interactive)
   (gmacs/opt-region-helper 'gmacs/counsel-git))
 
 (defun gmacs/counsel-projectile-find-dir-region ()
-  "Optionally run counsel-projectile-find-dir on region."
+  "Optionally run `counsel-projectile-find-dir' on region."
   (interactive)
   (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-dir))
 
