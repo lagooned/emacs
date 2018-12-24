@@ -522,6 +522,7 @@ evil-mode state."
     (call-interactively 'eval-last-sexp)))
 
 (defun gmacs/enlarge-window ()
+  "Enlarge the active window vertically."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'enlarge-window)))
