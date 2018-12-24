@@ -330,7 +330,7 @@ INITIAL-INPUT can be given as the initial minibuffer input."
 
 (defun gmacs/unhighlight-all ()
   "Unhighlight all currently highlighted symbols and \
-disable `hi-lock-mode'."
+disable command `hi-lock-mode'."
   (interactive)
   (unhighlight-regexp t)
   (hi-lock-mode 0))
