@@ -576,26 +576,13 @@ has been accepted."
     "m b" 'lsp-java-build-project))
 
 (defun gmacs/evil-eshell-mode-setup ()
-  (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
-    "Like evil-delete, but inhibit read only and when the eshell prompt is
-involved re-emit it."
-    (interactive "<R><x><y>")
-    (let ((inhibit-read-only t)
-          (total-prompt-length (length (gmacs/eshell-prompt-function)))
-          (bottom-prompt-length (length (gmacs/eshell-bottom-prompt-function))))
-      (if (gmacs/looking-at-eshell-prompt-regexp-p beg)
-          (progn
-            (evil-delete
-             (+ beg bottom-prompt-length)
-             end type register yank-handler)
-            (delete-region
-             (- (+ beg bottom-prompt-length) total-prompt-length)
-             (+ beg bottom-prompt-length))
-            (eshell-emit-prompt))
-        (evil-delete beg end type register yank-handler))))
-  ;; todo custom paste (p) operator too pls
-  (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
+  "Setup Gshell."
   (setq-local inhibit-read-only t)
+  (gmacs/gshell-evil-mode-keys-setup))
+
+(defun gmacs/gshell-evil-mode-keys-setup ()
+  "Setup Gshell evil-mode keys."
+  (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
   (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
   (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
   (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
