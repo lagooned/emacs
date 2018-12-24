@@ -258,7 +258,7 @@ extra `GREP-ARGS'."
     (funcall-interactively func)))
 
 (defun gmacs/swiper-region-thing ()
-  "Call swiper on the selected region or thing under cursor."
+  "Call `swiper' on the selected region or thing under cursor."
   (interactive)
   (if (use-region-p)
       (progn (deactivate-mark)
