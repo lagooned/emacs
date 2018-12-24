@@ -454,8 +454,8 @@ disable command `hi-lock-mode'."
   (if (= (user-uid) 0) "# " "$ "))
 
 (defun gmacs/eshell-prompt-function ()
-  "A function that returns the Eshell prompt string. Make
-sure to update `gmacs/eshell-prompt-regexp' so that it will
+  "A function that returns the Eshell prompt string.
+Make sure to update `gmacs/eshell-prompt-regexp' so that it will
 match your prompt."
   (concat "\n" (gmacs/eshell-top-prompt-function) " \n"
           (gmacs/eshell-bottom-prompt-function)))
