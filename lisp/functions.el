@@ -457,20 +457,23 @@ disable command `hi-lock-mode'."
     (eshell-send-input)))
 
 (defun gmacs/eshell-top-prompt-function ()
+  "Builds the top line of the gmacs eshell prompt."
   (concat "[" (abbreviate-file-name (eshell/pwd)) "]"))
 
 (defun gmacs/eshell-bottom-prompt-function ()
+  "Builds the bottom line of the gmacs eshell prompt."
   (if (= (user-uid) 0) "# " "$ "))
 
 (defun gmacs/eshell-prompt-function ()
-  "A function that returns the Eshell prompt string.
-Make sure to update `gmacs/eshell-prompt-regexp' so that it will
+  "Builds the Eshell prompt string. Make sure to \
+update `gmacs/eshell-prompt-regexp' so that it will \
 match your prompt."
   (concat "\n" (gmacs/eshell-top-prompt-function) " \n"
           (gmacs/eshell-bottom-prompt-function)))
 
 (defun gmacs/evil-visual-or-normal-p ()
-  "True if evil mode is enabled, and we are in normal or visual mode."
+  "True if evil mode is enabled, and we are in \
+normal or visual mode."
   (and (bound-and-true-p evil-mode)
        (not (memq evil-state '(insert emacs)))))
 
