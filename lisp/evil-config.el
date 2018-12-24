@@ -235,3 +235,7 @@ involved re-emit it."
 (provide 'evil-config)
 
 ;;; evil-config.el ends here
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
