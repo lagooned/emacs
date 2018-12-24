@@ -395,11 +395,13 @@ disable command `hi-lock-mode'."
       "To view starup log, type \\[gmacs/open-startup-log]"))))
 
 (defun gmacs/company-cancel-complete-prev ()
+  "Exit company mode and use evil complete to autocomplete upwards."
   (interactive)
   (company-abort)
   (evil-complete-previous))
 
 (defun gmacs/company-cancel-complete-next ()
+  "Exit company mode and use evil complete to autocomplete downwards."
   (interactive)
   (company-abort)
   (evil-complete-next))
