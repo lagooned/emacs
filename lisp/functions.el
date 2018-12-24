@@ -132,8 +132,6 @@ at the first save of each gmacs session."
   "Check if the buffer's file is large (see `gmacs/large-file-size').
 If so, ask for confirmation to open it literally (read-only, disabled
 undo and in `fundamental-mode' for performance sake."
-  (defvar gmacs/large-file-size)
-  (defvar gmacs/large-file-modes-ignore-list)
   (let* ((filename (buffer-file-name))
          (size (nth 7 (file-attributes filename))))
     (when (and (not (memq major-mode gmacs/large-file-modes-ignore-list))
@@ -171,7 +169,6 @@ undo and in `fundamental-mode' for performance sake."
 `gmacs/counsel-git-grep-region', and `gmacs/grep-region' \
 in order."
   (interactive)
-  (defvar projectile-project-p)
   (if (executable-find "rg")
       (call-interactively 'gmacs/counsel-rg-region)
     (if projectile-project-p
@@ -285,7 +282,6 @@ extra `GREP-ARGS'."
 (defun gmacs/org-link-follow ()
   "Push marker stack and follow org link."
   (interactive)
-  (defvar org-link-frame-setup)
   (if (thing-at-point-url-at-point)
       (browse-url-at-point)
     (let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
@@ -295,7 +291,6 @@ extra `GREP-ARGS'."
   "Find file in the current Git repository. `INITIAL-INPUT' \
 can be given as the initial minibuffer input."
   (interactive)
-  (defvar counsel-git-cmd)
   (counsel-require-program (car (split-string counsel-git-cmd)))
   (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
          (cands (split-string
@@ -311,7 +306,6 @@ can be given as the initial minibuffer input."
   "Jump to a directory in the current project with \
 initial input `INITIAL-INPUT'."
   (interactive)
-  (defvar counsel-projectile-find-dir-action)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
     (ivy-read (projectile-prepend-project-name "Find dir: ")
@@ -679,3 +673,7 @@ involved re-emit it."
 
 (provide 'functions)
 ;;; functions.el ends here
+
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars cl-functions)
+;; End:
