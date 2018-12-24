@@ -652,6 +652,7 @@ has been accepted."
        #'gmacs/lsp-python-setup)))
 
 (defun gmacs/lsp-python-setup ()
+  "Setup Python LSP mode."
   (if gmacs/python-enable-lsp-p
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
