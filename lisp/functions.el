@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(require 'cl)
 (require 'curry-compose)
 
 (defun void ()
