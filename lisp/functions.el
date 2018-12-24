@@ -307,7 +307,8 @@ can be given as the initial minibuffer input."
               :caller 'counsel-git)))
 
 (defun gmacs/counsel-projectile-find-dir (&optional initial-input)
-  "Jump to a directory in the current project with initial input `INITIAL-INPUT'."
+  "Jump to a directory in the current project with \
+initial input `INITIAL-INPUT'."
   (interactive)
   (defvar counsel-projectile-find-dir-action)
   (if (not (projectile-project-p))
