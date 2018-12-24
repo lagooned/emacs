@@ -197,8 +197,8 @@ extra `GREP-ARGS'."
   (concat "\"" str "\""))
 
 (defun string-utils/escape-parens (str)
-  "Escape parens in `STR'."
-  (string-utils/escape-command-str str ["(" ")"]))
+  "Escape parens, space, and quotes in `STR'."
+  (string-utils/escape-command-str str [" " "\"" "(" ")" "'" "`"]))
 
 (defun string-utils/escape-command-str (str charlist)
   "Escapes all instances of each element of `CHARLIST' in `STR'."
