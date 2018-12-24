@@ -699,5 +699,6 @@ stateful confirmation dialog.
 ;;; functions.el ends here
 
 ;; Local Variables:
-;; byte-compile-warnings: (not free-vars cl-functions)
+;; byte-compile-warnings: (not free-vars cl-functions make-local)
 ;; End:
+
