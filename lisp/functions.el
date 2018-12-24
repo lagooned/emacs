@@ -231,7 +231,7 @@ extra `GREP-ARGS'."
       (counsel-git-grep nil initial))))
 
 (defun gmacs/grep-region ()
-  "Optionally run grep on region."
+  "Optionally run `grep' on region."
   (interactive)
   (gmacs/opt-region-helper
    '(lambda (&optional initial)
