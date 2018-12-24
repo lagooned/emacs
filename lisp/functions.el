@@ -491,6 +491,8 @@ normal or visual mode."
         (set-mark mark-before)))))
 
 (defun gmacs/mc-evil-back-to-previous-state ()
+  "When done using multiple-cursors, switch back previous \
+evil-mode state."
   (when gmacs/mc-evil-prev-state
     (unwind-protect
         (case gmacs/mc-evil-evil-prev-state
