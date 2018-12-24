@@ -528,6 +528,7 @@ evil-mode state."
     (call-interactively 'enlarge-window)))
 
 (defun gmacs/shrink-window ()
+  "Shrink the active window vertically."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window)))
