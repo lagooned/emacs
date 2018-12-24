@@ -546,30 +546,34 @@ evil-mode state."
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun gmacs/lsp-java-enable ()
+  "Enable Java LSP if in project and confirmation prompt \
+has been accepted."
   (if (projectile-project-p)
-      (gmacs/lsp-java-prompt-maybe-enable)))
-
-(defun gmacs/lsp-java-prompt-maybe-enable ()
-  (gmacs/prompt-maybe-run
-   'gmacs/java-lsp-dialog-confirmed-p
-   "Enable Java LSP on this ENV?"
-   'gmacs/java-enable-lsp-p
-   #'gmacs/lsp-java-setup))
+      (gmacs/prompt-maybe-run
+       'gmacs/java-lsp-dialog-confirmed-p
+       "Enable Java LSP on this ENV?"
+       'gmacs/java-enable-lsp-p
+       #'gmacs/lsp-java-setup)))
 
 (defun gmacs/lsp-java-setup ()
+  "Initialize Java LSP."
   (if gmacs/java-enable-lsp-p
       (progn (push 'company-lsp company-backends)
              (flycheck-mode 1)
              (lsp-java-enable)
-             (evil-leader/set-key-for-mode 'java-mode
-               "m a" 'lsp-execute-code-action
-               "m r" 'lsp-rename
-               "m R" 'lsp-restart-workspace
-               "m f" 'lsp-format-buffer
-               "m h" 'lsp-describe-thing-at-point
-               "m H" 'lsp-highlight-symbol-at-point
-               "m o" 'lsp-java-organize-imports
-               "m b" 'lsp-java-build-project))))
+             (gmacs/lsp-java-leader-setup))))
+
+(defun gmacs/lsp-java-leader-setup ()
+  "Setup Evil-Leader for Java LSP."
+  (evil-leader/set-key-for-mode 'java-mode
+    "m a" 'lsp-execute-code-action
+    "m r" 'lsp-rename
+    "m R" 'lsp-restart-workspace
+    "m f" 'lsp-format-buffer
+    "m h" 'lsp-describe-thing-at-point
+    "m H" 'lsp-highlight-symbol-at-point
+    "m o" 'lsp-java-organize-imports
+    "m b" 'lsp-java-build-project))
 
 (defun gmacs/evil-eshell-mode-setup ()
   (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
