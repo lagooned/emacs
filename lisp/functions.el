@@ -503,6 +503,7 @@ evil-mode state."
       (setq gmacs/mc-evil-mark-was-active nil))))
 
 (defun gmacs/shrink-window-horizontally ()
+  "Shrink the active window horizontally."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window-horizontally)))
