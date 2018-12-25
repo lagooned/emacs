@@ -73,8 +73,6 @@
   (global-evil-surround-mode 1))
 
 (use-package evil-collection
-  :init
-  (evil-collection-minibuffer nil)
   :config
   (evil-collection-init))
 
