@@ -213,6 +213,8 @@
 
 (use-package exec-path-from-shell)
 
+(use-package fireplace)
+
 (use-package fix-word
   :commands
   fix-word-upcase
