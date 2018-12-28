@@ -283,7 +283,8 @@
 
 (use-package grep
   :init
-  (setq grep-command "grep -rLZE '.{200}' -R . | xargs -r0 grep --color -nH --null")
+  (setq grep-command "grep -rLZE '.{200}' -R . | xargs -r0 grep --color -nH --null"
+        grep-use-null-device nil)
   (add-hook 'grep-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
 (use-package hi-lock
