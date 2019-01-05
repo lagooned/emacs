@@ -181,9 +181,13 @@
         eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
   (add-hook 'eshell-mode-hook #'gmacs/enable-truncate-lines-no-message)
   :config
-  (with-eval-after-load 'em-term (push "ngrok" eshell-visual-commands))
-  (with-eval-after-load 'em-term (push "npm" eshell-visual-commands))
-  (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))
+  (with-eval-after-load 'em-term
+    (progn
+      (push '("npm" "install") eshell-visual-subcommands)
+      (push '("git" "diff" "log") eshell-visual-subcommands)
+      (push 'eshell-truncate-buffer eshell-output-filter-functions)))
+  (with-eval-after-load 'em-hist
+    (setq eshell-hist-ignoredups t)))
 
 (use-package evil
   :init
