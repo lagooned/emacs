@@ -624,7 +624,6 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
   (define-key evil-emacs-state-local-map (kbd "S-SPC") 'ivy-restrict-to-matches)
   (define-key evil-emacs-state-local-map (kbd "C-M-j") 'ivy-immediate-done)
   (define-key evil-emacs-state-local-map (kbd "C-M-m") 'ivy-call)
-  (define-key evil-emacs-state-local-map (kbd "C-M-m") 'ivy-call)
   (define-key evil-emacs-state-local-map (kbd "C-M-n") 'ivy-next-line-and-call)
   (define-key evil-emacs-state-local-map (kbd "C-M-p") 'ivy-previous-line-and-call)
   (define-key evil-emacs-state-local-map (kbd "C-M-o") 'ivy-dispatching-call)
