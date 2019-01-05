@@ -129,6 +129,7 @@
   "s c" 'avy-goto-char
   "s l" 'avy-goto-line
   "s j" 'avy-goto-word-0
+  "s r" 'ivy-resume
 
   ;; toggles
   "t l" 'linum-relative-mode
