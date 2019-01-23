@@ -77,6 +77,11 @@
   (dap-mode 1)
   (dap-ui-mode 1))
 
+(use-package dockerfile-mode
+  :commands dockerfile-mode
+  :init
+  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+
 (load "elisp-lang")
 (load "php-lang")
 (load "python-lang")
