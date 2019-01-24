@@ -24,7 +24,10 @@
 
 ;;; Code:
 
-(add-hook 'prog-mode-hook 'gmacs/enable-company-mode)
+(use-package prog-mode
+  :ensure nil
+  :init
+  (add-hook 'prog-mode-hook 'gmacs/enable-company-mode))
 
 (use-package flycheck
   :diminish flycheck-mode "flyc"
