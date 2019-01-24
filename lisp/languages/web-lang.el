@@ -25,6 +25,7 @@
 ;;; Code:
 
 (use-package emmet-mode
+  :diminish "emm"
   :commands
   emmet-mode
   :init
