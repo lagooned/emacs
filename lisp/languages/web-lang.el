@@ -38,12 +38,8 @@
   :init
   (setq web-mode-enable-auto-pairing nil
         web-mode-markup-indent-offset 4)
-  (add-to-list
-   'auto-mode-alist
-   '("\\.x?html\\'" . web-mode))
-  (add-to-list
-   'auto-mode-alist
-   '("\\.blade.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
   :config
   (emmet-mode 1)
   (add-hook 'web-mode-hook (lambda () (sp-local-pair 'web-mode "<" ""))))
