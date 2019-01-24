@@ -25,7 +25,9 @@
 ;;; Code:
 
 (use-package lsp-java
-  :commands lsp-java-enable
+  :commands
+  lsp-java-enable
+  lsp-java-update-server
   :init
   (setq lsp-java-save-action-organize-imports nil)
   (add-hook 'java-mode-hook #'gmacs/lsp-java-enable))
