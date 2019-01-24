@@ -709,6 +709,27 @@ stateful confirmation dialog.
   (make-variable-buffer-local 'company-backends)
   (company-mode))
 
+(defun gmacs/php-mode-setup ()
+  "Setup php-mode."
+  (flycheck-define-checker gmacs-php
+    "A PHP syntax checker using the PHP command line interpreter."
+    :command
+    ("php" "-l"
+     "-d" "error_reporting=E_ALL"
+     "-d" "display_errors=1"
+     "-d" "log_errors=0"
+     source)
+    :error-patterns
+    ((error
+      line-start
+      (or "Parse" "Fatal" "syntax") " error" (any ":" ",") " "
+      (message) " in " (file-name) " on line " line line-end))
+    :modes
+    (php-mode)
+    :next-checkers
+    ((warning . php-phpmd)
+     (warning . php-phpcs))))
+
 (provide 'functions)
 ;;; functions.el ends here
 
