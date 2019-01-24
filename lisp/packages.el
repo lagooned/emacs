@@ -49,6 +49,7 @@
 (use-package avy)
 
 (use-package aggressive-indent
+  :diminish "agg"
   :commands aggressive-indent-mode
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
