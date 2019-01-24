@@ -731,6 +731,7 @@ stateful confirmation dialog.
      (warning . php-phpcs))))
 
 (defun gmacs/css-mode-setup ()
+  "Setup CSS mode."
   (defun css--fontify-region (start end &optional loudly)
     "Fontify a CSS buffer between START and END.
 START and END are buffer positions."
