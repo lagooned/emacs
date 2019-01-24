@@ -380,6 +380,7 @@
         org-log-done t
         org-agenda-files (list "~/org/work.org"
                                "~/org/home.org"))
+  (add-hook 'org-indent-mode-hook (lambda () (diminish 'org-indent-mode "in")))
   :config
   (add-to-list 'org-file-apps '(directory . emacs))
   (set-face-attribute 'org-level-1 nil :height 1.0)
