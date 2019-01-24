@@ -24,6 +24,10 @@
 
 ;;; Code:
 
+(use-package apache-mode
+  :commands
+  apache-mode)
+
 (use-package prog-mode
   :ensure nil
   :commands prog-mode
