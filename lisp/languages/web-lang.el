@@ -49,6 +49,8 @@
   (add-hook 'web-mode-hook (lambda () (sp-local-pair 'web-mode "<" ""))))
 
 (use-package css-mode
+  :commands
+  css-mode
   :config
   (defun css--fontify-region (start end &optional loudly)
     "Fontify a CSS buffer between START and END.
