@@ -30,8 +30,8 @@
   emmet-mode
   :init
   (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook  'emmet-mode)
-  (add-hook 'css-mode-hook  'emmet-mode))
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook 'emmet-mode))
 
 (use-package web-mode
   :commands web-mode
