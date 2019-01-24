@@ -26,6 +26,7 @@
 
 (use-package prog-mode
   :ensure nil
+  :commands prog-mode
   :init
   (add-hook 'prog-mode-hook 'gmacs/enable-company-mode))
 
