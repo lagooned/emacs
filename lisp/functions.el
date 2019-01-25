@@ -168,7 +168,7 @@ undo and in `fundamental-mode' for performance sake."
   "Gmacs grep function. Will try `gmacs/counsel-rg-region', \
 then `gmacs/grep-region' in order."
   (interactive)
-  (if (executable-find "rg")
+  (if (and (executable-find "rg") (not (eval 'gmacs/force-basic-grep)))
       (call-interactively 'gmacs/counsel-rg-region)
     (if (projectile-project-p)
         (let ((default-directory (projectile-project-p)))

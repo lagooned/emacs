@@ -78,5 +78,8 @@ re-entered for it to take effect.")
 (defvar gmacs/js2-xref-accept-ag nil
   "Determines whether or not to show the xref-ag confirmation.")
 
+(defvar gmacs/force-basic-grep nil
+  "Determines whether or not to use basic grep.")
+
 (provide 'variables)
 ;;; variables.el ends here

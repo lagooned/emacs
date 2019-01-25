@@ -37,6 +37,9 @@
 ;; transparency
 (transparency-set-value 100)
 
+;; use basic grep
+(setq gmacs/force-basic-grep nil)
+
 ;; custom vars
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
