@@ -170,7 +170,10 @@ then `gmacs/grep-region' in order."
   (interactive)
   (if (executable-find "rg")
       (call-interactively 'gmacs/counsel-rg-region)
-    (call-interactively 'gmacs/grep-region)))
+    (if (projectile-project-p)
+        (let ((default-directory (projectile-project-p)))
+          (funcall 'gmacs/grep-region))
+      (funcall 'gmacs/grep-region))))
 
 (defun gmacs/grep (&optional initial)
   "Gmacs grep wrapper to take optional `INITIAL' input or \
