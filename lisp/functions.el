@@ -166,37 +166,33 @@ undo and in `fundamental-mode' for performance sake."
 
 (defun gmacs/run-grep ()
   "Gmacs grep function. Will try `gmacs/counsel-rg-region', \
-`gmacs/counsel-git-grep-region', and `gmacs/grep-region' \
-in order."
+then `gmacs/grep-region' in order."
   (interactive)
   (if (executable-find "rg")
       (call-interactively 'gmacs/counsel-rg-region)
-    (if projectile-project-p
-        (call-interactively 'gmacs/counsel-git-grep-region)
-      (call-interactively 'gmacs/lrgrep-region))))
+    (call-interactively 'gmacs/grep-region)))
 
-(defun gmacs/grep (&optional initial grep-args)
-  "Gmacs grep wrapper to take optional `INITIAL' input and \
-extra `GREP-ARGS'."
+(defun gmacs/grep (&optional initial)
+  "Gmacs grep wrapper to take optional `INITIAL' input or \
+prompt for grep command."
   (if initial
       (let ((args
              (concat
-              (eval grep-command)
-              " " grep-args " -e "
-              (if initial (concat (string-utils/escape-parens initial))
+              (eval grep-command) " -F -e "
+              (if initial
+                  (concat (string-utils/escape-str-for-command initial))
                 nil))))
         (progn (message args) (grep args)))
     (grep
-     (string-utils/escape-parens
-      (read-string
-       "Grep Command: "
-       (concat (eval grep-command) " " grep-args " -e "))))))
+     (read-string
+      "Grep Command: "
+      (concat (eval grep-command) " -e ")))))
 
 (defun string-utils/add-quotes (str)
   "Surround `STR' in quotes."
   (concat "\"" str "\""))
 
-(defun string-utils/escape-parens (str)
+(defun string-utils/escape-str-for-command (str)
   "Escape parens, space, and quotes in `STR'."
   (string-utils/escape-command-str str [" " "\"" "(" ")" "'" "`"]))
 
@@ -233,7 +229,7 @@ extra `GREP-ARGS'."
   (interactive)
   (gmacs/opt-region-helper
    '(lambda (&optional initial)
-      (gmacs/grep initial "-F"))))
+      (gmacs/grep initial))))
 
 (defun gmacs/counsel-projectile-find-file-region ()
   "Optionally run `counsel-git' on region."
