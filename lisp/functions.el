@@ -122,7 +122,7 @@ at the first save of each gmacs session."
   (when (not buffer-backed-up)
     ;; Override the default parameters for per-session backups.
     (let ((backup-directory-alist
-           '(("" . "~/.emacs.d/backup/session")))
+           '(("" . "~/.backup/session")))
           (kept-new-versions 3))
       (backup-buffer)))
   (let ((buffer-backed-up nil))

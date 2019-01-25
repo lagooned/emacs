@@ -89,7 +89,7 @@
       delete-old-versions t
       backup-by-copying t
       vc-make-backup-files t
-      backup-directory-alist '(("" . "~/.emacs.d/backup/save")))
+      backup-directory-alist '(("" . "~/.backup/save")))
 
 (add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
