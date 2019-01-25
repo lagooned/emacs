@@ -197,7 +197,7 @@ prompt for grep command."
 
 (defun string-utils/escape-str-for-command (str)
   "Escape parens, space, and quotes in `STR'."
-  (string-utils/escape-command-str str [" " "\"" "(" ")" "'" "`"]))
+  (string-utils/escape-command-str str [";" " " "\"" "(" ")" "'" "`"]))
 
 (defun string-utils/escape-command-str (str charlist)
   "Escapes all instances of each element of `CHARLIST' in `STR'."
