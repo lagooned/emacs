@@ -119,6 +119,7 @@
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "gr") 'revert-buffer)
+(define-key evil-normal-state-map (kbd "M-t") 'transpose-words)
 
 ;; visual mode
 (define-key evil-visual-state-map (kbd "$") 'evil-end-of-visual-line)
