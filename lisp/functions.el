@@ -26,6 +26,7 @@
 
 (require 'cl)
 (require 'curry-compose)
+(require 'string-utils)
 
 (defun void ()
   "Interactive No-op."
@@ -189,30 +190,6 @@ prompt for grep command."
       (eval grep-command)
       (string-utils/add-quotes
        (read-string "grep regexp: "))))))
-
-(defun string-utils/add-quotes (str)
-  "Surround `STR' in quotes."
-  (concat "\"" str "\""))
-
-(defun string-utils/escape-str-for-command (str)
-  "Escape parens, space, and quotes in `STR'."
-  (string-utils/escape-command-str str ["\"" "`"]))
-
-(defun string-utils/escape-command-str (str charlist)
-  "Escapes all instances of each element of `CHARLIST' in `STR'."
-  (funcall
-   (reduce
-    #'compose
-    (mapcar (lambda (char) (curry 'string-utils/escape-character-str char)) charlist))
-   str))
-
-(defun string-utils/escape-character-str (char str)
-  "Escapes every instance of `CHAR' in `STR'."
-  (string-utils/replace-in-string char (concat "\\" char) str))
-
-(defun string-utils/replace-in-string (what with in)
-  "Replace `WHAT' `WITH' `IN'."
-  (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
 
 (defun gmacs/counsel-rg-region ()
   "Optionally run ripgrep on region."
