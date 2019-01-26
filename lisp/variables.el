@@ -31,8 +31,8 @@ will be capped at the current line height
 set by (line-pixel-height)")
 
 (defvar gmacs/large-file-size 2
-  "Size (in MB) above which the user will be prompted to open the file literally
-to avoid performance issues. Opening literally means that no major or minor
+  "Size (in MB) above which the user will be prompted to open the file literally \
+to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
 (defvar gmacs/large-file-modes-ignore-list
@@ -52,9 +52,10 @@ modes are active and the buffer is read-only.")
 
 (defvar gmacs/eshell-prompt-regexp "^[#$] "
   "A regexp which fully matches your eshell prompt.
-This setting is important, since it affects how eshell will interpret
-the lines that are passed to it.
-If this variable is changed, all Eshell buffers must be exited and
+
+This setting is important, since it affects how eshell will interpret \
+the lines that are passed to it. \
+If this variable is changed, all Eshell buffers must be exited and \
 re-entered for it to take effect.")
 
 (defvar gmacs/mc-evil-prev-state nil
