@@ -24,10 +24,10 @@
 
 ;;; Code:
 
-(defvar gmacs/evil-base-cursor-height 99999
-  "set the cursor height to be used, note
-anything over the current line height
-will be capped at the current line height
+(defvar gmacs/evil-base-cursor-height #xfffff
+  "Set the cursor height to be used, note \
+anything over the current line height \
+will be capped at the current line height \
 set by (line-pixel-height)")
 
 (defvar gmacs/large-file-size 2
