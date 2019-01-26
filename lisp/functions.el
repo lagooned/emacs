@@ -179,17 +179,16 @@ then `gmacs/grep-region' in order."
   "Gmacs grep wrapper to take optional `INITIAL' input or \
 prompt for grep command."
   (if initial
-      (let ((args
-             (concat
-              (eval grep-command) " -F -e "
-              (if initial
-                  (concat (string-utils/escape-str-for-command initial))
-                nil))))
-        (progn (message args) (grep args)))
+      (grep
+       (concat
+        (eval grep-command)
+        (string-utils/add-quotes
+         (string-utils/escape-str-for-command initial))))
     (grep
-     (read-string
-      "Grep Command: "
-      (concat (eval grep-command) " -e ")))))
+     (concat
+      (eval grep-command)
+      (string-utils/add-quotes
+       (read-string "grep regexp: "))))))
 
 (defun string-utils/add-quotes (str)
   "Surround `STR' in quotes."
@@ -197,7 +196,7 @@ prompt for grep command."
 
 (defun string-utils/escape-str-for-command (str)
   "Escape parens, space, and quotes in `STR'."
-  (string-utils/escape-command-str str [";" " " "\"" "(" ")" "'" "`"]))
+  (string-utils/escape-command-str str ["\"" "`"]))
 
 (defun string-utils/escape-command-str (str charlist)
   "Escapes all instances of each element of `CHARLIST' in `STR'."

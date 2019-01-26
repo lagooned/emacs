@@ -288,7 +288,7 @@
 
 (use-package grep
   :init
-  (setq grep-command "grep -rLZE '.{200}' -R . | xargs -r0 grep --color -nH --null"
+  (setq grep-command "grep -rLZE '.{800}' -R . | xargs -r0 grep --color -n -e "
         grep-use-null-device nil)
   (add-hook 'grep-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
