@@ -9,8 +9,9 @@
       erc-nick "jhd")
 
 ;; spelling binary
-(setq ispell-program-name "aspell"
-      ispell-extra-args '("--sug-mode=ultra"))
+(if (executable-find "aspell")
+    (setq ispell-program-name "aspell"
+          ispell-extra-args '("--sug-mode=ultra")))
 
 ;; menu-bar-display
 (if (display-graphic-p) (menu-bar-mode -1))
