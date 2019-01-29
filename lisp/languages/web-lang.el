@@ -50,15 +50,5 @@
   :config
   (gmacs/css-mode-setup))
 
-(use-package mmm-mode
-  :init
-  (setq mmm-submode-decoration-level 0))
-
-(use-package vue-mode
-  :init
-  (setq vue-html-tab-width 4)
-  :config
-  (add-hook 'vue-mode-hook 'turn-off-evil-matchit-mode))
-
 (provide 'web-lang)
 ;;; web-lang.el ends here
