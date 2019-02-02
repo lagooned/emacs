@@ -40,10 +40,6 @@
 
 (use-package exato)
 
-(use-package evil-exchange
-  :config
-  (evil-exchange-install))
-
 (use-package evil-numbers
   :commands
   evil-numbers/inc-at-point
