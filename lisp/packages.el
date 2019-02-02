@@ -216,7 +216,8 @@
 (use-package expand-region
   :commands er/expand-region)
 
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :commands exec-path-from-shell-initialize)
 
 (use-package fireplace
   :commands fireplace)
