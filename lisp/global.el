@@ -184,6 +184,9 @@
       jit-lock-stealth-time 10
       jit-lock-stealth-verbose nil)
 
+;; fast but imprecise scrolling
+(setq fast-but-imprecise-scrolling t)
+
 ;; save history
 (setq savehist-additional-variables
       '(kill-ring search-ring regexp-search-ring))
