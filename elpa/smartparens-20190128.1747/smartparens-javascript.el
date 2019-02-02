@@ -1,4 +1,4 @@
-;;; smartparens-javascript.el --- Additional configuration for JavaScript based modes.
+;;; smartparens-javascript.el --- Additional configuration for JavaScript based modes.  -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2017 Marinin Tim
 ;; Author: Tim Marinin <mt@marinin.xyz>
@@ -48,7 +48,7 @@
 
 ;; (|sys).path.append---the dot should not travel with the closing
 ;; paren
-(--each '(js-mode javascript-mode js2-mode typescript-mode)
+(--each '(js-mode javascript-mode js2-mode typescript-mode rjsx-mode)
   (add-to-list 'sp-sexp-suffix (list it 'regexp "")))
 
 (provide 'smartparens-javascript)

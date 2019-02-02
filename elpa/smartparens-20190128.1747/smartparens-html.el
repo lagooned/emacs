@@ -1,4 +1,4 @@
-;;; smartparens-html.el --- Additional configuration for HTML based modes.
+;;; smartparens-html.el --- Additional configuration for HTML based modes.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2013-2014 Matus Goljer
 
@@ -89,7 +89,7 @@ backward."
         (sp-beginning-of-sexp arg)
       (sp-beginning-of-sexp (1- (- (prefix-numeric-value arg)))))))
 
-(defun sp-html-post-handler (&optional id action context)
+(defun sp-html-post-handler (&optional _id action _context)
   "Post-action hooks for `html-mode'.
 
 ID is the tag being processed, ACTION is the action and CONTEXT
@@ -164,6 +164,9 @@ specifies if we are inside a string or code."
 
 (--each sp--html-modes
   (add-to-list 'sp-navigate-consider-sgml-tags it))
+
+(--each '(web-mode)
+  (add-to-list 'sp-sexp-suffix (list it 'regexp "")))
 
 (provide 'smartparens-html)
 

@@ -1,11 +1,14 @@
-;;; smartparens-latex.el --- Additional configuration for text-mode.
+;;; smartparens-ml.el --- Additional configuration for ML languages  -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2016-2017 Ta Quang Trung
 ;; Copyright (C) 2017 Matus Goljer
 
-;; Author: Matus Goljer <matus.goljer@gmail.com>
+;; Author: Ta Quang Trung <taquangtrungvn@gmail.com>
+;;         Matus Goljer <matus.goljer@gmail.com>
+;;         Louis Roché <louis@louisroche.net>
 ;; Maintainer: Matus Goljer <matus.goljer@gmail.com>
-;; Created: 16 July 2017
-;; Keywords: abbrev convenience editing
+;; Created: 14 July 2016
+;; Keywords: smartparens, ML, ocaml, reason
 ;; URL: https://github.com/Fuco1/smartparens
 
 ;; This file is not part of GNU Emacs.
@@ -29,17 +32,17 @@
 
 ;;; Commentary:
 
-;; This file provides some additional configuration for `text-mode'.
+;; This file provides some additional configuration for ML languages.
 ;; To use it, simply add:
 ;;
-;; (require 'smartparens-text)
+;; (require 'smartparens-ml)
 ;;
 ;; into your configuration.  You can use this in conjunction with the
 ;; default config or your own configuration.
-
+;;
 ;; If you have good ideas about what should be added please file an
 ;; issue on the github tracker.
-
+;;
 ;; For more info, see github readme at
 ;; https://github.com/Fuco1/smartparens
 
@@ -47,19 +50,24 @@
 
 (require 'smartparens)
 
-(defun sp-text-mode-emoticon-p (_id action _context)
-  (when (memq action '(insert navigate))
-    (sp--looking-back-p ":-?[()]" 3)))
+;;; Local pairs for ML-family languages
 
-(defun sp-text-mode-skip-emoticon (ms mb me)
-  (when (member ms '("(" ")"))
-    (save-excursion
-      (goto-char mb)
-      (sp--looking-back-p ":-?" 2))))
+(sp-with-modes '(fsharp-mode)
+  (sp-local-pair "(*" "*)" ))
 
-(sp-local-pair 'text-mode "(" nil
-               :unless '(:add sp-text-mode-emoticon-p)
-               :skip-match 'sp-text-mode-skip-emoticon)
+(sp-with-modes '(tuareg-mode)
+  ;; Disable ` because it is used in polymorphic variants
+  (sp-local-pair "`" nil :actions nil)
+  ;; Disable ' because it is used in value names and types
+  (sp-local-pair "'" nil :actions nil)
+  (sp-local-pair "(*" "*)" ))
 
-(provide 'smartparens-text)
-;;; smartparens-text.el ends here
+(sp-with-modes '(reason-mode)
+  ;; Disable ` because it is used in polymorphic variants
+  (sp-local-pair "`" nil :actions nil)
+  ;; Disable ' because it is used in value names and types
+  (sp-local-pair "'" nil :actions nil)
+  (sp-local-pair "/*" "*/" ))
+
+(provide 'smartparens-ml)
+;;; smartparens-ml.el ends here
