@@ -416,7 +416,8 @@
               (concat "^" (expand-file-name "~/\\(.emacs.d\\|emacs\\)/workspace") "/.+$")
               "^#")))
 
-(use-package restart-emacs)
+(use-package restart-emacs
+  :commands restart-emacs)
 
 (use-package restclient
   :commands restclient-mode
