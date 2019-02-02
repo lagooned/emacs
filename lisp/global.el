@@ -100,9 +100,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; show column too
-(column-number-mode 1)
-
 ;; cursor blink
 (blink-cursor-mode -1)
 
