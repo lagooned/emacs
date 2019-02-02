@@ -457,8 +457,8 @@
 (use-package telephone-line
   :init
   (require 'telephone-line-config)
-  (setq telephone-line-primary-left-separator 'telephone-line-abs-left
-        telephone-line-secondary-left-separator 'telephone-line-abs-left)
+  (setq telephone-line-primary-left-separator 'telephone-line-flat
+        telephone-line-secondary-left-separator 'telephone-line-flat)
   (defface telephone-line-elscreen
     '((t (:foreground "black" :background "grey70" :weight bold)))
     "Elscreen telephone-line segment theme.")
