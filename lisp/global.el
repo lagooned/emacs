@@ -180,8 +180,8 @@
 
 ;; defer jit font lock
 (setq jit-lock-defer-time nil
-      jit-lock-stealth-nice 0.1
-      jit-lock-stealth-time 0.2
+      jit-lock-stealth-nice 0.5
+      jit-lock-stealth-time 10
       jit-lock-stealth-verbose nil)
 
 ;; save history
