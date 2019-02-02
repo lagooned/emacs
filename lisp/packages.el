@@ -340,11 +340,7 @@
   :commands
   lorem-ipsum-insert-list
   lorem-ipsum-insert-sentences
-  Lorem-ipsum-insert-list
-  Lorem-ipsum-insert-paragraphs
-  lorem-ipsum-insert-paragraphs
-  Lorem-ipsum-insert-sentences
-  lorem-ipsum-use-default-bindings)
+  lorem-ipsum-insert-paragraphs)
 
 (use-package magit
   :commands magit-status
