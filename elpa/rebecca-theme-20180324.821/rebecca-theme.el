@@ -283,8 +283,8 @@
    `(magit-section-heading        ((,class (:foreground ,keyword :weight bold))))
    `(magit-section-highlight      ((,class (:background ,bg2))))
    ;; mode-line
-   `(mode-line ((,class (:foreground ,type :background ,rebecca))))
-   `(mode-line-inactive ((,class (:inherit mode-line :background ,bg1 :foreground ,comment :box ,comment))))
+   `(mode-line ((,class (:foreground ,type :background ,ninja))))
+   `(mode-line-inactive ((,class (:inherit mode-line :background ,bg1 :foreground ,comment))))
    `(mode-line-buffer-id ((,class (:foreground ,fg1))))
    ;; mu4e
    `(mu4e-cited-1-face ((,class (:foreground ,fg2))))
@@ -498,8 +498,8 @@
   (custom-theme-set-variables
    'rebecca
    `(ansi-color-names-vector [(,bg3 ,bg3) (,keyword ,bg3) (,type ,bg3)
-			      (,var ,var) (,func ,func) (,builtin ,builtin)
-			      (,str ,str) (,fg2 ,fg2)])))
+			                  (,var ,var) (,func ,func) (,builtin ,builtin)
+			                  (,str ,str) (,fg2 ,fg2)])))
 
 ;;;###autoload
 (when load-file-name
