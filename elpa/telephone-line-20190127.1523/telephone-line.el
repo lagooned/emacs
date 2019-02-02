@@ -41,7 +41,7 @@
   :group 'mode-line)
 
 (defface telephone-line-accent-active
-  '((t (:foreground "grey80" :background "grey25" :inherit mode-line)))
+  '((t (:foreground "grey80" :background "grey27" :inherit mode-line)))
   "Accent face for mode-line."
   :group 'telephone-line)
 
