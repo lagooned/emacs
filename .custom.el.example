@@ -8,6 +8,10 @@
       calendar-location-name "Houston, TX"
       erc-nick "jhd")
 
+;; set font on windows
+(when (eq system-type 'windows-nt)
+  (set-face-attribute 'default nil :family "Consolas" :height 100))
+
 ;; spelling binary
 (if (executable-find "aspell")
     (setq ispell-program-name "aspell"
