@@ -387,7 +387,6 @@
 (use-package projectile
   :diminish projectile-mode
   :init
-  (setq projectile-indexing-method 'alien)
   (setq projectile-switch-project-action 'projectile-dired)
   :config
   (projectile-mode 1))
