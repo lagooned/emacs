@@ -518,6 +518,8 @@ evil-mode state."
   "Setup Emacs Lisp Mode."
   (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
   (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+  (add-hook 'lisp-interaction-mode-hook 'rainbow-mode)
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun gmacs/lsp-java-enable ()

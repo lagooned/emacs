@@ -393,6 +393,10 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package rainbow-mode
+  :commands rainbow-mode
+  :diminish "rnb")
+
 (use-package rebecca-theme)
 
 (use-package recentf
