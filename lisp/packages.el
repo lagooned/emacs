@@ -133,9 +133,7 @@
 
 (use-package doom-themes
   :init
-  (setq doom-themes-enable-bold nil)
-  :config
-  (load-theme 'doom-vibrant t))
+  (setq doom-themes-enable-bold nil))
 
 (use-package ediff
   :init
@@ -394,6 +392,8 @@
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(use-package rebecca-theme)
 
 (use-package recentf
   :defer t

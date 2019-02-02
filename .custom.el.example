@@ -42,6 +42,10 @@
 ;; use basic grep
 (setq gmacs/force-basic-grep nil)
 
+;; load theme
+;; (load-theme 'doom-vibrant t)
+(load-theme 'rebecca t)
+
 ;; custom vars
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
