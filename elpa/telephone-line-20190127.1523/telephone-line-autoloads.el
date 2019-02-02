@@ -1,10 +1,13 @@
 ;;; telephone-line-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads nil "telephone-line" "telephone-line.el" (23053
-;;;;;;  14111 0 0))
+;;;### (autoloads nil "telephone-line" "telephone-line.el" (0 0 0
+;;;;;;  0))
 ;;; Generated autoloads from telephone-line.el
 
 (defvar telephone-line-mode nil "\
@@ -20,23 +23,46 @@ or call the function `telephone-line-mode'.")
 (autoload 'telephone-line-mode "telephone-line" "\
 Toggle telephone-line on or off.
 
+If called interactively, enable Telephone-Line mode if ARG is positive, and
+disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it
+if ARG is `toggle'; disable the mode otherwise.
+
 \(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "telephone-line" '("telephone-line-")))
 
 ;;;***
 
 ;;;### (autoloads nil "telephone-line-config" "telephone-line-config.el"
-;;;;;;  (23053 14111 0 0))
+;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from telephone-line-config.el
 
 (autoload 'telephone-line-evil-config "telephone-line-config" "\
-A simple default for using telephone-line with evil.
+Deprecated, just call (telephone-line-mode t) instead.
 
 \(fn)" nil nil)
 
 ;;;***
 
+;;;### (autoloads nil "telephone-line-segments" "telephone-line-segments.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from telephone-line-segments.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "telephone-line-segments" '("telephone-line-")))
+
+;;;***
+
+;;;### (autoloads nil "telephone-line-separators" "telephone-line-separators.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from telephone-line-separators.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "telephone-line-separators" '("telephone-line-")))
+
+;;;***
+
 ;;;### (autoloads nil "telephone-line-utils" "telephone-line-utils.el"
-;;;;;;  (23053 14111 0 0))
+;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from telephone-line-utils.el
 
 (autoload 'telephone-line-defsegment* "telephone-line-utils" "\
@@ -67,10 +93,11 @@ Return nil for blank/empty strings.
 
 \(fn STR &optional PREFORMATTED)" nil nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "telephone-line-utils" '("telephone-line-")))
+
 ;;;***
 
-;;;### (autoloads nil nil ("telephone-line-pkg.el" "telephone-line-segments.el"
-;;;;;;  "telephone-line-separators.el") (23053 14111 0 0))
+;;;### (autoloads nil nil ("telephone-line-pkg.el") (0 0 0 0))
 
 ;;;***
 
@@ -78,5 +105,6 @@ Return nil for blank/empty strings.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; telephone-line-autoloads.el ends here
