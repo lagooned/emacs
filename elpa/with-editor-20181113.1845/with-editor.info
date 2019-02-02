@@ -12,6 +12,7 @@ with-editor.texi.
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
      General Public License for more details.
+
 INFO-DIR-SECTION Emacs
 START-INFO-DIR-ENTRY
 * With-Editor: (with-editor). Using the Emacsclient as $EDITOR.
@@ -38,7 +39,7 @@ library is made available as a separate package.  It also defines some
 additional functionality which makes it useful even for end-users, who
 don’t use Magit or another package which uses it internally.
 
-This manual is for With-Editor version 2.7.4.
+This manual is for With-Editor version 2.8.0 (v2.8.0-2-g87c96b3+1).
 
      Copyright (C) 2015-2018 Jonas Bernoulli <jonas@bernoul.li>
 
@@ -170,15 +171,18 @@ it receives a signal.
      performant implementation:
 
           "sh -c '\
-          echo \"WITH-EDITOR: $$ OPEN $0\"; \
+          echo \"WITH-EDITOR: $$ OPEN $0 IN $(pwd)\"; \
           trap \"exit 0\" USR1; \
           trap \"exit 1\" USR2; \
           while true; do sleep 1; done'"
 
-     This leads to a delay of up to a second.  The delay can be
-     shortened by replacing ‘sleep 1’ with ‘sleep 0.01’, or if your
-     implementation does not support floats, then by using ‘nanosleep
-     0.01’ instead.
+     Note that the unit seperator character () right after the file name
+     ($0) is required.
+
+     Also note that using this alternative implementation leads to a
+     delay of up to a second.  The delay can be shortened by replacing
+     ‘sleep 1’ with ‘sleep 0.01’, or if your implementation does not
+     support floats, then by using ‘nanosleep’ instead.
 
 
 File: with-editor.info,  Node: Using With-Editor commands,  Prev: Configuring With-Editor,  Up: Using the With-Editor package
@@ -204,10 +208,9 @@ for an alternative environment variable such as ‘$GIT_EDITOR’.
 
  -- Command: with-editor-shell-command
 
-     This command is like ‘async-shell-command’, but it runs the shell
-     command with the current Emacs instance exported as ‘$EDITOR’.
-     This only has an effect if the shell command is run asynchronously,
-     i.e.  when the command ends with ‘&’.
+     This command is like ‘shell-command’, but if the shell command ends
+     with ‘&’ and is therefore run asynchronously, then the current
+     Emacs instance is exported as ‘$EDITOR’.
 
    To always use these variants add this to you init file:
 
@@ -280,10 +283,19 @@ package::.
      to call home to the current Emacs instance when they require that
      the user edits a file.
 
-     This is essentially done by establishing a local binding for
-     ‘process-environment’ and changing the value of the ‘$EDITOR’
-     environment variable in that scope.  This affects all asynchronous
-     processes started by forms (dynamically) inside BODY.
+     This is done by establishing a local binding for
+     ‘process-environment’ and changing the value of the ‘EDITOR’
+     environment variable in that scope.  This affects all
+     (asynchronous) processes started by forms (dynamically) inside
+     BODY.
+
+     If BODY begins with a literal string, then that variable is set
+     instead of ‘EDITOR’.
+
+ -- Macro: with-editor envvar &rest body
+
+     This macro is like ‘with-editor’ instead that the ENVVAR argument
+     is required and that it is evaluated at run-time.
 
  -- Function: with-editor-set-process-filter process filter
 
@@ -316,12 +328,12 @@ Emacs and what is the output of ‘M-x with-editor-debug RET’.
 
 
 Tag Table:
-Node: Top772
-Node: Using the With-Editor package2512
-Node: Configuring With-Editor3098
-Node: Using With-Editor commands7495
-Node: Using With-Editor as a library10758
-Node: Debugging12454
+Node: Top773
+Node: Using the With-Editor package2535
+Node: Configuring With-Editor3121
+Node: Using With-Editor commands7670
+Node: Using With-Editor as a library10865
+Node: Debugging12828
 
 End Tag Table
 
