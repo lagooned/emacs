@@ -14,6 +14,11 @@
 Completion starts automatically, depending on the values
 `company-idle-delay' and `company-minimum-prefix-length'.
 
+If called interactively, enable Company mode if ARG is positive, and
+disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it
+if ARG is `toggle'; disable the mode otherwise.
+
 Completion can be controlled with the commands:
 `company-complete-common', `company-complete-selection', `company-complete',
 `company-select-next', `company-select-previous'.  If these commands are
