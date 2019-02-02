@@ -77,7 +77,7 @@
    #b00000000])
 
 ;; let text breath
-(fringe-mode 20)
+(fringe-mode (frame-char-width))
 
 ;; decouple window and minibuffer fringes
 (add-hook 'after-init-hook #'gmacs/minibuffer-fringe-setup)
