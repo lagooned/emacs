@@ -4,7 +4,7 @@
 
 ;; Author: Adam Niederer <adam.niederer@gmail.com>
 ;; URL: http://github.com/AdamNiederer/ssass-mode
-;; Package-Version: 20180428.1339
+;; Package-Version: 20180428.2039
 ;; Version: 0.2.0
 ;; Keywords: languages sass
 ;; Package-Requires: ((emacs "24.3"))
