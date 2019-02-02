@@ -4,7 +4,7 @@
 
 ;; Author: Lars Tveito <larstvei@ifi.uio.no>
 ;; URL: http://github.com/larstvei/try
-;; Package-Version: 20170226.805
+;; Package-Version: 20181204.236
 ;; Created: 13th November 2014
 ;; Keywords: packages
 ;; Version: 0.0.1
@@ -37,9 +37,6 @@
 (require 'package)
 (require 'url)
 
-(defvar try-tmp-dir (make-temp-file "try" t)
-  "A temporary directory for storing packages.")
-
 (defun try-raw-link-p (url)
   "Returns non-nil if this looks like an URL to a .el file."
   (string-match-p "[^:]*://\\([^?\r\n]+\\).*\.el?$" url))
@@ -69,10 +66,10 @@
     (completing-read "url or package: " pkgs)))
 
 ;;;###autoload
-(defun try-and-refresh ()
+(defun try-and-refresh (&optional url-or-package)
   "Refreshes package-list before calling `try'."
   (interactive)
-  (package-refresh-contents) (try))
+  (package-refresh-contents) (try url-or-package))
 
 ;;;###autoload
 (defun try (&optional url-or-package)
@@ -88,11 +85,12 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
          (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
           ((try-package-exists-p package-symbol)
-           (let ((package-user-dir try-tmp-dir)
-                 (package-alist nil))
+           (let* ((tmp-dir (make-temp-file (concat url-or-package "-") t))
+                  (package-user-dir tmp-dir)
+                  (package-alist nil))
              (if (version< emacs-version "25.1")
                  (package-install package-symbol)
-                 (package-install package-symbol 'dont-select))
+               (package-install package-symbol 'dont-select))
              (message "Trying %s!" url-or-package)))
           (t (message (concat "Couldn't find a sensible way to try this. "
                               "Try running `package-refresh-contents'!"))))))
