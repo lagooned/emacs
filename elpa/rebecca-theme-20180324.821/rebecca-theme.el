@@ -26,7 +26,7 @@
 (deftheme rebecca "A purple, dark theme.")
 
 (let* ((class '((class color) (min-colors 89)))
-       (rebecca "#663399")
+       (rebecca "#773399")
        (ninja   "#333353")
 
        (base00 (if (display-graphic-p) "#292a44" nil)) ;; default background
@@ -38,9 +38,9 @@
        (base06 (if (display-graphic-p) "#ccccff" "#afafff")) ;; light foreground
        (base07 (if (display-graphic-p) "#53495d" "#4e4e4e")) ;; light background
        (base08 (if (display-graphic-p) "#a0a0c5" "#afafd7")) ;; variables
-       (base09 (if (display-graphic-p) "#efe4a1" "#ffff87")) ;; constants
+       (base09 (if (display-graphic-p) "#7777ff" "#8888ff")) ;; constants
        (base0A (if (display-graphic-p) "#ae81ff" "#af5fff")) ;; search text background
-       (base0B (if (display-graphic-p) "#6dfedf" "#87ffd7")) ;; strings
+       (base0B (if (display-graphic-p) "#7dfedf" "#87ffd7")) ;; strings
        (base0C (if (display-graphic-p) "#8eaee0" "#87afd7")) ;; regex, escaped chars
        (base0D (if (display-graphic-p) "#2de0a7" "#5fd7af")) ;; functions
        (base0E (if (display-graphic-p) "#7aa5ff" "#5fafff")) ;; keywords
@@ -283,7 +283,7 @@
    `(magit-section-heading        ((,class (:foreground ,keyword :weight bold))))
    `(magit-section-highlight      ((,class (:background ,bg2))))
    ;; mode-line
-   `(mode-line ((,class (:foreground ,type :background ,ninja))))
+   `(mode-line ((,class (:foreground ,fg1 :background ,ninja))))
    `(mode-line-inactive ((,class (:inherit mode-line :background ,bg1 :foreground ,comment))))
    `(mode-line-buffer-id ((,class (:foreground ,fg1))))
    ;; mu4e
