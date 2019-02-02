@@ -4,8 +4,8 @@
 
 ;; Author: Christopher Wellons <wellons@nullprogram.com>
 ;; URL: https://github.com/skeeto/emacs-http-server
-;; Package-Version: 20171004.938
-;; Version: 1.4.6
+;; Package-Version: 20190110.1505
+;; Version: 1.5.1
 ;; Package-Requires: ((cl-lib "0.3"))
 
 ;;; Commentary:
@@ -96,6 +96,12 @@
 
 ;;; History:
 
+;; Version 1.5.1: improvements
+;;   * Add `httpd-running-p'
+;;   * Properly handle "Connection: close" and HTTP/1.0
+;; Version 1.5.0: improvements
+;;   * Drastically improved performance for large requests
+;;   * More HTTP status codes
 ;; Version 1.4.6: fixes
 ;;   * Added httpd-serve-directory
 ;;   * Fix some encoding issues
@@ -170,6 +176,11 @@
 
 (defcustom httpd-servlets t
   "Enable servlets."
+  :group 'simple-httpd
+  :type 'boolean)
+
+(defcustom httpd-show-backtrace-when-error nil
+  "If true, show backtrace on error page."
   :group 'simple-httpd
   :type 'boolean)
 
@@ -354,6 +365,11 @@ instance per Emacs instance."
     (run-hooks 'httpd-stop-hook)))
 
 ;;;###autoload
+(defun httpd-running-p ()
+  "Return non-nil if the simple-httpd server is running."
+  (not (null (process-status "httpd"))))
+
+;;;###autoload
 (defun httpd-serve-directory (directory)
   "Start the web server with given `directory' as `httpd-root'."
   (interactive "DServe directory: \n")
@@ -395,6 +411,11 @@ emacs -Q -batch -l simple-httpd.elc -f httpd-batch-start"
 
 ;; Networking code
 
+(defun httpd--connection-close-p (request)
+  "Return non-nil if the client requested \"connection: close\"."
+  (or (equal '("close") (cdr (assoc "Connection" request)))
+      (equal '("HTTP/1.0") (cddr (assoc "GET" request)))))
+
 (defun httpd--filter (proc chunk)
   "Runs each time client makes a request."
   (with-current-buffer (process-get proc :request-buffer)
@@ -428,7 +449,9 @@ emacs -Q -batch -l simple-httpd.elc -f httpd-batch-start"
                   (httpd--error-safe proc 404)
                 (condition-case error-case
                     (funcall servlet proc uri-path uri-query request)
-                  (error (httpd--error-safe proc 500 error-case)))))))))))
+                  (error (httpd--error-safe proc 500 error-case))))
+              (when (httpd--connection-close-p request)
+                (process-send-eof proc)))))))))
 
 (defun httpd--log (server proc message)
   "Runs each time a new client connects."
@@ -677,6 +700,23 @@ element is the fragment."
     (push (if p1 (httpd-parse-args (substring uri (1+ p1) p2))) retval)
     (push (substring uri 0 (or p1 p2)) retval)))
 
+(defun httpd-escape-html-buffer ()
+  "Escape current buffer contents to be safe for inserting into HTML."
+  (setf (point) (point-min))
+  (while (search-forward-regexp "[<>&]" nil t)
+    (replace-match
+     (cl-case (aref (match-string 0) 0)
+       (?< "&lt;")
+       (?> "&gt;")
+       (?& "&amp;")))))
+
+(defun httpd-escape-html (string)
+  "Escape STRING so that it's safe to insert into an HTML document."
+  (with-temp-buffer
+    (insert string)
+    (httpd-escape-html-buffer)
+    (buffer-string)))
+
 ;; Path handling
 
 (defun httpd-status (path)
@@ -838,8 +878,21 @@ optionally inserting object INFO into page. If PROC is T use the
   (httpd-log `(error ,status ,info))
   (with-temp-buffer
     (let ((html (or (cdr (assq status httpd-html)) ""))
-          (erro (url-insert-entities-in-string (format "error: %s"  info))))
-      (insert (format html (if info erro ""))))
+          (contents
+           (if (not info)
+               ""
+             (with-temp-buffer
+               (let ((standard-output (current-buffer)))
+                 (insert "error: ")
+                 (princ info)
+                 (insert "\n")
+                 (when httpd-show-backtrace-when-error
+                   (insert "backtrace: ")
+                   (princ (backtrace))
+                   (insert "\n"))
+                 (httpd-escape-html-buffer)
+                 (buffer-string))))))
+      (insert (format html contents)))
     (httpd-send-header proc "text/html" status)))
 
 (defun httpd--error-safe (&rest args)
