@@ -218,7 +218,8 @@
 
 (use-package exec-path-from-shell)
 
-(use-package fireplace)
+(use-package fireplace
+  :commands fireplace)
 
 (use-package fix-word
   :commands
