@@ -17,7 +17,7 @@
 (if (display-graphic-p) (menu-bar-mode -1))
 
 ;; telephone-line height
-(setq telephone-line-height (+ 10 (frame-char-height)))
+(setq telephone-line-height (+ (/ (frame-char-height) 2) (frame-char-height)))
 
 ;; icon in title bar
 (setq ns-use-proxy-icon nil)
