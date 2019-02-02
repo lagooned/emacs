@@ -485,8 +485,8 @@ Return DEFAULT if PROP is not in H."
 (defun hydra-key-doc-function-default (key key-width doc doc-width)
   "Doc"
   (cond
-   ((equal key " ") (format (format "%%-%ds" (+ 3 key-width doc-width)) doc))
-   (t (format (format "%%%ds: %%%ds" key-width (- -1 doc-width)) key doc))))
+    ((equal key " ") (format (format "%%-%ds" (+ 3 key-width doc-width)) doc))
+    (t (format (format "%%%ds: %%%ds" key-width (- -1 doc-width)) key doc))))
 
 (defun hydra--to-string (x)
   (if (stringp x)
@@ -559,7 +559,7 @@ BODY, and HEADS are parameters to `defhydra'."
          (heads-w-col (cl-remove-if-not (lambda (heads) (hydra--head-property (nth 0 heads) :column)) sorted-heads))
          (heads-wo-col (cl-remove-if (lambda (heads) (hydra--head-property (nth 0 heads) :column)) sorted-heads)))
     (concat (when heads-w-col
-              (concat "\n" (hydra--hint-from-matrix body (hydra--generate-matrix heads-w-col))))
+              (hydra--hint-from-matrix body (hydra--generate-matrix heads-w-col)))
             (when heads-wo-col
               (hydra--hint-heads-wocol body (car heads-wo-col))))))
 
@@ -646,17 +646,18 @@ The expressions can be auto-expanded according to NAME."
                     ""
                   (hydra--hint body heads)))
           (start 0)
+          (inner-regex (format "\\(%s\\)\\(%s\\)" hydra-width-spec-regex hydra-key-regex))
           varlist
           offset)
       (while (setq start
                    (string-match
                     (format
-                     "\\(?:%%\\( ?-?[0-9]*s?\\)\\(`[a-z-A-Z/0-9]+\\|(\\)\\)\\|\\(?:[_?]\\(%s\\)\\(%s\\)[_?]\\)"
-                     hydra-width-spec-regex
-                     hydra-key-regex)
+                     "\\(?:%%\\( ?-?[0-9]*s?\\)\\(`[a-z-A-Z/0-9]+\\|(\\)\\)\\|\\(?:_%s_\\)\\|\\(?:[?]%s[?]\\)"
+                     inner-regex
+                     inner-regex)
                     docstring start))
         (cond ((eq ?? (aref (match-string 0 docstring) 0))
-               (let* ((key (match-string 4 docstring))
+               (let* ((key (match-string 6 docstring))
                       (head (assoc key heads)))
                  (if head
                      (progn
@@ -714,17 +715,27 @@ The expressions can be auto-expanded according to NAME."
                         (substring docstring 0 start)
                         "%" spec
                         (substring docstring (+ start offset 1 lspec varp))))))))
-      (if (eq ?\n (aref docstring 0))
-          `(concat (format ,(substring docstring 1) ,@(nreverse varlist))
-                   ,rest)
-        (let ((r `(replace-regexp-in-string
-                   " +$" ""
-                   (concat ,docstring ": "
-                           (replace-regexp-in-string
-                            "\\(%\\)" "\\1\\1" ,rest)))))
-          (if (stringp rest)
-              `(format ,(eval r))
-            `(format ,r)))))))
+      (cond
+        ((string= docstring "")
+         rest)
+        ((eq ?\n (aref docstring 0))
+         `(concat (format ,(substring docstring 1) ,@(nreverse varlist))
+                  ,rest))
+        (t
+         (let ((r `(replace-regexp-in-string
+                    " +$" ""
+                    (concat ,docstring
+                            ,(cond ((string-match-p "\\`\n" rest)
+                                    ":")
+                                   ((string-match-p "\n" rest)
+                                    ":\n")
+                                   (t
+                                    ": "))
+                            (replace-regexp-in-string
+                             "\\(%\\)" "\\1\\1" ,rest)))))
+           (if (stringp rest)
+               `(format ,(eval r))
+             `(format ,r))))))))
 
 (defun hydra--complain (format-string &rest args)
   "Forward to (`message' FORMAT-STRING ARGS) unless `hydra-verbose' is nil."
@@ -738,15 +749,15 @@ BODY-KEY is the body key binding.
 BODY-NAME is the symbol that identifies the Hydra.
 HEADS is a list of heads."
   (format
-   "Create a hydra with %s body and the heads:\n\n%s\n\n%s"
-   (if body-key
-       (format "a \"%s\"" body-key)
-     "no")
+   "The heads for the associated hydra are:\n\n%s\n\n%s%s."
    (mapconcat
     (lambda (x)
       (format "\"%s\":    `%S'" (car x) (cadr x)))
     heads ",\n")
-   (format "The body can be accessed via `%S'." body-name)))
+   (format "The body can be accessed via `%S'" body-name)
+   (if body-key
+       (format ", which is bound to \"%s\"" body-key)
+     "")))
 
 (defun hydra--call-interactively-remap-maybe (cmd)
   "`call-interactively' the given CMD or its remapped equivalent.
@@ -783,8 +794,10 @@ BODY-AFTER-EXIT is added to the end of the wrapper."
                (hydra--make-callable
                 (cadr head))))
         (doc (if (car head)
-                 (format "%s\n\nCall the head: `%S'." doc (cadr head))
-               doc))
+                 (format "Call the head `%S' in the \"%s\" hydra.\n\n%s"
+                         (cadr head) name doc)
+               (format "Call the body in the \"%s\" hydra.\n\n%s"
+                       name doc)))
         (hint (intern (format "%S/hint" name)))
         (body-foreign-keys (hydra--body-foreign-keys body))
         (body-timeout (plist-get body :timeout))
@@ -792,6 +805,7 @@ BODY-AFTER-EXIT is added to the end of the wrapper."
     `(defun ,cmd-name ()
        ,doc
        (interactive)
+       (require 'hydra)
        (hydra-default-pre)
        ,@(when body-pre (list body-pre))
        ,@(if (hydra--head-property head :exit)
@@ -1044,21 +1058,21 @@ Each head is decorated with 2 new properties max-doc-len and max-key-len
 representing the maximum dimension of their owning group.
  Every heads-group have equal length by adding padding heads where applicable."
   (when heads-groups
-    (cl-loop for heads-group in (hydra--pad-heads heads-groups '(" " nil " " :exit t))
-             for column-name = (hydra--head-property (nth 0 heads-group) :column)
-             for max-key-len = (apply #'max (mapcar (lambda (x) (length (car x))) heads-group))
-             for max-doc-len = (apply #'max
-                                      (length column-name)
-                                      (mapcar (lambda (x) (length (hydra--to-string (nth 2 x)))) heads-group))
-             for header-virtual-head = `(" " nil ,column-name :column ,column-name :exit t)
-             for separator-virtual-head = `(" " nil ,(make-string (+ 2 max-doc-len max-key-len) ?-) :column ,column-name :exit t)
-             for decorated-heads = (copy-tree (apply 'list header-virtual-head separator-virtual-head heads-group))
-             collect (mapcar (lambda (it)
-                               (hydra--head-set-property it :max-key-len max-key-len)
-                               (hydra--head-set-property it :max-doc-len max-doc-len))
-                             decorated-heads)
-             into decorated-heads-matrix
-             finally return decorated-heads-matrix)))
+    (let ((res nil))
+      (dolist (heads-group (hydra--pad-heads heads-groups '(" " nil " " :exit t)))
+        (let* ((column-name (hydra--head-property (nth 0 heads-group) :column))
+               (max-key-len (apply #'max (mapcar (lambda (x) (length (car x))) heads-group)))
+               (max-doc-len (apply #'max
+                                   (length column-name)
+                                   (mapcar (lambda (x) (length (hydra--to-string (nth 2 x)))) heads-group)))
+               (header-virtual-head `(" " nil ,column-name :column ,column-name :exit t))
+               (separator-virtual-head `(" " nil ,(make-string (+ 2 max-doc-len max-key-len) ?-) :column ,column-name :exit t))
+               (decorated-heads (copy-tree (apply 'list header-virtual-head separator-virtual-head heads-group))))
+          (push (mapcar (lambda (it)
+                          (hydra--head-set-property it :max-key-len max-key-len)
+                          (hydra--head-set-property it :max-doc-len max-doc-len))
+                        decorated-heads) res)))
+      (nreverse res))))
 
 (defun hydra--hint-from-matrix (body heads-matrix)
   "Generate a formated table-style docstring according to BODY and HEADS-MATRIX.
@@ -1066,21 +1080,26 @@ HEADS-MATRIX is expected to be a list of heads with following features:
 Each heads must have the same length
 Each head must have a property max-key-len and max-doc-len."
   (when heads-matrix
-    (cl-loop with first-heads-col = (nth 0 heads-matrix)
-             with last-row-index = (- (length first-heads-col) 1)
-             for row-index from 0 to last-row-index
-             for heads-in-row = (mapcar (lambda (heads) (nth row-index heads)) heads-matrix)
-             concat (concat
-                     (replace-regexp-in-string "\s+$" ""
-                                               (mapconcat (lambda (head)
-                                                            (funcall hydra-key-doc-function
-                                                                     (hydra-fontify-head head body) ;; key
-                                                                     (hydra--head-property head :max-key-len)
-                                                                     (nth 2 head) ;; doc
-                                                                     (hydra--head-property head :max-doc-len)))
-                                                          heads-in-row "| ")) "\n")
-             into matrix-image
-             finally return matrix-image)))
+    (let* ((first-heads-col (nth 0 heads-matrix))
+           (last-row-index (- (length first-heads-col) 1))
+           (lines nil))
+      (dolist (row-index (number-sequence 0 last-row-index))
+        (let ((heads-in-row (mapcar
+                             (lambda (heads) (nth row-index heads))
+                             heads-matrix)))
+          (push (replace-regexp-in-string
+                 "\s+$" ""
+                 (mapconcat (lambda (head)
+                              (funcall hydra-key-doc-function
+                                       (hydra-fontify-head head body) ;; key
+                                       (let ((n (hydra--head-property head :max-key-len)))
+                                         (+ n (cl-count ?% (car head))))
+                                       (nth 2 head) ;; doc
+                                       (hydra--head-property head :max-doc-len)))
+                            heads-in-row "| "))
+                lines)))
+      (concat (mapconcat #'identity (nreverse lines) "\n") "\n"))))
+
 ;; previous functions dealt with automatic docstring table generation from :column head property
 
 (defun hydra-idle-message (secs hint name)
@@ -1170,15 +1189,17 @@ result of `defhydra'."
          (setq docstring (concat "\n" (eval docstring))))
         (t
          (setq heads (cons docstring heads))
-         (setq docstring "hydra")))
+         (setq docstring "")))
   (when (keywordp (car body))
     (setq body (cons nil (cons nil body))))
   (condition-case-unless-debug err
-      (let* ((keymap (copy-keymap hydra-base-map))
-             (keymap-name (intern (format "%S/keymap" name)))
+      (let* ((keymap-name (intern (format "%S/keymap" name)))
              (body-name (intern (format "%S/body" name)))
              (body-key (cadr body))
              (body-plist (cddr body))
+             (base-map (or (eval (plist-get body-plist :base-map))
+                           hydra-base-map))
+             (keymap (copy-keymap base-map))
              (body-map (or (car body)
                            (plist-get body-plist :bind)))
              (body-pre (plist-get body-plist :pre))
