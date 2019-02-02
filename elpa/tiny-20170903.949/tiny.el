@@ -4,7 +4,7 @@
 
 ;; Author: Oleh Krehel <ohwoeowho@gmail.com>
 ;; URL: https://github.com/abo-abo/tiny
-;; Package-Version: 20170903.249
+;; Package-Version: 20170903.949
 ;; Version: 0.2.1
 ;; Keywords: convenience
 

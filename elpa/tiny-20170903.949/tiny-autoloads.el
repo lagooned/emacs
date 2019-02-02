@@ -1,9 +1,12 @@
 ;;; tiny-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads nil "tiny" "tiny.el" (23325 57573 0 0))
+;;;### (autoloads nil "tiny" "tiny.el" (0 0 0 0))
 ;;; Generated autoloads from tiny.el
 
 (autoload 'tiny-expand "tiny" "\
@@ -40,11 +43,14 @@ Usage: Call TINY-HELPER, ↵↵↵↵↵            -> 0 1 2 3 4 5 6 7 8 9
 
 \(fn &optional END-VAL BEGIN-VAL SEP OP FMT)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tiny" '("tiny-")))
+
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; tiny-autoloads.el ends here
