@@ -135,6 +135,8 @@
   :init
   (setq doom-themes-enable-bold nil))
 
+(use-package dracula-theme)
+
 (use-package ediff
   :init
   (setq ediff-diff-options "-w"
