@@ -128,9 +128,6 @@
 ;; no scroll bar
 (scroll-bar-mode -1)
 
-;; truncate prog mode
-(add-hook 'prog-mode-hook #'gmacs/enable-truncate-lines-no-message)
-
 ;; wrap words
 (setq-default word-wrap t)
 
