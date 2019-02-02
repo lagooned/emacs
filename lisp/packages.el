@@ -389,7 +389,7 @@
   :init
   (setq projectile-switch-project-action 'projectile-dired)
   :config
-  (projectile-mode 1))
+  (add-hook 'emacs-startup-hook (lambda () (projectile-mode 1))))
 
 (use-package rainbow-delimiters
   :config
