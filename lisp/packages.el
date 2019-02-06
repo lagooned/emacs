@@ -336,7 +336,7 @@
   :commands linum-relative-mode
   :diminish linum-relative-mode
   :init
-  (setq linum-relative-format "%5s"
+  (setq linum-relative-format "%5s "
         linum-relative-current-symbol ""))
 
 (use-package lorem-ipsum
