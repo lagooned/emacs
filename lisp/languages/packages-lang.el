@@ -51,6 +51,8 @@
         flycheck-highlighting-mode 'lines
         flycheck-emacs-lisp-load-path 'inherit))
 
+(use-package groovy-mode)
+
 (use-package xref
   :ensure nil
   :bind
