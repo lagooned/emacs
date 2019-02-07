@@ -93,6 +93,8 @@
   (dap-mode 1)
   (dap-ui-mode 1))
 
+(use-package yaml-mode)
+
 (load "elisp-lang")
 (load "php-lang")
 (load "python-lang")
