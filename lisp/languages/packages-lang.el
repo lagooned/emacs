@@ -98,6 +98,10 @@
   :init
   (setq nxml-child-indent 4))
 
+(use-package sgml-mode
+  :init
+  (setq sgml-basic-offset 4))
+
 (use-package yaml-mode)
 
 (load "elisp-lang")

@@ -432,10 +432,6 @@
    'auto-mode-alist
    '("\\.rest\\'" . restclient-mode)))
 
-(use-package sgml-mode
-  :init
-  (setq sgml-basic-offset 4))
-
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode "sp"
