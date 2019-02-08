@@ -246,11 +246,13 @@
   :commands git-gutter-mode
   :diminish git-gutter-mode "gg"
   :init
-  (add-hook
-   'prog-mode-hook
-   (lambda () (git-gutter-mode 1)))
+  (when (not (eq system-type 'windows-nt))
+    (add-hook
+     'prog-mode-hook
+     (lambda () (git-gutter-mode 1))))
   :config
   (require 'git-gutter-fringe)
+  (setq git-gutter:update-interval 1)
   (set-face-foreground 'git-gutter-fr:modified "darkorange")
   (set-face-foreground 'git-gutter-fr:added    "darkorange")
   (set-face-foreground 'git-gutter-fr:deleted  "darkorange")

@@ -35,9 +35,6 @@
 (when (not (eq system-type 'windows-nt))
   (exec-path-from-shell-initialize))
 
-;; git gutter interval
-(setq git-gutter:update-interval 1)
-
 ;; enable full screen
 (if (not (frame-parameter nil 'fullscreen))
     (toggle-frame-fullscreen))
