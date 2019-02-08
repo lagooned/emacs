@@ -366,11 +366,6 @@
   (add-hook 'multiple-cursors-mode-enabled-hook #'gmacs/mc-evil-switch-to-emacs-state)
   (add-hook 'multiple-cursors-mode-disabled-hook #'gmacs/mc-evil-back-to-previous-state))
 
-(use-package nxml-mode
-  :ensure nil
-  :init
-  (setq nxml-child-indent 4))
-
 (use-package org
   :commands
   org-mode
