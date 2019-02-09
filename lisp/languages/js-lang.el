@@ -25,6 +25,9 @@
 ;;; Code:
 
 (use-package rjsx-mode
+  :commands
+  rjsx-minor-mode
+  rjsx-mode
   :init
   (add-hook 'js2-mode-hook 'rjsx-minor-mode))
 
