@@ -573,6 +573,12 @@
   :config
   (setq whitespace-line-column 100))
 
+(use-package wdired
+  :ensure nil
+  :init
+  (setq wdired-allow-to-change-permissions t
+        wdired-allow-to-redirect-linkst t))
+
 (use-package wgrep)
 
 (use-package yasnippet
