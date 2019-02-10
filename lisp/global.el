@@ -93,6 +93,15 @@
 
 (add-hook 'before-save-hook 'gmacs/force-buffer-backup)
 
+;; open fundamental mode when there is a long line
+(add-hook
+ 'prog-mode-hook
+ (lambda ()
+   (if (string-match-p
+        (make-string 1500 ?.)
+        (buffer-substring-no-properties
+         (point-min) (point-max)))
+       (fundamental-mode))))
 
 ;; auto save to temp
 (setq auto-save-file-name-transforms
