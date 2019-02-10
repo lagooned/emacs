@@ -35,18 +35,6 @@ set by (line-pixel-height)")
 to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
-(defvar gmacs/large-file-modes-ignore-list
-  '(archive-mode
-    tar-mode
-    jka-compr
-    git-commit-mode
-    image-mode
-    doc-view-mode
-    doc-view-mode-maybe
-    ebrowse-tree-mode
-    pdf-view-mode)
-  "Major modes that `gmacs/check-large-file' will ignore.")
-
 (defvar gmacs/eshell-message "Gshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 
