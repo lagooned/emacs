@@ -47,8 +47,8 @@
 
 ;; load theme
 ;; (load-theme 'doom-vibrant t)
-;; (load-theme 'rebecca t)
-(load-theme 'dracula t)
+(load-theme 'rebecca t)
+;; (load-theme 'dracula t)
 
 ;; custom vars
 (custom-set-variables
