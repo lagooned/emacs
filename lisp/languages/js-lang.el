@@ -29,7 +29,9 @@
   rjsx-minor-mode
   rjsx-mode
   :init
-  (add-hook 'js2-mode-hook 'rjsx-minor-mode))
+  (add-hook 'js2-mode-hook 'rjsx-minor-mode)
+  (add-hook 'js2-mode-hook 'emmet-mode)
+  (add-hook 'js2-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t))))
 
 (use-package js2-mode
   :commands js2-mode
