@@ -37,8 +37,9 @@
   :ensure nil
   :commands prog-mode
   :init
+  (add-hook 'prog-mode-hook #'gmacs/enable-fundamental-mode-if-long-line)
   (add-hook 'prog-mode-hook #'gmacs/enable-truncate-lines-no-message)
-  (add-hook 'prog-mode-hook 'gmacs/enable-company-mode))
+  (add-hook 'prog-mode-hook #'gmacs/enable-company-mode))
 
 (use-package flycheck
   :diminish flycheck-mode "flyc"

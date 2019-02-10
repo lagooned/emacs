@@ -719,6 +719,13 @@ START and END are buffer positions."
 (defun gmacs/evil-command-window-hook ()
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 
+(defun gmacs/enable-fundamental-mode-if-long-line ()
+  (if (string-match-p
+       (make-string 1500 ?.)
+       (buffer-substring-no-properties
+        (point-min) (point-max)))
+      (fundamental-mode)))
+
 (provide 'functions)
 ;;; functions.el ends here
 
