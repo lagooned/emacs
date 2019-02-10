@@ -123,6 +123,7 @@
   (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil)
   (add-hook 'dired-mode-hook #'gmacs/rename-dired-buffer)
+  (add-hook 'dired-mode-hook #'auto-revert-mode)
   (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
 (use-package dired-x
