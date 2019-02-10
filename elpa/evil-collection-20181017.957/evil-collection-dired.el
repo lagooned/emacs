@@ -123,6 +123,8 @@
     "gf" 'dired-find-file
     (kbd "C-m") 'dired-find-file
     (kbd "C-j") 'dired-find-file-other-window
+    (kbd "C-i") 'evil-jump-forward
+    (kbd "C-o") 'evil-jump-backward
     "gr" 'revert-buffer
     "i" 'dired-toggle-read-only
     "I" 'dired-maybe-insert-subdir

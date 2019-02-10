@@ -232,6 +232,9 @@ involved re-emit it."
 (if (not (member 'evil-ex-history savehist-additional-variables))
     (push 'evil-ex-history savehist-additional-variables))
 
+;; add dired buffers to jumplist
+(evil-add-command-properties #'dired-find-file :jump t)
+
 (provide 'evil-config)
 
 ;;; evil-config.el ends here

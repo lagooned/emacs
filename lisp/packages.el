@@ -121,6 +121,7 @@
   :ensure nil
   :init
   (put 'dired-find-alternate-file 'disabled nil)
+  (add-hook 'dired-mode-hook #'gmacs/rename-dired-buffer)
   (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
 (use-package dired-x
@@ -201,6 +202,8 @@
         evil-motion-state-message nil
         evil-insert-state-message nil
         evil-operator-state-message nil)
+  (setq evil--jumps-buffer-targets
+        "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
   (let ((height (eval gmacs/evil-base-cursor-height)))
     (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
