@@ -72,6 +72,7 @@
                (vertical-border :foreground ,bg2)
                (warning :foreground ,warning)
                (whitespace-trailing :inherit trailing-whitespace)
+               (whitespace-empty :foreground ,bg1)
                (header-line :background ,bg1)
                ;; syntax
                (font-lock-builtin-face :foreground ,builtin)
