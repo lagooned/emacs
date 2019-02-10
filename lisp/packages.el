@@ -120,6 +120,7 @@
   :commands dired
   :ensure nil
   :init
+  (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil)
   (add-hook 'dired-mode-hook #'gmacs/rename-dired-buffer)
   (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message))
