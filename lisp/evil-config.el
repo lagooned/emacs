@@ -116,6 +116,7 @@
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "gr") 'revert-buffer)
 (define-key evil-normal-state-map (kbd "M-t") 'transpose-words)
+(define-key evil-normal-state-map (kbd "M-:") 'evil-command-window-ex)
 
 ;; visual mode
 (define-key evil-visual-state-map (kbd "$") 'evil-end-of-visual-line)
@@ -223,6 +224,9 @@ involved re-emit it."
 
 ;; company abort on exit insert mode
 (add-hook 'evil-insert-state-exit-hook 'gmacs/evil-company-abort-on-insert-leave)
+
+;; company abort on exit insert mode
+(add-hook 'evil-command-window-mode-hook #'gmacs/evil-command-window-hook)
 
 ;; add evil-ex-history to .savehist file
 (if (not (member 'evil-ex-history savehist-additional-variables))

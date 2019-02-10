@@ -734,6 +734,8 @@ START and END are buffer positions."
                                          :foreground (css--contrasty-color color))))))))))))
       extended-region)))
 
+(defun gmacs/evil-command-window-hook ()
+  (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 
 (provide 'functions)
 ;;; functions.el ends here
