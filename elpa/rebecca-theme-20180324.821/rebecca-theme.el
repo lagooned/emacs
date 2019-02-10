@@ -113,6 +113,7 @@
    `(whitespace-space ((,class (:foreground ,ninja))))
    `(whitespace-newline ((,class (:foreground ,ninja))))
    `(whitespace-trailing ((,class :inherit trailing-whitespace)))
+   `(whitespace-empty ((,class (:foreground ,ninja))))
    ;; syntax
    `(font-lock-builtin-face ((,class (:foreground ,builtin))))
    `(font-lock-comment-face ((,class (:foreground ,comment))))
