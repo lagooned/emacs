@@ -729,7 +729,7 @@ START and END are buffer positions."
 (defun gmacs/rename-dired-buffer ()
   (interactive)
   (unless (string-match-p "dired:" (buffer-name))
-    (rename-buffer (concat "dired:" (buffer-name)))))
+    (rename-buffer (concat "dired:" (generate-new-buffer-name dired-directory)))))
 
 (provide 'functions)
 ;;; functions.el ends here
