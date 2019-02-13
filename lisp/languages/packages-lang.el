@@ -25,8 +25,7 @@
 ;;; Code:
 
 (use-package apache-mode
-  :commands
-  apache-mode)
+  :commands apache-mode)
 
 (use-package dockerfile-mode
   :commands dockerfile-mode
