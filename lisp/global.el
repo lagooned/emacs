@@ -174,6 +174,7 @@
 
 ;; disable bidirectional text
 (setq bidi-display-reordering nil)
+(setq-default bidi-display-reordering nil)
 
 ;; defer jit font lock
 (setq jit-lock-defer-time nil

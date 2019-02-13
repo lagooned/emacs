@@ -501,6 +501,9 @@
   :config
   (tiny-setup-default))
 
+(use-package too-long-lines-mode
+  :ensure nil)
+
 (use-package try
   :commands try)
 
