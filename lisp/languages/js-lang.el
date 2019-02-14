@@ -24,6 +24,9 @@
 
 ;;; Code:
 
+(use-package json-mode
+  :commands json-mode)
+
 (use-package rjsx-mode
   :commands
   rjsx-minor-mode
