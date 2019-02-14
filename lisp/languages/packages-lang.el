@@ -99,6 +99,9 @@
   :init
   (setq nxml-child-indent 4))
 
+(use-package puppet-mode
+  :commands puppet-mode)
+
 (use-package sgml-mode
   :init
   (setq sgml-basic-offset 4))
