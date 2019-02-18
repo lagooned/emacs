@@ -186,10 +186,7 @@
   (add-hook 'eshell-mode-hook #'gmacs/enable-truncate-lines-no-message)
   :config
   (with-eval-after-load 'em-term
-    (progn
-      (push '("npm" "install") eshell-visual-subcommands)
-      (push '("git" "diff" "log") eshell-visual-subcommands)
-      (push 'eshell-truncate-buffer eshell-output-filter-functions)))
+    (push 'eshell-truncate-buffer eshell-output-filter-functions))
   (with-eval-after-load 'em-hist
     (setq eshell-hist-ignoredups t)))
 
