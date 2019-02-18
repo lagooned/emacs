@@ -566,6 +566,13 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
     (goto-char loc)
     (looking-at-p gmacs/eshell-prompt-regexp)))
 
+(defun gmacs/looking-at-eshell-top-prompt-regexp-p (loc)
+  "Truthy value for evil-eshell-delete which determines if \
+the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
+  (save-excursion
+    (goto-char loc)
+    (looking-at-p gmacs/eshell-top-prompt-regexp)))
+
 (defun gmacs/evil-minibuffer-setup ()
   "Setup the minibuffer."
   (evil-emacs-state)

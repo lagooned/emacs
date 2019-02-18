@@ -38,6 +38,9 @@ modes are active and the buffer is read-only.")
 (defvar gmacs/eshell-message "Gshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 
+(defvar gmacs/eshell-top-prompt-regexp "^\\[.*\\].*"
+  "A regexp which matches the top line in the eshell prompt.")
+
 (defvar gmacs/eshell-prompt-regexp "^[#$] "
   "A regexp which fully matches your eshell prompt.
 

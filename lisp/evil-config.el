@@ -203,16 +203,18 @@ involved re-emit it."
   (let ((inhibit-read-only t)
         (total-prompt-length (length (gmacs/eshell-prompt-function)))
         (bottom-prompt-length (length (gmacs/eshell-bottom-prompt-function))))
-    (if (gmacs/looking-at-eshell-prompt-regexp-p beg)
-        (progn
-          (evil-delete
-           (+ beg bottom-prompt-length)
-           end type register yank-handler)
-          (delete-region
-           (- (+ beg bottom-prompt-length) total-prompt-length)
-           (+ beg bottom-prompt-length))
-          (eshell-emit-prompt))
-      (evil-delete beg end type register yank-handler))))
+    (cond
+     ((gmacs/looking-at-eshell-prompt-regexp-p beg)
+      (progn
+        (evil-delete
+         (+ beg bottom-prompt-length)
+         end type register yank-handler)
+        (delete-region
+         (- (+ beg bottom-prompt-length) total-prompt-length)
+         (+ beg bottom-prompt-length))
+        (eshell-emit-prompt)))
+     ((gmacs/looking-at-eshell-top-prompt-regexp-p beg) (void))
+     (t (evil-delete beg end type register yank-handler)))))
 
 (add-hook 'eshell-mode-hook 'gmacs/evil-eshell-mode-setup)
 
