@@ -102,6 +102,13 @@
 (use-package puppet-mode
   :commands puppet-mode)
 
+(use-package restclient
+  :commands restclient-mode
+  :init
+  (add-to-list
+   'auto-mode-alist
+   '("\\.rest\\'" . restclient-mode)))
+
 (use-package sgml-mode
   :init
   (setq sgml-basic-offset 4))

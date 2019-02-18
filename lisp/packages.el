@@ -427,13 +427,6 @@
 (use-package restart-emacs
   :commands restart-emacs)
 
-(use-package restclient
-  :commands restclient-mode
-  :init
-  (add-to-list
-   'auto-mode-alist
-   '("\\.rest\\'" . restclient-mode)))
-
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode "sp"
