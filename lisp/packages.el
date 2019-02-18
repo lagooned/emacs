@@ -452,7 +452,7 @@
 (use-package swiper
   :commands swiper)
 
-(if (eq system-type 'gnu/linux)
+(if (and (eq system-type 'gnu/linux) (executable-find "sudo"))
     (use-package sudo-edit))
 
 (use-package suggest
