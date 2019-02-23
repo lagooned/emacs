@@ -231,8 +231,6 @@ involved re-emit it."
 (add-hook 'evil-command-window-mode-hook #'gmacs/evil-command-window-hook)
 
 ;; add evil-ex-history to .savehist file
-(if (not (member 'evil-ex-history savehist-additional-variables))
-    (push 'evil-ex-history savehist-additional-variables))
 (put 'evil-ex-history 'history-length 50)
 
 ;; add dired buffers to jumplist
