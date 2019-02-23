@@ -203,6 +203,7 @@
         evil-operator-state-message nil)
   (setq evil--jumps-buffer-targets
         "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
+  (setq evil-want-Y-yank-to-eol t)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
   (let ((height (eval gmacs/evil-base-cursor-height)))
     (setq evil-normal-state-cursor `("#dd00dd" (hbar . ,(eval height))))
