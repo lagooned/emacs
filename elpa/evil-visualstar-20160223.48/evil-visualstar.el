@@ -3,7 +3,7 @@
 ;; Copyright (C) 2013 by Bailey Ling
 ;; Author: Bailey Ling
 ;; URL: https://github.com/bling/evil-visualstar
-;; Package-Version: 20160222.1648
+;; Package-Version: 20160223.48
 ;; Filename: evil-visualstar.el
 ;; Description: Starts a * or # search from the visual selection
 ;; Created: 2013-09-24
