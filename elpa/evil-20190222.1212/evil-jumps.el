@@ -2,7 +2,7 @@
 
 ;; Author: Bailey Ling <bling at live.ca>
 
-;; Version: 1.2.13
+;; Version: 1.2.14
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -230,7 +230,10 @@ POS defaults to point."
       (cl-loop repeat idx
                do (ring-remove target-list))
       (setf (evil-jumps-struct-idx struct) -1))
-    (evil--jumps-push)))
+    (save-excursion
+      (when pos
+        (goto-char pos))
+      (evil--jumps-push))))
 
 (defun evil--jump-backward (count)
   (let ((count (or count 1)))
@@ -290,8 +293,9 @@ POS defaults to point."
 (defadvice split-window-internal (before evil-jumps activate)
   (evil-set-jump))
 
-(defadvice find-tag-noselect (before evil-jumps activate)
-  (evil-set-jump))
+(eval-after-load 'etags
+  '(defadvice find-tag-noselect (before evil-jumps activate)
+     (evil-set-jump)))
 
 (if (bound-and-true-p savehist-loaded)
     (evil--jumps-savehist-load)

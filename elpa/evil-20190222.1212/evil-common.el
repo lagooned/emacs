@@ -2,7 +2,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.2.13
+;; Version: 1.2.14
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -28,7 +28,6 @@
 (require 'evil-digraphs)
 (require 'rect)
 (require 'thingatpt)
-(eval-when-compile (require 'cl))
 
 ;;; Code:
 
@@ -46,6 +45,13 @@ window commands not available.")
    nil))
 
 ;;; Compatibility with different Emacs versions
+
+;; x-set-selection and x-get-selection have been deprecated since 25.1
+;; by gui-set-selection and gui-get-selection
+(defalias 'evil-get-selection
+  (if (fboundp 'gui-get-selection) 'gui-get-selection 'x-get-selection))
+(defalias 'evil-set-selection
+  (if (fboundp 'gui-set-selection) 'gui-set-selection 'x-set-selection))
 
 (defmacro evil-called-interactively-p ()
   "Wrapper for `called-interactively-p'.
@@ -482,13 +488,13 @@ If any character set is complemented, the result is also complemented."
   (let ((bracket "") (complement "") (hyphen "") result)
     (save-match-data
       (dolist (set sets)
-        (when (string-match "^\\^" set)
+        (when (string-match-p "^\\^" set)
           (setq set (substring set 1)
                 complement "^"))
-        (when (string-match "^]" set)
+        (when (string-match-p "^]" set)
           (setq set (substring set 1)
                 bracket "]"))
-        (when (string-match "^-" set)
+        (when (string-match-p "^-" set)
           (setq set (substring set 1)
                 hyphen "-"))
         (setq result (concat result set)))
@@ -1880,7 +1886,7 @@ closer if MOVE is non-nil."
 with regard to indentation."
   (evil-narrow-to-field
     (evil-move-beginning-of-line)
-    (insert "\n")
+    (insert (if use-hard-newlines hard-newline "\n"))
     (forward-line -1)
     (back-to-indentation)))
 
@@ -1889,7 +1895,7 @@ with regard to indentation."
 with regard to indentation."
   (evil-narrow-to-field
     (evil-move-end-of-line)
-    (insert "\n")
+    (insert (if use-hard-newlines hard-newline "\n"))
     (back-to-indentation)))
 
 ;;; Markers
@@ -2010,7 +2016,7 @@ The following special registers are supported.
                   (setq request-type (list request-type)))
                 (while (and request-type (not text))
                   (condition-case nil
-                      (setq text (x-get-selection what (pop request-type)))
+                      (setq text (evil-get-selection what (pop request-type)))
                     (error nil)))
                 (when text
                   (remove-text-properties 0 (length text) '(foreign-selection nil) text))
@@ -2098,9 +2104,9 @@ register instead of replacing its content."
         (current-kill (- register ?1))
         (setcar kill-ring-yank-pointer text))))
    ((eq register ?*)
-    (x-set-selection 'PRIMARY text))
+    (evil-set-selection 'PRIMARY text))
    ((eq register ?+)
-    (x-set-selection 'CLIPBOARD text))
+    (evil-set-selection 'CLIPBOARD text))
    ((eq register ?-)
     (setq evil-last-small-deletion text))
    ((eq register ?_) ; the black hole register
@@ -2174,7 +2180,7 @@ Variables pertaining to Transient Mark mode are listed in
     (when (and (boundp var)
                (not (assq var evil-transient-vals)))
       (push (list var (symbol-value var)
-                  (and (assq var (buffer-local-variables)) t))
+                  (local-variable-p var))
             evil-transient-vals)
       (make-variable-buffer-local var)
       (put var 'permanent-local t))))
@@ -3429,7 +3435,8 @@ are included. The step is terminated with `evil-end-undo-step'."
 (defun evil-end-undo-step (&optional continue)
   "End a undo step started with `evil-start-undo-step'.
 Adds an undo boundary unless CONTINUE is specified."
-  (when (and evil-undo-list-pointer
+  (when (and (listp buffer-undo-list)
+             evil-undo-list-pointer
              (not evil-in-single-undo))
     (evil-refresh-undo-step)
     (unless (or continue (null (car-safe buffer-undo-list)))

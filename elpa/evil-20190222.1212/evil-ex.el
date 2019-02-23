@@ -3,7 +3,7 @@
 ;; Author: Frank Fischer <frank fischer at mathematik.tu-chemnitz.de>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.2.13
+;; Version: 1.2.14
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -181,7 +181,7 @@ is appended to the line."
         evil-ex-info-string
         result)
     (minibuffer-with-setup-hook
-        #'evil-ex-setup
+        (if initial-input #'evil-ex-setup-and-update #'evil-ex-setup)
       (setq result
             (read-from-minibuffer
              ":"
@@ -228,7 +228,7 @@ This function registers several hooks that are used for the
 interactive actions during ex state."
   (add-hook 'post-command-hook #'evil-ex-abort)
   (add-hook 'after-change-functions #'evil-ex-update nil t)
-  (add-hook 'minibuffer-exit-hook #'evil-ex-teardown)
+  (add-hook 'minibuffer-exit-hook #'evil-ex-teardown nil t)
   (when evil-ex-previous-command
     (add-hook 'pre-command-hook #'evil-ex-remove-default))
   (remove-hook 'minibuffer-setup-hook #'evil-ex-setup)
@@ -239,11 +239,16 @@ interactive actions during ex state."
           evil-ex-argument-completion-at-point)))
 (put 'evil-ex-setup 'permanent-local-hook t)
 
+(defun evil-ex-setup-and-update ()
+  "Initialize Ex minibuffer with `evil-ex-setup', then call `evil-ex-update'."
+  (evil-ex-setup)
+  (evil-ex-update))
+
 (defun evil-ex-teardown ()
   "Deinitialize Ex minibuffer.
 Clean up everything set up by `evil-ex-setup'."
   (remove-hook 'post-command-hook #'evil-ex-abort)
-  (remove-hook 'minibuffer-exit-hook #'evil-ex-teardown)
+  (remove-hook 'minibuffer-exit-hook #'evil-ex-teardown t)
   (remove-hook 'after-change-functions #'evil-ex-update t)
   (when evil-ex-argument-handler
     (let ((runner (evil-ex-argument-handler-runner
@@ -640,29 +645,35 @@ works accordingly."
   "Replace special symbols in FILE-NAME.
 Replaces % by the current file-name,
 Replaces # by the alternate file-name in FILE-NAME."
-  (let ((current-fname (buffer-file-name))
+  (let ((remote (file-remote-p file-name))
+        (current-fname (buffer-file-name))
         (alternate-fname (and (other-buffer)
                               (buffer-file-name (other-buffer)))))
+    (setq file-name (or (file-remote-p file-name 'localname) file-name))
     (when current-fname
+      (setq current-fname (or (file-remote-p current-fname 'localname)
+                              current-fname))
       (setq file-name
             (replace-regexp-in-string "\\(^\\|[^\\\\]\\)\\(%\\)"
                                       current-fname file-name
                                       t t 2)))
     (when alternate-fname
+      (setq alternate-fname (or (file-remote-p alternate-fname 'localname)
+                                alternate-fname))
       (setq file-name
             (replace-regexp-in-string "\\(^\\|[^\\\\]\\)\\(#\\)"
                                       alternate-fname file-name
                                       t t 2)))
     (setq file-name
           (replace-regexp-in-string "\\\\\\([#%]\\)"
-                                    "\\1" file-name t)))
+                                    "\\1" file-name t))
+    (setq file-name (concat remote file-name)))
   file-name)
 
 (defun evil-ex-file-arg ()
   "Returns the current Ex argument as a file name.
 This function interprets special file names like # and %."
-  (unless (or (null evil-ex-argument)
-              (zerop (length evil-ex-argument)))
+  (unless (zerop (length evil-ex-argument))
     (evil-ex-replace-special-filenames evil-ex-argument)))
 
 (defun evil-ex-repeat (count)
@@ -821,14 +832,8 @@ Returns the line number of the match."
 NUMBER defaults to 1."
   (funcall sign (or number 1)))
 
-(defun evil-ex-eval (string &optional start)
-  "Evaluate STRING as an Ex command.
-START is the start symbol, which defaults to `expression'."
-  ;; disable the mark before executing, otherwise the visual region
-  ;; may be used as operator range instead of the ex-range
-  (let ((form (evil-ex-parse string nil start))
-        transient-mark-mode deactivate-mark)
-    (eval form)))
+;; function `evil-ex-eval' has been superseded by `evil-ex-parse' plus `eval'
+(make-obsolete 'evil-ex-eval 'evil-ex-parse "1.2.14")
 
 (defun evil-ex-parse (string &optional syntax start)
   "Parse STRING as an Ex expression and return an evaluation tree.

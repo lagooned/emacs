@@ -1,4 +1,4 @@
-This is evil.info, produced by makeinfo version 5.2 from evil.texi.
+This is evil.info, produced by makeinfo version 6.5 from evil.texi.
 
 This manual is for Evil (version 0.1 of 2011-07-30), an extensible vi
 layer for Emacs.
@@ -303,10 +303,10 @@ may be changed from a mode hook.
 
 * Menu:
 
-* 'evil-define-key'::
+* evil-define-key::
 
 
-File: evil.info,  Node: 'evil-define-key',  Up: Keymaps
+File: evil.info,  Node: evil-define-key,  Up: Keymaps
 
 3.1 'evil-define-key'
 =====================
@@ -1195,17 +1195,17 @@ Ref: Settings-Footnote-15826
 Node: The cursor5983
 Node: The initial state7188
 Node: Keymaps7647
-Node: 'evil-define-key'9511
-Node: Hooks10697
-Node: Macros12219
-Node: Motions12499
-Node: Operators14436
-Node: Text objects16769
-Node: Types19782
-Node: States21264
-Node: Other internals22363
-Node: Command properties22540
-Node: GNU Free Documentation License23867
+Node: evil-define-key9509
+Node: Hooks10693
+Node: Macros12215
+Node: Motions12495
+Node: Operators14432
+Node: Text objects16765
+Node: Types19778
+Node: States21260
+Node: Other internals22359
+Node: Command properties22536
+Node: GNU Free Documentation License23863
 
 End Tag Table
 

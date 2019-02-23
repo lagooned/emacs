@@ -3,7 +3,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.2.13
+;; Version: 1.2.14
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -354,13 +354,11 @@ otherwise exit Visual state."
     (when (buffer-live-p buf)
       (with-current-buffer buf
         (when (and (evil-visual-state-p)
-                   (fboundp 'x-select-text)
-                   (or (not (boundp 'ns-initialized))
-                       (with-no-warnings ns-initialized))
+                   (display-selections-p)
                    (not (eq evil-visual-selection 'block)))
-          (x-select-text (buffer-substring-no-properties
-                          evil-visual-beginning
-                          evil-visual-end)))))))
+          (evil-set-selection 'PRIMARY (buffer-substring-no-properties
+                                        evil-visual-beginning
+                                        evil-visual-end)))))))
 
 (defun evil-visual-activate-hook (&optional command)
   "Enable Visual state if the region is activated."

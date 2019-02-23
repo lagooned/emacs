@@ -3,7 +3,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.2.13
+;; Version: 1.2.14
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -73,6 +73,7 @@
 (define-key evil-normal-state-map "gU" 'evil-upcase)
 (define-key evil-normal-state-map "gf" 'find-file-at-point)
 (define-key evil-normal-state-map "gF" 'evil-find-file-at-point-with-line)
+(define-key evil-normal-state-map "gx" 'browse-url-at-point)
 (define-key evil-normal-state-map "g?" 'evil-rot13)
 (define-key evil-normal-state-map "g~" 'evil-invert-case)
 (define-key evil-normal-state-map "zo" 'evil-open-fold)
@@ -208,7 +209,7 @@
 (define-key evil-motion-state-map "g^" 'evil-first-non-blank-of-visual-line)
 (define-key evil-motion-state-map "gm" 'evil-middle-of-visual-line)
 (define-key evil-motion-state-map "g$" 'evil-end-of-visual-line)
-(define-key evil-motion-state-map "g\C-]" 'find-tag)
+(define-key evil-motion-state-map "g\C-]" 'evil-jump-to-tag)
 (define-key evil-motion-state-map "{" 'evil-backward-paragraph)
 (define-key evil-motion-state-map "}" 'evil-forward-paragraph)
 (define-key evil-motion-state-map "#" 'evil-search-word-backward)
@@ -244,7 +245,6 @@
 (define-key evil-motion-state-map (kbd "C-6") 'evil-switch-to-windows-last-buffer)
 (define-key evil-motion-state-map "\C-]" 'evil-jump-to-tag)
 (define-key evil-motion-state-map (kbd "C-b") 'evil-scroll-page-up)
-(define-key evil-motion-state-map (kbd "C-d") 'evil-scroll-down)
 (define-key evil-motion-state-map (kbd "C-e") 'evil-scroll-line-down)
 (define-key evil-motion-state-map (kbd "C-f") 'evil-scroll-page-down)
 (define-key evil-motion-state-map (kbd "C-o") 'evil-jump-backward)
@@ -328,6 +328,9 @@
 
 (when evil-want-C-u-scroll
   (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up))
+
+(when evil-want-C-d-scroll
+  (define-key evil-motion-state-map (kbd "C-d") 'evil-scroll-down))
 
 ;;; Visual state
 
@@ -543,6 +546,7 @@ included in `evil-insert-state-bindings' by default."
 ;; evil-read-key
 (define-key evil-read-key-map (kbd "ESC") #'keyboard-quit)
 (define-key evil-read-key-map (kbd "C-]") #'keyboard-quit)
+(define-key evil-read-key-map (kbd "C-g") #'keyboard-quit)
 (define-key evil-read-key-map (kbd "C-q") #'evil-read-quoted-char)
 (define-key evil-read-key-map (kbd "C-v") #'evil-read-quoted-char)
 (define-key evil-read-key-map (kbd "C-k") #'evil-read-digraph-char)

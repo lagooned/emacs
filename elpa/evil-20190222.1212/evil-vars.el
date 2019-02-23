@@ -3,7 +3,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.2.13
+;; Version: 1.2.14
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -35,15 +35,15 @@
 ;;; Hooks
 
 (defvar evil-after-load-hook nil
-  "Functions to be run when loading of evil is finished.
+  "Functions to be run when loading of Evil is finished.
 This hook can be used the execute some initialization routines
-when evil is completely loaded.")
+when Evil is completely loaded.")
 
 ;;; Initialization
 
 (defvar evil-pending-custom-initialize nil
   "A list of pending initializations for custom variables.
-Each element is a triple (FUNC VAR VALUE). When evil is
+Each element is a triple (FUNC VAR VALUE). When Evil is
 completely loaded then the functions (funcall FUNC VAR VALUE) is
 called for each element. FUNC should be a function suitable for
 the :initialize property of `defcustom'.")
@@ -151,7 +151,7 @@ commands."
   :prefix 'evil-)
 
 (defcustom evil-auto-indent t
-  "Whether to auto-indent when entering Insert state."
+  "Whether to auto-indent when opening lines."
   :type  'boolean
   :group 'evil)
 (make-variable-buffer-local 'evil-auto-indent)
@@ -218,7 +218,7 @@ a line."
 
 (defcustom evil-respect-visual-line-mode nil
   "Whether to remap movement commands when `visual-line-mode' is active.
-This variable must be set before evil is loaded. The commands
+This variable must be set before Evil is loaded. The commands
 swapped are
 
 `evil-next-line'         <-> `evil-next-visual-line'
@@ -298,7 +298,7 @@ operation are collected in a single undo step. If \"Yes\" is
 selected, undo steps are determined according to Emacs heuristics
 and no attempt is made to further aggregate changes.
 
-As of 1.2.13, the option \"fine\" is ignored and means the same
+As of 1.2.14, the option \"fine\" is ignored and means the same
 thing as \"No\". It used to be the case that fine would only try
 to merge the first two changes in an insert operation. For
 example, merging the delete and first insert operation after
@@ -360,9 +360,9 @@ Used by `evil-esc-mode'.")
   "If non-nil, the \\e event will never be translated to 'escape.")
 
 (defcustom evil-intercept-esc 'always
-  "Whether evil should intercept the ESC key.
+  "Whether Evil should intercept the ESC key.
 In terminal, a plain ESC key and a meta-key-sequence both
-generate the same event. In order to distinguish both evil
+generate the same event. In order to distinguish both Evil
 modifies `input-decode-map'. This is necessary in terminal but
 not in X mode. However, the terminal ESC is equivalent to C-[, so
 if you want to use C-[ instead of ESC in X, then Evil must
@@ -596,7 +596,7 @@ Must be readable by `read-kbd-macro'. For example: \"C-z\"."
            (set-default sym value)))
 
 (defcustom evil-default-state 'normal
-  "The default state.
+  "The default Evil state.
 This is the state a mode comes up in when it is not listed
 in `evil-emacs-state-modes', `evil-insert-state-modes' or
 `evil-motion-state-modes'. The value may be one of `normal',
@@ -616,12 +616,15 @@ If STATE is nil, Evil is disabled in the buffer."
   :group 'evil)
 
 (defcustom evil-emacs-state-modes
-  '(archive-mode
+  '(5x5-mode
+    archive-mode
     bbdb-mode
     biblio-selection-mode
+    blackbox-mode
     bookmark-bmenu-mode
     bookmark-edit-annotation-mode
     browse-kill-ring-mode
+    bubbles-mode
     bzr-annotate-mode
     calc-mode
     cfw:calendar-mode
@@ -633,6 +636,7 @@ If STATE is nil, Evil is disabled in the buffer."
     desktop-menu-blist-mode
     desktop-menu-mode
     doc-view-mode
+    dun-mode
     dvc-bookmarks-mode
     dvc-diff-mode
     dvc-info-buffer-mode
@@ -668,6 +672,7 @@ If STATE is nil, Evil is disabled in the buffer."
     gnus-group-mode
     gnus-server-mode
     gnus-summary-mode
+    gomoku-mode
     google-maps-static-mode
     ibuffer-mode
     jde-javadoc-checker-report-mode
@@ -694,12 +699,14 @@ If STATE is nil, Evil is disabled in the buffer."
     ;; end obsolete
     mh-folder-mode
     monky-mode
+    mpuz-mode
     mu4e-main-mode
     mu4e-headers-mode
     mu4e-view-mode
     notmuch-hello-mode
     notmuch-search-mode
     notmuch-show-mode
+    notmuch-tree-mode
     occur-mode
     org-agenda-mode
     package-menu-mode
@@ -716,6 +723,8 @@ If STATE is nil, Evil is disabled in the buffer."
     slime-inspector-mode
     slime-thread-control-mode
     slime-xref-mode
+    snake-mode
+    solitaire-mode
     sr-buttons-mode
     sr-mode
     sr-tree-mode
@@ -1018,7 +1027,8 @@ preserved."
 used in `evil-cjk-word-boundary-p'. See the documentation of
 `word-separating-categories'. Use `describe-categories' to see
 the list of categories."
-  :type '((character . character))
+  :type '(alist :key-type (choice character (const nil))
+                :value-type (choice character (const nil)))
   :group 'evil-cjk)
 
 (defcustom evil-cjk-word-combining-categories
@@ -1037,7 +1047,8 @@ the list of categories."
 used in `evil-cjk-word-boundary-p'. See the documentation of
 `word-combining-categories'. Use `describe-categories' to see the
 list of categories."
-  :type '((character . character))
+  :type '(alist :key-type (choice character (const nil))
+                :value-type (choice character (const nil)))
   :group 'evil-cjk)
 
 (defcustom evil-ex-complete-emacs-commands 'in-turn
@@ -1053,7 +1064,7 @@ available for completion."
 (defface evil-ex-commands '(( nil
                               :underline t
                               :slant italic))
-  "Face for the evil command in completion in ex mode."
+  "Face for the Evil command in completion in ex mode."
   :group 'evil)
 
 (defface evil-ex-info '(( ((supports :slant))
@@ -1082,7 +1093,7 @@ be extended to contain full lines."
 (defcustom evil-magic t
   "Meaning which characters in a pattern are magic.
 The meaning of those values is the same as in Vim. Note that it
-only has influence if the evil search module is chosen in
+only has influence if the Evil search module is chosen in
 `evil-search-module'."
   :group 'evil
   :type '(radio (const :tag "Very magic." :value very-magic)
@@ -1261,7 +1272,7 @@ reinitialized in each buffer. Entries have the form
 the keymap for MODE.")
 
 (defvar evil-minor-mode-keymaps-alist nil
-  "Association list of evil states to minor-mode keymap alists.
+  "Association list of Evil states to minor-mode keymap alists.
 Entries have the form (STATE . MODE-MAP-ALIST), where
 MODE-MAP-ALIST is an alist taking the form of
 `minor-mode-map-alist'.")
@@ -1616,7 +1627,21 @@ Elements have the form (NAME . FUNCTION).")
 (declare-function origami-close-node "origami.el")
 
 (defvar evil-fold-list
-  `(((hs-minor-mode)
+  `(((vdiff-mode)
+     :open-all   vdiff-open-all-folds
+     :close-all  vdiff-close-all-folds
+     :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
+     :open       ,(lambda () (call-interactively 'vdiff-open-fold))
+     :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
+     :close      ,(lambda () (call-interactively 'vdiff-close-fold)))
+    ((vdiff-3way-mode)
+     :open-all   vdiff-open-all-folds
+     :close-all  vdiff-close-all-folds
+     :toggle     nil
+     :open       ,(lambda () (call-interactively 'vdiff-open-fold))
+     :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
+     :close      ,(lambda () (call-interactively 'vdiff-close-fold)))
+    ((hs-minor-mode)
      :open-all   hs-show-all
      :close-all  hs-hide-all
      :toggle     hs-toggle-hiding
@@ -1650,14 +1675,7 @@ Elements have the form (NAME . FUNCTION).")
      :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
      :open       ,(lambda () (origami-open-node (current-buffer) (point)))
      :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
-     :close      ,(lambda () (origami-close-node (current-buffer) (point))))
-    ((vdiff-mode)
-     :open-all   vdiff-open-all-folds
-     :close-all  vdiff-close-all-folds
-     :toggle     nil
-     :open       ,(lambda () (call-interactively 'vdiff-open-fold))
-     :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
-     :close      ,(lambda () (call-interactively 'vdiff-close-fold))))
+     :close      ,(lambda () (origami-close-node (current-buffer) (point)))))
   "Actions to be performed for various folding operations.
 
 The value should be a list of fold handlers, were a fold handler has
@@ -1850,8 +1868,34 @@ Otherwise the previous command is assumed as substitute.")
                       (buffer-substring (point-min)
                                         (line-end-position))))
           ;; no repo, use plain version
-          "1.2.13"))))
+          "1.2.14"))))
   "The current version of Evil")
+
+(defcustom evil-want-integration t
+  "Whether to load evil-integration.el.
+This variable must be set before Evil is loaded."
+  :type 'boolean
+  :group 'evil)
+
+(defcustom evil-want-keybinding t
+  "Whether to load evil-keybindings.el.
+
+This loads a set of keybindings for evil in other modes as well as
+setting the initial evil state in those modes.
+
+This variable must be set before evil is loaded."
+  :type 'boolean
+  :group 'evil)
+
+(defcustom evil-want-minibuffer nil
+  "Whether to enable Evil in minibuffer(s)."
+  :type 'boolean
+  :group 'evil
+  :set #'(lambda (sym value)
+           (set-default sym value)
+           (if value
+               (add-hook 'minibuffer-setup-hook 'evil-initialize)
+             (remove-hook 'minibuffer-setup-hook 'evil-initialize))))
 
 (defun evil-version ()
   (interactive)
