@@ -3,7 +3,7 @@
 ;; Copyright (C) 2011-2013 by Michael Markert
 ;; Author: Michael Markert <markert.michael@googlemail.com>
 ;; URL: http://github.com/cofi/evil-leader
-;; Package-Version: 20140606.543
+;; Package-Version: 20140606.1243
 ;; Git-Repository: git://github.com/cofi/evil-leader.git
 ;; Created: 2011-09-13
 ;; Version: 0.4.3
