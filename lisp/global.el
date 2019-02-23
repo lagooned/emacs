@@ -189,6 +189,8 @@
 (setq savehist-additional-variables
       '(kill-ring search-ring regexp-search-ring))
 (put 'kill-ring 'history-length 25)
+;; strip properties from kill string
+(add-hook 'kill-emacs-hook 'gmacs/unpropertize-kill-ring)
 
 ;; no bell
 (setq ring-bell-function 'ignore)
