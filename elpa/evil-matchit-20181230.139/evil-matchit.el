@@ -1,12 +1,12 @@
 ;;; evil-matchit.el --- Vim matchit ported to Evil
 
-;; Copyright (C) 2014-2017 Chen Bin <chenbin.sh@gmail.com>
+;; Copyright (C) 2014-2018 Chen Bin <chenbin.sh@gmail.com>
 
 ;; Author: Chen Bin <chenbin.sh@gmail.com>
 ;; URL: http://github.com/redguardtoo/evil-matchit
-;; Version: 2.2.3
+;; Version: 2.2.9
 ;; Keywords: matchit vim evil
-;; Package-Requires: ((evil "1.0.7"))
+;; Package-Requires: ((evil "1.2.0") (emacs "24.4"))
 ;;
 ;; This file is not part of GNU Emacs.
 
@@ -30,12 +30,9 @@
 ;;; Commentary:
 ;;
 ;; This program emulates matchit.vim by Benji Fisher.
-;; It allows you press % to match items.
+;; Add `(global-evil-matchit-mode 1)' into Emacs setup.
+;; Then press % to match items.
 ;; See https://github.com/redguardtoo/evil-matchit/ for help.
-;;
-;; You can turn on `evilmi-always-simple-jump' to match brackets at first.
-;; Thus you disable our *advanced algorithm* which I highly recommend.
-;; Some people may prefer simpler algorithm in `python-mode'.
 ;;
 ;; This program requires EVIL (http://gitorious.org/evil)
 ;;
@@ -43,6 +40,7 @@
 ;;; Code:
 
 (require 'evil)
+(require 'evil-matchit-sdk)
 
 (defvar evilmi-plugins '(emacs-lisp-mode
                          ((evilmi-simple-get-tag evilmi-simple-jump)))
@@ -118,18 +116,6 @@ If font-face-under-cursor is NOT nil, the quoted string is being processed."
     (if evilmi-debug (message "evilmi--is-jump-forward return (%s %s %s)" rlt ff (string ch)))
     (list rlt ff ch)))
 
-(defun evilmi--in-comment-p (pos)
-  "Check the code at POS is comment by comparing font face."
-  (let* ((fontfaces (get-text-property pos 'face)))
-    (when (not (listp fontfaces))
-      (setf fontfaces (list fontfaces)))
-    (delq nil
-          (mapcar #'(lambda (f)
-                      ;; learn this trick from flyspell
-                      (or (eq f 'font-lock-comment-face)
-                          (eq f 'font-lock-comment-delimiter-face)))
-                  fontfaces))))
-
 (defun evilmi--scan-sexps (is-forward)
   "Get the position of matching tag.
 If IS-FORWARD is t, jump forward; or else jump backward."
@@ -151,7 +137,7 @@ If IS-FORWARD is t, jump forward; or else jump backward."
              ((= b 93) 91)))
          (rlt start-pos))
     (cond
-     ((evilmi--in-comment-p (point))
+     ((evilmi-in-comment-p (point))
       ;; Matching tag in comment.
       ;; Use own algorithm instead of `scan-sexps'
       ;; because `scan-sexps' not work in some major-mode
@@ -161,7 +147,7 @@ If IS-FORWARD is t, jump forward; or else jump backward."
                     (> lvl 0))
           (setq start-pos (+ start-pos arg))
           (goto-char start-pos)
-          (if (evilmi--in-comment-p start-pos)
+          (if (evilmi-in-comment-p start-pos)
               (cond
                ((= (following-char) b)
                 (setq lvl (1+ lvl)))
@@ -275,130 +261,102 @@ If IS-FORWARD is t, jump forward; or else jump backward."
 (defun evilmi--push-mark (rlt)
     (push-mark (nth 0 rlt) t t))
 
+;;;###autoload
+(defun evilmi-load-plugin-rules(modes rules)
+  "Load MODES's plugin RULES."
+  (dolist (mode modes)
+    (setq evilmi-plugins
+          (plist-put evilmi-plugins
+                     mode
+                     (mapcar (lambda (rule)
+                               (let* ((rule-filename (concat "evil-matchit-" (symbol-name rule)))
+                                      (fn-prefix (concat "evilmi-" (symbol-name rule)))
+                                      (get-tag-function (intern (concat fn-prefix "-get-tag")))
+                                      (jump-function (intern (concat fn-prefix "-jump"))))
+                                 (autoload get-tag-function rule-filename nil)
+                                 (autoload jump-function rule-filename nil)
+                                 (list get-tag-function jump-function)))
+                             rules)))))
+
+;;;###autoload
 (defun evilmi-init-plugins ()
-  "Load Matrix."
+  "Load plugins."
   (interactive)
   ;; simple matching for languages containing "{(["
-  (autoload 'evilmi-simple-get-tag "evil-matchit-simple" nil)
-  (autoload 'evilmi-simple-jump "evil-matchit-simple" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-simple-get-tag evilmi-simple-jump))))
-        '(java-mode perl-mode cperl-mode go-mode))
+  (evilmi-load-plugin-rules '(java-mode perl-mode cperl-mode go-mode)
+                            '(simple))
 
-  ;; Javascript
-  (autoload 'evilmi-javascript-get-tag "evil-matchit-javascript" nil)
-  (autoload 'evilmi-javascript-jump "evil-matchit-javascript" nil)
-  (autoload 'evilmi-html-get-tag "evil-matchit-html" nil)
-  (autoload 'evilmi-html-jump "evil-matchit-html" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-javascript-get-tag evilmi-javascript-jump)
-                                           (evilmi-html-get-tag evilmi-html-jump))))
-        '(js-mode json-mode js2-mode js3-mode javascript-mode rjsx-mode))
+  ;; Javascript/Typescript
+  (evilmi-load-plugin-rules '(js-mode
+                              json-mode
+                              js2-mode
+                              js3-mode
+                              javascript-mode
+                              rjsx-mode
+                              react-mode
+                              typescript-mode
+                              typescript-tsx-mode)
+                            '(simple javascript html))
 
   ;; Html
-  (autoload 'evilmi-template-get-tag "evil-matchit-template" nil)
-  (autoload 'evilmi-template-jump "evil-matchit-template" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-template-get-tag evilmi-template-jump)
-                                           (evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-html-get-tag evilmi-html-jump))))
-        '(web-mode html-mode nxml-mode nxhtml-mode sgml-mode message-mode))
+  (evilmi-load-plugin-rules '(web-mode
+                              html-mode
+                              nxml-mode
+                              nxhtml-mode
+                              sgml-mode
+                              message-mode
+                              mhtml-mode)
+                            '(template simple html))
 
   ;; Emacs Org-mode
-  (autoload 'evilmi-org-get-tag "evil-matchit-org" nil)
-  (autoload 'evilmi-org-jump "evil-matchit-org" nil)
-  (plist-put evilmi-plugins 'org-mode '((evilmi-org-get-tag evilmi-org-jump)))
-
+  (evilmi-load-plugin-rules '(org-mode) '(org))
 
   ;; Markdown
-  (autoload 'evilmi-markdown-get-tag "evil-matchit-markdown" nil)
-  (autoload 'evilmi-markdown-jump "evil-matchit-markdown" nil)
-  (plist-put evilmi-plugins 'markdown-mode '((evilmi-markdown-get-tag evilmi-markdown-jump)))
+  (evilmi-load-plugin-rules '(markdown-mode) '(markdown))
 
   ;; Latex
-  (autoload 'evilmi-latex-get-tag "evil-matchit-latex" nil)
-  (autoload 'evilmi-latex-jump "evil-matchit-latex" nil t)
-  (plist-put evilmi-plugins 'latex-mode '((evilmi-latex-get-tag evilmi-latex-jump)
-                                          (evilmi-simple-get-tag evilmi-simple-jump)))
+  (evilmi-load-plugin-rules '(latex-mode) '(latex simple))
 
-  ;; ocaml
-  (autoload 'evilmi-ocaml-get-tag "evil-matchit-ocaml" nil)
-  (autoload 'evilmi-ocaml-jump "evil-matchit-ocaml" nil t)
-  (plist-put evilmi-plugins 'tuareg-mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-ocaml-get-tag evilmi-ocaml-jump)))
+  ;; Ocaml
+  (evilmi-load-plugin-rules '(tuareg-mode) '(simple ocaml))
 
   ;; Python
-  (autoload 'evilmi-python-get-tag "evil-matchit-python" nil)
-  (autoload 'evilmi-python-jump "evil-matchit-python" nil)
-  (plist-put evilmi-plugins 'python-mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-python-get-tag evilmi-python-jump)))
+  (evilmi-load-plugin-rules '(python-mode) '(simple python))
 
   ;; SQL
-  (autoload 'evilmi-sql-get-tag "evil-matchit-sql" nil)
-  (autoload 'evilmi-sql-jump "evil-matchit-sql" nil)
-  (plist-put evilmi-plugins 'sql-mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-sql-get-tag evilmi-sql-jump)))
+  (evilmi-load-plugin-rules '(sql-mode) '(simple sql))
 
   ;; C/C++
-  (autoload 'evilmi-c-get-tag "evil-matchit-c" nil)
-  (autoload 'evilmi-c-jump "evil-matchit-c" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-c-get-tag evilmi-c-jump)
-                                           (evilmi-simple-get-tag evilmi-simple-jump))))
-        '(c-mode c++-mode))
+  (evilmi-load-plugin-rules '(c-mode c++-mode) '(c simple))
 
-  ;; diff/patch
-  (autoload 'evilmi-diff-get-tag "evil-matchit-diff" nil)
-  (autoload 'evilmi-diff-jump "evil-matchit-diff" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-diff-get-tag evilmi-diff-jump))))
-        '(diff-mode ffip-diff-mode magit-diff-mode))
+  ;; Diff/Patch
+  (evilmi-load-plugin-rules '(diff-mode ffip-diff-mode magit-diff-mode)
+                            '(simple diff))
+
   ;; Fortran
-  (autoload 'evilmi-fortran-get-tag "evil-matchit-fortran" nil)
-  (autoload 'evilmi-fortran-jump "evil-matchit-fortran" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-fortran-get-tag evilmi-fortran-jump))))
-        '(f90-mode fortran-mode))
+  (evilmi-load-plugin-rules '(f90 fortran-mode) '(fortran))
 
   ;; CMake (http://www.cmake.org)
-  (autoload 'evilmi-cmake-get-tag "evil-matchit-cmake" nil)
-  (autoload 'evilmi-cmake-jump "evil-matchit-cmake" nil)
-  (plist-put evilmi-plugins 'cmake-mode '((evilmi-cmake-get-tag evilmi-cmake-jump)))
+  (evilmi-load-plugin-rules '(cmake-mode) '(cmake))
 
   ;; sh-mode
-  (autoload 'evilmi-sh-get-tag "evil-matchit-sh" nil)
-  (autoload 'evilmi-sh-jump "evil-matchit-sh" nil)
-  (plist-put evilmi-plugins 'sh-mode '((evilmi-sh-get-tag evilmi-sh-jump)))
+  (evilmi-load-plugin-rules '(sh-mode) '(sh))
 
   ;; verilog-mode
-  (autoload 'evilmi-verilog-get-tag "evil-matchit-verilog" nil)
-  (autoload 'evilmi-verilog-jump "evil-matchit-verilog" nil)
-  (plist-put evilmi-plugins 'verilog-mode '((evilmi-verilog-get-tag evilmi-verilog-jump)))
+  (evilmi-load-plugin-rules '(verilog-mode) '(verilog))
 
-  ;; Lua or any fine script
-  (autoload 'evilmi-script-get-tag "evil-matchit-script" nil)
-  (autoload 'evilmi-script-jump "evil-matchit-script" nil)
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-script-get-tag evilmi-script-jump))))
-        '(lua-mode vimrc-mode))
+  ;; Lua or script
+  (evilmi-load-plugin-rules '(lua-mode vimrc-mode) '(simple script))
 
   ;; css/scss/less
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-simple-get-tag evilmi-simple-jump))))
-        '(css-mode less-mode scss-mode))
+  (evilmi-load-plugin-rules '(css-mode less-mode scss-mode) '(simple))
 
   ;; Ruby
-  (autoload 'evilmi-ruby-get-tag "evil-matchit-ruby" nil)
-  (autoload 'evilmi-ruby-jump "evil-matchit-ruby" nil)
-  ;; @see https://github.com/syl20bnr/spacemacs/issues/2093
-  ;; spacemacs use enh-ruby-mode
-  (mapc (lambda (mode)
-          (plist-put evilmi-plugins mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                           (evilmi-ruby-get-tag evilmi-ruby-jump))))
-        '(ruby-mode enh-ruby-mode)))
+  (evilmi-load-plugin-rules '(ruby-mode enh-ruby-mode) '(simple ruby))
+
+  ;; Elixir
+  (evilmi-load-plugin-rules '(elixir-mode enh-elixir-mode) '(simple elixir)))
+
 
 (defun evilmi--region-to-select-or-delete (num &optional is-inner)
   (let* (where-to-jump-in-theory b e)
@@ -479,9 +437,10 @@ If IS-FORWARD is t, jump forward; or else jump backward."
       (goto-char dst)
       (back-to-indentation))))
 
-;;;###autoload
-(defun evilmi-jump-items (&optional num)
+;;;###autoload (autoload 'evilmi-jump-items "evil-matchit" nil t)
+(evil-define-command evilmi-jump-items (&optional num)
   "Jump between items."
+  :repeat nil
   (interactive "P")
   (cond
    ((and evilmi-may-jump-by-percentage num)
@@ -492,7 +451,7 @@ If IS-FORWARD is t, jump forward; or else jump backward."
 ;;;###autoload
 (defun evilmi-version()
   (interactive)
-  (message "2.2.3"))
+  (message "2.2.9"))
 
 ;;;###autoload
 (define-minor-mode evil-matchit-mode
