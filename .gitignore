@@ -38,3 +38,4 @@ url
 /session.*
 /undo/*
 /undo
+transient

@@ -48,8 +48,7 @@
   (require 'evil-numbers))
 
 (use-package evil-magit
-  :after
-  magit
+  :after magit
   :config
   (require 'evil-magit)
   (evil-define-key
