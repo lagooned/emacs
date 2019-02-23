@@ -1,16 +1,17 @@
 ;;; evil-surround.el --- emulate surround.vim from Vim
 
 ;; Copyright (C) 2010 - 2017 Tim Harper
+;; Copyright (C) 2018 - 2019 The evil-surround.el Contributors
 
 ;; Licensed under the same terms as Emacs (GPLv3)
 
 ;;
 ;; Author: Tim Harper <timcharper at gmail dot com>
-;;      Vegard Øye <vegard_oye at hotmail dot com>
+;;         Vegard Øye <vegard_oye at hotmail dot com>           
 ;; Current Maintainer: ninrod (github.com/ninrod)
 ;; Created: July 23 2011
-;; Version: 0.1
-;; Package-Version: 20171004.600
+;; Version: 1.0.3
+;; Package-Version: 20181218.1957
 ;; Package-Requires: ((evil "1.2.12"))
 ;; Mailing list: <implementations-list at lists.ourproject.org>
 ;;      Subscribe: http://tinyurl.com/implementations-list
@@ -40,9 +41,9 @@
 
 (require 'evil)
 
-(defgroup surround nil
+(defgroup evil-surround nil
   "surround.vim for Emacs"
-  :prefix "surround-"
+  :prefix "evil-surround-"
   :group 'evil)
 
 ;; make surround's `ysw' work like `cw', not `ce'
@@ -69,7 +70,7 @@
 Each item is of the form (TRIGGER . (LEFT . RIGHT)), all strings.
 Alternatively, a function can be put in place of (LEFT . RIGHT).
 This only affects inserting pairs, not deleting or changing them."
-  :group 'surround
+  :group 'evil-surround
   :type '(alist
           :key-type (character :tag "Key")
           :value-type (choice
@@ -82,7 +83,7 @@ This only affects inserting pairs, not deleting or changing them."
     (evil-delete . delete))
   "Association list of operators to their fundamental operation.
 Each item is of the form (OPERATOR . OPERATION)."
-  :group 'surround
+  :group 'evil-surround
   :type '(repeat (cons (symbol :tag "Operator")
                        (symbol :tag "Operation"))))
 
@@ -92,15 +93,41 @@ Each item is of the form (OPERATOR . OPERATION)."
     map)
   "Keymap used by `evil-surround-read-tag'.")
 
+(defvar evil-surround-record-repeat nil
+  "Flag to indicate we're manually recording repeat info.")
+
+(defun evil-surround-read-from-minibuffer (&rest args)
+  (when evil-surround-record-repeat
+    (evil-repeat-keystrokes 'post))
+  (let ((res (apply #'read-from-minibuffer args)))
+    (when evil-surround-record-repeat
+      (evil-repeat-record res))
+    res))
+
+;; The operator state narrows the buffer to the current field. This
+;; function widens temporarily before reading a character so the
+;; narrowing is not visible to the user.
+(defun evil-surround-read-char ()
+  (if (evil-operator-state-p)
+      (save-restriction (widen) (read-char))
+    (read-char)))
+
+(defun evil-surround-input-char ()
+  (list (evil-surround-read-char)))
+
+(defun evil-surround-input-region-char ()
+  (append (evil-operator-range t)
+          (evil-surround-input-char)))
+
 (defun evil-surround-function ()
   "Read a functionname from the minibuffer and wrap selection in function call"
-  (let ((fname (read-from-minibuffer "" "" )))
+  (let ((fname (evil-surround-read-from-minibuffer "" "")))
     (cons (format "%s(" (or fname ""))
           ")")))
 
 (defun evil-surround-read-tag ()
   "Read a XML tag from the minibuffer."
-  (let* ((input (read-from-minibuffer "<" "" evil-surround-read-tag-map))
+  (let* ((input (evil-surround-read-from-minibuffer "<" "" evil-surround-read-tag-map))
          (match (string-match "\\([0-9a-z-]+\\)\\(.*?\\)[>]*$" input))
          (tag  (match-string 1 input))
          (rest (match-string 2 input)))
@@ -110,6 +137,13 @@ Each item is of the form (OPERATOR . OPERATION)."
 (defun evil-surround-valid-char-p (char)
   "Returns whether CHAR is a valid surround char or not."
   (not (memq char '(?\C-\[ ?\C-?))))
+
+(defun evil-surround-delete-char-noop-p (char)
+  "Returns whether CHAR is a noop when used with surround delete."
+  (memq char (list (string-to-char "w")
+                   (string-to-char "W")
+                   (string-to-char "s")
+                   (string-to-char "p"))))
 
 (defun evil-surround-pair (char)
   "Return the evil-surround pair of char.
@@ -181,7 +215,7 @@ Alternatively, the text to delete can be represented with
 the overlays OUTER and INNER, where OUTER includes the delimiters
 and INNER excludes them. The intersection (i.e., difference)
 between these overlays is what is deleted."
-  (interactive "c")
+  (interactive (evil-surround-input-char))
   (cond
    ((and outer inner)
     (delete-region (overlay-start outer) (overlay-start inner))
@@ -203,11 +237,12 @@ between these overlays is what is deleted."
   "Change the surrounding delimiters represented by CHAR.
 Alternatively, the text to delete can be represented with the
 overlays OUTER and INNER, which are passed to `evil-surround-delete'."
-  (interactive "c")
+  (interactive (evil-surround-input-char))
   (cond
    ((and outer inner)
-    (evil-surround-delete char outer inner)
-    (let ((key (read-char)))
+    (unless (evil-surround-delete-char-noop-p char)
+      (evil-surround-delete char outer inner))
+    (let ((key (evil-surround-read-char)))
       (evil-surround-region (overlay-start outer)
                             (overlay-end outer)
                             nil (if (evil-surround-valid-char-p key) key char))))
@@ -256,7 +291,8 @@ This is necessary because `evil-yank' operator is not repeatable (:repeat nil)"
   ;; correctly set to, for example, `evil-surround-region' instead of
   ;; `evil-yank' when surround has been invoked by `ys'
   (setq this-command callback)
-  (call-interactively callback)
+  (let ((evil-surround-record-repeat t))
+    (call-interactively callback))
   (evil-repeat-keystrokes 'post)
   (evil-repeat-stop))
 
@@ -304,7 +340,7 @@ Becomes this:
      :thing
    }"
 
-  (interactive "<R>c")
+  (interactive (evil-surround-input-region-char))
   (when (evil-surround-valid-char-p char)
     (let* ((overlay (make-overlay beg end nil nil t))
            (pair (or (and (boundp 'pair) pair) (evil-surround-pair char)))
@@ -360,7 +396,7 @@ Becomes this:
 
 (evil-define-operator evil-Surround-region (beg end type char)
   "Call surround-region, toggling force-new-line"
-  (interactive "<R>c")
+  (interactive (evil-surround-input-region-char))
   (evil-surround-region beg end type char t))
 
 ;;;###autoload
