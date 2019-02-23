@@ -6,7 +6,7 @@
 ;;               Matthew Fidler <matthew.fidler@gmail.com>
 ;;               Michael Markert <markert.michael@gmail.com>
 ;; URL: http://github.com/cofi/evil-numbers
-;; Package-Version: 20140606.551
+;; Package-Version: 20140606.1251
 ;; Git-Repository: git://github.com/cofi/evil-numbers.git
 ;; Created: 2011-09-02
 ;; Version: 0.4
