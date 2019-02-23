@@ -1,12 +1,12 @@
 ;;; exato.el --- EXATO: Evil XML/HTML Attributes Text Object -*- lexical-binding: t -*-
 
-;; Copyright (C) 2015 by Filipe Correa Lima da Silva (ninrod)
+;; Copyright (C) 2017, 2018 by Filipe Silva (ninrod)
 
-;; Author: Filipe Correa Lima da Silva <filipe.silva@gmail.com>
+;; Author: Filipe Silva <filipe.silva@gmail.com>
 ;; URL: https://github.com/ninrod/exato
-;; Package-Version: 20171119.632
+;; Package-Version: 20180305.1042
 ;; Version: 0.0.1
-;; Package-Requires: ((evil "1.2.13") (thingatpt+ "0"))
+;; Package-Requires: ((evil "1.2.13") (emacs "24"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,19 +23,27 @@
 
 ;;; Commentary:
 
-;; This is an an evil text object for hmtl/xml tag attributes.
+;; This package provides the `x` text object to manipulate html/xml tag attributes.
 ;; it is a port of https://github.com/whatyouhide/vim-textobj-xmlattr vim plugin.
 
-;; examples:
-;; dax: delete around xml tag attribute
-;; dix: delete inside xml tag attribute
+;; Try using `dax`, `vix` and `gUix`. You can customize the binding.
+
+;; To install the package, Just use https://melpa.org.
+;; Here's an oneliner using https://github.com/jwiegley/use-package:
+;; (use-package exato :ensure t)
+
+;; *customization*: to change the bind from `x` to your liking, you can customize exato-key:
+
+;; (use-package exato
+;;   :ensure t
+;;   :init
+;;   (setq exato-key "h"))
 
 ;;; Code:
 
 ;;; Settings:
 
 (require 'evil)
-(require 'thingatpt+)
 
 (defgroup exato nil
   "Provides a xml tag attribute text object."
@@ -49,11 +57,16 @@
 
 ;;; Core functions
 
+(defun exato--evil-bounds-of-string-at-point ()
+  (save-excursion
+    (or (bounds-of-evil-string-at-point)
+        (progn (forward-char) (bounds-of-evil-string-at-point)))))
+
 (defun exato--find-str-start ()
   "Find the beggining of the string."
   (condition-case nil
       (save-excursion
-        (beginning-of-thing 'string)
+        (goto-char (car (exato--evil-bounds-of-string-at-point)))
         (point))
     (error nil)))
 
@@ -61,7 +74,7 @@
   "Find the end of the string."
   (condition-case nil
       (save-excursion
-        (end-of-thing 'string)
+        (goto-char (cdr (exato--evil-bounds-of-string-at-point)))
         (1- (point)))
     (error nil)))
 
@@ -160,9 +173,9 @@
           (t
            nil))))
 
-(evil-define-text-object evil-inner-xml-attr (count &optional beg end type)
+(evil-define-text-object evil-inner-xml-attr (count &optional _beg _end _type)
   (exato--evil-xml-attr-inner-range))
-(evil-define-text-object evil-outer-xml-attr (count &optional beg end type)
+(evil-define-text-object evil-outer-xml-attr (count &optional _beg _end _type)
   (exato--evil-xml-attr-outer-range))
 
 (define-key evil-outer-text-objects-map exato-key 'evil-outer-xml-attr)
