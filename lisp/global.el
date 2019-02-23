@@ -188,6 +188,7 @@
 ;; save history
 (setq savehist-additional-variables
       '(kill-ring search-ring regexp-search-ring))
+(put 'kill-ring 'history-length 25)
 
 ;; no bell
 (setq ring-bell-function 'ignore)
