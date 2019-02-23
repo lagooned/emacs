@@ -51,7 +51,6 @@
   "c ." 'gmacs/open-custom-config
   "c l" 'gmacs/open-language-config
   "c g" 'gmacs/open-global-config
-  "c e" 'gmacs/open-environment-config
   "c k" 'gmacs/open-evil-config
   "c p" 'gmacs/open-packages-config
   "c c" 'gmacs/load-config

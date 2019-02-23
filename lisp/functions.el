@@ -77,11 +77,6 @@ to sane runtime defaults."
   (interactive)
   (find-file "~/.emacs.d/lisp/global.el"))
 
-(defun gmacs/open-environment-config ()
-  "Open environment.el."
-  (interactive)
-  (find-file "~/.emacs.d/lisp/environment.el"))
-
 (defun gmacs/open-evil-config ()
   "Open evil-config.el."
   (interactive)
