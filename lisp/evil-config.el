@@ -233,6 +233,7 @@ involved re-emit it."
 ;; add evil-ex-history to .savehist file
 (if (not (member 'evil-ex-history savehist-additional-variables))
     (push 'evil-ex-history savehist-additional-variables))
+(put 'evil-ex-history 'history-length 50)
 
 ;; add dired buffers to jumplist
 (evil-add-command-properties #'dired-find-file :jump t)
