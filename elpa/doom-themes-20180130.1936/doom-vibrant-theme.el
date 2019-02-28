@@ -152,7 +152,8 @@ determine the exact padding."
 
    ;; org-mode
    (org-hide :foreground hidden)
-   (solaire-org-hide-face :foreground hidden-alt))
+   (solaire-org-hide-face :foreground hidden-alt)
+   (org-document-title :weight bold :foreground yellow :height 1.44))
 
 
   ;; --- extra variables --------------------
