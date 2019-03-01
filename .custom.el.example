@@ -41,9 +41,9 @@
 (setq gmacs/force-basic-grep nil)
 
 ;; load theme
-;; (load-theme 'doom-vibrant t)
-(load-theme 'rebecca t)
-;; (load-theme 'dracula t)
+(if (display-graphic-p)
+    (load-theme 'dracula t)
+  (load-theme 'wombat))
 
 ;; custom vars
 (custom-set-variables
