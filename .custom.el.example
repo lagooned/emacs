@@ -20,11 +20,6 @@
 ;; menu-bar-display
 (if (display-graphic-p) (menu-bar-mode -1))
 
-;; telephone-line height
-(setq
- telephone-line-height
- (floor (* 0.9 (+ (/ (frame-char-height) 2) (frame-char-height)))))
-
 ;; icon in title bar
 (setq ns-use-proxy-icon nil)
 

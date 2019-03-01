@@ -453,42 +453,6 @@
 (use-package suggest
   :commands suggest)
 
-(use-package telephone-line
-  :init
-  (require 'telephone-line-config)
-  (setq telephone-line-primary-left-separator 'telephone-line-flat
-        telephone-line-secondary-left-separator 'telephone-line-flat)
-  (defface telephone-line-elscreen
-    '((t (:foreground "black" :background "grey70" :weight bold)))
-    "Elscreen telephone-line segment theme.")
-  (setq telephone-line-faces
-        '((evil . telephone-line-modal-face)
-          (modal . telephone-line-modal-face)
-          (elscreen . (telephone-line-elscreen . mode-line-inactive))
-          (ryo . telephone-line-ryo-modal-face)
-          (accent . (telephone-line-accent-active . mode-line-inactive))
-          (nil . (mode-line . mode-line-inactive))))
-  (telephone-line-defsegment* telephone-line-empty-segment ()
-    (telephone-line-raw "" t))
-  (telephone-line-defsegment* telephone-line-elscreen-mode-line-string-segment ()
-    (telephone-line-raw elscreen-mode-line-string t))
-  (setq telephone-line-lhs '((elscreen . (telephone-line-elscreen-mode-line-string-segment))
-                             (evil . (telephone-line-simple-major-mode-segment))
-                             (accent . (telephone-line-simple-minor-mode-segment))
-                             (nil . (telephone-line-buffer-segment))
-                             (nil . (telephone-line-airline-position-segment))))
-  (setq telephone-line-rhs '((nil . ())))
-  (custom-set-faces
-   '(telephone-line-evil-normal
-     ((t (:inherit telephone-line-evil :background "darkmagenta"))))
-   '(telephone-line-evil-replace
-     ((t (:inherit telephone-line-evil :background "darkcyan"))))
-   '(telephone-line-evil-emacs
-     ((t (:inherit telephone-line-evil :background "red")))))
-  (telephone-line-mode 1)
-  ;; fix in-window modeline fragements on quit
-  (add-hook 'minibuffer-exit-hook #'redraw-display))
-
 (use-package tiny
   :config
   (tiny-setup-default))
