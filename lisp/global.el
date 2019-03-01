@@ -113,7 +113,7 @@
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(add-hook 'kill-buffer-query-functions 'gmacs/dont-kill-scratch)
+(add-hook 'kill-buffer-query-functions 'gmacs/dont-kill-scratch-or-dired)
 
 ;; no tool bar
 (tool-bar-mode -1)

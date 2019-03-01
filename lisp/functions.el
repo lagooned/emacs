@@ -485,9 +485,10 @@ evil-mode state."
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window)))
 
-(defun gmacs/dont-kill-scratch ()
-  "Don't kill but bury *scratch* buffer."
-  (if (equal (buffer-name (current-buffer)) "*scratch*")
+(defun gmacs/dont-kill-scratch-or-dired ()
+  "Don't kill but bury *scratch* and \"dired:\" buffers."
+  (if (or (string-match-p "dired:" (buffer-name))
+          (equal (buffer-name (current-buffer)) "*scratch*"))
       (progn (bury-buffer) nil)
     t))
 
