@@ -42,7 +42,7 @@
 
 ;; load theme
 (if (display-graphic-p)
-    (load-theme 'dracula t)
+    (load-theme 'atom-one-dark t)
   (load-theme 'wombat))
 
 ;; custom vars
