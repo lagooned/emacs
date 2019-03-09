@@ -55,10 +55,6 @@
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
 
-(use-package centered-cursor-mode
-  :commands
-  centered-cursor-mode)
-
 (use-package company
   :diminish company-mode
   :commands company-mode
