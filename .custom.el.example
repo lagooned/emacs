@@ -41,9 +41,7 @@
 (setq gmacs/force-basic-grep nil)
 
 ;; load theme
-(if (display-graphic-p)
-    (load-theme 'atom-one-dark t)
-  (load-theme 'wombat))
+(load-theme 'atom-one-dark t)
 
 ;; custom vars
 (custom-set-variables
