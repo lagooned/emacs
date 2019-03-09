@@ -179,8 +179,7 @@
 (setq fast-but-imprecise-scrolling t)
 
 ;; save history
-(setq savehist-additional-variables
-      '(kill-ring search-ring regexp-search-ring))
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 (put 'kill-ring 'history-length 25)
 (put 'search-ring 'history-length 25)
 (put 'regexp-search-ring 'history-length 25)
