@@ -73,5 +73,8 @@ re-entered for it to take effect.")
 (defvar gmacs/force-basic-grep nil
   "Determines whether or not to use basic grep.")
 
+(defvar gmacs/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
+  "Git command for showing ls-tree")
+
 (provide 'variables)
 ;;; variables.el ends here

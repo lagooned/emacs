@@ -24,6 +24,8 @@
 
 ;;; Code:
 
+(require 'seq)
+(require 'functional)
 (require 'cl)
 (require 'curry-compose)
 (require 'string-utils)
@@ -258,13 +260,23 @@ can be given as the initial minibuffer input."
   "Jump to a directory in the current project with \
 initial input `INITIAL-INPUT'."
   (interactive)
-  (if (not (projectile-project-p))
-      (error "Not in a git repository")
-    (ivy-read (projectile-prepend-project-name "Find dir: ")
-              (counsel-projectile--project-directories)
+  (counsel-require-program (car (split-string counsel-git-cmd)))
+  (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
+         (cands
+          (flatmap
+           'last
+           (seq-filter
+            #'gmacs/directory-ls-tree-entry-p
+            (mapcar
+             'split-string
+             (cdr
+              (split-string
+               (shell-command-to-string gmacs/git-ls-tree-head-cmd)
+               "\n"
+               t)))))))
+    (ivy-read (projectile-prepend-project-name "Find dir: ") cands
               :initial-input initial-input
-              :require-match t
-              :action counsel-projectile-find-dir-action
+              :action #'counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
 
 (defun gmacs/magit-status ()
@@ -729,6 +741,9 @@ START and END are buffer positions."
 
 (defun gmacs/unpropertize-kill-ring ()
   (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
+
+(defun gmacs/directory-ls-tree-entry-p (entry)
+  (string= (nth 1 entry) "tree"))
 
 (provide 'functions)
 ;;; functions.el ends here
