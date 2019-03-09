@@ -176,12 +176,6 @@
 (setq bidi-display-reordering nil)
 (setq-default bidi-display-reordering nil)
 
-;; defer jit font lock
-(setq jit-lock-defer-time nil
-      jit-lock-stealth-nice 0.5
-      jit-lock-stealth-time 10
-      jit-lock-stealth-verbose nil)
-
 ;; fast but imprecise scrolling
 (setq fast-but-imprecise-scrolling t)
 
