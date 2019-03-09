@@ -152,7 +152,7 @@
    ;; isearch
    `(isearch ((t (:foreground ,atom-one-dark-bg :background ,atom-one-dark-purple))))
    `(isearch-fail ((t (:foreground ,atom-one-dark-red-2 :background nil))))
-   `(lazy-highlight ((t (:foreground ,atom-one-dark-purple :background ,atom-one-dark-bg-1 :underline ,atom-one-dark-purple))))
+   `(lazy-highlight ((t (:foreground ,atom-one-dark-purple :background ,atom-one-dark-bg-1))))
 
    ;; diff-hl (https://github.com/dgutov/diff-hl)
    '(diff-hl-change ((t (:foreground "#E9C062" :background "#8b733a"))))
