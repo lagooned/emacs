@@ -149,7 +149,6 @@
 
 ;; remember place
 (save-place-mode 1)
-(setq save-place-forget-unreadable-files nil)
 
 ;; create directories with find file
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
