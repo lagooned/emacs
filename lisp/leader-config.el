@@ -118,8 +118,6 @@
   "p r" 'gmacs/projectile-root-dir
   "p f" 'gmacs/counsel-projectile-find-file-region
   "p d" 'gmacs/counsel-projectile-find-dir-region
-  "p D" 'magit-diff-popup
-  "p F" 'magit-file-popup
   "p b" 'magit-blame
   "p g" 'gmacs/counsel-git-grep-region
 
