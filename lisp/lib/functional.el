@@ -30,6 +30,24 @@
 (defun flatmap (func list)
   (flatten (mapcar func list)))
 
+(defsubst curry (function &rest arguments)
+  (lexical-let ((function function)
+                (arguments arguments))
+    (lambda (&rest more) (apply function (append arguments more)))))
+
+(defsubst rcurry (function &rest arguments)
+  (lexical-let ((function function)
+                (arguments arguments))
+    (lambda (&rest more) (apply function (append more arguments)))))
+
+(defsubst compose (function &rest more-functions)
+  (cl-reduce (lambda (f g)
+               (lexical-let ((f f) (g g))
+                 (lambda (&rest arguments)
+                   (funcall f (apply g arguments)))))
+             more-functions
+             :initial-value function))
+
 (provide 'functional)
 ;;; functional.el ends here
 

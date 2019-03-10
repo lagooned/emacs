@@ -24,6 +24,8 @@
 
 ;;; Code:
 
+(require 'functional)
+
 (defun string-utils/add-quotes (str)
   "Surround `STR' in quotes."
   (concat "\"" str "\""))

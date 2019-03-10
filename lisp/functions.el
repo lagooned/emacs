@@ -27,7 +27,6 @@
 (require 'seq)
 (require 'functional)
 (require 'cl)
-(require 'curry-compose)
 (require 'string-utils)
 
 (defun void ()
