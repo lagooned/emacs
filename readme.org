@@ -1,4 +1,4 @@
-#+title: gmacs.org
+#+title: gmacs
 #+author: jared engler
 
 * install
