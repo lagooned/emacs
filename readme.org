@@ -1,19 +1,18 @@
-#+title: readme.org
+#+title: gmacs.org
 #+author: jared engler
 
-* gmacs
-** install
+* install
 - =git clone https://github.com/lagooned/emacs.git=
 - =ln -s ./emacs ~/.emacs.d=
 - =cp ~/.emacs.d/custom.el.example ~/.emacs.d/.custom.el=
 - =emacs &=
-** usage
+* usage
 - evil-leader-key is SPC (much like spacemacs)
   - customize .custom.el by using SPC C . (default)
   - quit/restart with SPC q q and SPC q r (default)
 - use which-key to explore functionality
-- have fun
-** future
+- have fun :)
+* future
 - this is a personal that i use all the time
   - master will change without warning as i find new things to add
   - fork if necessary
