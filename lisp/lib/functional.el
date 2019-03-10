@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(defun flatten (list)
+(defsubst flatten (list)
   (mapcan (lambda (x) (if (listp x) x nil)) list))
 
 (defun flatmap (func list)
