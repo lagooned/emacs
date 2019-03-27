@@ -28,7 +28,6 @@
     (progn
       (package-refresh-contents)
       (package-install 'use-package)))
-(setq use-package-always-ensure t)
 (require 'use-package)
 
 (use-package abbrev
