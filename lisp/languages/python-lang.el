@@ -25,7 +25,6 @@
 ;;; Code:
 
 (use-package python-mode
-  :ensure nil
   :commands python-mode
   :init
   (add-hook 'python-mode-hook #'gmacs/python-mode-hook))
