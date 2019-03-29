@@ -735,8 +735,8 @@ START and END are buffer positions."
 
 (defun gmacs/rename-dired-buffer ()
   (interactive)
-  (unless (string-match-p "dired:" (buffer-name))
-    (rename-buffer (concat "dired:" (generate-new-buffer-name dired-directory)))))
+  (unless (string-match-p (concat "dired" uniquify-separator) (buffer-name))
+    (rename-buffer (concat "dired" uniquify-separator (generate-new-buffer-name dired-directory)))))
 
 (defun gmacs/unpropertize-kill-ring ()
   (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
