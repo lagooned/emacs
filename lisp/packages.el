@@ -148,27 +148,6 @@
   :config
   (elscreen-start))
 
-(use-package erc
-  :commands erc
-  :config
-  (require 'erc-services nil t)
-  (erc-services-mode 1)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-hide-list '("PART" "QUIT" "JOIN"))
-  (setq erc-server-coding-system '(utf-8 . utf-8)
-        erc-server "irc.freenode.net"
-        erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
-        erc-prompt-for-password nil
-        erc-prompt (lambda () (concat (buffer-name) ">"))
-        erc-server-send-ping-interval 10
-        erc-server-send-ping-timeout 180
-        erc-server-reconnect-timeout 60
-        erc-prompt-for-nickserv-password nil
-        ;; erc-kill-buffer-on-part t
-        ;; erc-server-auto-reconnect t
-        ;; erc-kill-server-buffer-on-quit t
-        erc-kill-queries-on-quit t))
-
 (use-package eshell
   :init
   (setq eshell-banner-message 'gmacs/eshell-message

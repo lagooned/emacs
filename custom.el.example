@@ -5,8 +5,7 @@
       user-mail-address "jhd@example.com"
       calendar-latitude 29.8724
       calendar-longitude -95.57
-      calendar-location-name "Houston, TX"
-      erc-nick "jhd")
+      calendar-location-name "Houston, TX")
 
 ;; set font on windows
 (when (eq system-type 'windows-nt)
