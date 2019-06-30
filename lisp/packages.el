@@ -114,7 +114,8 @@
   (put 'dired-find-alternate-file 'disabled nil)
   (add-hook 'dired-mode-hook #'gmacs/rename-dired-buffer)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
-  (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message))
+  (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message)
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode))
 
 (use-package dired-x
   :after dired
