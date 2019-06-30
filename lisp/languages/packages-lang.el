@@ -33,7 +33,6 @@
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 (use-package prog-mode
-  :ensure nil
   :commands prog-mode
   :init
   (add-hook 'prog-mode-hook #'too-long-lines-mode)
@@ -55,7 +54,6 @@
   :commands groovy-mode)
 
 (use-package xref
-  :ensure nil
   :bind
   (:map xref--button-map
         ("C-j" . xref-goto-xref))
@@ -95,7 +93,6 @@
   (dap-ui-mode 1))
 
 (use-package nxml-mode
-  :ensure nil
   :init
   (setq nxml-child-indent 4))
 

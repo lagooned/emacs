@@ -28,17 +28,14 @@
     (progn
       (package-refresh-contents)
       (package-install 'use-package)))
-(setq use-package-always-ensure t)
 (require 'use-package)
 
 (use-package abbrev
-  :ensure nil
   :diminish abbrev-mode "ab")
 
 (use-package alpha)
 
 (use-package autorevert
-  :ensure nil
   :init
   (setq auto-revert-verbose nil)
   (add-hook
@@ -113,7 +110,6 @@
 
 (use-package dired
   :commands dired
-  :ensure nil
   :init
   (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil)
@@ -122,7 +118,6 @@
   (add-hook 'dired-mode-hook #'gmacs/enable-truncate-lines-no-message))
 
 (use-package dired-x
-  :ensure nil
   :after dired
   :config
   (setq dired-omit-files
@@ -151,27 +146,6 @@
         elscreen-display-tab nil)
   :config
   (elscreen-start))
-
-(use-package erc
-  :commands erc
-  :config
-  (require 'erc-services nil t)
-  (erc-services-mode 1)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-hide-list '("PART" "QUIT" "JOIN"))
-  (setq erc-server-coding-system '(utf-8 . utf-8)
-        erc-server "irc.freenode.net"
-        erc-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
-        erc-prompt-for-password nil
-        erc-prompt (lambda () (concat (buffer-name) ">"))
-        erc-server-send-ping-interval 10
-        erc-server-send-ping-timeout 180
-        erc-server-reconnect-timeout 60
-        erc-prompt-for-nickserv-password nil
-        ;; erc-kill-buffer-on-part t
-        ;; erc-server-auto-reconnect t
-        ;; erc-kill-server-buffer-on-quit t
-        erc-kill-queries-on-quit t))
 
 (use-package eshell
   :init
@@ -300,7 +274,6 @@
 
 (use-package hi-lock
   :diminish hi-lock-mode "hi"
-  :ensure nil
   :init
   (defface hi-magenta
     '((((background dark)) (:background "magenta" :foreground "black"))
@@ -316,8 +289,6 @@
 
 (use-package ivy
   :diminish ivy-mode
-  :ensure ivy-hydra
-  :ensure avy
   :bind
   (:map ivy-minibuffer-map
         ("M--" . counsel-up-directory))
@@ -403,7 +374,6 @@
 
 (use-package recentf
   :defer t
-  :ensure nil
   :commands counsel-recentf
   :config
   (setq recentf-max-menu-items 0
@@ -454,18 +424,15 @@
   (tiny-setup-default))
 
 (use-package too-long-lines-mode
-  :diminish too-long-lines-mode
-  :ensure nil)
+  :diminish too-long-lines-mode)
 
 (use-package try
   :commands try)
 
 (use-package undo-tree
-  :ensure nil
   :diminish undo-tree-mode "ut")
 
 (use-package uniquify
-  :ensure nil
   :config
   (setq uniquify-buffer-name-style 'reverse
         uniquify-after-kill-buffer-p t
@@ -473,7 +440,6 @@
         uniquify-ignore-buffers-re "^\\*"))
 
 (use-package winner
-  :ensure nil
   :config
   (winner-mode 1))
 
@@ -520,7 +486,6 @@
   (which-key-mode 1))
 
 (use-package whitespace
-  :ensure nil
   :init
   (setq whitespace-display-mappings
         '((tab-mark ?\t [?› ?\t])
@@ -530,7 +495,6 @@
   (setq whitespace-line-column 100))
 
 (use-package wdired
-  :ensure nil
   :init
   (setq wdired-allow-to-change-permissions t
         wdired-allow-to-redirect-linkst t))
