@@ -43,8 +43,7 @@
   (setq auto-revert-verbose nil)
   (add-hook
    'auto-revert-mode-hook
-   (lambda () (diminish 'auto-revert-mode)))
-  (global-auto-revert-mode 1))
+   (lambda () (diminish 'auto-revert-mode))))
 
 (use-package avy)
 
