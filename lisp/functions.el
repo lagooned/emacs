@@ -261,18 +261,17 @@ initial input `INITIAL-INPUT'."
   (interactive)
   (counsel-require-program (car (split-string counsel-git-cmd)))
   (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
-         (cands
-          (flatmap
-           'last
-           (seq-filter
-            #'gmacs/directory-ls-tree-entry-p
-            (mapcar
-             'split-string
-             (cdr
-              (split-string
-               (shell-command-to-string gmacs/git-ls-tree-head-cmd)
-               "\n"
-               t)))))))
+         (cands (flatmap
+                 'last
+                 (seq-filter
+                  #'gmacs/directory-ls-tree-entry-p
+                  (mapcar
+                   'split-string
+                   (cdr
+                    (split-string
+                     (shell-command-to-string gmacs/git-ls-tree-head-cmd)
+                     "\n"
+                     t)))))))
     (ivy-read (projectile-prepend-project-name "Find dir: ") cands
               :initial-input initial-input
               :action #'counsel-projectile-find-dir-action
