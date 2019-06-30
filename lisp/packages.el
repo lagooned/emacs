@@ -109,7 +109,6 @@
             ("Oa" counsel-projectile-switch-project-action-org-agenda "open project agenda"))))
 
 (use-package dired
-  :commands dired
   :init
   (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil)
@@ -120,6 +119,7 @@
 (use-package dired-x
   :after dired
   :config
+  (setq-default dired-omit-mode 1)
   (setq dired-omit-files
         (concat dired-omit-files
                 "\\|^\\..+$\\|^~.+$\\|^#.+$")))
