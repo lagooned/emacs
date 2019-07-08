@@ -331,7 +331,8 @@
     (info-initialize)
     (add-to-list
      'Info-directory-list
-     "~/.emacs.d/packages/magit/Documentation/")))
+     "~/.emacs.d/packages/magit/Documentation/"))
+  (magit-auto-revert-mode 0))
 
 (use-package multiple-cursors
   :config
