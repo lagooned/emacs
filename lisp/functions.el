@@ -158,16 +158,11 @@ then `gmacs/grep-region' in order."
   "Gmacs grep wrapper to take optional `INITIAL' input or \
 prompt for grep command."
   (if initial
-      (grep
-       (concat
-        (eval grep-command)
-        (string-utils/add-quotes
-         (string-utils/escape-str-for-command initial))))
-    (grep
-     (concat
-      (eval grep-command)
-      (string-utils/add-quotes
-       (read-string "grep regexp: "))))))
+      (gmacs/grep-concat-command (lambda () (string-utils/add-quotes (string-utils/escape-str-for-command initial))))
+    (gmacs/grep-concat-command (lambda () (string-utils/add-quotes (read-string "grep regexp: "))))))
+
+(defun gmacs/grep-concat-command (func)
+  (grep (concat (eval grep-command) (funcall func) " | cut -c -1500")))
 
 (defun gmacs/counsel-rg-region ()
   "Optionally run ripgrep on region."
