@@ -81,6 +81,7 @@
 
 ;; decouple window and minibuffer fringes
 (add-hook 'after-init-hook #'gmacs/minibuffer-fringe-setup)
+(gmacs/disable-minibuffer-fringe)
 
 ;; backups
 (setq version-control t
