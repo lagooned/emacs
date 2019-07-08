@@ -191,6 +191,10 @@
 (setq ring-bell-function 'ignore)
 (setq visible-bell nil)
 
+;; time in modeline
+(setq display-time-default-load-average 'nil)
+(display-time-mode 1)
+
 (provide 'global)
 ;;; global.el ends here
 
