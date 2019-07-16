@@ -216,57 +216,6 @@
   :commands
   focus-mode)
 
-(use-package git-gutter
-  :commands git-gutter-mode
-  :diminish git-gutter-mode "gg"
-  :init
-  (when (not (eq system-type 'windows-nt))
-    (add-hook
-     'prog-mode-hook
-     (lambda () (git-gutter-mode 1))))
-  :config
-  (require 'git-gutter-fringe)
-  (setq git-gutter:update-interval 1)
-  (set-face-foreground 'git-gutter-fr:modified "darkorange")
-  (set-face-foreground 'git-gutter-fr:added    "darkorange")
-  (set-face-foreground 'git-gutter-fr:deleted  "darkorange")
-  (fringe-helper-define 'git-gutter-fr:added nil
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX")
-  (fringe-helper-define 'git-gutter-fr:deleted nil
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX")
-  (fringe-helper-define 'git-gutter-fr:modified nil
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"
-    "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX" "XXXXXXXX"))
-
 (use-package grep
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
