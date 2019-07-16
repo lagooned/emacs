@@ -8,7 +8,7 @@
 - =emacs &=
 * usage
 - evil-leader-key is SPC (much like spacemacs)
-  - customize .custom.el by using SPC C . (default)
+  - customize .custom.el by using SPC c . (default)
   - quit/restart with SPC q q and SPC q r (default)
 - use which-key to explore functionality
 - have fun :)
