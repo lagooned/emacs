@@ -39,7 +39,8 @@
     "gg" 'beginning-of-buffer
     "n" 'evil-search-next
     "\C-j" 'next-error-no-select
-    "\C-k" 'previous-error-no-select))
+    "\C-k" 'previous-error-no-select
+    "0" 'evil-beginning-of-line))
 
 
 (provide 'evil-collection-grep)
