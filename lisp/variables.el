@@ -24,7 +24,7 @@
 
 ;;; Code:
 
-(defvar gmacs/evil-base-cursor-height #xfffff
+(defvar gmacs/evil-base-cursor-height #xffff
   "Set the cursor height to be used, note \
 anything over the current line height \
 will be capped at the current line height \
