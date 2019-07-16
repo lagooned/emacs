@@ -328,7 +328,7 @@
   :commands counsel-recentf
   :config
   (setq recentf-max-menu-items 0
-        recentf-max-saved-items 999
+        recentf-max-saved-items 20
         recentf-filename-handlers '(file-truename)
         recentf-exclude
         (list "^/tmp/"
