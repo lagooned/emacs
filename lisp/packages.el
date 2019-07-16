@@ -448,7 +448,7 @@
 (use-package wdired
   :init
   (setq wdired-allow-to-change-permissions t
-        wdired-allow-to-redirect-linkst t))
+        wdired-allow-to-redirect-links t))
 
 (use-package wgrep)
 
