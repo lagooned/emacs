@@ -106,8 +106,9 @@ to sane runtime defaults."
 
 (defun gmacs/minibuffer-fringe-setup ()
   "Decouples the minibuffer's fringe from that of the main buffer."
-  (set-window-fringes (minibuffer-window) 0 0 nil)
-  (add-hook 'minibuffer-setup-hook #'gmacs/disable-minibuffer-fringe))
+  ;; (set-window-fringes (minibuffer-window) 0 0 nil)
+  (add-hook 'minibuffer-setup-hook #'gmacs/disable-minibuffer-fringe)
+  (add-hook 'minibuffer-exit-hook #'gmacs/disable-minibuffer-fringe))
 
 (defun gmacs/disable-minibuffer-fringe ()
   "Disable minibuffer fringe."
