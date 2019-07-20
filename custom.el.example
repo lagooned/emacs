@@ -1,4 +1,4 @@
-;; environment specific values
+;; environment specific values  -*- mode: Emacs-Lisp; -*-
 
 ;; setup user
 (setq user-full-name "John H. Doe"
@@ -40,7 +40,8 @@
 (setq gmacs/force-basic-grep nil)
 
 ;; load theme
-(load-theme 'atom-one-dark t)
+(if (display-graphic-p)
+    (load-theme 'atom-one-dark t))
 
 ;; custom vars
 (custom-set-variables
