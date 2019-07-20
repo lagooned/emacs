@@ -72,7 +72,7 @@
   (evil-collection-init))
 
 ;; insert state
-(define-key evil-insert-state-map (kbd "C-;") 'comment-dwim)
+(define-key evil-insert-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-insert-state-map (kbd "C-j") 'newline)
 (define-key evil-insert-state-map (kbd "C-m") 'newline-and-indent)
 (define-key evil-insert-state-map (kbd "M-.") 'company-complete)
@@ -93,7 +93,7 @@
 
 ;; normal state
 (define-key evil-normal-state-map (kbd "-") 'dired-jump)
-(define-key evil-normal-state-map (kbd "C-;") 'comment-line)
+(define-key evil-normal-state-map (kbd "M-;") 'comment-line)
 (define-key evil-normal-state-map (kbd "C-=") 'er/expand-region)
 (define-key evil-normal-state-map (kbd "C-]") 'gmacs/xref-find-definitions-symbol)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
