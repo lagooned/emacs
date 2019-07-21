@@ -606,6 +606,14 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
 
+(defun gmacs/evil-emmet-mode-setup ()
+  (define-key evil-normal-state-local-map (kbd "M-j") 'emmet-expand-line)
+  (define-key evil-insert-state-local-map (kbd "M-j") 'emmet-expand-line)
+  (define-key evil-normal-state-local-map (kbd "M-l") 'emmet-next-edit-point)
+  (define-key evil-insert-state-local-map (kbd "M-l") 'emmet-next-edit-point)
+  (define-key evil-normal-state-local-map (kbd "M-h") 'emmet-prev-edit-point)
+  (define-key evil-insert-state-local-map (kbd "M-h") 'emmet-prev-edit-point))
+
 (defun gmacs/evil-company-abort-on-insert-leave ()
   "If company mode is currently enabled, run company abort. \
 Note: effective as an evil-insert-state-exit-hook."
