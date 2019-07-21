@@ -1,13 +1,13 @@
 ;;; counsel-projectile.el --- Ivy integration for Projectile -*- lexical-binding: t -*-
 
-;; Copyright (C) 2016-2018 Eric Danan
+;; Copyright (C) 2016-2019 Eric Danan
 
 ;; Author: Eric Danan
 ;; URL: https://github.com/ericdanan/counsel-projectile
-;; Package-Version: 20181020.1906
+;; Package-Version: 20190325.856
 ;; Keywords: project, convenience
-;; Version: 0.3.0-snapshot
-;; Package-Requires: ((counsel "0.10.0") (projectile "1.0.0"))
+;; Version: 0.3.0
+;; Package-Requires: ((counsel "0.11.0") (projectile "2.0.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -243,6 +243,17 @@ If anything goes wrong, throw an error and do not modify ACTION-VAR."
                (cons (counsel-projectile--action-index action-item action-list)
                      (cdr action-list))))))
     (set action-var action-list)))
+
+;; Copy the function `string-trim-right' from emacs 26 here so as to
+;; support emacs 25 (the function exists in emacs 25 but doesn't
+;; accept the REGEXP optional argument).
+(defsubst counsel-projectile--string-trim-right (string &optional regexp)
+  "Trim STRING of trailing string matching REGEXP.
+
+REGEXP defaults to  \"[ \\t\\n\\r]+\"."
+  (if (string-match (concat "\\(?:" (or regexp "[ \t\n\r]+") "\\)\\'") string)
+      (replace-match "" t t string)
+    string))
 
 ;;* counsel-projectile-find-file
 
@@ -610,9 +621,9 @@ Note that you can always insert the value
 of `(ivy-thing-at-point)' by hitting \"M-n\" in the minibuffer."
   :type '(choice
           (const :tag "None" nil)
-          (const :tag "Symbol at point (generic)" '(thing-at-point 'symbol t))
-          (const :tag "Symbol or selection at point (projectile)" '(projectile-symbol-or-selection-at-point))
-          (const :tag "Thing at point (ivy)" '(ivy-thing-at-point))
+          (const :tag "Symbol at point (generic)" (thing-at-point 'symbol t))
+          (const :tag "Symbol or selection at point (projectile)" (projectile-symbol-or-selection-at-point))
+          (const :tag "Thing at point (ivy)" (ivy-thing-at-point))
           (sexp  :tag "Custom expression"))
   :group 'counsel-projectile)
 
@@ -646,11 +657,9 @@ construct the command.")
 
 (defun counsel-projectile-grep-function (string)
   "Grep for STRING in the current project."
-  (or (counsel-more-chars)
+  (or (ivy-more-chars)
       (let ((default-directory (ivy-state-directory ivy-last))
-            (regex (counsel-unquote-regex-parens
-                    (setq ivy--old-re
-                          (ivy--regex string)))))
+            (regex (counsel--grep-regex string)))
         (counsel--async-command (format counsel-projectile-grep-command
                                         (shell-quote-argument regex)))
         nil)))
@@ -672,24 +681,8 @@ construct the command.")
 
 (defun counsel-projectile-grep-occur ()
   "Generate a custom occur buffer for `counsel-projectile-grep'."
-  ;; Copied from `counsel-grep-like-occur', except that we don't
-  ;; prepend "./" to the candidates since grep already does so.
-  (unless (eq major-mode 'ivy-occur-grep-mode)
-    (ivy-occur-grep-mode)
-    (setq default-directory (ivy-state-directory ivy-last)))
-  (setq ivy-text
-        (and (string-match "\"\\(.*\\)\"" (buffer-name))
-             (match-string 1 (buffer-name))))
-  (let* ((cmd (format counsel-projectile-grep-command
-                      (shell-quote-argument
-                       (counsel-unquote-regex-parens
-                        (ivy--regex ivy-text)))))
-         (cands (split-string (shell-command-to-string cmd) "\n" t)))
-    ;; Need precise number of header lines for `wgrep' to work.
-    (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
-                    default-directory))
-    (insert (format "%d candidates:\n" (length cands)))
-    (ivy--occur-insert-lines cands)))
+  (counsel-grep-like-occur
+   counsel-projectile-grep-command))
 
 ;;;###autoload
 (defun counsel-projectile-grep (&optional options-or-cmd)
@@ -734,7 +727,7 @@ called with a prefix argument."
               (format counsel-projectile-grep-base-command ignored path))
         (ivy-read (projectile-prepend-project-name "grep: ")
                   #'counsel-projectile-grep-function
-                  :initial-input counsel-projectile-grep-initial-input
+                  :initial-input (eval counsel-projectile-grep-initial-input)
                   :dynamic-collection t
                   :keymap counsel-ag-map
                   :history 'counsel-git-grep-history
@@ -744,6 +737,7 @@ called with a prefix argument."
                             (swiper--cleanup))
                   :caller 'counsel-projectile-grep)))))
 
+(cl-pushnew 'counsel-projectile-grep ivy-highlight-grep-commands)
 (counsel-set-async-exit-code 'counsel-projectile-grep 1 "No matches found")
 (ivy-set-occur 'counsel-projectile-grep 'counsel-projectile-grep-occur)
 (ivy-set-display-transformer 'counsel-projectile-grep  'counsel-projectile-grep-transformer)
@@ -766,13 +760,13 @@ with a prefix argument."
                         (car (projectile-parse-dirconfig-file)))
                        " "))
            (counsel-git-grep-cmd-default
-            (concat (string-trim-right counsel-git-grep-cmd-default " \\.")
+            (concat (counsel-projectile--string-trim-right counsel-git-grep-cmd-default " \\.")
                     " " path)))
       (ivy-add-actions
        'counsel-git-grep
        counsel-projectile-git-grep-extra-actions)
       (counsel-git-grep (or current-prefix-arg cmd)
-                        counsel-projectile-grep-initial-input))))
+                        (eval counsel-projectile-grep-initial-input)))))
 
 ;;* counsel-projectile-ag
 
@@ -785,9 +779,9 @@ Note that you can always insert the value
 of `(ivy-thing-at-point)' by hitting \"M-n\" in the minibuffer."
   :type '(choice
           (const :tag "None" nil)
-          (const :tag "Symbol at point (generic)" '(thing-at-point 'symbol t))
-          (const :tag "Symbol or selection at point (projectile)" '(projectile-symbol-or-selection-at-point))
-          (const :tag "Thing at point (ivy)" '(ivy-thing-at-point))
+          (const :tag "Symbol at point (generic)" (thing-at-point 'symbol t))
+          (const :tag "Symbol or selection at point (projectile)" (projectile-symbol-or-selection-at-point))
+          (const :tag "Thing at point (ivy)" (ivy-thing-at-point))
           (sexp  :tag "Custom expression"))
   :group 'counsel-projectile)
 
@@ -833,7 +827,7 @@ is called with a prefix argument."
                         (projectile-ignored-directories-rel))
                        " "))
            (counsel-ag-base-command
-            (format (string-trim-right counsel-ag-base-command " \\.")
+            (format (counsel-projectile--string-trim-right counsel-ag-base-command " \\.")
                     (concat ignored " %s " path))))
       (ivy-add-actions
        'counsel-ag
@@ -842,7 +836,7 @@ is called with a prefix argument."
                   (projectile-project-root)
                   options
                   (projectile-prepend-project-name
-                   (car (split-string counsel-ag-base-command)))))))
+                   (concat (car (split-string counsel-ag-base-command)) ": "))))))
 
 ;;* counsel-projectile-rg
 
@@ -855,9 +849,9 @@ Note that you can always insert the value
 of `(ivy-thing-at-point)' by hitting \"M-n\" in the minibuffer."
   :type '(choice
           (const :tag "None" nil)
-          (const :tag "Symbol at point (generic)" '(thing-at-point 'symbol t))
-          (const :tag "Symbol or selection at point (projectile)" '(projectile-symbol-or-selection-at-point))
-          (const :tag "Thing at point (ivy)" '(ivy-thing-at-point))
+          (const :tag "Symbol at point (generic)" (thing-at-point 'symbol t))
+          (const :tag "Symbol or selection at point (projectile)" (projectile-symbol-or-selection-at-point))
+          (const :tag "Thing at point (ivy)" (ivy-thing-at-point))
           (sexp  :tag "Custom expression"))
   :group 'counsel-projectile)
 
@@ -905,7 +899,7 @@ is called with a prefix argument."
                         (projectile-ignored-directories-rel))
                        " "))
            (counsel-rg-base-command
-            (format (string-trim-right counsel-rg-base-command " \\.")
+            (format (counsel-projectile--string-trim-right counsel-rg-base-command " \\.")
                     (concat ignored " %s " path))))
       (ivy-add-actions
        'counsel-ag
@@ -914,7 +908,7 @@ is called with a prefix argument."
                   (projectile-project-root)
                   options
                   (projectile-prepend-project-name
-                   (car (split-string counsel-rg-base-command)))))))
+                   (concat (car (split-string counsel-rg-base-command)) ": "))))))
 
 ;;* counsel-projectile-org-capture
 

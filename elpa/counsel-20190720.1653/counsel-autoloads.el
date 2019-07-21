@@ -19,6 +19,11 @@ Common Lisp completion at point.
 
 \(fn)" t nil)
 
+(autoload 'counsel-jedi "counsel" "\
+Python completion at point.
+
+\(fn)" t nil)
+
 (autoload 'counsel-clj "counsel" "\
 Clojure completion at point.
 
@@ -51,7 +56,7 @@ to `ivy-highlight-face'.
 \(fn)" t nil)
 
 (autoload 'counsel-set-variable "counsel" "\
-Set a variable, with completion.
+Set a variable SYM, with completion.
 
 When the selected variable is a `defcustom' with the type boolean
 or radio, offer completion of all possible values.
@@ -72,7 +77,8 @@ a symbol and how to search for them.
 \(fn)" t nil)
 
 (autoload 'counsel-info-lookup-symbol "counsel" "\
-Forward to `info-lookup-symbol' with ivy completion.
+Forward SYMBOL to `info-lookup-symbol' with ivy completion.
+With prefix arg MODE a query for the symbol help mode is offered.
 
 \(fn SYMBOL &optional MODE)" t nil)
 
@@ -83,6 +89,11 @@ This function integrates with either the `amx' or `smex' package
 when available, in that order of precedence.
 
 \(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-command-history "counsel" "\
+Show the history of commands.
+
+\(fn)" t nil)
 
 (autoload 'counsel-load-library "counsel" "\
 Load a selected the Emacs Lisp library.
@@ -110,6 +121,11 @@ BUFFER defaults to the current one.
 
 \(fn &optional PREFIX BUFFER)" t nil)
 
+(autoload 'counsel-describe-face "counsel" "\
+Completion for `describe-face'.
+
+\(fn)" t nil)
+
 (autoload 'counsel-faces "counsel" "\
 Complete faces with preview.
 Actions are provided by default for describing or customizing the
@@ -124,7 +140,7 @@ INITIAL-INPUT can be given as the initial minibuffer input.
 \(fn &optional INITIAL-INPUT)" t nil)
 
 (autoload 'counsel-git-grep "counsel" "\
-Grep for a string in the current git repository.
+Grep for a string in the current Git repository.
 When CMD is a string, use it as a \"git grep\" command.
 When CMD is non-nil, prompt for a specific \"git grep\" command.
 INITIAL-INPUT can be given as the initial minibuffer input.
@@ -157,6 +173,12 @@ When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
 
 \(fn &optional INITIAL-INPUT)" t nil)
 
+(autoload 'counsel-dired "counsel" "\
+Forward to `dired'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
 (autoload 'counsel-recentf "counsel" "\
 Find a file on `recentf-list'.
 
@@ -184,6 +206,11 @@ so: `(set-register ?i \"/home/eric/.emacs.d/init.el\")'.  Now you
 can use `C-x r j i' to open that file.
 
 \(fn)" t nil)
+
+(autoload 'counsel-locate-action-extern "counsel" "\
+Pass X to `xdg-open' or equivalent command via the shell.
+
+\(fn X)" t nil)
 
 (autoload 'counsel-locate "counsel" "\
 Call the \"locate\" shell command.
@@ -218,7 +245,7 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 \(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
 
 (autoload 'counsel-dired-jump "counsel" "\
-Jump to a directory (in dired) below the current directory.
+Jump to a directory (see `dired-jump') below the current directory.
 List all subdirectories within the current directory.
 INITIAL-INPUT can be given as the initial minibuffer input.
 INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
@@ -231,8 +258,9 @@ INITIAL-INPUT can be given as the initial minibuffer input.
 INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 EXTRA-AG-ARGS string, if non-nil, is appended to `counsel-ag-base-command'.
 AG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+CALLER is passed to `ivy-read'.
 
-\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-AG-ARGS AG-PROMPT)" t nil)
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-AG-ARGS AG-PROMPT &key CALLER)" t nil)
 
 (autoload 'counsel-pt "counsel" "\
 Grep for a string in the current directory using pt.
@@ -257,6 +285,9 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
 RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
 
+Example input with inclusion and exclusion file patterns:
+    -g*.py -g!*test* -- ...
+
 \(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT)" t nil)
 
 (autoload 'counsel-grep "counsel" "\
@@ -265,11 +296,37 @@ When non-nil, INITIAL-INPUT is the initial search pattern.
 
 \(fn &optional INITIAL-INPUT)" t nil)
 
+(autoload 'counsel-grep-backward "counsel" "\
+Grep for a string in the file visited by the current buffer going
+backward similar to `swiper-backward'. When non-nil, INITIAL-INPUT is
+the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
 (autoload 'counsel-grep-or-swiper "counsel" "\
 Call `swiper' for small buffers and `counsel-grep' for large ones.
 When non-nil, INITIAL-INPUT is the initial search pattern.
 
 \(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper-backward "counsel" "\
+Call `swiper-backward' for small buffers and `counsel-grep-backward' for
+large ones.  When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recoll "counsel" "\
+Search for a string in the recoll database.
+You'll be given a list of files that match.
+Selecting a file will launch `swiper' for that file.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel--org-get-tags "counsel" "\
+
+
+\(fn)" nil nil)
 
 (autoload 'counsel-org-tag "counsel" "\
 Add or remove tags in `org-mode'.
@@ -308,6 +365,27 @@ Choose from headers of `org-mode' files in the agenda.
 
 \(fn)" t nil)
 
+(autoload 'counsel-mark-ring "counsel" "\
+Browse `mark-ring' interactively.
+Obeys `widen-automatically', which see.
+
+\(fn)" t nil)
+
+(autoload 'counsel-package "counsel" "\
+Install or delete packages.
+
+Packages not currently installed are prefixed with \"+\", and
+selecting one of these will try to install it.
+Packages currently installed are prefixed with \"-\", and
+selecting one of these will try to delete it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Describe package
+  \\[ivy-dispatching-done] h: Visit package's homepage
+
+\(fn)" t nil)
+
 (autoload 'counsel-tmm "counsel" "\
 Text-mode emulation of looking and choosing from a menubar.
 
@@ -325,6 +403,16 @@ Note: Duplicate elements of `kill-ring' are always deleted.
 
 \(fn &optional ARG)" t nil)
 
+(autoload 'counsel-register "counsel" "\
+Interactively choose a register.
+
+\(fn)" t nil)
+
+(autoload 'counsel-evil-registers "counsel" "\
+Ivy replacement for `evil-show-registers'.
+
+\(fn)" t nil)
+
 (autoload 'counsel-imenu "counsel" "\
 Jump to a buffer position indexed by imenu.
 
@@ -334,17 +422,6 @@ Jump to a buffer position indexed by imenu.
 Offer completion for `process-list'.
 The default action deletes the selected process.
 An extra action allows to switch to the process buffer.
-
-\(fn)" t nil)
-
-(autoload 'counsel-expression-history "counsel" "\
-Select an element of `read-expression-history'.
-And insert it into the minibuffer.  Useful during `eval-expression'.
-
-\(fn)" t nil)
-
-(autoload 'counsel-shell-command-history "counsel" "\
-Browse shell command history.
 
 \(fn)" t nil)
 
@@ -360,6 +437,21 @@ Browse Eshell history.
 
 (autoload 'counsel-shell-history "counsel" "\
 Browse shell history.
+
+\(fn)" t nil)
+
+(autoload 'counsel-hydra-heads "counsel" "\
+Call a head of the current/last hydra.
+
+\(fn)" t nil)
+
+(autoload 'counsel-semantic "counsel" "\
+Jump to a semantic tag in the current buffer.
+
+\(fn)" t nil)
+
+(autoload 'counsel-semantic-or-imenu "counsel" "\
+
 
 \(fn)" t nil)
 
@@ -404,10 +496,55 @@ selected color.
 (autoload 'counsel-rhythmbox "counsel" "\
 Choose a song from the Rhythmbox library to play or enqueue.
 
-\(fn)" t nil)
+\(fn &optional ARG)" t nil)
 
 (autoload 'counsel-linux-app "counsel" "\
 Launch a Linux desktop application, similar to Alt-<F2>.
+When ARG is non-nil, ignore NoDisplay property in *.desktop files.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-wmctrl "counsel" "\
+Select a desktop window using wmctrl.
+
+\(fn)" t nil)
+
+(autoload 'counsel-switch-buffer "counsel" "\
+Switch to another buffer.
+Display a preview of the selected ivy completion candidate buffer
+in the current window.
+
+\(fn)" t nil)
+
+(autoload 'counsel-switch-buffer-other-window "counsel" "\
+Switch to another buffer in another window.
+Display a preview of the selected ivy completion candidate buffer
+in the current window.
+
+\(fn)" t nil)
+
+(autoload 'counsel-compile "counsel" "\
+Call `compile' completing with smart suggestions, optionally for DIR.
+
+\(fn &optional DIR)" t nil)
+
+(autoload 'counsel-compile-env "counsel" "\
+Update `counsel-compile-env' interactively.
+
+\(fn)" t nil)
+
+(autoload 'counsel-minor "counsel" "\
+Enable or disable minor mode.
+
+Disabled minor modes are prefixed with \"+\", and
+selecting one of these will enable it.
+Enabled minor modes are prefixed with \"-\", and
+selecting one of these will enable it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Go to minor mode definition
+  \\[ivy-dispatching-done] h: Describe minor mode
 
 \(fn)" t nil)
 
