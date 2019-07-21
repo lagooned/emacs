@@ -2,7 +2,7 @@
 
 ;; Copyright (c) 2013 Spotify AB
 ;; Package-Requires: ((emacs "24") (s "1.12"))
-;; Package-Version: 20181104.1800
+;; Package-Version: 20190505.1807
 ;; Homepage: https://github.com/spotify/dockerfile-mode
 ;;
 ;; Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -42,6 +42,11 @@
   "*Hook called by `dockerfile-mode'."
   :type 'hook
   :group 'dockerfile)
+
+(defcustom dockerfile-mode-command "docker"
+  "Which binary to use to build images"
+  :group 'dockerfile
+  :type 'string)
 
 (defcustom dockerfile-use-sudo nil
   "Runs docker builder command with sudo."
@@ -166,8 +171,9 @@ If prefix arg NO-CACHE is set, don't cache the image."
   (if (stringp image-name)
       (compilation-start
        (format
-        "%sdocker build %s -t %s %s -f %s %s"
+        "%s%s build %s -t %s %s -f %s %s"
         (if dockerfile-use-sudo "sudo " "")
+	dockerfile-mode-command
         (if no-cache "--no-cache" "")
         (shell-quote-argument image-name)
         (dockerfile-build-arg-string)
