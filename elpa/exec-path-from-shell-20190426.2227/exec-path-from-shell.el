@@ -5,7 +5,7 @@
 ;; Author: Steve Purcell <steve@sanityinc.com>
 ;; Keywords: unix, environment
 ;; URL: https://github.com/purcell/exec-path-from-shell
-;; Package-Version: 20180323.1904
+;; Package-Version: 20190426.2227
 ;; Package-X-Original-Version: 0
 
 ;; This file is not part of GNU Emacs.
@@ -120,9 +120,12 @@ See documentation for `exec-path-from-shell-shell-name'."
    (error "SHELL environment variable is unset")))
 
 (defcustom exec-path-from-shell-arguments
-  (if (string-match-p "t?csh$" (exec-path-from-shell--shell))
-      (list "-d")
-    (list "-l" "-i"))
+  (let ((shell (exec-path-from-shell--shell)))
+    (if (string-match-p "t?csh$" shell)
+        (list "-d")
+      (if (string-match-p "fish" shell)
+          (list "-l")
+        (list "-l" "-i"))))
   "Additional arguments to pass to the shell.
 
 The default value denotes an interactive login shell."
@@ -178,6 +181,8 @@ shell-escaped, so they may contain $ etc."
 
 Execute the shell according to `exec-path-from-shell-arguments'.
 The result is a list of (NAME . VALUE) pairs."
+  (when (file-remote-p default-directory)
+    (error "You cannot run exec-path-from-shell from a remote buffer (Tramp, etc.)"))
   (let* ((random-default (md5 (format "%s%s%s" (emacs-pid) (random) (current-time))))
          (dollar-names (mapcar (lambda (n) (format "${%s-%s}" n random-default)) names))
          (values (split-string (exec-path-from-shell-printf
