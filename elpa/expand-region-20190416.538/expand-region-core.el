@@ -44,22 +44,17 @@
 (defvar er/try-expand-list nil
   "A list of functions that are tried when expanding.")
 
-(defvar er--transient-mark-mode-before-expanding nil
-  "The value of transient mark mode before expanding.")
+(defvar er/save-mode-excursion nil
+  "A function to save excursion state when expanding.")
 
 (defun er--prepare-expanding ()
-  (when (er--first-invocation)
-    (setq er--transient-mark-mode-before-expanding transient-mark-mode))
-
   (when (and (er--first-invocation)
              (not (use-region-p)))
     (push-mark nil t)  ;; one for keeping starting position
     (push-mark nil t)) ;; one for replace by set-mark in expansions
 
-  (when (and (er--first-invocation)
-             (or (not (eq t transient-mark-mode))
-                 shift-select-mode))
-    (setq transient-mark-mode (cons 'only transient-mark-mode))))
+  (when (not transient-mark-mode)
+    (setq-local transient-mark-mode (cons 'only transient-mark-mode))))
 
 (defun er--copy-region-to-register ()
   (when (and (stringp expand-region-autocopy-register)
@@ -72,6 +67,13 @@
   (when (< emacs-major-version 25)
     (defmacro save-mark-and-excursion (&rest body)
       `(save-excursion ,@body))))
+
+(defmacro er--save-excursion (&rest body)
+  `(let ((action (lambda ()
+                   (save-mark-and-excursion ,@body))))
+     (if er/save-mode-excursion
+         (funcall er/save-mode-excursion action)
+       (funcall action))))
 
 (defun er--expand-region-1 ()
   "Increase selected region by semantic units.
@@ -104,7 +106,7 @@ moving point or mark as little as possible."
       (setq start (point)))
 
     (while try-list
-      (save-mark-and-excursion
+      (er--save-excursion
        (ignore-errors
          (funcall (car try-list))
          (when (and (region-active-p)
@@ -155,11 +157,10 @@ before calling `er/expand-region' for the first time."
     (when er/history
       ;; Be sure to reset them all if called with 0
       (when (= arg 0)
-        (setq arg (length er/history))
-        (setq transient-mark-mode er--transient-mark-mode-before-expanding))
+        (setq arg (length er/history)))
 
       (when (not transient-mark-mode)
-        (setq transient-mark-mode (cons 'only transient-mark-mode)))
+        (setq-local transient-mark-mode (cons 'only transient-mark-mode)))
 
       ;; Advance through the list the desired distance
       (while (and (cdr er/history)
@@ -286,6 +287,14 @@ remove the keymap depends on user input and KEEP-PRED:
     (dolist (buffer (buffer-list))
       (with-current-buffer buffer
         (when (derived-mode-p mode)
+          (funcall add-fn))))))
+
+(defun er/enable-minor-mode-expansions (mode add-fn)
+  (add-hook (intern (format "%s-hook" mode)) add-fn)
+  (save-window-excursion
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (symbol-value mode)
           (funcall add-fn))))))
 
 ;; Some more performant version of `looking-back'
