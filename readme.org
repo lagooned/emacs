@@ -1,6 +1,10 @@
 #+title: gmacs
 #+author: jared engler
 
+* disclaimer
+- this is a personal config that i use all the time
+  - master will change without warning as i find new things to add
+  - fork if necessary
 * install
 - =git clone https://github.com/lagooned/emacs.git=
 - =ln -s ./emacs ~/.emacs.d=
@@ -13,9 +17,6 @@
 - use which-key to explore functionality
 - have fun :)
 * future
-- this is a personal that i use all the time
-  - master will change without warning as i find new things to add
-  - fork if necessary
 - better way of managing keybinds
   - global keybinds conflict with evil philosophy
     - better way to unbindall that doesn't make emacs unusuable if config breaks
