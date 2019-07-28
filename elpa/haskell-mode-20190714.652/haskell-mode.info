@@ -1,4 +1,4 @@
-This is haskell-mode.info, produced by makeinfo version 6.1 from
+This is haskell-mode.info, produced by makeinfo version 6.5 from
 haskell-mode.texi.
 
 This manual is for Haskell mode, version 16.1-git
@@ -349,7 +349,7 @@ loaded and available packages.  Also it completes symbols querying REPL
 with ‘:complete’ command, hence completion candidate list also includes
 symbols from imported modules.
 
-   Unfortunatelly, it is not possible to provide candidates for
+   Unfortunately, it is not possible to provide candidates for
 identifiers defined locally in ‘let’ and ‘where’ blocks even in
 interactive mode.  But if you’re using company-mode
 (http://company-mode.github.io/) you can override ‘company-backends’
@@ -1434,7 +1434,34 @@ expressions.  To do that, configure the variable
    There you can choose ‘haskell-mode‘, for example, to pretty print the
 output as Haskell.
 
-13.8.7 Presentations
+13.8.7 SVG images rendering
+---------------------------
+
+If you are working on SVG images, you can instruct Emacs to render the
+image as the output of an image producing command at the REPL.
+
+   The following example uses the ‘diamgrams’ library with the default
+SVG backend to produce a circle:
+
+         {-# LANGUAGE OverloadedStrings #-}
+
+         import Diagrams.Prelude
+         import Diagrams.Backend.SVG
+
+         myCircle :: Diagram B
+         myCircle = circle 1 # lc purple # fc yellow
+
+         circle = renderDia SVG (SVGOptions (mkWidth 250) Nothing "" [] True) myCircle
+
+   After enabling SVG rendering with ‘M-x
+haskell-svg-toggle-render-images’, if you load the above code and type
+‘circle’ at the REPL, you will see the rendered circle instead of the
+XML representation of the image.
+
+   This feature can be enabled by default by setting the customization
+variable ‘haskell-svg-render-images’ to a non-nil value.
+
+13.8.8 Presentations
 --------------------
 
 If you have the ‘present’ package installed, you can use the following
@@ -1459,23 +1486,23 @@ You can click the ‘[Integer]’ or press ‘RET’ on it to expand further:
 
    Etc.  Remember: this only works for instances of ‘Data.Data.Data’.
 
-13.8.8 History
+13.8.9 History
 --------------
 
 A history is maintained for the duration of the REPL buffer.  To go up
 and down in the history, run ‘M-p’ for previous and ‘M-n’ for next.
 
-13.8.9 Cancelling commands
---------------------------
+13.8.10 Cancelling commands
+---------------------------
 
 To cancel a running REPL command, run ‘C-c C-c’.
 
-13.8.10 Clear the REPL
+13.8.11 Clear the REPL
 ----------------------
 
 Run ‘C-c C-k’ to clear the REPL.
 
-13.8.11 Trick: Put Interactive REPL in Separate Frame
+13.8.12 Trick: Put Interactive REPL in Separate Frame
 -----------------------------------------------------
 
 The following ‘create-haskell-interactive-frame’ is a quick hack to move
@@ -1495,7 +1522,7 @@ layout of windows in Emacs.
        (delete-window))
 
 
-13.8.12 Troubleshooting
+13.8.13 Troubleshooting
 -----------------------
 
 If the REPL ever goes funny, you can clear the command queue via:
@@ -2327,10 +2354,13 @@ Concept index
 * customizing <1>:                       Interactive Haskell. (line  53)
 * haskell-mode:                          Editing Haskell Code.
                                                               (line   6)
+* Images, rendering SVG images:          Interactive Haskell. (line 614)
 * indentation:                           Indentation.         (line   6)
 * layout rule:                           Indentation.         (line   6)
 * off-side rule:                         Indentation.         (line   6)
 * rectangle:                             Indentation.         (line  49)
+* Rendering SVG images:                  Interactive Haskell. (line 614)
+* SVG images, rendering:                 Interactive Haskell. (line 614)
 * testing:                               Interactive Haskell. (line 470)
 * Unicode:                               Unicode support.     (line   6)
 
@@ -2351,6 +2381,7 @@ Function index
 * haskell-mode:                          Editing Haskell Code.
                                                               (line   6)
 * haskell-session-change-target:         Interactive Haskell. (line 463)
+* haskell-svg-toggle-render-images:      Interactive Haskell. (line 630)
 
 
 File: haskell-mode.info,  Node: Variable index,  Prev: Function index,  Up: Top
@@ -2386,6 +2417,7 @@ Variable index
 * haskell-process-path-stack:            Interactive Haskell. (line  76)
 * haskell-process-type:                  Interactive Haskell. (line  76)
 * haskell-quasi-quote-face:              Syntax highlighting. (line  36)
+* haskell-svg-render-images:             Interactive Haskell. (line 635)
 * haskell-type-face:                     Syntax highlighting. (line  29)
 
 
@@ -2397,25 +2429,25 @@ Node: Installation4173
 Node: Editing Haskell Code6796
 Node: Syntax highlighting10556
 Node: Completion support12816
-Node: Unicode support14860
-Node: Indentation19532
-Node: External indentation23008
-Node: Autoformating23736
-Node: Module templates24364
-Node: Declaration scanning24794
-Node: Compilation28082
-Node: Interactive Haskell31987
-Node: Editing Cabal files62914
-Node: Browsing Haddocks63661
-Node: Spell checking strings and comments66486
-Node: Aligning code67592
-Node: Rectangular commands69337
-Node: REPL70857
-Node: Collapsing Haskell code75635
-Node: Getting Help and Reporting Bugs78243
-Node: Concept index79287
-Node: Function index80326
-Node: Variable index81048
+Node: Unicode support14859
+Node: Indentation19531
+Node: External indentation23007
+Node: Autoformating23735
+Node: Module templates24363
+Node: Declaration scanning24793
+Node: Compilation28081
+Node: Interactive Haskell31986
+Node: Editing Cabal files63863
+Node: Browsing Haddocks64610
+Node: Spell checking strings and comments67435
+Node: Aligning code68541
+Node: Rectangular commands70286
+Node: REPL71806
+Node: Collapsing Haskell code76584
+Node: Getting Help and Reporting Bugs79192
+Node: Concept index80236
+Node: Function index81494
+Node: Variable index82289
 
 End Tag Table
 
