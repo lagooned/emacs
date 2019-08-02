@@ -302,9 +302,11 @@
                                "~/org/home.org"))
   (add-hook 'org-indent-mode-hook (lambda () (diminish 'org-indent-mode "in")))
   :config
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+  (add-hook 'org-mode-hook #'gmacs/enable-truncate-lines-no-message)
   (add-to-list 'org-file-apps '(directory . emacs))
-  (set-face-attribute 'org-level-1 nil :height 1.0)
-  (add-hook 'org-mode-hook #'gmacs/enable-truncate-lines-no-message))
+  (require 'org-tempo))
 
 (use-package projectile
   :diminish projectile-mode
