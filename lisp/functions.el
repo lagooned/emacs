@@ -246,7 +246,7 @@ can be given as the initial minibuffer input."
                  (shell-command-to-string counsel-git-cmd)
                  "\n"
                  t)))
-    (ivy-read (projectile-prepend-project-name "Find file") cands
+    (ivy-read (projectile-prepend-project-name "Find file: ") cands
               :initial-input initial-input
               :action #'counsel-git-action
               :caller 'counsel-git)))
