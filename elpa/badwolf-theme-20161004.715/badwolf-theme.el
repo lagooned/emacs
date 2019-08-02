@@ -116,7 +116,11 @@
    `(secondary-selection ((t (:foreground ,darkgravel :background ,tardis))))
    `(fringe ((t (:background ,bg))))
    `(linum ((t (:foreground ,mediumgravel :background ,bg))))
-   `(vertical-border ((t (:foreground ,gravel))))
+   `(line-number ((t (:foreground ,mediumgravel :background ,bg))))
+   `(line-number-current-line ((t (:foreground ,mediumgravel :background ,bg))))
+   `(linum-relative-current-face ((t :foreground ,orange :background ,bg)))
+   `(linum-highlight-face ((t (:foreground ,mediumgravel :background ,bg))))
+   `(vertical-border ((t (:foreground ,deepgravel))))
    `(highlight ((t (:foreground ,coal :background ,dalespale))))
    `(escape-glyph ((t (:foreground ,tardis))))
    `(hl-line ((t (:inherit nil :background ,hl-line))))
@@ -171,7 +175,7 @@
    `(anzu-replace-to ((t (:background ,tardis :foreground ,coal))))
 
    ;; rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((t (:foreground ,mediumgravel))))
+   `(rainbow-delimiters-depth-1-face ((t (:foreground ,lightgravel))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground ,dalespale))))
    `(rainbow-delimiters-depth-3-face ((t (:foreground ,dress))))
    `(rainbow-delimiters-depth-4-face ((t (:foreground ,orange))))
@@ -214,7 +218,7 @@
 
    `(flx-highlight-face ((t (:foreground ,dirtyblonde :weight normal :underline nil))))
 
-  ;; ivy
+   ;; ivy
    `(ivy-confirm-face ((t :foreground ,lime)))
    `(ivy-current-match ((t :foreground ,dirtyblonde :bold t)))
    `(ivy-match-required-face ((t :foreground ,taffy)))
