@@ -40,7 +40,8 @@
     "n" 'evil-search-next
     "\C-j" 'next-error-no-select
     "\C-k" 'previous-error-no-select
-    "0" 'evil-beginning-of-line))
+    "0" 'evil-beginning-of-line
+    "gw" 'wgrep-change-to-wgrep-mode))
 
 
 (provide 'evil-collection-grep)
