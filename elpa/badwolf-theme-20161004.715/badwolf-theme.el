@@ -241,6 +241,9 @@
    `(outline-4 ((t (:foreground ,toffee))))
    `(outline-5 ((t (:foreground ,dress))))
 
+   `(org-hide ((t (:foreground ,bg :background ,bg))))
+   `(org-indent ((t (:foreground ,bg :background ,bg))))
+
    `(org-done ((t (:foreground ,dress :weight bold))))
    `(org-todo ((t (:foreground ,dalespale :weight bold))))
    `(org-date ((t (:foreground ,tardis :underline t))))
