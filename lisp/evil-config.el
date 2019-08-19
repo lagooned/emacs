@@ -127,6 +127,7 @@
 (define-key evil-visual-state-map (kbd "RET") 'void)
 (define-key evil-visual-state-map (kbd "gg") 'beginning-of-buffer)
 (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
 
 ;; emacs mode
 (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
