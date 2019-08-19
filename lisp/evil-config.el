@@ -123,6 +123,7 @@
 (define-key evil-visual-state-map (kbd "C-=") 'er/expand-region)
 (define-key evil-visual-state-map (kbd "C-j") 'void)
 (define-key evil-visual-state-map (kbd "G") 'end-of-buffer)
+(define-key evil-visual-state-map (kbd "M-n") 'evil-visualstar/begin-search-forward)
 (define-key evil-visual-state-map (kbd "M-N") 'evil-visualstar/begin-search-backward)
 (define-key evil-visual-state-map (kbd "RET") 'void)
 (define-key evil-visual-state-map (kbd "gg") 'beginning-of-buffer)
