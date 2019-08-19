@@ -31,8 +31,8 @@
 (evil-leader/set-key
   ;; buffer
   "b b" 'switch-to-buffer
-  "b k" 'kill-buffer
-  "b K" 'kill-this-buffer
+  "b k" 'kill-this-buffer
+  "b K" 'kill-buffer
   "b C-k" 'kill-matching-buffers
   "b h" 'gmacs/switch-to-scratch-buffer
   "b m" 'gmacs/switch-to-messages-buffer
