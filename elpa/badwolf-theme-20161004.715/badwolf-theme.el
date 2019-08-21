@@ -325,7 +325,9 @@
                            `(:background ,dress :foreground ,bg)))))
    `(diff-hl-change ((t ,(if badwolf-diff-hl-inverse
                              `(:background ,bg :foreground ,dirtyblonde)
-                           `(:background ,dirtyblonde :foreground ,bg)))))))
+                           `(:background ,dirtyblonde :foreground ,bg)))))
+   ;; term
+   `(term-color-blue ((t (:background ,tardis :foreground ,tardis))))))
 
 ;;;###autoload
 (when load-file-name
