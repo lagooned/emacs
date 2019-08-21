@@ -373,6 +373,12 @@
 (use-package suggest
   :commands suggest)
 
+(use-package term
+  :init
+  (defadvice term-handle-exit
+      (after term-kill-buffer-on-exit activate)
+    (kill-buffer)))
+
 (use-package tiny
   :config
   (tiny-setup-default))
