@@ -43,7 +43,7 @@
 (use-package evil-numbers
   :commands
   evil-numbers/inc-at-point
-  evil-numbers/dev-at-point
+  evil-numbers/dec-at-point
   :config
   (require 'evil-numbers))
 
