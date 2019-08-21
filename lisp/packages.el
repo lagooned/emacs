@@ -349,6 +349,11 @@
 (use-package restart-emacs
   :commands restart-emacs)
 
+(use-package shell
+  :commands shell
+  :init
+  (add-hook 'shell-mode-hook 'gmacs/shell-kill-buffer-on-exit-sentinel))
+
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode "sp"

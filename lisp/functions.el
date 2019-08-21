@@ -755,6 +755,22 @@ START and END are buffer positions."
 (defun gmacs/directory-ls-tree-entry-p (entry)
   (string= (nth 1 entry) "tree"))
 
+(defun gmacs/shell-kill-buffer-on-exit-sentinel ()
+  "Create sentinal to wait for shell process to exit, \
+then kill buffer."
+  ;; Kill the buffer when the shell process exits.
+  (let* ((proc (get-buffer-process (current-buffer)))
+         (sentinel (process-sentinel proc)))
+    (set-process-sentinel
+     proc
+     `(lambda (process signal)
+        ;; Call the original process sentinel first.
+        (funcall #',sentinel process signal)
+        ;; Kill the buffer on an exit signal.
+        (and (memq (process-status process) '(exit signal))
+             (buffer-live-p (process-buffer process))
+             (kill-buffer (process-buffer process)))))))
+
 (provide 'functions)
 ;;; functions.el ends here
 
