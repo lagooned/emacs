@@ -737,7 +737,7 @@ to 'auto, tags may not be properly aligned. "
      `(org-date ((,class (:underline t :foreground ,var))))
      `(org-date-selected ((,class (:background ,func :foreground ,bg1))))
      `(org-document-info-keyword ((,class (:foreground ,meta))))
-     `(org-document-title ((,class (:foreground ,func :inherit bold :height ,(if spacemacs-theme-org-height 1.4 1.0) :underline t))))
+     `(org-document-title ((,class (:foreground ,func :inherit bold :height ,(if spacemacs-theme-org-height 1.4 1.0)))))
      `(org-done ((,class (:foreground ,suc :inherit bold :background ,green-bg))))
      `(org-ellipsis ((,class (:foreground ,keyword))))
      `(org-footnote  ((,class (:underline t :foreground ,base))))
