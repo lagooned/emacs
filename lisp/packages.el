@@ -369,6 +369,10 @@
   (add-hook 'evil-replace-state-entry-hook #'turn-off-smartparens-mode)
   (add-hook 'evil-replace-state-exit-hook  #'turn-on-smartparens-mode))
 
+(use-package spacemacs-theme
+  :init
+  (setq spacemacs-theme-comment-bg nil))
+
 (use-package swiper
   :commands swiper)
 
