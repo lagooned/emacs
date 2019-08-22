@@ -41,7 +41,7 @@
 
 ;; load theme
 (if (display-graphic-p)
-    (load-theme 'badwolf t))
+    (load-theme 'spacemacs-dark t))
 
 ;; custom vars
 (custom-set-variables
