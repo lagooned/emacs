@@ -124,6 +124,7 @@
 (use-package yaml-mode)
 
 (load "elisp-lang")
+(load "clj-lang")
 (load "php-lang")
 (load "python-lang")
 (load "js-lang")
