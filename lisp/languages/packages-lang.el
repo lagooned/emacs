@@ -72,10 +72,6 @@
   (setq xref-after-jump-hook '(recenter)
         xref-after-return-hook '(recenter)))
 
-(use-package nxml-mode
-  :init
-  (setq nxml-child-indent 4))
-
 (use-package puppet-mode
   :commands puppet-mode)
 
@@ -86,10 +82,6 @@
    'auto-mode-alist
    '("\\.rest\\'" . restclient-mode)))
 
-(use-package sgml-mode
-  :init
-  (setq sgml-basic-offset 4))
-
 (use-package yaml-mode)
 
 (load "elisp-lang")
@@ -99,6 +91,7 @@
 (load "js-lang")
 (load "web-lang")
 (load "java-lang")
+(load "xml-lang")
 
 (provide 'packages-lang)
 ;;; packages-lang.el ends here
