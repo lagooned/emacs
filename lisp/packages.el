@@ -46,9 +46,7 @@
 
 (use-package aggressive-indent
   :diminish "agg"
-  :commands aggressive-indent-mode
-  :init
-  (add-hook 'css-mode-hook #'aggressive-indent-mode))
+  :commands aggressive-indent-mode)
 
 (use-package badwolf-theme)
 
