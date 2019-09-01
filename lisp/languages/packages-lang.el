@@ -24,14 +24,6 @@
 
 ;;; Code:
 
-(use-package xref
-  :bind
-  (:map xref--button-map
-        ("C-j" . xref-goto-xref))
-  :init
-  (setq xref-after-jump-hook '(recenter)
-        xref-after-return-hook '(recenter)))
-
 (load "elisp-lang")
 (load "clj-lang")
 (load "ops-lang")

@@ -500,6 +500,14 @@
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (yas-reload-all))
 
+(use-package xref
+  :bind
+  (:map xref--button-map
+        ("C-j" . xref-goto-xref))
+  :init
+  (setq xref-after-jump-hook '(recenter)
+        xref-after-return-hook '(recenter)))
+
 (provide 'packages)
 ;;; packages.el ends here
 
