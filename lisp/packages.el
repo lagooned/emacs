@@ -147,11 +147,12 @@
   (elscreen-start))
 
 (use-package eshell
+  :hook
+  (eshell-mode . gmacs/enable-truncate-lines-no-message)
   :init
   (setq eshell-banner-message 'gmacs/eshell-message
         eshell-prompt-function 'gmacs/eshell-prompt-function
         eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
-  (add-hook 'eshell-mode-hook #'gmacs/enable-truncate-lines-no-message)
   :config
   (with-eval-after-load 'em-term
     (push 'eshell-truncate-buffer eshell-output-filter-functions))
