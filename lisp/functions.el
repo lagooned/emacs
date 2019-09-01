@@ -671,6 +671,10 @@ then kill buffer."
              (buffer-live-p (process-buffer process))
              (kill-buffer (process-buffer process)))))))
 
+(defun gmacs/web-mode-setup ()
+  (sp-local-pair 'web-mode "<" "")
+  (emmet-mode 1))
+
 (provide 'functions)
 ;;; functions.el ends here
 

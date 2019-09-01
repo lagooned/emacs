@@ -26,14 +26,13 @@
 
 (use-package web-mode
   :commands web-mode
+  :hook (web-mode . gmacs/web-mode-setup)
   :init
   (setq web-mode-enable-auto-pairing nil
         web-mode-markup-indent-offset 4
         web-mode-enable-css-colorization nil)
   (add-to-list 'auto-mode-alist '("\\.x?html\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
-  (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook (lambda () (sp-local-pair 'web-mode "<" ""))))
+  (add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode)))
 
 (use-package css-mode
   :commands css-mode
