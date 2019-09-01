@@ -675,6 +675,9 @@ then kill buffer."
   (sp-local-pair 'web-mode "<" "")
   (emmet-mode 1))
 
+(defun gmacs/auto-revert-mode-setup ()
+  (diminish 'auto-revert-mode))
+
 (provide 'functions)
 ;;; functions.el ends here
 

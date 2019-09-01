@@ -36,11 +36,10 @@
 (use-package alpha)
 
 (use-package autorevert
+  ;; :diminish doesn't work as mode and lib name are different
+  :hook (auto-revert-mode . gmacs/auto-revert-mode-setup)
   :init
-  (setq auto-revert-verbose nil)
-  (add-hook
-   'auto-revert-mode-hook
-   (lambda () (diminish 'auto-revert-mode))))
+  (setq auto-revert-verbose nil))
 
 (use-package avy)
 
