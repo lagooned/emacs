@@ -169,11 +169,11 @@
         evil-emacs-state-message nil
         evil-motion-state-message nil
         evil-insert-state-message nil
-        evil-operator-state-message nil)
+        evil-operator-state-message nil
+        evil-want-Y-yank-to-eol t
+        evil-want-keybinding nil)
   (setq evil--jumps-buffer-targets
         "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
-  (setq evil-want-Y-yank-to-eol t
-        evil-want-keybinding nil)
   (let ((height (eval gmacs/evil-base-cursor-height))
         (pipe-width (frame-char-width)))
     (setq evil-normal-state-cursor `("#00ffff" (hbar . ,(eval height))))
