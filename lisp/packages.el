@@ -176,15 +176,6 @@
         evil-want-keybinding nil)
   (setq evil--jumps-buffer-targets
         "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
-  (let ((height (eval gmacs/evil-base-cursor-height))
-        (pipe-width (frame-char-width)))
-    (setq evil-normal-state-cursor `("#00ffff" (hbar . ,(eval height))))
-    (setq evil-insert-state-cursor `("#00e000" (bar . ,(/ pipe-width 5))))
-    (setq evil-visual-state-cursor `("#ff8800" (hbar . ,(eval height))))
-    (setq evil-emacs-state-cursor `("#ff0000" (hbar . ,(eval height))))
-    (setq evil-motion-state-cursor `("#0055ff" (hbar . ,(eval height))))
-    (setq evil-replace-state-cursor `("#00acff" (hbar . ,(eval height))))
-    (setq evil-operator-state-cursor `("#ff66ff" (hbar . ,(eval height)))))
   :config
   (load "evil-config"))
 

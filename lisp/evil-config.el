@@ -71,6 +71,17 @@
   :config
   (evil-collection-init))
 
+;; cursor configs
+(let ((height (eval gmacs/evil-base-cursor-height))
+      (pipe-width (/ (frame-char-width) 5)))
+  (setq evil-normal-state-cursor `("#00ffff" (hbar . ,(eval height))))
+  (setq evil-insert-state-cursor `("#00e000" (bar . ,(eval pipe-width))))
+  (setq evil-visual-state-cursor `("#ff8800" (hbar . ,(eval height))))
+  (setq evil-emacs-state-cursor `("#ff0000" (hbar . ,(eval height))))
+  (setq evil-motion-state-cursor `("#0055ff" (hbar . ,(eval height))))
+  (setq evil-replace-state-cursor `("#00acff" (hbar . ,(eval height))))
+  (setq evil-operator-state-cursor `("#ff66ff" (hbar . ,(eval height)))))
+
 ;; insert state
 (define-key evil-insert-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-insert-state-map (kbd "C-j") 'newline)
