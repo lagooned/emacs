@@ -168,7 +168,8 @@
    (minibuffer-setup . gmacs/evil-minibuffer-setup)
    (org-mode . gmacs/evil-org-mode-setup)
    (c-mode-common . gmacs/evil-c-common-mode-setup)
-   (evil-insert-state-exit . gmacs/evil-company-abort-on-insert-leave))
+   (evil-insert-state-exit . gmacs/evil-company-abort-on-insert-leave)
+   (evil-mode . gmacs/evil-jumplist-setup))
   :init
   (setq
    evil-move-cursor-back nil
@@ -182,10 +183,9 @@
    evil-operator-state-message nil
    evil-want-Y-yank-to-eol t
    evil-want-keybinding nil)
-  (setq
-   evil--jumps-buffer-targets
-   "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   :config
+  (load "evil-pre-config")
+  (evil-mode 1)
   (load "evil-config"))
 
 (use-package expand-region

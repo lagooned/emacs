@@ -24,20 +24,6 @@
 
 ;;; Code:
 
-(use-package evil-leader
-  :config
-  (load "leader-config"))
-
-(use-package evil-matchit
-  :config
-  (global-evil-matchit-mode 1))
-
-(use-package evil-visualstar
-  :config
-  (global-evil-visualstar-mode 1))
-
-(evil-mode 1)
-
 (use-package exato)
 
 (use-package evil-numbers
@@ -205,12 +191,7 @@
 (define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
-
-;; add evil-ex-history to .savehist file
-(put 'evil-ex-history 'history-length 50)
-
-;; add dired buffers to jumplist
-(evil-add-command-properties #'dired-find-file :jump t)
+(put 'evil-ex-history 'history-length 10)
 
 (provide 'evil-config)
 
