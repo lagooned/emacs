@@ -206,9 +206,6 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
-;; minibuffer
-(add-hook 'minibuffer-setup-hook 'gmacs/evil-minibuffer-setup)
-
 ;; org
 (add-hook 'org-mode-hook 'gmacs/evil-org-mode-setup)
 
