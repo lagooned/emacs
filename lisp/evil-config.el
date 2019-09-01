@@ -206,9 +206,6 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
-;; c derivs setup
-(add-hook 'c-mode-common-hook 'gmacs/evil-c-common-mode-setup)
-
 ;; company abort on exit insert mode
 (add-hook 'evil-insert-state-exit-hook 'gmacs/evil-company-abort-on-insert-leave)
 

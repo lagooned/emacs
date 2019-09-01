@@ -166,7 +166,8 @@
    (evil-command-window-mode . gmacs/evil-command-window-setup)
    (eshell-mode . gmacs/evil-eshell-mode-setup)
    (minibuffer-setup . gmacs/evil-minibuffer-setup)
-   (org-mode . gmacs/evil-org-mode-setup))
+   (org-mode . gmacs/evil-org-mode-setup)
+   (c-mode-common . gmacs/evil-c-common-mode-setup))
   :init
   (setq
    evil-move-cursor-back nil
