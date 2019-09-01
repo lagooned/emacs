@@ -334,12 +334,12 @@
   (add-hook 'emacs-startup-hook (lambda () (projectile-mode 1))))
 
 (use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode)
+  :commands rainbow-delimiters-mode
   :init
   (custom-set-faces
    '(rainbow-delimiters-mismatched-face ((t (:overline nil))))
-   '(rainbow-delimiters-unmatched-face ((t (:overline nil)))))
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+   '(rainbow-delimiters-unmatched-face ((t (:overline nil))))))
 
 (use-package rainbow-mode
   :commands rainbow-mode
