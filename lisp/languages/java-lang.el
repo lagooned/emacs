@@ -24,7 +24,11 @@
 
 ;;; Code:
 
-(use-package java-mode)
+(use-package java-mode
+  :commands java-mode)
+
+(use-package groovy-mode
+  :commands groovy-mode)
 
 (provide 'java-lang)
 ;;; java-lang.el ends here

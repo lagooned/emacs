@@ -50,9 +50,6 @@
    '(flycheck-info ((t (:foreground "green" :underline nil))))
    '(flycheck-warning ((t (:foreground "yellow" :underline nil))))))
 
-(use-package groovy-mode
-  :commands groovy-mode)
-
 (use-package xref
   :bind
   (:map xref--button-map
