@@ -393,7 +393,8 @@
 
 (use-package spacemacs-theme
   :init
-  (setq spacemacs-theme-comment-bg nil))
+  (setq spacemacs-theme-comment-bg nil
+        spacemacs-theme-underline-parens nil))
 
 (use-package swiper
   :commands swiper)
