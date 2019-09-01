@@ -51,13 +51,13 @@
 (use-package flycheck
   :diminish flycheck-mode "flyc"
   :init
+  (setq flycheck-indication-mode nil
+        flycheck-highlighting-mode 'lines
+        flycheck-emacs-lisp-load-path 'inherit)
   (custom-set-faces
    '(flycheck-error ((t (:foreground "red" :underline nil))))
    '(flycheck-info ((t (:foreground "green" :underline nil))))
-   '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
-  (setq flycheck-indication-mode nil
-        flycheck-highlighting-mode 'lines
-        flycheck-emacs-lisp-load-path 'inherit))
+   '(flycheck-warning ((t (:foreground "yellow" :underline nil))))))
 
 (use-package groovy-mode
   :commands groovy-mode)
