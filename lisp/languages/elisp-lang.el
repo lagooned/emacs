@@ -25,17 +25,14 @@
 ;;; Code:
 
 (use-package elisp-mode
-  :init
-  (add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode)
-  (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-setup))
+  :hook ((emacs-lisp-mode . aggressive-indent-mode)
+         (emacs-lisp-mode . gmacs/emacs-lisp-setup)))
 
 (use-package eldoc
   :diminish eldoc-mode
   :commands eldoc-mode
-  :init
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode))
+  :hook ((emacs-lisp-mode . turn-on-eldoc-mode)
+         (lisp-interaction-mode . turn-on-eldoc-mode)))
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
   "C-e" 'gmacs/move-eol-eval-last-sexp
