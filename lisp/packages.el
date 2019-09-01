@@ -307,6 +307,8 @@
   org-agenda
   org-iswitchb
   org-capture
+  :hook
+  (org-mode . gmacs/enable-truncate-lines-no-message)
   :init
   (setq org-startup-indented t
         org-log-done t
@@ -316,7 +318,6 @@
   :config
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
-  (add-hook 'org-mode-hook #'gmacs/enable-truncate-lines-no-message)
   (add-to-list 'org-file-apps '(directory . emacs))
   (require 'org-tempo))
 
