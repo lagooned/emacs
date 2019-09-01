@@ -336,7 +336,7 @@
 (use-package rainbow-delimiters
   :init
   (custom-set-faces
-   '(rainbow-delimiters-unmatched-face ((t (:overline nil))))
+   '(rainbow-delimiters-mismatched-face ((t (:overline nil))))
    '(rainbow-delimiters-unmatched-face ((t (:overline nil)))))
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
