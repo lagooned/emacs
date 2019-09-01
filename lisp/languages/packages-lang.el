@@ -72,37 +72,6 @@
   (setq xref-after-jump-hook '(recenter)
         xref-after-return-hook '(recenter)))
 
-(use-package lsp-mode
-  :commands lsp-mode
-  :init
-  (setq lsp-eldoc-render-all nil
-        lsp-inhibit-message t)
-  :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (add-hook 'lsp-mode-hook (lambda () (diminish 'lsp-mode "lsp"))))
-
-(use-package lsp-ui
-  :commands lsp-ui-mode
-  :init
-  (setq lsp-ui-flycheck-enable t
-        lsp-ui-doc-enable nil
-        lsp-ui-sideline-enable nil)
-  :config
-  (remove-hook 'lsp-eldoc-hook 'lsp-document-highlight))
-
-(use-package company-lsp
-  :after lsp-mode
-  :config
-  (setq company-lsp-cache-candidates t
-        company-lsp-enable-snippet t
-        company-lsp-enable-recompletion t))
-
-(use-package dap-mode
-  :after lsp-mode
-  :config
-  (dap-mode 1)
-  (dap-ui-mode 1))
-
 (use-package nxml-mode
   :init
   (setq nxml-child-indent 4))

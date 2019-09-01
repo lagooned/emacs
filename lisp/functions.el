@@ -504,36 +504,6 @@ evil-mode state."
   (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
   (push '(company-capf company-yasnippet) company-backends))
 
-(defun gmacs/lsp-java-enable ()
-  "Enable Java LSP if in project and confirmation prompt \
-has been accepted."
-  (if (projectile-project-p)
-      (gmacs/prompt-maybe-run
-       'gmacs/java-lsp-dialog-confirmed-p
-       "Enable Java LSP on this ENV?"
-       'gmacs/java-enable-lsp-p
-       #'gmacs/lsp-java-setup)))
-
-(defun gmacs/lsp-java-setup ()
-  "Initialize Java LSP."
-  (if gmacs/java-enable-lsp-p
-      (progn (push 'company-lsp company-backends)
-             (flycheck-mode 1)
-             (lsp-java-enable)
-             (gmacs/lsp-java-leader-setup))))
-
-(defun gmacs/lsp-java-leader-setup ()
-  "Setup Evil-Leader for Java LSP."
-  (evil-leader/set-key-for-mode 'java-mode
-    "m a" 'lsp-execute-code-action
-    "m r" 'lsp-rename
-    "m R" 'lsp-restart-workspace
-    "m f" 'lsp-format-buffer
-    "m h" 'lsp-describe-thing-at-point
-    "m H" 'lsp-highlight-symbol-at-point
-    "m o" 'lsp-java-organize-imports
-    "m b" 'lsp-java-build-project))
-
 (defun gmacs/evil-eshell-mode-setup ()
   "Setup Gshell."
   (setq-local inhibit-read-only t)
@@ -634,28 +604,6 @@ Note: effective as an evil-insert-state-exit-hook."
   "Python mode setup."
   (prettify-symbols-mode 1)
   (message nil))
-
-(defun gmacs/lsp-python-mode-hook ()
-  "Python LSP Enable."
-  (gmacs/lsp-python-enable))
-
-(defun gmacs/lsp-python-enable ()
-  "Enable Python LSP if in project and confirmation prompt \
-has been accepted."
-  (if (projectile-project-p)
-      (gmacs/prompt-maybe-run
-       'gmacs/python-lsp-dialog-confirmed-p
-       "Enable Python LSP on this ENV?"
-       'gmacs/python-enable-lsp-p
-       #'gmacs/lsp-python-setup)))
-
-(defun gmacs/lsp-python-setup ()
-  "Setup Python LSP mode."
-  (if gmacs/python-enable-lsp-p
-      (progn (push 'company-lsp company-backends)
-             (flycheck-mode 1)
-             (lsp-python-enable)
-             (eldoc-mode 0))))
 
 (defun gmacs/prompt-maybe-run (confirmed-var question enabled-var init-func)
   "Defines an interface which one can adhear to create a environmentally \

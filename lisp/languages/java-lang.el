@@ -24,16 +24,7 @@
 
 ;;; Code:
 
-(use-package lsp-java
-  :commands
-  lsp-java-enable
-  lsp-java-update-server
-  :init
-  (setq lsp-java-save-action-organize-imports nil)
-  (add-hook 'java-mode-hook #'gmacs/lsp-java-enable))
-
-(use-package dap-java
-  :after lsp-java)
+(use-package java-mode)
 
 (provide 'java-lang)
 ;;; java-lang.el ends here

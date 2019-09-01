@@ -55,18 +55,6 @@ re-entered for it to take effect.")
 (defvar gmacs/mc-evil-mark-was-active nil
   "Saves the previous state of the mark.")
 
-(defvar gmacs/python-lsp-dialog-confirmed-p nil
-  "Shows if the user has already confirmed the python lsp dialog.")
-
-(defvar gmacs/python-enable-lsp-p t
-  "Determine whether or not to use python lsp.")
-
-(defvar gmacs/java-lsp-dialog-confirmed-p nil
-  "Shows if the user has already confirmed the java lsp dialog.")
-
-(defvar gmacs/java-enable-lsp-p t
-  "Determine whether or not to use java lsp.")
-
 (defvar gmacs/js2-xref-accept-ag nil
   "Determines whether or not to show the xref-ag confirmation.")
 
