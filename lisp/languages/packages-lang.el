@@ -24,14 +24,14 @@
 
 ;;; Code:
 
-(load "elisp-lang")
 (load "clj-lang")
+(load "elisp-lang")
+(load "java-lang")
+(load "js-lang")
 (load "ops-lang")
 (load "php-lang")
 (load "python-lang")
-(load "js-lang")
 (load "web-lang")
-(load "java-lang")
 (load "xml-lang")
 
 (provide 'packages-lang)
