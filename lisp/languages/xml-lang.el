@@ -24,6 +24,15 @@
 
 ;;; Code:
 
+(use-package emmet-mode
+  :diminish "emm"
+  :commands emmet-mode
+  :hook ((sgml-mode . emmet-mode)
+         (web-mode . emmet-mode)
+         (css-mode . emmet-mode)
+         (nxml-mode . emmet-mode)
+         (emmet-mode . gmacs/evil-emmet-mode-setup)))
+
 (use-package nxml-mode
   :init
   (setq nxml-child-indent 4))

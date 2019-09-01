@@ -32,15 +32,6 @@
   :init
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
-(use-package emmet-mode
-  :diminish "emm"
-  :commands emmet-mode
-  :hook ((sgml-mode . emmet-mode)
-         (web-mode . emmet-mode)
-         (css-mode . emmet-mode)
-         (nxml-mode . emmet-mode)
-         (emmet-mode . gmacs/evil-emmet-mode-setup)))
-
 (use-package prog-mode
   :commands prog-mode
   :init
