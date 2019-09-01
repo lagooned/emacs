@@ -195,6 +195,12 @@
 (use-package fireplace
   :commands fireplace)
 
+(use-package fix-word
+  :commands
+  fix-word-upcase
+  fix-word-downcase
+  fix-word-capitalize)
+
 (use-package flycheck
   :diminish flycheck-mode "flyc"
   :init
@@ -205,12 +211,6 @@
    '(flycheck-error ((t (:foreground "red" :underline nil))))
    '(flycheck-info ((t (:foreground "green" :underline nil))))
    '(flycheck-warning ((t (:foreground "yellow" :underline nil))))))
-
-(use-package fix-word
-  :commands
-  fix-word-upcase
-  fix-word-downcase
-  fix-word-capitalize)
 
 (use-package flyspell
   :defer t
