@@ -26,6 +26,7 @@
 
 (use-package elisp-mode
   :init
+  (add-hook 'emacs-lisp-mode-hook 'aggressive-indent-mode)
   (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-setup))
 
 (use-package eldoc

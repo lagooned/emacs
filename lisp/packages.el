@@ -48,7 +48,6 @@
   :diminish "agg"
   :commands aggressive-indent-mode
   :init
-  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'css-mode-hook #'aggressive-indent-mode))
 
 (use-package badwolf-theme)
