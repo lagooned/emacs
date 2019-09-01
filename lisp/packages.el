@@ -322,10 +322,9 @@
 
 (use-package prog-mode
   :commands prog-mode
-  :init
-  (add-hook 'prog-mode-hook #'too-long-lines-mode)
-  (add-hook 'prog-mode-hook #'gmacs/enable-truncate-lines-no-message)
-  (add-hook 'prog-mode-hook #'gmacs/enable-company-mode))
+  :hook ((prog-mode . too-long-lines-mode)
+         (prog-mode . gmacs/enable-truncate-lines-no-message)
+         (prog-mode . gmacs/enable-company-mode)))
 
 (use-package projectile
   :diminish projectile-mode
