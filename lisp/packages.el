@@ -163,19 +163,21 @@
 (use-package evil
   :hook (with-editor-mode . evil-insert-state)
   :init
-  (setq evil-move-cursor-back nil
-        evil-insert-state-message nil
-        evil-visual-state-message nil
-        evil-replace-state-message nil
-        evil-normal-state-message nil
-        evil-emacs-state-message nil
-        evil-motion-state-message nil
-        evil-insert-state-message nil
-        evil-operator-state-message nil
-        evil-want-Y-yank-to-eol t
-        evil-want-keybinding nil)
-  (setq evil--jumps-buffer-targets
-        "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
+  (setq
+   evil-move-cursor-back nil
+   evil-insert-state-message nil
+   evil-visual-state-message nil
+   evil-replace-state-message nil
+   evil-normal-state-message nil
+   evil-emacs-state-message nil
+   evil-motion-state-message nil
+   evil-insert-state-message nil
+   evil-operator-state-message nil
+   evil-want-Y-yank-to-eol t
+   evil-want-keybinding nil)
+  (setq
+   evil--jumps-buffer-targets
+   "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   :config
   (load "evil-config"))
 
@@ -197,9 +199,10 @@
 (use-package flycheck
   :diminish flycheck-mode "flyc"
   :init
-  (setq flycheck-indication-mode nil
-        flycheck-highlighting-mode 'lines
-        flycheck-emacs-lisp-load-path 'inherit)
+  (setq
+   flycheck-indication-mode nil
+   flycheck-highlighting-mode 'lines
+   flycheck-emacs-lisp-load-path 'inherit)
   (custom-set-faces
    '(flycheck-error ((t (:foreground "red" :underline nil))))
    '(flycheck-info ((t (:foreground "green" :underline nil))))
