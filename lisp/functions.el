@@ -487,6 +487,7 @@ match your prompt."
 (defun gmacs/evil-eshell-mode-setup ()
   "Setup Gshell."
   (setq-local inhibit-read-only t)
+  (gmacs/eshell-def-evil-eshell-delete)
   (gmacs/gshell-evil-mode-keys-setup))
 
 (defun gmacs/gshell-evil-mode-keys-setup ()
@@ -508,6 +509,27 @@ match your prompt."
   (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
   (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
   (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))
+
+(defun gmacs/eshell-def-evil-eshell-delete ()
+  (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
+    "Like evil-delete, but inhibit read only and when the eshell prompt is
+involved re-emit it."
+    (interactive "<R><x><y>")
+    (let ((inhibit-read-only t)
+          (total-prompt-length (length (gmacs/eshell-prompt-function)))
+          (bottom-prompt-length (length (gmacs/eshell-bottom-prompt-function))))
+      (cond
+       ((gmacs/looking-at-eshell-prompt-regexp-p beg)
+        (progn
+          (evil-delete
+           (+ beg bottom-prompt-length)
+           end type register yank-handler)
+          (delete-region
+           (- (+ beg bottom-prompt-length) total-prompt-length)
+           (+ beg bottom-prompt-length))
+          (eshell-emit-prompt)))
+       ((gmacs/looking-at-eshell-top-prompt-regexp-p beg) (void))
+       (t (evil-delete beg end type register yank-handler))))))
 
 (defun gmacs/looking-at-eshell-prompt-regexp-p (loc)
   "Truthy value for evil-eshell-delete which determines if \
@@ -664,4 +686,3 @@ then kill buffer."
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars cl-functions make-local)
 ;; End:
-

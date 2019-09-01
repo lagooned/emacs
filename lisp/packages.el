@@ -163,7 +163,8 @@
 (use-package evil
   :hook
   ((with-editor-mode . evil-insert-state)
-   (evil-command-window-mode . gmacs/evil-command-window-setup))
+   (evil-command-window-mode . gmacs/evil-command-window-setup)
+   (eshell-mode . gmacs/evil-eshell-mode-setup))
   :init
   (setq
    evil-move-cursor-back nil
