@@ -159,6 +159,7 @@
     (setq eshell-hist-ignoredups t)))
 
 (use-package evil
+  :hook (with-editor-mode . evil-insert-state)
   :init
   (setq evil-move-cursor-back nil
         evil-insert-state-message nil
@@ -173,7 +174,6 @@
         "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   (setq evil-want-Y-yank-to-eol t
         evil-want-keybinding nil)
-  (add-hook 'with-editor-mode-hook 'evil-insert-state)
   (let ((height (eval gmacs/evil-base-cursor-height))
         (pipe-width (frame-char-width)))
     (setq evil-normal-state-cursor `("#00ffff" (hbar . ,(eval height))))
