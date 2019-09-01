@@ -107,10 +107,11 @@
             ("Oa" counsel-projectile-switch-project-action-org-agenda "open project agenda"))))
 
 (use-package dired
-  :hook ((dired-mode . gmacs/rename-dired-buffer)
-         (dired-mode . auto-revert-mode)
-         (dired-mode . gmacs/enable-truncate-lines-no-message)
-         (dired-mode . dired-hide-details-mode))
+  :hook
+  ((dired-mode . gmacs/rename-dired-buffer)
+   (dired-mode . auto-revert-mode)
+   (dired-mode . gmacs/enable-truncate-lines-no-message)
+   (dired-mode . dired-hide-details-mode))
   :init
   (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil))
