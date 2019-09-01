@@ -182,7 +182,8 @@
    evil-insert-state-message nil
    evil-operator-state-message nil
    evil-want-Y-yank-to-eol t
-   evil-want-keybinding nil)
+   evil-want-keybinding nil
+   evil-jumps-max-length 20)
   :config
   (load "evil-pre-config")
   (evil-mode 1)
