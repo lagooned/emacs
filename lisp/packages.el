@@ -161,7 +161,9 @@
     (setq eshell-hist-ignoredups t)))
 
 (use-package evil
-  :hook (with-editor-mode . evil-insert-state)
+  :hook
+  ((with-editor-mode . evil-insert-state)
+   (evil-command-window-mode . gmacs/evil-command-window-setup))
   :init
   (setq
    evil-move-cursor-back nil

@@ -621,7 +621,7 @@ stateful confirmation dialog.
   (make-variable-buffer-local 'company-backends)
   (company-mode))
 
-(defun gmacs/evil-command-window-hook ()
+(defun gmacs/evil-command-window-setup ()
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 
 (defun gmacs/rename-dired-buffer ()

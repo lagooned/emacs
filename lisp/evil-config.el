@@ -241,9 +241,6 @@ involved re-emit it."
 ;; company abort on exit insert mode
 (add-hook 'evil-insert-state-exit-hook 'gmacs/evil-company-abort-on-insert-leave)
 
-;; company abort on exit insert mode
-(add-hook 'evil-command-window-mode-hook #'gmacs/evil-command-window-hook)
-
 ;; add evil-ex-history to .savehist file
 (put 'evil-ex-history 'history-length 50)
 
