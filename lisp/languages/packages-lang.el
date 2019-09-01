@@ -24,13 +24,6 @@
 
 ;;; Code:
 
-(use-package prog-mode
-  :commands prog-mode
-  :init
-  (add-hook 'prog-mode-hook #'too-long-lines-mode)
-  (add-hook 'prog-mode-hook #'gmacs/enable-truncate-lines-no-message)
-  (add-hook 'prog-mode-hook #'gmacs/enable-company-mode))
-
 (use-package flycheck
   :diminish flycheck-mode "flyc"
   :init
