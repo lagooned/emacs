@@ -693,33 +693,6 @@ stateful confirmation dialog.
   (make-variable-buffer-local 'company-backends)
   (company-mode))
 
-(defun gmacs/css-mode-setup ()
-  "Setup CSS mode."
-  (defun css--fontify-region (start end &optional loudly)
-    "Fontify a CSS buffer between START and END.
-START and END are buffer positions."
-    (let ((extended-region (font-lock-default-fontify-region start end loudly)))
-      (when css-fontify-colors
-        (when (and (consp extended-region)
-                   (eq (car extended-region) 'jit-lock-bounds))
-          (setq start (cadr extended-region))
-          (setq end (cddr extended-region)))
-        (save-excursion
-          (let ((case-fold-search t))
-            (goto-char start)
-            (while (re-search-forward css--colors-regexp end t)
-              ;; Skip comments and strings.
-              (unless (nth 8 (syntax-ppss))
-                (let* ((start (match-beginning 0))
-                       (color (css--compute-color start (match-string 0))))
-                  (when color
-                    (with-silent-modifications
-                      (add-text-properties
-                       start (point)
-                       (list 'face (list :background color
-                                         :foreground (css--contrasty-color color))))))))))))
-      extended-region)))
-
 (defun gmacs/evil-command-window-hook ()
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 

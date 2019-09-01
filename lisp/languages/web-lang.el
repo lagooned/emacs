@@ -36,10 +36,8 @@
   (add-hook 'web-mode-hook (lambda () (sp-local-pair 'web-mode "<" ""))))
 
 (use-package css-mode
-  :commands
-  css-mode
-  :config
-  (gmacs/css-mode-setup))
+  :commands css-mode
+  :init (setq css-fontify-colors nil))
 
 (provide 'web-lang)
 ;;; web-lang.el ends here
