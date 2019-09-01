@@ -26,9 +26,7 @@
 
 (use-package php-mode
   :commands
-  php-mode
-  :config
-  (gmacs/php-mode-setup))
+  php-mode)
 
 (provide 'php-lang)
 ;;; php-lang.el ends here
