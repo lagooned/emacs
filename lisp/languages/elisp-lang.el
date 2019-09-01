@@ -30,7 +30,6 @@
   (add-hook 'emacs-lisp-mode-hook 'gmacs/emacs-lisp-setup))
 
 (use-package eldoc
-  :defer t
   :diminish eldoc-mode
   :commands eldoc-mode
   :init
