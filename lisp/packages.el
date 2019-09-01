@@ -494,9 +494,9 @@
 
 (use-package yasnippet
   :commands
+  yas-minor-mode
   yas-minor-mode-on
-  :init
-  (add-hook 'prog-mode-hook #'yas-minor-mode-on)
+  :hook (prog-mode . yas-minor-mode)
   :config
   (require 'yasnippet)
   (define-key yas-minor-mode-map (kbd "C-i") nil)
