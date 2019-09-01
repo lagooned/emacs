@@ -167,7 +167,8 @@
    (eshell-mode . gmacs/evil-eshell-mode-setup)
    (minibuffer-setup . gmacs/evil-minibuffer-setup)
    (org-mode . gmacs/evil-org-mode-setup)
-   (c-mode-common . gmacs/evil-c-common-mode-setup))
+   (c-mode-common . gmacs/evil-c-common-mode-setup)
+   (evil-insert-state-exit . gmacs/evil-company-abort-on-insert-leave))
   :init
   (setq
    evil-move-cursor-back nil

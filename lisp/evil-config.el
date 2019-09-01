@@ -206,9 +206,6 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
-;; company abort on exit insert mode
-(add-hook 'evil-insert-state-exit-hook 'gmacs/evil-company-abort-on-insert-leave)
-
 ;; add evil-ex-history to .savehist file
 (put 'evil-ex-history 'history-length 50)
 
