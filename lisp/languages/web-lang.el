@@ -37,7 +37,8 @@
 
 (use-package css-mode
   :commands css-mode
-  :init (setq css-fontify-colors nil))
+  :init
+  (setq css-fontify-colors nil))
 
 (provide 'web-lang)
 ;;; web-lang.el ends here
