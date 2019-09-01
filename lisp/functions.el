@@ -429,12 +429,6 @@ match your prompt."
   (concat "\n" (gmacs/eshell-top-prompt-function) " \n"
           (gmacs/eshell-bottom-prompt-function)))
 
-(defun gmacs/evil-visual-or-normal-p ()
-  "True if evil mode is enabled, and we are in \
-normal or visual mode."
-  (and (bound-and-true-p evil-mode)
-       (not (memq evil-state '(insert emacs)))))
-
 (defun gmacs/mc-evil-emacs-state ()
   "When using multiple-cursors, switch to Emacs state."
   (if (region-active-p)
