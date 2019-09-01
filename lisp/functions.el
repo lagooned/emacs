@@ -435,30 +435,16 @@ normal or visual mode."
   (and (bound-and-true-p evil-mode)
        (not (memq evil-state '(insert emacs)))))
 
-(defun gmacs/mc-evil-switch-to-emacs-state ()
-  "When using multiple-cursors, switch to evil-mode Emacs state."
-  (when (gmacs/evil-visual-or-normal-p)
-    (setq gmacs/mc-evil-prev-state evil-state)
-    (when (region-active-p)
-      (setq gmacs/mc-evil-mark-was-active t))
-    (let ((mark-before (mark))
-          (point-before (point)))
-      (evil-emacs-state 1)
-      (when (or gmacs/mc-evil-mark-was-active (region-active-p))
-        (goto-char point-before)
-        (set-mark mark-before)))))
+(defun gmacs/mc-evil-emacs-state ()
+  "When using multiple-cursors, switch to Emacs state."
+  (if (region-active-p)
+      (delete-selection-mode 1))
+  (evil-emacs-state 1))
 
-(defun gmacs/mc-evil-back-to-previous-state ()
-  "When done using multiple-cursors, switch back previous \
-evil-mode state."
-  (when gmacs/mc-evil-prev-state
-    (unwind-protect
-        (case gmacs/mc-evil-evil-prev-state
-          ((normal visual) (evil-force-normal-state))
-          (t (message "Don't know how to handle previous state: %S"
-                      gmacs/mc-evil-evil-prev-state)))
-      (setq gmacs/mc-evil-prev-state nil)
-      (setq gmacs/mc-evil-mark-was-active nil))))
+(defun gmacs/mc-evil-normal-state ()
+  "When done using multiple-cursors, switch to normal mode."
+  (delete-selection-mode 0)
+  (evil-normal-state 1))
 
 (defun gmacs/shrink-window-horizontally ()
   "Shrink the active window horizontally."

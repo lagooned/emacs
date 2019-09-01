@@ -295,9 +295,9 @@
   (magit-auto-revert-mode 0))
 
 (use-package multiple-cursors
-  :config
-  (add-hook 'multiple-cursors-mode-enabled-hook #'gmacs/mc-evil-switch-to-emacs-state)
-  (add-hook 'multiple-cursors-mode-disabled-hook #'gmacs/mc-evil-back-to-previous-state))
+  :hook
+  ((multiple-cursors-mode-enabled . gmacs/mc-evil-emacs-state)
+   (multiple-cursors-mode-disabled . gmacs/mc-evil-normal-state)))
 
 (use-package org
   :commands
