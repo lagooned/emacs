@@ -24,14 +24,6 @@
 
 ;;; Code:
 
-(use-package apache-mode
-  :commands apache-mode)
-
-(use-package dockerfile-mode
-  :commands dockerfile-mode
-  :init
-  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
-
 (use-package prog-mode
   :commands prog-mode
   :init
@@ -58,20 +50,9 @@
   (setq xref-after-jump-hook '(recenter)
         xref-after-return-hook '(recenter)))
 
-(use-package puppet-mode
-  :commands puppet-mode)
-
-(use-package restclient
-  :commands restclient-mode
-  :init
-  (add-to-list
-   'auto-mode-alist
-   '("\\.rest\\'" . restclient-mode)))
-
-(use-package yaml-mode)
-
 (load "elisp-lang")
 (load "clj-lang")
+(load "ops-lang")
 (load "php-lang")
 (load "python-lang")
 (load "js-lang")
