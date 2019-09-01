@@ -34,14 +34,12 @@
 
 (use-package emmet-mode
   :diminish "emm"
-  :commands
-  emmet-mode
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook 'emmet-mode)
-  (add-hook 'nxml-mode-hook 'emmet-mode)
-  (add-hook 'emmet-mode-hook 'gmacs/evil-emmet-mode-setup))
+  :commands emmet-mode
+  :hook ((sgml-mode . emmet-mode)
+         (web-mode . emmet-mode)
+         (css-mode . emmet-mode)
+         (nxml-mode . emmet-mode)
+         (emmet-mode . gmacs/evil-emmet-mode-setup)))
 
 (use-package prog-mode
   :commands prog-mode
