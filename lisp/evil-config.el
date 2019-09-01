@@ -206,9 +206,6 @@
 (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
 (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element)
 
-;; org
-(add-hook 'org-mode-hook 'gmacs/evil-org-mode-setup)
-
 ;; c derivs setup
 (add-hook 'c-mode-common-hook 'gmacs/evil-c-common-mode-setup)
 
