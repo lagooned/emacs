@@ -179,10 +179,9 @@
 ;; fast but imprecise scrolling
 (setq fast-but-imprecise-scrolling t)
 
-;; save history
+;; history
+(setq history-length 10)
 (setq savehist-additional-variables '(search-ring regexp-search-ring))
-(put 'search-ring 'history-length 10)
-(put 'regexp-search-ring 'history-length 10)
 
 ;; no bell
 (setq ring-bell-function 'ignore)
