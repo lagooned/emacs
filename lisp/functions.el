@@ -651,9 +651,6 @@ stateful confirmation dialog.
   (unless (string-match-p (concat "dired" uniquify-separator) (buffer-name))
     (rename-buffer (concat "dired" uniquify-separator (generate-new-buffer-name dired-directory)))))
 
-(defun gmacs/unpropertize-kill-ring ()
-  (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
-
 (defun gmacs/directory-ls-tree-entry-p (entry)
   (string= (nth 1 entry) "tree"))
 

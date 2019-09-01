@@ -180,13 +180,9 @@
 (setq fast-but-imprecise-scrolling t)
 
 ;; save history
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-(put 'kill-ring 'history-length 25)
+(setq savehist-additional-variables '(search-ring regexp-search-ring))
 (put 'search-ring 'history-length 25)
 (put 'regexp-search-ring 'history-length 25)
-
-;; strip properties from kill string
-(add-hook 'kill-emacs-hook 'gmacs/unpropertize-kill-ring)
 
 ;; no bell
 (setq ring-bell-function 'ignore)
