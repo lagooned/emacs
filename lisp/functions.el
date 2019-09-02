@@ -590,6 +590,7 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
 
 (defun gmacs/evil-emmet-mode-setup ()
+  "Setup emmet-mode for evil."
   (define-key evil-normal-state-local-map (kbd "M-j") 'emmet-expand-line)
   (define-key evil-insert-state-local-map (kbd "M-j") 'emmet-expand-line)
   (define-key evil-normal-state-local-map (kbd "M-l") 'emmet-next-edit-point)
