@@ -331,11 +331,11 @@
          (prog-mode . gmacs/enable-company-mode)))
 
 (use-package projectile
-  :diminish projectile-mode
+  :diminish projectile-mode "proj"
+  :commands projectile-mode
+  :hook (emacs-startup . projectile-mode)
   :init
-  (setq projectile-switch-project-action 'projectile-dired)
-  :config
-  (add-hook 'emacs-startup-hook (lambda () (projectile-mode 1))))
+  (setq projectile-switch-project-action 'projectile-dired))
 
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
