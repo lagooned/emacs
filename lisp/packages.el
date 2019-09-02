@@ -231,10 +231,10 @@
   focus-mode)
 
 (use-package grep
+  :hook (grep-mode . gmacs/enable-truncate-lines-no-message)
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
-        grep-use-null-device nil)
-  (add-hook 'grep-mode-hook #'gmacs/enable-truncate-lines-no-message))
+        grep-use-null-device nil))
 
 (use-package hi-lock
   :diminish hi-lock-mode "hi"
