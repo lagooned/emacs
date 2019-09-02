@@ -312,12 +312,12 @@
   org-capture
   :hook
   (org-mode . gmacs/enable-truncate-lines-no-message)
+  (org-indent-mode . gmacs/org-indent-setup)
   :init
   (setq org-startup-indented t
         org-log-done t
         org-agenda-files (list "~/org/work.org"
                                "~/org/home.org"))
-  (add-hook 'org-indent-mode-hook (lambda () (diminish 'org-indent-mode "in")))
   :config
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh" . "src sh"))

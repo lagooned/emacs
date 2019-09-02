@@ -681,6 +681,9 @@ then kill buffer."
   (setq evil--jumps-buffer-targets "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   (evil-add-command-properties #'dired-find-file :jump t))
 
+(defun gmacs/org-indent-setup ()
+  (diminish 'org-indent-mode "in"))
+
 (provide 'functions)
 ;;; functions.el ends here
 
