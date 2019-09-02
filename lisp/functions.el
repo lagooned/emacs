@@ -36,8 +36,6 @@
 (defun gmacs/emacs-startup-hook ()
   "Gmacs startup function."
   (gmacs/reset-gc-threshold-percentage)
-  (gmacs/write-startup-log)
-  (kill-buffer "*Messages*")
   (setq default-directory "~/.emacs.d/"))
 
 (defun gmacs/reset-gc-threshold-percentage ()
@@ -97,12 +95,6 @@ to sane runtime defaults."
   "Open .custom.el."
   (interactive)
   (find-file "~/.emacs.d/.custom.el"))
-
-(defun gmacs/open-startup-log ()
-  "Open startup.log."
-  (interactive)
-  (find-file "~/.emacs.d/startup.log")
-  (goto-char (point-max)))
 
 (defun gmacs/minibuffer-fringe-setup ()
   "Decouples the minibuffer's fringe from that of the main buffer."
@@ -352,15 +344,6 @@ disable command `hi-lock-mode'."
   "Open ~/code."
   (interactive)
   (gmacs/create-visit-dir "~/code"))
-
-(defun gmacs/write-startup-log ()
-  "Write ~/.emacs.d/startup.log."
-  (save-current-buffer
-    (set-buffer "*Messages*")
-    (append-to-file (point-min) (point-max) "~/.emacs.d/startup.log")
-    (message
-     (substitute-command-keys
-      "To view starup log, type \\[gmacs/open-startup-log]"))))
 
 (defun gmacs/company-cancel-complete-prev ()
   "Exit company mode and use evil complete to autocomplete upwards."
