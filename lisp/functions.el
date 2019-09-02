@@ -511,7 +511,7 @@ match your prompt."
 (defun gmacs/eshell-def-evil-eshell-delete ()
   "Define custom delete operation for Eshell when on the line with the prompt."
   (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
-    "Like evil-delete, but inhibit read only and when the eshell prompt is
+    "Like evil-delete, but inhibit read only and when the eshell prompt is \
 involved re-emit it."
     (interactive "<R><x><y>")
     (let ((inhibit-read-only t)
