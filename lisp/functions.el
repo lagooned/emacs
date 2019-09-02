@@ -676,6 +676,7 @@ then kill buffer."
              (kill-buffer (process-buffer process)))))))
 
 (defun gmacs/web-mode-setup ()
+  "Configure `web-mode'."
   (sp-local-pair 'web-mode "<" "")
   (emmet-mode 1))
 
