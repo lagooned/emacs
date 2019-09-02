@@ -376,23 +376,21 @@
 
 (use-package shell
   :commands shell
-  :init
-  (add-hook 'shell-mode-hook 'gmacs/shell-kill-buffer-on-exit-sentinel))
+  :hook (shell-mode . gmacs/shell-kill-buffer-on-exit-sentinel))
 
 (use-package smartparens
   :commands smartparens-mode
   :diminish smartparens-mode "sp"
-  :init
-  (add-hook 'prog-mode-hook #'smartparens-mode)
+  :hook ((prog-mode . smartparens-mode)
+         (evil-replace-state-entry . turn-off-smartparens-mode)
+         (evil-replace-state-exit . turn-on-smartparens-mode))
   :config
   (require 'smartparens-config)
   (setq sp-autowrap-region nil
         sp-highlight-pair-overlay nil
         sp-cancel-autoskip-on-backward-movement nil
         sp-show-pair-delay 0
-        sp-max-pair-length 3)
-  (add-hook 'evil-replace-state-entry-hook #'turn-off-smartparens-mode)
-  (add-hook 'evil-replace-state-exit-hook  #'turn-on-smartparens-mode))
+        sp-max-pair-length 3))
 
 (use-package spacemacs-theme
   :init
