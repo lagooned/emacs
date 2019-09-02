@@ -570,7 +570,8 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   "Setup org mode."
   (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle)
   (define-key evil-normal-state-local-map (kbd "C-M-l") 'gmacs/org-cycle-list-bullet-forward)
-  (define-key evil-normal-state-local-map (kbd "C-M-h") 'gmacs/org-cycle-list-bullet-backward))
+  (define-key evil-normal-state-local-map (kbd "C-M-h") 'gmacs/org-cycle-list-bullet-backward)
+  (define-key evil-insert-state-local-map (kbd "C-d") 'evil-shift-left-line))
 
 (defun gmacs/org-cycle-list-bullet-forward ()
   "Cycle org list bullet type forward."
