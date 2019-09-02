@@ -646,6 +646,7 @@ stateful confirmation dialog.
   (company-mode))
 
 (defun gmacs/evil-command-window-setup ()
+  "Setup Evil command window."
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 
 (defun gmacs/rename-dired-buffer ()
