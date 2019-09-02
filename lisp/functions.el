@@ -690,6 +690,7 @@ then kill buffer."
   (evil-add-command-properties #'dired-find-file :jump t))
 
 (defun gmacs/org-indent-setup ()
+  "Configure `org-intent-mode'."
   (diminish 'org-indent-mode "in"))
 
 (provide 'functions)
