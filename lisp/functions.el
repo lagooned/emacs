@@ -656,6 +656,7 @@ stateful confirmation dialog.
     (rename-buffer (concat "dired" uniquify-separator (generate-new-buffer-name dired-directory)))))
 
 (defun gmacs/directory-ls-tree-entry-p (entry)
+  "Function to `mapcar' to filter `ENTRY' in 'git ls-tree' for directories."
   (string= (nth 1 entry) "tree"))
 
 (defun gmacs/shell-kill-buffer-on-exit-sentinel ()
