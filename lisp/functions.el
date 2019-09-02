@@ -372,7 +372,7 @@ disable command `hi-lock-mode'."
   (evil-complete-next))
 
 (defun gmacs/counsel-func-eshell-history (msg func)
-  "Call function on value from from eshell history."
+  "Call `FUNC' and display `MSG' on value from from eshell history."
   (let (collection val)
     (setq collection
           (nreverse
