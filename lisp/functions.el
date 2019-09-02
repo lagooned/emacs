@@ -681,6 +681,7 @@ then kill buffer."
   (emmet-mode 1))
 
 (defun gmacs/auto-revert-mode-setup ()
+  "Configure `auto-revert-mode' setup."
   (diminish 'auto-revert-mode))
 
 (defun gmacs/evil-jumplist-setup ()
