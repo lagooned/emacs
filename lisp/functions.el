@@ -240,7 +240,7 @@ prompt for grep command."
   (interactive)
   (if (thing-at-point-url-at-point)
       (browse-url-at-point)
-    (let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
+    (lexical-let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
       (call-interactively #'org-open-at-point))))
 
 (defun gmacs/counsel-git (&optional initial-input)
