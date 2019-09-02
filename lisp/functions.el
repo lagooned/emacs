@@ -169,6 +169,7 @@ prompt for grep command."
       (read-string "grep regexp: ")))))
 
 (defun gmacs/grep-concat-command (func)
+  "Constuct grep command with `FUNC' and truncate with cut."
   (grep (concat (eval grep-command) (funcall func) " | cut -c -1500")))
 
 (defun gmacs/counsel-rg-region ()
