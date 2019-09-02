@@ -573,6 +573,7 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   (define-key evil-normal-state-local-map (kbd "C-M-h") 'gmacs/org-cycle-list-bullet-backward))
 
 (defun gmacs/org-cycle-list-bullet-forward ()
+  "Cycle org list bullet type forward."
   (interactive)
   (funcall-interactively 'org-cycle-list-bullet 'nil))
 
