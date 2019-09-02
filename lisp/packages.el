@@ -393,6 +393,7 @@
         sp-max-pair-length 3))
 
 (use-package spacemacs-theme
+  :defer t
   :init
   (setq spacemacs-theme-comment-bg nil
         spacemacs-theme-underline-parens nil))
