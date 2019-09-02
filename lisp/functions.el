@@ -650,6 +650,7 @@ stateful confirmation dialog.
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 
 (defun gmacs/rename-dired-buffer ()
+  "Rename Dired buffers so that they can be referred to in the Evil Jumplist."
   (interactive)
   (unless (string-match-p (concat "dired" uniquify-separator) (buffer-name))
     (rename-buffer (concat "dired" uniquify-separator (generate-new-buffer-name dired-directory)))))
