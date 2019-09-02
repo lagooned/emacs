@@ -578,6 +578,7 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   (funcall-interactively 'org-cycle-list-bullet 'nil))
 
 (defun gmacs/org-cycle-list-bullet-backward ()
+  "Cycle org list bullet type backward."
   (interactive)
   (funcall-interactively 'org-cycle-list-bullet 'previous))
 
