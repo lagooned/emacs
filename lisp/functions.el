@@ -685,6 +685,7 @@ then kill buffer."
   (diminish 'auto-revert-mode))
 
 (defun gmacs/evil-jumplist-setup ()
+  "Configure evil-jumplist."
   (setq evil--jumps-buffer-targets "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   (evil-add-command-properties #'dired-find-file :jump t))
 
