@@ -57,10 +57,10 @@
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
 
 (evil-leader/set-key-for-mode 'js2-mode
-  "m f s" 'js2-mode-toggle-hide-functions
-  "m f c" 'js2-mode-toggle-hide-comments
+  "m t s" 'js2-mode-toggle-hide-functions
+  "m t c" 'js2-mode-toggle-hide-comments
   "m f f" 'js2-mode-toggle-element
-  "m v" 'js2r-rename-var)
+  "m r" 'js2r-rename-var)
 
 (which-key-add-key-based-replacements
   "SPC m f" "fold")
