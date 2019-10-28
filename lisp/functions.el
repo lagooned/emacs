@@ -495,7 +495,7 @@ match your prompt."
   (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
   (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
   (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
-  (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof-kill-on-empty-prompt)
   (define-key evil-insert-state-local-map (kbd "C-i") 'eshell-pcomplete)
   (define-key evil-insert-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
   (define-key evil-normal-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
@@ -536,6 +536,31 @@ the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
   (save-excursion
     (goto-char loc)
     (looking-at-p gmacs/eshell-prompt-regexp)))
+
+(defun gmacs/looking-at-empty-eshell-prompt-regexp-p (loc)
+  "Truthy value for evil-eshell-delete which determines if \
+the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp' \
+followed by nothing."
+  (save-excursion
+    (goto-char loc)
+    (looking-at-p (concat gmacs/eshell-prompt-regexp "$"))))
+
+(defun gmacs/eshell-send-eof-kill-on-empty-prompt ()
+  "Send eshell-life-is-too-much if there is no pending \
+eshell command string, and EOF if there is a pending command string."
+  (interactive)
+  (if (gmacs/looking-at-empty-eshell-prompt-p)
+      (eshell-life-is-too-much)
+    (gmacs/eshell-send-eof)))
+
+(defun gmacs/looking-at-empty-eshell-prompt-p ()
+  "Test if looking an empty eshell prompt."
+  (let ((beginning-of-line-pos
+         (progn
+           (save-excursion
+             (call-interactively 'move-beginning-of-line)
+             (point)))))
+    (gmacs/looking-at-empty-eshell-prompt-regexp-p beginning-of-line-pos)))
 
 (defun gmacs/looking-at-eshell-top-prompt-regexp-p (loc)
   "Truthy value for evil-eshell-delete which determines if \
