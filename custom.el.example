@@ -17,7 +17,7 @@
           ispell-extra-args '("--sug-mode=ultra")))
 
 ;; menu-bar-display
-(if (display-graphic-p) (menu-bar-mode -1))
+(menu-bar-mode -1)
 
 ;; icon in title bar
 (setq ns-use-proxy-icon nil)
