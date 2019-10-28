@@ -235,7 +235,7 @@
    `(swiper-match-face-4 ((t :foreground ,bg :background ,tardis :bold t)))
 
    ;; org
-   `(outline-1 ((t (:foreground ,orange :height 1.2))))
+   `(outline-1 ((t (:foreground ,orange))))
    `(outline-2 ((t (:foreground ,dirtyblonde))))
    `(outline-3 ((t (:foreground ,brightgravel))))
    `(outline-4 ((t (:foreground ,toffee))))
@@ -249,7 +249,7 @@
    `(org-date ((t (:foreground ,tardis :underline t))))
    `(org-special-keyword ((t (:foreground ,taffy :weight bold))))
    `(org-document-info ((t (:foreground ,brightgravel))))
-   `(org-document-title ((t (:foreground ,plain :family "sans" :height 1.8 :weight bold))))
+   `(org-document-title ((t (:foreground ,plain :family "sans" :weight bold))))
 
    ;; erc
    `(erc-default-face ((t (:inherit default))))
