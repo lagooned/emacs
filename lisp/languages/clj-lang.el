@@ -27,7 +27,9 @@
 (use-package clojure-mode)
 
 (use-package cider
-  :when (executable-find "clj")
+  :when
+  (and (executable-find "clj")
+       (executable-find "lein"))
   :hook
   (cider-repl-mode . gmacs/cider-repl-mode-setup)
   :init
