@@ -719,6 +719,11 @@ then kill buffer."
   "Configure `org-intent-mode'."
   (diminish 'org-indent-mode "in"))
 
+(defun gmacs/cider-repl-mode-setup ()
+  "Configure `cider-repl-mode'"
+  (define-key evil-normal-state-local-map (kbd "C-m") 'cider-repl-return)
+  (define-key evil-normal-state-local-map (kbd "C-j") 'cider-repl-return))
+
 (provide 'functions)
 ;;; functions.el ends here
 

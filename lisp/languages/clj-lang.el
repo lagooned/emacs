@@ -26,5 +26,12 @@
 
 (use-package clojure-mode)
 
+(use-package cider
+  :when (executable-find "clj")
+  :hook
+  (cider-repl-mode . gmacs/cider-repl-mode-setup)
+  :init
+  (setq cider-repl-display-help-banner 'nil))
+
 (provide 'clj-lang)
 ;;; clj-lang.el ends here
