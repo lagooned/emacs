@@ -401,8 +401,9 @@
 (use-package swiper
   :commands swiper)
 
-(if (and (eq system-type 'gnu/linux) (executable-find "sudo"))
-    (use-package sudo-edit))
+(use-package sudo-edit
+  :when (and (eq system-type 'gnu/linux)
+             (executable-find "sudo")))
 
 (use-package suggest
   :commands suggest)
