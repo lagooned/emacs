@@ -31,7 +31,8 @@
   (and (executable-find "clj")
        (executable-find "lein"))
   :hook
-  (cider-repl-mode . gmacs/cider-repl-mode-setup)
+  ((cider-repl-mode . gmacs/cider-repl-mode-setup)
+   (cider-repl-mode . eldoc-mode))
   :init
   (setq cider-repl-display-help-banner 'nil)
   :config
