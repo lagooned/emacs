@@ -457,6 +457,13 @@ match your prompt."
     (call-interactively 'end-of-line)
     (call-interactively 'eval-last-sexp)))
 
+(defun gmacs/cider-move-eol-eval-last-sexp ()
+  "Eval the current line as if you were at the eol."
+  (interactive)
+  (save-excursion
+    (call-interactively 'end-of-line)
+    (call-interactively 'cider-eval-last-sexp)))
+
 (defun gmacs/enlarge-window ()
   "Enlarge the active window vertically."
   (interactive)

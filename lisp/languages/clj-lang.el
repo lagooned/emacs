@@ -36,8 +36,10 @@
   (setq cider-repl-display-help-banner 'nil)
   :config
   (evil-leader/set-key-for-mode 'cider-repl-mode
-    "m q" 'cider-quit))
-
+    "m q" 'cider-quit)
+  (evil-leader/set-key-for-mode 'clojure-mode
+    "C-e" 'gmacs/cider-move-eol-eval-last-sexp
+    "e" 'cider-eval-last-sexp))
 
 (provide 'clj-lang)
 ;;; clj-lang.el ends here
