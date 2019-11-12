@@ -33,7 +33,11 @@
   :hook
   (cider-repl-mode . gmacs/cider-repl-mode-setup)
   :init
-  (setq cider-repl-display-help-banner 'nil))
+  (setq cider-repl-display-help-banner 'nil)
+  :config
+  (evil-leader/set-key-for-mode 'cider-repl-mode
+    "m q" 'cider-quit))
+
 
 (provide 'clj-lang)
 ;;; clj-lang.el ends here
