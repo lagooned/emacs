@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, init
+;; Keywords: jeemacs, config, init
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,14 +27,15 @@
 (setq inhibit-startup-screen t)
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "
-;;    ██████╗ ███╗   ███╗ █████╗  ██████╗███████╗
-;;   ██╔════╝ ████╗ ████║██╔══██╗██╔════╝██╔════╝
-;;   ██║  ███╗██╔████╔██║███████║██║     ███████╗
-;;   ██║   ██║██║╚██╔╝██║██╔══██║██║     ╚════██║
-;;   ╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╗███████║
-;;    ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
+;;
+;;        ██╗███████╗███████╗███╗   ███╗ █████╗  ██████╗███████╗
+;;        ██║██╔════╝██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
+;;        ██║█████╗  █████╗  ██╔████╔██║███████║██║     ███████╗
+;;   ██   ██║██╔══╝  ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
+;;   ╚█████╔╝███████╗███████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
+;;    ╚════╝ ╚══════╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
 
-;; welcome to gmacs, enjoy! (/^.^)/
+;; welcome to jeemacs, enjoy! (/^.^)/
 
 ;; this buffer is for text that is not saved, and for lisp evaluation.
 ;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
@@ -84,7 +85,7 @@
 (savehist-mode 1)
 
 ;; write startup log, fix messages modeline, set dir to ~/.emacs.d
-(add-hook 'emacs-startup-hook #'gmacs/emacs-startup-hook)
+(add-hook 'emacs-startup-hook #'jeemacs/emacs-startup-hook)
 
 ;; customs file
 (setq custom-file "~/.emacs.d/.custom.el")

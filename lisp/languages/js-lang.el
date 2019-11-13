@@ -1,9 +1,9 @@
-;;; js-lang.el --- gmacs javascript langauge tools  -*- lexical-binding: t; -*-
+;;; js-lang.el --- jeemacs javascript langauge tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared Matthew Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, javascript
+;; Keywords: jeemacs, config, languages, javascript
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@
   (setq xref-js2-ignored-dirs nil)
   :config
   (if (executable-find "ag")
-      (add-hook 'js2-mode-hook #'gmacs/add-xref-js2-xref-backend)))
+      (add-hook 'js2-mode-hook #'jeemacs/add-xref-js2-xref-backend)))
 
 (use-package js2-refactor
   :after js2-mode

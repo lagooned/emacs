@@ -1,9 +1,9 @@
-;;; ops-lang.el --- gmacs ops tools                  -*- lexical-binding: t; -*-
+;;; ops-lang.el --- jeemacs ops tools                  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, ops
+;; Keywords: jeemacs, config, languages, ops
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

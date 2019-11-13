@@ -1,9 +1,9 @@
-;;; setup.el --- gmacs pre-config setup  -*- lexical-binding: t; -*-
+;;; setup.el --- jeemacs pre-config setup  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, setup, binds
+;; Keywords: jeemacs, config, setup, binds
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

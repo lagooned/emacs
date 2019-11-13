@@ -3,7 +3,7 @@
 ;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, xml
+;; Keywords: jeemacs, config, languages, xml
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
          (web-mode . emmet-mode)
          (css-mode . emmet-mode)
          (nxml-mode . emmet-mode)
-         (emmet-mode . gmacs/evil-emmet-mode-setup)))
+         (emmet-mode . jeemacs/evil-emmet-mode-setup)))
 
 (use-package nxml-mode
   :init

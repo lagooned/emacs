@@ -1,9 +1,9 @@
-;;; global.el --- gmacs main config  -*- lexical-binding: t; -*-
+;;; global.el --- jeemacs main config  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, defaults, encoding, fringe, bell, cursor, warnings
+;; Keywords: jeemacs, config, defaults, encoding, fringe, bell, cursor, warnings
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -80,8 +80,8 @@
 (fringe-mode (frame-char-width))
 
 ;; decouple window and minibuffer fringes
-(add-hook 'after-init-hook #'gmacs/minibuffer-fringe-setup)
-(gmacs/disable-minibuffer-fringe)
+(add-hook 'after-init-hook #'jeemacs/minibuffer-fringe-setup)
+(jeemacs/disable-minibuffer-fringe)
 
 ;; backups
 (setq version-control t
@@ -92,7 +92,7 @@
       vc-make-backup-files t
       backup-directory-alist '(("" . "~/.backup/save")))
 
-(add-hook 'before-save-hook 'gmacs/force-buffer-backup)
+(add-hook 'before-save-hook 'jeemacs/force-buffer-backup)
 
 ;; auto save to temp
 (setq auto-save-file-name-transforms
@@ -114,7 +114,7 @@
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(add-hook 'kill-buffer-query-functions 'gmacs/dont-kill-scratch-or-dired)
+(add-hook 'kill-buffer-query-functions 'jeemacs/dont-kill-scratch-or-dired)
 
 ;; no tool bar
 (tool-bar-mode -1)
@@ -134,7 +134,7 @@
 (setq-default c-basic-offset 4)
 
 ;; reload init
-(global-set-key (kbd "C-c i") 'gmacs/load-config)
+(global-set-key (kbd "C-c i") 'jeemacs/load-config)
 
 ;; make prompts easier
 (defalias 'yes-or-no-p 'y-or-n-p)

@@ -1,9 +1,9 @@
-;;; web-lang.el --- gmacs web tools  -*- lexical-binding: t; -*-
+;;; web-lang.el --- jeemacs web tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, web, css, vue, emmet, html
+;; Keywords: jeemacs, config, languages, web, css, vue, emmet, html
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 
 (use-package web-mode
   :commands web-mode
-  :hook (web-mode . gmacs/web-mode-setup)
+  :hook (web-mode . jeemacs/web-mode-setup)
   :init
   (setq web-mode-enable-auto-pairing nil
         web-mode-markup-indent-offset 4

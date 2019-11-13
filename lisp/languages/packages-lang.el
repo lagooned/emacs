@@ -1,9 +1,9 @@
-;;; package-lang.el --- gmacs language-specific tools  -*- lexical-binding: t; -*-
+;;; package-lang.el --- jeemacs language-specific tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, packages, syntax, xref, lsp, debug
+;; Keywords: jeemacs, config, languages, packages, syntax, xref, lsp, debug
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

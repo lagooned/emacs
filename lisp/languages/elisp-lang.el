@@ -3,7 +3,7 @@
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, elisp
+;; Keywords: jeemacs, config, languages, elisp
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 
 (use-package elisp-mode
   :hook ((emacs-lisp-mode . aggressive-indent-mode)
-         (emacs-lisp-mode . gmacs/emacs-lisp-setup)))
+         (emacs-lisp-mode . jeemacs/emacs-lisp-setup)))
 
 (use-package eldoc
   :diminish eldoc-mode
@@ -35,11 +35,11 @@
          (lisp-interaction-mode . turn-on-eldoc-mode)))
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "C-e" 'gmacs/move-eol-eval-last-sexp
+  "C-e" 'jeemacs/move-eol-eval-last-sexp
   "e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
-  "C-e" 'gmacs/move-eol-eval-last-sexp
+  "C-e" 'jeemacs/move-eol-eval-last-sexp
   "e" 'eval-last-sexp)
 
 (which-key-add-key-based-replacements

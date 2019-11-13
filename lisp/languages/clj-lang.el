@@ -3,7 +3,7 @@
 ;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, languages, config, clojure
+;; Keywords: jeemacs, languages, config, clojure
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@
   (and (executable-find "clj")
        (executable-find "lein"))
   :hook
-  ((cider-repl-mode . gmacs/cider-repl-mode-setup)
+  ((cider-repl-mode . jeemacs/cider-repl-mode-setup)
    (cider-repl-mode . eldoc-mode))
   :init
   (setq cider-repl-display-help-banner 'nil)
@@ -39,7 +39,7 @@
   (evil-leader/set-key-for-mode 'cider-repl-mode
     "m q" 'cider-quit)
   (evil-leader/set-key-for-mode 'clojure-mode
-    "C-e" 'gmacs/cider-move-eol-eval-last-sexp
+    "C-e" 'jeemacs/cider-move-eol-eval-last-sexp
     "e" 'cider-eval-last-sexp))
 
 (provide 'clj-lang)

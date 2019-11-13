@@ -1,9 +1,9 @@
-;;; variables.el --- gmacs vars  -*- lexical-binding: t; -*-
+;;; variables.el --- jeemacs vars  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, var
+;; Keywords: jeemacs, config, var
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,24 +24,24 @@
 
 ;;; Code:
 
-(defvar gmacs/evil-base-cursor-height #xffff
+(defvar jeemacs/evil-base-cursor-height #xffff
   "Set the cursor height to be used, note \
 anything over the current line height \
 will be capped at the current line height \
 set by (line-pixel-height)")
 
-(defvar gmacs/large-file-size 2
+(defvar jeemacs/large-file-size 2
   "Size (in MB) above which the user will be prompted to open the file literally \
 to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
-(defvar gmacs/eshell-message "Gshell \\(^.^\\)\n"
+(defvar jeemacs/eshell-message "Gshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 
-(defvar gmacs/eshell-top-prompt-regexp "^\\[.*\\].*"
+(defvar jeemacs/eshell-top-prompt-regexp "^\\[.*\\].*"
   "A regexp which matches the top line in the eshell prompt.")
 
-(defvar gmacs/eshell-prompt-regexp "^[#$] "
+(defvar jeemacs/eshell-prompt-regexp "^[#$] "
   "A regexp which fully matches your eshell prompt.
 
 This setting is important, since it affects how eshell will interpret \
@@ -49,19 +49,19 @@ the lines that are passed to it. \
 If this variable is changed, all Eshell buffers must be exited and \
 re-entered for it to take effect.")
 
-(defvar gmacs/mc-evil-prev-state nil
+(defvar jeemacs/mc-evil-prev-state nil
   "Saves the previous evil state as a string.")
 
-(defvar gmacs/mc-evil-mark-was-active nil
+(defvar jeemacs/mc-evil-mark-was-active nil
   "Saves the previous state of the mark.")
 
-(defvar gmacs/js2-xref-accept-ag nil
+(defvar jeemacs/js2-xref-accept-ag nil
   "Determines whether or not to show the xref-ag confirmation.")
 
-(defvar gmacs/force-basic-grep nil
+(defvar jeemacs/force-basic-grep nil
   "Determines whether or not to use basic grep.")
 
-(defvar gmacs/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
+(defvar jeemacs/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
   "Git command for showing ls-tree")
 
 (provide 'variables)

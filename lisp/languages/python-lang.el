@@ -1,9 +1,9 @@
-;;; python-lang.el --- gmacs python language tools  -*- lexical-binding: t; -*-
+;;; python-lang.el --- jeemacs python language tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, python, lsp
+;; Keywords: jeemacs, config, languages, python, lsp
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 (use-package python-mode
   :commands python-mode
   :init
-  (add-hook 'python-mode-hook #'gmacs/python-mode-hook))
+  (add-hook 'python-mode-hook #'jeemacs/python-mode-hook))
 
 (provide 'python-lang)
 ;;; python-lang.el ends here

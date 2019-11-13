@@ -1,4 +1,4 @@
-#+title: gmacs
+#+title: jeemacs
 #+author: jared engler
 
 * disclaimer

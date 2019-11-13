@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, packages
+;; Keywords: jeemacs, config, packages
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@
 
 (use-package autorevert
   ;; :diminish doesn't work as mode and lib name are different
-  :hook (auto-revert-mode . gmacs/auto-revert-mode-setup)
+  :hook (auto-revert-mode . jeemacs/auto-revert-mode-setup)
   :init
   (setq auto-revert-verbose nil))
 
@@ -61,8 +61,8 @@
         ("M-n" . company-select-next-or-abort)
         ("M-p" . company-select-previous-or-abort)
         ("M-i" . company-complete-common-or-cycle)
-        ("C-n" . gmacs/company-cancel-complete-next)
-        ("C-p" . gmacs/company-cancel-complete-prev)
+        ("C-n" . jeemacs/company-cancel-complete-next)
+        ("C-p" . jeemacs/company-cancel-complete-prev)
         ("M-g" . company-abort)
         ("M-j" . company-complete-selection)
         ("M-m" . company-complete-selection)
@@ -108,9 +108,9 @@
 
 (use-package dired
   :hook
-  ((dired-mode . gmacs/rename-dired-buffer)
+  ((dired-mode . jeemacs/rename-dired-buffer)
    (dired-mode . auto-revert-mode)
-   (dired-mode . gmacs/enable-truncate-lines-no-message)
+   (dired-mode . jeemacs/enable-truncate-lines-no-message)
    (dired-mode . dired-hide-details-mode))
   :init
   (setq dired-listing-switches "-lah")
@@ -149,11 +149,11 @@
 
 (use-package eshell
   :hook
-  (eshell-mode . gmacs/enable-truncate-lines-no-message)
+  (eshell-mode . jeemacs/enable-truncate-lines-no-message)
   :init
-  (setq eshell-banner-message 'gmacs/eshell-message
-        eshell-prompt-function 'gmacs/eshell-prompt-function
-        eshell-prompt-regexp (eval 'gmacs/eshell-prompt-regexp))
+  (setq eshell-banner-message 'jeemacs/eshell-message
+        eshell-prompt-function 'jeemacs/eshell-prompt-function
+        eshell-prompt-regexp (eval 'jeemacs/eshell-prompt-regexp))
   :config
   (with-eval-after-load 'em-term
     (push 'eshell-truncate-buffer eshell-output-filter-functions))
@@ -163,13 +163,13 @@
 (use-package evil
   :hook
   ((with-editor-mode . evil-insert-state)
-   (evil-command-window-mode . gmacs/evil-command-window-setup)
-   (eshell-mode . gmacs/evil-eshell-mode-setup)
-   (minibuffer-setup . gmacs/evil-minibuffer-setup)
-   (org-mode . gmacs/evil-org-mode-setup)
-   (c-mode-common . gmacs/evil-c-common-mode-setup)
-   (evil-insert-state-exit . gmacs/evil-company-abort-on-insert-leave)
-   (evil-mode . gmacs/evil-jumplist-setup))
+   (evil-command-window-mode . jeemacs/evil-command-window-setup)
+   (eshell-mode . jeemacs/evil-eshell-mode-setup)
+   (minibuffer-setup . jeemacs/evil-minibuffer-setup)
+   (org-mode . jeemacs/evil-org-mode-setup)
+   (c-mode-common . jeemacs/evil-c-common-mode-setup)
+   (evil-insert-state-exit . jeemacs/evil-company-abort-on-insert-leave)
+   (evil-mode . jeemacs/evil-jumplist-setup))
   :init
   (setq
    evil-move-cursor-back nil
@@ -231,7 +231,7 @@
   focus-mode)
 
 (use-package grep
-  :hook (grep-mode . gmacs/enable-truncate-lines-no-message)
+  :hook (grep-mode . jeemacs/enable-truncate-lines-no-message)
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
         grep-use-null-device nil))
@@ -300,8 +300,8 @@
 
 (use-package multiple-cursors
   :hook
-  ((multiple-cursors-mode-enabled . gmacs/mc-evil-emacs-state)
-   (multiple-cursors-mode-disabled . gmacs/mc-evil-normal-state)))
+  ((multiple-cursors-mode-enabled . jeemacs/mc-evil-emacs-state)
+   (multiple-cursors-mode-disabled . jeemacs/mc-evil-normal-state)))
 
 (use-package org
   :commands
@@ -311,8 +311,8 @@
   org-iswitchb
   org-capture
   :hook
-  (org-mode . gmacs/enable-truncate-lines-no-message)
-  (org-indent-mode . gmacs/org-indent-setup)
+  (org-mode . jeemacs/enable-truncate-lines-no-message)
+  (org-indent-mode . jeemacs/org-indent-setup)
   :init
   (setq org-startup-indented t
         org-log-done t
@@ -327,8 +327,8 @@
 (use-package prog-mode
   :commands prog-mode
   :hook ((prog-mode . too-long-lines-mode)
-         (prog-mode . gmacs/enable-truncate-lines-no-message)
-         (prog-mode . gmacs/enable-company-mode)))
+         (prog-mode . jeemacs/enable-truncate-lines-no-message)
+         (prog-mode . jeemacs/enable-company-mode)))
 
 (use-package projectile
   :diminish projectile-mode "proj"
@@ -376,7 +376,7 @@
 
 (use-package shell
   :commands shell
-  :hook (shell-mode . gmacs/shell-kill-buffer-on-exit-sentinel))
+  :hook (shell-mode . jeemacs/shell-kill-buffer-on-exit-sentinel))
 
 (use-package smartparens
   :commands smartparens-mode

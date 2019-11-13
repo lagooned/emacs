@@ -3,7 +3,7 @@
 ;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, tools
+;; Keywords: jeemacs, config, languages, tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

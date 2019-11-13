@@ -60,7 +60,7 @@
     "M" 'dired-do-chmod
     "O" 'dired-do-chown
     "P" 'dired-do-print
-    "p" 'gmacs/magit-status
+    "p" 'jeemacs/magit-status
     "Q" 'dired-do-find-regexp-and-replace
     "R" 'dired-do-rename
     "S" 'dired-do-symlink

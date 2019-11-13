@@ -3,7 +3,7 @@
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, evil, leader, binds
+;; Keywords: jeemacs, config, evil, leader, binds
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@
   "b k" 'kill-this-buffer
   "b K" 'kill-buffer
   "b C-k" 'kill-matching-buffers
-  "b h" 'gmacs/switch-to-scratch-buffer
-  "b m" 'gmacs/switch-to-messages-buffer
+  "b h" 'jeemacs/switch-to-scratch-buffer
+  "b m" 'jeemacs/switch-to-messages-buffer
   "b l" 'ibuffer
   "b r" 'revert-buffer
   "b R" 'rename-buffer
@@ -44,28 +44,28 @@
   "TAB" 'evil-switch-to-windows-last-buffer
 
   ;; config
-  "c i" 'gmacs/open-init-config
-  "c f" 'gmacs/open-functions-config
-  "c v" 'gmacs/open-variables-config
-  "c ," 'gmacs/open-leader-config
-  "c ." 'gmacs/open-custom-config
-  "c l" 'gmacs/open-language-config
-  "c g" 'gmacs/open-global-config
-  "c k" 'gmacs/open-evil-config
-  "c p" 'gmacs/open-packages-config
-  "c c" 'gmacs/load-config
+  "c i" 'jeemacs/open-init-config
+  "c f" 'jeemacs/open-functions-config
+  "c v" 'jeemacs/open-variables-config
+  "c ," 'jeemacs/open-leader-config
+  "c ." 'jeemacs/open-custom-config
+  "c l" 'jeemacs/open-language-config
+  "c g" 'jeemacs/open-global-config
+  "c k" 'jeemacs/open-evil-config
+  "c p" 'jeemacs/open-packages-config
+  "c c" 'jeemacs/load-config
 
   ;; file
   "f f" 'find-file
   "f a" 'find-alternate-file
-  "f c" 'gmacs/cleanup-file
+  "f c" 'jeemacs/cleanup-file
   "f r" 'counsel-recentf
   "f l" 'counsel-locate
   "f s" 'save-buffer
   "f w" 'write-file
 
   ;; grep
-  "g" 'gmacs/run-grep
+  "g" 'jeemacs/run-grep
 
   ;; help
   "h a"   'about-emacs
@@ -105,23 +105,23 @@
 
   ;; open
   "o a" 'org-agenda
-  "o o" 'gmacs/open-org-dir
-  "o d" 'gmacs/open-downloads-dir
-  "o c" 'gmacs/open-code-dir
-  "o h" 'gmacs/open-home-dir
+  "o o" 'jeemacs/open-org-dir
+  "o d" 'jeemacs/open-downloads-dir
+  "o c" 'jeemacs/open-code-dir
+  "o h" 'jeemacs/open-home-dir
 
   ;; project
-  "p s" 'gmacs/magit-status
+  "p s" 'jeemacs/magit-status
   "p e" 'projectile-run-eshell
   "p p" 'counsel-projectile-switch-project
-  "p r" 'gmacs/projectile-root-dir
-  "p f" 'gmacs/counsel-projectile-find-file-region
-  "p d" 'gmacs/counsel-projectile-find-dir-region
+  "p r" 'jeemacs/projectile-root-dir
+  "p f" 'jeemacs/counsel-projectile-find-file-region
+  "p d" 'jeemacs/counsel-projectile-find-dir-region
   "p b" 'magit-blame
-  "p g" 'gmacs/counsel-git-grep-region
+  "p g" 'jeemacs/counsel-git-grep-region
 
   ;; search
-  "s s" 'gmacs/swiper-region-thing
+  "s s" 'jeemacs/swiper-region-thing
   "s c" 'avy-goto-char
   "s l" 'avy-goto-line
   "s j" 'avy-goto-word-0
@@ -136,9 +136,9 @@
   "t p" 'smartparens-mode
   "t f" 'focus-mode
   "t c" 'flycheck-mode
-  "t s" 'gmacs/toggle-spelling
+  "t s" 'jeemacs/toggle-spelling
   "t h" 'highlight-symbol-at-point
-  "t H" 'gmacs/unhighlight-all
+  "t H" 'jeemacs/unhighlight-all
 
   ;; universal
   "u" 'universal-argument
@@ -158,14 +158,14 @@
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
   "w f" 'reposition-window
-  "w m" 'gmacs/switch-to-minibuffer
+  "w m" 'jeemacs/switch-to-minibuffer
   "w u" 'winner-undo
   "w r" 'winner-redo
   "w RET" 'toggle-frame-fullscreen
-  "]" 'gmacs/enlarge-window-horizontally
-  "[" 'gmacs/shrink-window-horizontally
-  "=" 'gmacs/enlarge-window
-  "-" 'gmacs/shrink-window
+  "]" 'jeemacs/enlarge-window-horizontally
+  "[" 'jeemacs/shrink-window-horizontally
+  "=" 'jeemacs/enlarge-window
+  "-" 'jeemacs/shrink-window
 
   ;; command
   ";" 'counsel-M-x
@@ -202,7 +202,7 @@
   "q r" 'restart-emacs)
 
 (evil-leader/set-key-for-mode 'org-mode
-  "l l" 'gmacs/org-link-follow
+  "l l" 'jeemacs/org-link-follow
   "l i" 'org-insert-link-global
   "m c" 'org-toggle-checkbox
   "m e" 'org-export-dispatch

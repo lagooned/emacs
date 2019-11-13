@@ -1,9 +1,9 @@
-;;; rust-lang.el --- gmacs rust tools                  -*- lexical-binding: t; -*-
+;;; rust-lang.el --- jeemacs rust tools                  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, languages, rust
+;; Keywords: jeemacs, config, languages, rust
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by

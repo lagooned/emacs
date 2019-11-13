@@ -1,9 +1,9 @@
-;;; functions.el --- custom gmacs functions  -*- lexical-binding: t; -*-
+;;; functions.el --- custom jeemacs functions  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: gmacs, config, function
+;; Keywords: jeemacs, config, function
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -33,82 +33,82 @@
   "Interactive No-op."
   (interactive))
 
-(defun gmacs/emacs-startup-hook ()
+(defun jeemacs/emacs-startup-hook ()
   "Gmacs startup function."
-  (gmacs/reset-gc-threshold-percentage)
+  (jeemacs/reset-gc-threshold-percentage)
   (setq default-directory "~/.emacs.d/"))
 
-(defun gmacs/reset-gc-threshold-percentage ()
+(defun jeemacs/reset-gc-threshold-percentage ()
   "Reset `gc-cons-threshold' and `gc-cons-percentage' \
 to sane runtime defaults."
   (setq gc-cons-threshold 16777216
         gc-cons-percentage 0.1))
 
-(defun gmacs/load-config ()
+(defun jeemacs/load-config ()
   "Load init.el."
   (interactive)
   (save-some-buffers)
   (load-file "~/.emacs.d/init.el")
   (revert-buffer t t))
 
-(defun gmacs/open-init-config ()
+(defun jeemacs/open-init-config ()
   "Open init.el."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(defun gmacs/open-variables-config ()
+(defun jeemacs/open-variables-config ()
   "Open variables.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/variables.el"))
 
-(defun gmacs/open-functions-config ()
+(defun jeemacs/open-functions-config ()
   "Open functions.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/functions.el"))
 
-(defun gmacs/open-leader-config ()
+(defun jeemacs/open-leader-config ()
   "Open leader-config.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/leader-config.el"))
 
-(defun gmacs/open-global-config ()
+(defun jeemacs/open-global-config ()
   "Open global.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/global.el"))
 
-(defun gmacs/open-evil-config ()
+(defun jeemacs/open-evil-config ()
   "Open evil-config.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/evil-config.el"))
 
-(defun gmacs/open-packages-config ()
+(defun jeemacs/open-packages-config ()
   "Open packages.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/packages.el"))
 
-(defun gmacs/open-language-config ()
+(defun jeemacs/open-language-config ()
   "Open languages/packages-lang.el."
   (interactive)
   (find-file "~/.emacs.d/lisp/languages/packages-lang.el"))
 
-(defun gmacs/open-custom-config ()
+(defun jeemacs/open-custom-config ()
   "Open .custom.el."
   (interactive)
   (find-file "~/.emacs.d/.custom.el"))
 
-(defun gmacs/minibuffer-fringe-setup ()
+(defun jeemacs/minibuffer-fringe-setup ()
   "Decouples the minibuffer's fringe from that of the main buffer."
   ;; (set-window-fringes (minibuffer-window) 0 0 nil)
-  (add-hook 'minibuffer-setup-hook #'gmacs/disable-minibuffer-fringe)
-  (add-hook 'minibuffer-exit-hook #'gmacs/disable-minibuffer-fringe))
+  (add-hook 'minibuffer-setup-hook #'jeemacs/disable-minibuffer-fringe)
+  (add-hook 'minibuffer-exit-hook #'jeemacs/disable-minibuffer-fringe))
 
-(defun gmacs/disable-minibuffer-fringe ()
+(defun jeemacs/disable-minibuffer-fringe ()
   "Disable minibuffer fringe."
   (set-window-fringes (minibuffer-window) 0 0 nil))
 
-(defun gmacs/force-buffer-backup ()
+(defun jeemacs/force-buffer-backup ()
   "Make a special per session and per save backup \
-at the first save of each gmacs session."
+at the first save of each jeemacs session."
   (when (not buffer-backed-up)
     ;; Override the default parameters for per-session backups.
     (let ((backup-directory-alist
@@ -118,90 +118,90 @@ at the first save of each gmacs session."
   (let ((buffer-backed-up nil))
     (backup-buffer)))
 
-(defun gmacs/untabify-except-makefiles ()
+(defun jeemacs/untabify-except-makefiles ()
   "Replace tabs with spaces except in makefiles."
   (unless (derived-mode-p 'makefile-mode)
     (untabify (point-min) (point-max))))
 
-(defun gmacs/switch-to-minibuffer ()
+(defun jeemacs/switch-to-minibuffer ()
   "Switch to minibuffer window."
   (interactive)
   (if (active-minibuffer-window)
       (select-window (active-minibuffer-window))
     (error "Minibuffer is not active")))
 
-(defun gmacs/cleanup-file ()
+(defun jeemacs/cleanup-file ()
   "Remove tabs and trailing whitespace from buffer."
   (interactive)
-  (gmacs/untabify-except-makefiles)
+  (jeemacs/untabify-except-makefiles)
   (delete-trailing-whitespace))
 
-(defun gmacs/run-grep ()
-  "Gmacs grep function. Will try `gmacs/counsel-rg-region', \
-then `gmacs/grep-region' in order."
+(defun jeemacs/run-grep ()
+  "jeemacs grep function. Will try `jeemacs/counsel-rg-region', \
+then `jeemacs/grep-region' in order."
   (interactive)
-  (if (and (executable-find "rg") (not (eval 'gmacs/force-basic-grep)))
-      (call-interactively 'gmacs/counsel-rg-region)
+  (if (and (executable-find "rg") (not (eval 'jeemacs/force-basic-grep)))
+      (call-interactively 'jeemacs/counsel-rg-region)
     (if (projectile-project-p)
         (let ((default-directory (projectile-project-p)))
-          (funcall 'gmacs/grep-region))
-      (funcall 'gmacs/grep-region))))
+          (funcall 'jeemacs/grep-region))
+      (funcall 'jeemacs/grep-region))))
 
-(defun gmacs/grep (&optional initial)
+(defun jeemacs/grep (&optional initial)
   "Gmacs grep wrapper to take optional `INITIAL' input or \
 prompt for grep command."
   (if initial
-      (gmacs/build-grep-command-with-region)
-    (gmacs/build-grep-command-with-input)))
+      (jeemacs/build-grep-command-with-region)
+    (jeemacs/build-grep-command-with-input)))
 
-(defun gmacs/build-grep-command-with-region ()
+(defun jeemacs/build-grep-command-with-region ()
   "Use currently selected region to build grep command."
-  (gmacs/grep-concat-command
+  (jeemacs/grep-concat-command
    (lambda ()
      (string-utils/add-quotes
       (string-utils/escape-str-for-command initial)))))
 
-(defun gmacs/build-grep-command-with-input ()
+(defun jeemacs/build-grep-command-with-input ()
   "Use `read-string' to build grep command."
-  (gmacs/grep-concat-command
+  (jeemacs/grep-concat-command
    (lambda ()
      (string-utils/add-quotes
       (read-string "grep regexp: ")))))
 
-(defun gmacs/grep-concat-command (func)
+(defun jeemacs/grep-concat-command (func)
   "Constuct grep command with `FUNC' and truncate with cut."
   (grep (concat (eval grep-command) (funcall func) " | cut -c -1500")))
 
-(defun gmacs/counsel-rg-region ()
+(defun jeemacs/counsel-rg-region ()
   "Optionally run ripgrep on region."
   (interactive)
-  (gmacs/opt-region-helper 'counsel-rg))
+  (jeemacs/opt-region-helper 'counsel-rg))
 
-(defun gmacs/counsel-git-grep-region ()
+(defun jeemacs/counsel-git-grep-region ()
   "Optionally run `counsel-git-grep' on region."
   (interactive)
-  (gmacs/opt-region-helper
+  (jeemacs/opt-region-helper
    '(lambda (&optional initial)
       (counsel-git-grep nil initial))))
 
-(defun gmacs/grep-region ()
+(defun jeemacs/grep-region ()
   "Optionally run `grep' on region."
   (interactive)
-  (gmacs/opt-region-helper
+  (jeemacs/opt-region-helper
    '(lambda (&optional initial)
-      (gmacs/grep initial))))
+      (jeemacs/grep initial))))
 
-(defun gmacs/counsel-projectile-find-file-region ()
+(defun jeemacs/counsel-projectile-find-file-region ()
   "Optionally run `counsel-git' on region."
   (interactive)
-  (gmacs/opt-region-helper 'gmacs/counsel-git))
+  (jeemacs/opt-region-helper 'jeemacs/counsel-git))
 
-(defun gmacs/counsel-projectile-find-dir-region ()
+(defun jeemacs/counsel-projectile-find-dir-region ()
   "Optionally run `counsel-projectile-find-dir' on region."
   (interactive)
-  (gmacs/opt-region-helper 'gmacs/counsel-projectile-find-dir))
+  (jeemacs/opt-region-helper 'jeemacs/counsel-projectile-find-dir))
 
-(defun gmacs/opt-region-helper (func)
+(defun jeemacs/opt-region-helper (func)
   "Add region to kill ring and run `FUNC' with optional region arg."
   (if (use-region-p)
       (let ((string (buffer-substring-no-properties
@@ -211,7 +211,7 @@ prompt for grep command."
                (funcall-interactively func string)))
     (funcall-interactively func)))
 
-(defun gmacs/swiper-region-thing ()
+(defun jeemacs/swiper-region-thing ()
   "Call `swiper' on the selected region or thing under cursor."
   (interactive)
   (if (use-region-p)
@@ -221,21 +221,21 @@ prompt for grep command."
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
-(defun gmacs/xref-find-definitions-symbol ()
+(defun jeemacs/xref-find-definitions-symbol ()
   "`xref-find-definitions' that doesn't fall back."
   (interactive)
   (if (symbol-at-point)
       (xref-find-definitions (symbol-name (symbol-at-point)))
     (message "No symbol selected")))
 
-(defun gmacs/xref-find-apropos-symbol ()
+(defun jeemacs/xref-find-apropos-symbol ()
   "`xref-find-apropos' that doesn't fall back."
   (interactive)
   (if (symbol-at-point)
       (xref-find-apropos (symbol-name (symbol-at-point)))
     (message "No symbol selected")))
 
-(defun gmacs/org-link-follow ()
+(defun jeemacs/org-link-follow ()
   "Push marker stack and follow org link."
   (interactive)
   (if (thing-at-point-url-at-point)
@@ -243,7 +243,7 @@ prompt for grep command."
     (lexical-let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
       (call-interactively #'org-open-at-point))))
 
-(defun gmacs/counsel-git (&optional initial-input)
+(defun jeemacs/counsel-git (&optional initial-input)
   "Find file in the current Git repository. `INITIAL-INPUT' \
 can be given as the initial minibuffer input."
   (interactive)
@@ -258,7 +258,7 @@ can be given as the initial minibuffer input."
               :action #'counsel-git-action
               :caller 'counsel-git)))
 
-(defun gmacs/counsel-projectile-find-dir (&optional initial-input)
+(defun jeemacs/counsel-projectile-find-dir (&optional initial-input)
   "Jump to a directory in the current project with \
 initial input `INITIAL-INPUT'."
   (interactive)
@@ -267,12 +267,12 @@ initial input `INITIAL-INPUT'."
          (cands (flatmap
                  'last
                  (seq-filter
-                  #'gmacs/directory-ls-tree-entry-p
+                  #'jeemacs/directory-ls-tree-entry-p
                   (mapcar
                    'split-string
                    (cdr
                     (split-string
-                     (shell-command-to-string gmacs/git-ls-tree-head-cmd)
+                     (shell-command-to-string jeemacs/git-ls-tree-head-cmd)
                      "\n"
                      t)))))))
     (ivy-read (projectile-prepend-project-name "Find dir: ") cands
@@ -280,14 +280,14 @@ initial input `INITIAL-INPUT'."
               :action #'counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
 
-(defun gmacs/magit-status ()
+(defun jeemacs/magit-status ()
   "Wrap `magit-status' with `projectile-project-p'."
   (interactive)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
     (magit-status)))
 
-(defun gmacs/toggle-spelling ()
+(defun jeemacs/toggle-spelling ()
   "Toggle flyspell."
   (interactive)
   (ispell-set-spellchecker-params)
@@ -302,42 +302,42 @@ initial input `INITIAL-INPUT'."
         (flyspell-large-region (point-min) (point-max))
         (flyspell-mode +1)))))
 
-(defun gmacs/unhighlight-all ()
+(defun jeemacs/unhighlight-all ()
   "Unhighlight all currently highlighted symbols and \
 disable command `hi-lock-mode'."
   (interactive)
   (unhighlight-regexp t)
   (hi-lock-mode 0))
 
-(defun gmacs/switch-to-scratch-buffer ()
+(defun jeemacs/switch-to-scratch-buffer ()
   "Switch to initial scratch buffer."
   (interactive)
   (switch-to-buffer "*scratch*"))
 
-(defun gmacs/switch-to-messages-buffer ()
+(defun jeemacs/switch-to-messages-buffer ()
   "Switch to Messages buffer."
   (interactive)
   (switch-to-buffer "*Messages*"))
 
-(defun gmacs/eshell-send-eof ()
+(defun jeemacs/eshell-send-eof ()
   "Send EOF to Eshell with newline."
   (interactive)
   (call-interactively 'newline)
   (call-interactively 'eshell-send-eof-to-process))
 
-(defun gmacs/projectile-root-dir ()
+(defun jeemacs/projectile-root-dir ()
   "Jump to the root directory of the current project."
   (interactive)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
     (dired (projectile-project-root))))
 
-(defun gmacs/open-home-dir ()
+(defun jeemacs/open-home-dir ()
   "Open ~."
   (interactive)
   (dired "~"))
 
-(defun gmacs/create-visit-dir (dir)
+(defun jeemacs/create-visit-dir (dir)
   "Open/create `DIR'."
   (if (file-directory-p dir)
       (dired dir)
@@ -345,34 +345,34 @@ disable command `hi-lock-mode'."
       (make-directory dir t)
       (dired dir))))
 
-(defun gmacs/open-org-dir ()
+(defun jeemacs/open-org-dir ()
   "Open ~/org."
   (interactive)
-  (gmacs/create-visit-dir "~/org"))
+  (jeemacs/create-visit-dir "~/org"))
 
-(defun gmacs/open-downloads-dir ()
+(defun jeemacs/open-downloads-dir ()
   "Open ~/Downloads."
   (interactive)
-  (gmacs/create-visit-dir "~/Downloads"))
+  (jeemacs/create-visit-dir "~/Downloads"))
 
-(defun gmacs/open-code-dir ()
+(defun jeemacs/open-code-dir ()
   "Open ~/code."
   (interactive)
-  (gmacs/create-visit-dir "~/code"))
+  (jeemacs/create-visit-dir "~/code"))
 
-(defun gmacs/company-cancel-complete-prev ()
+(defun jeemacs/company-cancel-complete-prev ()
   "Exit company mode and use evil complete to autocomplete upwards."
   (interactive)
   (company-abort)
   (evil-complete-previous))
 
-(defun gmacs/company-cancel-complete-next ()
+(defun jeemacs/company-cancel-complete-next ()
   "Exit company mode and use evil complete to autocomplete downwards."
   (interactive)
   (company-abort)
   (evil-complete-next))
 
-(defun gmacs/counsel-func-eshell-history (msg func)
+(defun jeemacs/counsel-func-eshell-history (msg func)
   "Call `FUNC' and display `MSG' on value from from eshell history."
   (let (collection val)
     (setq collection
@@ -386,126 +386,126 @@ disable command `hi-lock-mode'."
                            (ivy-read (format msg) collection))))
       (funcall func val))))
 
-(defun gmacs/counsel-insert-eshell-history ()
+(defun jeemacs/counsel-insert-eshell-history ()
   "Insert at point from eshell history."
   (interactive)
-  (gmacs/counsel-func-eshell-history
+  (jeemacs/counsel-func-eshell-history
    "insert eshell history: "
    (lambda (v) (insert v))))
 
-(defun gmacs/counsel-yank-eshell-history ()
+(defun jeemacs/counsel-yank-eshell-history ()
   "Yank from eshell history."
   (interactive)
-  (gmacs/counsel-func-eshell-history
+  (jeemacs/counsel-func-eshell-history
    "yank eshell history: "
    (lambda (v)
      (progn
        (kill-new v)
        (message "%s yanked" v)))))
 
-(defun gmacs/eshell-clear ()
+(defun jeemacs/eshell-clear ()
   "Clear terminal."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)
-    (setq-local gmacs/eshell-message (string-trim gmacs/eshell-message))
+    (setq-local jeemacs/eshell-message (string-trim jeemacs/eshell-message))
     (eshell-banner-initialize)
     (eshell-send-input)))
 
-(defun gmacs/eshell-top-prompt-function ()
-  "Builds the top line of the gmacs eshell prompt."
+(defun jeemacs/eshell-top-prompt-function ()
+  "Builds the top line of the jeemacs eshell prompt."
   (concat "[" (abbreviate-file-name (eshell/pwd)) "]"))
 
-(defun gmacs/eshell-bottom-prompt-function ()
-  "Builds the bottom line of the gmacs eshell prompt."
+(defun jeemacs/eshell-bottom-prompt-function ()
+  "Builds the bottom line of the jeemacs eshell prompt."
   (if (= (user-uid) 0) "# " "$ "))
 
-(defun gmacs/eshell-prompt-function ()
+(defun jeemacs/eshell-prompt-function ()
   "Builds the Eshell prompt string. Make sure to \
-update `gmacs/eshell-prompt-regexp' so that it will \
+update `jeemacs/eshell-prompt-regexp' so that it will \
 match your prompt."
-  (concat "\n" (gmacs/eshell-top-prompt-function) " \n"
-          (gmacs/eshell-bottom-prompt-function)))
+  (concat "\n" (jeemacs/eshell-top-prompt-function) " \n"
+          (jeemacs/eshell-bottom-prompt-function)))
 
-(defun gmacs/mc-evil-emacs-state ()
+(defun jeemacs/mc-evil-emacs-state ()
   "When using multiple-cursors, switch to Emacs state."
   (if (region-active-p)
       (delete-selection-mode 1))
   (evil-emacs-state 1))
 
-(defun gmacs/mc-evil-normal-state ()
+(defun jeemacs/mc-evil-normal-state ()
   "When done using multiple-cursors, switch to normal mode."
   (delete-selection-mode 0)
   (evil-normal-state 1))
 
-(defun gmacs/shrink-window-horizontally ()
+(defun jeemacs/shrink-window-horizontally ()
   "Shrink the active window horizontally."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window-horizontally)))
 
-(defun gmacs/enlarge-window-horizontally ()
+(defun jeemacs/enlarge-window-horizontally ()
   "Enlarge the active window horizontally."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'enlarge-window-horizontally)))
 
-(defun gmacs/move-eol-eval-last-sexp ()
+(defun jeemacs/move-eol-eval-last-sexp ()
   "Eval the current line as if you were at the eol."
   (interactive)
   (save-excursion
     (call-interactively 'end-of-line)
     (call-interactively 'eval-last-sexp)))
 
-(defun gmacs/cider-move-eol-eval-last-sexp ()
+(defun jeemacs/cider-move-eol-eval-last-sexp ()
   "Eval the current line as if you were at the eol."
   (interactive)
   (save-excursion
     (call-interactively 'end-of-line)
     (call-interactively 'cider-eval-last-sexp)))
 
-(defun gmacs/enlarge-window ()
+(defun jeemacs/enlarge-window ()
   "Enlarge the active window vertically."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'enlarge-window)))
 
-(defun gmacs/shrink-window ()
+(defun jeemacs/shrink-window ()
   "Shrink the active window vertically."
   (interactive)
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window)))
 
-(defun gmacs/dont-kill-scratch-or-dired ()
+(defun jeemacs/dont-kill-scratch-or-dired ()
   "Don't kill but bury *scratch* and \"dired:\" buffers."
   (if (or (string-match-p "dired:" (buffer-name))
           (equal (buffer-name (current-buffer)) "*scratch*"))
       (progn (bury-buffer) nil)
     t))
 
-(defun gmacs/emacs-lisp-setup ()
+(defun jeemacs/emacs-lisp-setup ()
   "Setup Emacs Lisp Mode."
   (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
   (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
   (push '(company-capf company-yasnippet) company-backends))
 
-(defun gmacs/evil-eshell-mode-setup ()
+(defun jeemacs/evil-eshell-mode-setup ()
   "Setup Gshell."
   (setq-local inhibit-read-only t)
-  (gmacs/eshell-def-evil-eshell-delete)
-  (gmacs/gshell-evil-mode-keys-setup))
+  (jeemacs/eshell-def-evil-eshell-delete)
+  (jeemacs/gshell-evil-mode-keys-setup))
 
-(defun gmacs/gshell-evil-mode-keys-setup ()
+(defun jeemacs/gshell-evil-mode-keys-setup ()
   "Setup Gshell evil-mode keys."
   (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
-  (define-key evil-normal-state-local-map (kbd "M-r") 'gmacs/counsel-yank-eshell-history)
-  (define-key evil-insert-state-local-map (kbd "M-r") 'gmacs/counsel-insert-eshell-history)
-  (define-key evil-normal-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
-  (define-key evil-insert-state-local-map (kbd "C-l") 'gmacs/eshell-clear)
-  (define-key evil-insert-state-local-map (kbd "C-d") 'gmacs/eshell-send-eof-kill-on-empty-prompt)
+  (define-key evil-normal-state-local-map (kbd "M-r") 'jeemacs/counsel-yank-eshell-history)
+  (define-key evil-insert-state-local-map (kbd "M-r") 'jeemacs/counsel-insert-eshell-history)
+  (define-key evil-normal-state-local-map (kbd "C-l") 'jeemacs/eshell-clear)
+  (define-key evil-insert-state-local-map (kbd "C-l") 'jeemacs/eshell-clear)
+  (define-key evil-insert-state-local-map (kbd "C-d") 'jeemacs/eshell-send-eof-kill-on-empty-prompt)
   (define-key evil-insert-state-local-map (kbd "C-i") 'eshell-pcomplete)
-  (define-key evil-insert-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
-  (define-key evil-normal-state-local-map (kbd "C-c C-d") 'gmacs/eshell-send-eof)
+  (define-key evil-insert-state-local-map (kbd "C-c C-d") 'jeemacs/eshell-send-eof)
+  (define-key evil-normal-state-local-map (kbd "C-c C-d") 'jeemacs/eshell-send-eof)
   (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
   (define-key evil-normal-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
   (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
@@ -515,17 +515,17 @@ match your prompt."
   (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
   (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))
 
-(defun gmacs/eshell-def-evil-eshell-delete ()
+(defun jeemacs/eshell-def-evil-eshell-delete ()
   "Define custom delete operation for Eshell when on the line with the prompt."
   (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
     "Like evil-delete, but inhibit read only and when the eshell prompt is \
 involved re-emit it."
     (interactive "<R><x><y>")
     (let ((inhibit-read-only t)
-          (total-prompt-length (length (gmacs/eshell-prompt-function)))
-          (bottom-prompt-length (length (gmacs/eshell-bottom-prompt-function))))
+          (total-prompt-length (length (jeemacs/eshell-prompt-function)))
+          (bottom-prompt-length (length (jeemacs/eshell-bottom-prompt-function))))
       (cond
-       ((gmacs/looking-at-eshell-prompt-regexp-p beg)
+       ((jeemacs/looking-at-eshell-prompt-regexp-p beg)
         (progn
           (evil-delete
            (+ beg bottom-prompt-length)
@@ -534,49 +534,49 @@ involved re-emit it."
            (- (+ beg bottom-prompt-length) total-prompt-length)
            (+ beg bottom-prompt-length))
           (eshell-emit-prompt)))
-       ((gmacs/looking-at-eshell-top-prompt-regexp-p beg) (void))
+       ((jeemacs/looking-at-eshell-top-prompt-regexp-p beg) (void))
        (t (evil-delete beg end type register yank-handler))))))
 
-(defun gmacs/looking-at-eshell-prompt-regexp-p (loc)
+(defun jeemacs/looking-at-eshell-prompt-regexp-p (loc)
   "Truthy value for evil-eshell-delete which determines if \
-the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp'."
+the `LOC' is `looking-at-p' `jeemacs/eshell-prompt-regexp'."
   (save-excursion
     (goto-char loc)
-    (looking-at-p gmacs/eshell-prompt-regexp)))
+    (looking-at-p jeemacs/eshell-prompt-regexp)))
 
-(defun gmacs/looking-at-empty-eshell-prompt-regexp-p (loc)
+(defun jeemacs/looking-at-empty-eshell-prompt-regexp-p (loc)
   "Truthy value for evil-eshell-delete which determines if \
-the `LOC' is `looking-at-p' `gmacs/eshell-prompt-regexp' \
+the `LOC' is `looking-at-p' `jeemacs/eshell-prompt-regexp' \
 followed by nothing."
   (save-excursion
     (goto-char loc)
-    (looking-at-p (concat gmacs/eshell-prompt-regexp "$"))))
+    (looking-at-p (concat jeemacs/eshell-prompt-regexp "$"))))
 
-(defun gmacs/eshell-send-eof-kill-on-empty-prompt ()
+(defun jeemacs/eshell-send-eof-kill-on-empty-prompt ()
   "Send eshell-life-is-too-much if there is no pending \
 eshell command string, and EOF if there is a pending command string."
   (interactive)
-  (if (gmacs/looking-at-empty-eshell-prompt-p)
+  (if (jeemacs/looking-at-empty-eshell-prompt-p)
       (eshell-life-is-too-much)
-    (gmacs/eshell-send-eof)))
+    (jeemacs/eshell-send-eof)))
 
-(defun gmacs/looking-at-empty-eshell-prompt-p ()
+(defun jeemacs/looking-at-empty-eshell-prompt-p ()
   "Test if looking an empty eshell prompt."
   (let ((beginning-of-line-pos
          (progn
            (save-excursion
              (call-interactively 'move-beginning-of-line)
              (point)))))
-    (gmacs/looking-at-empty-eshell-prompt-regexp-p beginning-of-line-pos)))
+    (jeemacs/looking-at-empty-eshell-prompt-regexp-p beginning-of-line-pos)))
 
-(defun gmacs/looking-at-eshell-top-prompt-regexp-p (loc)
+(defun jeemacs/looking-at-eshell-top-prompt-regexp-p (loc)
   "Truthy value for evil-eshell-delete which determines if \
-the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
+the `LOC' is `looking-at-p' `jeemacs/eshell-top-prompt-regexp'."
   (save-excursion
     (goto-char loc)
-    (looking-at-p gmacs/eshell-top-prompt-regexp)))
+    (looking-at-p jeemacs/eshell-top-prompt-regexp)))
 
-(defun gmacs/evil-minibuffer-setup ()
+(defun jeemacs/evil-minibuffer-setup ()
   "Setup the minibuffer."
   (evil-emacs-state)
   (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
@@ -598,31 +598,31 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   (define-key evil-emacs-state-local-map (kbd "C-M-o") 'ivy-dispatching-call)
   (define-key evil-emacs-state-local-map (kbd "C-M-h") 'ivy-help))
 
-(defun gmacs/evil-org-mode-setup ()
+(defun jeemacs/evil-org-mode-setup ()
   "Setup org mode."
   (define-key evil-normal-state-local-map (kbd "M-i") 'org-cycle)
-  (define-key evil-normal-state-local-map (kbd "C-M-l") 'gmacs/org-cycle-list-bullet-forward)
-  (define-key evil-normal-state-local-map (kbd "C-M-h") 'gmacs/org-cycle-list-bullet-backward)
+  (define-key evil-normal-state-local-map (kbd "C-M-l") 'jeemacs/org-cycle-list-bullet-forward)
+  (define-key evil-normal-state-local-map (kbd "C-M-h") 'jeemacs/org-cycle-list-bullet-backward)
   (define-key evil-insert-state-local-map (kbd "C-d") 'evil-shift-left-line))
 
-(defun gmacs/org-cycle-list-bullet-forward ()
+(defun jeemacs/org-cycle-list-bullet-forward ()
   "Cycle org list bullet type forward."
   (interactive)
   (funcall-interactively 'org-cycle-list-bullet 'nil))
 
-(defun gmacs/org-cycle-list-bullet-backward ()
+(defun jeemacs/org-cycle-list-bullet-backward ()
   "Cycle org list bullet type backward."
   (interactive)
   (funcall-interactively 'org-cycle-list-bullet 'previous))
 
-(defun gmacs/evil-c-common-mode-setup ()
+(defun jeemacs/evil-c-common-mode-setup ()
   "Setup C mode and it's derivatives."
   (define-key evil-normal-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-j") 'c-indent-new-comment-line)
   (define-key evil-normal-state-local-map (kbd "M-m") 'c-indent-new-comment-line)
   (define-key evil-insert-state-local-map (kbd "M-m") 'c-indent-new-comment-line))
 
-(defun gmacs/evil-emmet-mode-setup ()
+(defun jeemacs/evil-emmet-mode-setup ()
   "Setup emmet-mode for evil."
   (define-key evil-normal-state-local-map (kbd "M-j") 'emmet-expand-line)
   (define-key evil-insert-state-local-map (kbd "M-j") 'emmet-expand-line)
@@ -631,18 +631,18 @@ the `LOC' is `looking-at-p' `gmacs/eshell-top-prompt-regexp'."
   (define-key evil-normal-state-local-map (kbd "M-h") 'emmet-prev-edit-point)
   (define-key evil-insert-state-local-map (kbd "M-h") 'emmet-prev-edit-point))
 
-(defun gmacs/evil-company-abort-on-insert-leave ()
+(defun jeemacs/evil-company-abort-on-insert-leave ()
   "If company mode is currently enabled, run company abort. \
 Note: effective as an evil-insert-state-exit-hook."
   (if (bound-and-true-p company-mode)
       (company-abort)))
 
-(defun gmacs/python-mode-hook ()
+(defun jeemacs/python-mode-hook ()
   "Python mode setup."
   (prettify-symbols-mode 1)
   (message nil))
 
-(defun gmacs/prompt-maybe-run (confirmed-var question enabled-var init-func)
+(defun jeemacs/prompt-maybe-run (confirmed-var question enabled-var init-func)
   "Defines an interface which one can adhear to create a environmentally \
 stateful confirmation dialog.
 
@@ -656,43 +656,43 @@ stateful confirmation dialog.
         (customize-save-variable enabled-var answer)))
   (funcall init-func))
 
-(defun gmacs/toggle-truncate-lines-mode-no-message (arg)
+(defun jeemacs/toggle-truncate-lines-mode-no-message (arg)
   "Run `toggle-truncate-lines' with `ARG' and swallow the message."
   (progn (toggle-truncate-lines arg)
          (message nil)))
 
-(defun gmacs/disable-truncate-lines-no-message ()
+(defun jeemacs/disable-truncate-lines-no-message ()
   "Disable `toggle-truncate-lines' and swallow the message."
-  (gmacs/toggle-truncate-lines-mode-no-message 0))
+  (jeemacs/toggle-truncate-lines-mode-no-message 0))
 
-(defun gmacs/enable-truncate-lines-no-message ()
+(defun jeemacs/enable-truncate-lines-no-message ()
   "Enable `toggle-truncate-lines' and swallow the message."
-  (gmacs/toggle-truncate-lines-mode-no-message 1))
+  (jeemacs/toggle-truncate-lines-mode-no-message 1))
 
-(defun gmacs/add-xref-js2-xref-backend ()
+(defun jeemacs/add-xref-js2-xref-backend ()
   "Add `js2-xref-backend' to `xref-backend-functions'."
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
 
-(defun gmacs/enable-company-mode ()
+(defun jeemacs/enable-company-mode ()
   "Enable Company Mode."
   (make-variable-buffer-local 'company-backends)
   (company-mode))
 
-(defun gmacs/evil-command-window-setup ()
+(defun jeemacs/evil-command-window-setup ()
   "Setup Evil command window."
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))
 
-(defun gmacs/rename-dired-buffer ()
+(defun jeemacs/rename-dired-buffer ()
   "Rename Dired buffers so that they can be referred to in the Evil Jumplist."
   (interactive)
   (unless (string-match-p (concat "dired" uniquify-separator) (buffer-name))
     (rename-buffer (concat "dired" uniquify-separator (generate-new-buffer-name dired-directory)))))
 
-(defun gmacs/directory-ls-tree-entry-p (entry)
+(defun jeemacs/directory-ls-tree-entry-p (entry)
   "Function to `mapcar' to filter `ENTRY' in 'git ls-tree' for directories."
   (string= (nth 1 entry) "tree"))
 
-(defun gmacs/shell-kill-buffer-on-exit-sentinel ()
+(defun jeemacs/shell-kill-buffer-on-exit-sentinel ()
   "Create sentinal to wait for shell process to exit, \
 then kill buffer."
   ;; Kill the buffer when the shell process exits.
@@ -708,25 +708,25 @@ then kill buffer."
              (buffer-live-p (process-buffer process))
              (kill-buffer (process-buffer process)))))))
 
-(defun gmacs/web-mode-setup ()
+(defun jeemacs/web-mode-setup ()
   "Configure `web-mode'."
   (sp-local-pair 'web-mode "<" "")
   (emmet-mode 1))
 
-(defun gmacs/auto-revert-mode-setup ()
+(defun jeemacs/auto-revert-mode-setup ()
   "Configure `auto-revert-mode' setup."
   (diminish 'auto-revert-mode))
 
-(defun gmacs/evil-jumplist-setup ()
+(defun jeemacs/evil-jumplist-setup ()
   "Configure evil-jumplist."
   (setq evil--jumps-buffer-targets "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")
   (evil-add-command-properties #'dired-find-file :jump t))
 
-(defun gmacs/org-indent-setup ()
+(defun jeemacs/org-indent-setup ()
   "Configure `org-intent-mode'."
   (diminish 'org-indent-mode "in"))
 
-(defun gmacs/cider-repl-mode-setup ()
+(defun jeemacs/cider-repl-mode-setup ()
   "Configure `cider-repl-mode'"
   (define-key evil-normal-state-local-map (kbd "C-m") 'cider-repl-return)
   (define-key evil-insert-state-local-map (kbd "C-m") 'cider-repl-return)
