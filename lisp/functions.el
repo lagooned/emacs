@@ -490,13 +490,13 @@ match your prompt."
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun jeemacs/evil-eshell-mode-setup ()
-  "Setup Gshell."
+  "Setup Jeeshell."
   (setq-local inhibit-read-only t)
   (jeemacs/eshell-def-evil-eshell-delete)
-  (jeemacs/gshell-evil-mode-keys-setup))
+  (jeemacs/jeeshell-evil-mode-keys-setup))
 
-(defun jeemacs/gshell-evil-mode-keys-setup ()
-  "Setup Gshell evil-mode keys."
+(defun jeemacs/jeeshell-evil-mode-keys-setup ()
+  "Setup Jeeshell evil-mode keys."
   (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
   (define-key evil-normal-state-local-map (kbd "M-r") 'jeemacs/counsel-yank-eshell-history)
   (define-key evil-insert-state-local-map (kbd "M-r") 'jeemacs/counsel-insert-eshell-history)

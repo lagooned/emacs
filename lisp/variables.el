@@ -35,7 +35,7 @@ set by (line-pixel-height)")
 to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
-(defvar jeemacs/eshell-message "Gshell \\(^.^\\)\n"
+(defvar jeemacs/eshell-message "Jeeshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 
 (defvar jeemacs/eshell-top-prompt-regexp "^\\[.*\\].*"
