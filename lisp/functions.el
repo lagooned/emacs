@@ -140,7 +140,8 @@ at the first save of each jeemacs session."
   "jeemacs grep function. Will try `jeemacs/counsel-rg-region', \
 then `jeemacs/grep-region' in order."
   (interactive)
-  (if (and (executable-find "rg") (not (eval 'jeemacs/force-basic-grep)))
+  (if (and (executable-find "rg")
+           (not (eval 'jeemacs/force-basic-grep)))
       (call-interactively 'jeemacs/counsel-rg-region)
     (if (projectile-project-p)
         (let ((default-directory (projectile-project-p)))
