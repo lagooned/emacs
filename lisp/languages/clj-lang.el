@@ -36,6 +36,7 @@
   :commands
   cider-jack-in
   cider-eval-last-sexp
+  cider-switch-to-repl-buffer
   :when
   (jeemacs/cider-deps-p)
   :hook
