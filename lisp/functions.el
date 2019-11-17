@@ -451,20 +451,6 @@ match your prompt."
   (let ((current-prefix-arg `(4)))
     (call-interactively 'enlarge-window-horizontally)))
 
-(defun jeemacs/move-eol-eval-last-sexp ()
-  "Eval the current line as if you were at the eol."
-  (interactive)
-  (save-excursion
-    (call-interactively 'end-of-line)
-    (call-interactively 'eval-last-sexp)))
-
-(defun jeemacs/cider-move-eol-eval-last-sexp ()
-  "Eval the current line as if you were at the eol."
-  (interactive)
-  (save-excursion
-    (call-interactively 'end-of-line)
-    (call-interactively 'cider-eval-last-sexp)))
-
 (defun jeemacs/enlarge-window ()
   "Enlarge the active window vertically."
   (interactive)
@@ -733,6 +719,12 @@ then kill buffer."
   (define-key evil-insert-state-local-map (kbd "C-m") 'cider-repl-return)
   (define-key evil-normal-state-local-map (kbd "M-m") 'cider-repl-return)
   (define-key evil-insert-state-local-map (kbd "M-m") 'cider-repl-return))
+
+(defun jeemacs/cider-deps-p ()
+  (and (executable-find "clj") (executable-find "lein")))
+
+(defun jeemacs/cider-mode-enabled-p ()
+  (bound-and-true-p cider-mode))
 
 (provide 'functions)
 ;;; functions.el ends here

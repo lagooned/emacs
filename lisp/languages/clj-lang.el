@@ -24,12 +24,20 @@
 
 ;;; Code:
 
-(use-package clojure-mode)
+(use-package clojure-mode
+  :config
+  (when (jeemacs/cider-deps-p)
+    (evil-leader/set-key-for-mode 'clojure-mode
+      "j" 'cider-jack-in
+      "e" 'cider-eval-last-sexp
+      "r" 'cider-switch-to-repl-buffer)))
 
 (use-package cider
+  :commands
+  cider-jack-in
+  cider-eval-last-sexp
   :when
-  (and (executable-find "clj")
-       (executable-find "lein"))
+  (jeemacs/cider-deps-p)
   :hook
   ((cider-repl-mode . jeemacs/cider-repl-mode-setup)
    (cider-repl-mode . eldoc-mode))
@@ -37,10 +45,7 @@
   (setq cider-repl-display-help-banner 'nil)
   :config
   (evil-leader/set-key-for-mode 'cider-repl-mode
-    "m q" 'cider-quit)
-  (evil-leader/set-key-for-mode 'clojure-mode
-    "C-e" 'jeemacs/cider-move-eol-eval-last-sexp
-    "e" 'cider-eval-last-sexp))
+    "m q" 'cider-quit))
 
 (provide 'clj-lang)
 ;;; clj-lang.el ends here
