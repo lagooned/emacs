@@ -46,6 +46,7 @@
   (setq cider-repl-display-help-banner 'nil)
   :config
   (evil-leader/set-key-for-mode 'cider-repl-mode
+    "r" 'cider-switch-to-last-clojure-buffer
     "m q" 'cider-quit))
 
 (provide 'clj-lang)
