@@ -35,16 +35,13 @@
          (lisp-interaction-mode . turn-on-eldoc-mode)))
 
 (evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "C-e" 'jeemacs/move-eol-eval-last-sexp
   "e" 'eval-last-sexp)
 
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
-  "C-e" 'jeemacs/move-eol-eval-last-sexp
   "e" 'eval-last-sexp)
 
 (which-key-add-key-based-replacements
-  "SPC e" "eval-sexp"
-  "SPC C-e" "eval-eol")
+  "SPC e" "eval-sexp")
 
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here
