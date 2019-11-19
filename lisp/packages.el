@@ -36,10 +36,8 @@
 (use-package alpha)
 
 (use-package autorevert
-  ;; :diminish doesn't work as mode and lib name are different
-  :hook (auto-revert-mode . jeemacs/auto-revert-mode-setup)
-  :init
-  (setq auto-revert-verbose nil))
+  :diminish auto-revert-mode
+  :init (setq auto-revert-verbose nil))
 
 (use-package avy)
 
