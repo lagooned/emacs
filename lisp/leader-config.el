@@ -111,7 +111,7 @@
   "o h" 'jeemacs/open-home-dir
 
   ;; project
-  "p s" 'jeemacs/magit-status
+  "p s" 'projectile-vc
   "p e" 'projectile-run-eshell
   "p p" 'counsel-projectile-switch-project
   "p r" 'jeemacs/projectile-root-dir
