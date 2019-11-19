@@ -289,7 +289,6 @@
         magit-refresh-status-buffer nil
         magit-refresh-verbose t
         magit-section-visibility-indicator nil)
-  (setq vc-handled-backends (delq 'Git vc-handled-backends))
   :config
   (with-eval-after-load 'info
     (info-initialize)
