@@ -117,7 +117,6 @@
   "p r" 'jeemacs/projectile-root-dir
   "p f" 'jeemacs/counsel-projectile-find-file-region
   "p d" 'jeemacs/counsel-projectile-find-dir-region
-  "p b" 'magit-blame
   "p g" 'jeemacs/counsel-git-grep-region
 
   ;; search
