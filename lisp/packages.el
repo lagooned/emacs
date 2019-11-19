@@ -435,12 +435,6 @@
         uniquify-separator ":"
         uniquify-ignore-buffers-re "^\\*"))
 
-(use-package vc
-  :init
-  (when (eq 'system-type 'windows-nt)
-    (setq vc-handled-backends 'nil
-          vc-display-status 'nil)))
-
 (use-package winner
   :config
   (winner-mode 1))
