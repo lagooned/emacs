@@ -332,7 +332,7 @@
          (prog-mode . jeemacs/enable-company-mode)))
 
 (use-package projectile
-  :diminish projectile-mode "proj"
+  :diminish projectile-mode
   :commands projectile-mode
   :hook (emacs-startup . projectile-mode)
   :init
