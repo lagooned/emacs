@@ -381,7 +381,7 @@
 
 (use-package smartparens
   :commands smartparens-mode
-  :diminish smartparens-mode "sp"
+  :diminish smartparens-mode
   :hook ((prog-mode . smartparens-mode)
          (evil-replace-state-entry . turn-off-smartparens-mode)
          (evil-replace-state-exit . turn-on-smartparens-mode))
