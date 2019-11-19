@@ -504,6 +504,7 @@
 (use-package wgrep)
 
 (use-package yasnippet
+  :diminish yas-minor-mode
   :commands
   yas-minor-mode
   yas-minor-mode-on
