@@ -426,7 +426,7 @@
   :commands try)
 
 (use-package undo-tree
-  :diminish undo-tree-mode "ut")
+  :diminish undo-tree-mode)
 
 (use-package uniquify
   :config
