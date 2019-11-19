@@ -200,15 +200,6 @@
   "q q" 'save-buffers-kill-terminal
   "q r" 'restart-emacs)
 
-(evil-leader/set-key-for-mode 'org-mode
-  "l l" 'je/org-link-follow
-  "l i" 'org-insert-link-global
-  "m c" 'org-toggle-checkbox
-  "m e" 'org-export-dispatch
-  "n e" 'org-narrow-to-element
-  "n b" 'org-narrow-to-block
-  "n s" 'org-narrow-to-subtree)
-
 (global-evil-leader-mode 1)
 
 (provide 'leader-config)

@@ -320,10 +320,18 @@
         org-agenda-files (list "~/org/work.org"
                                "~/org/home.org"))
   :config
+  (require 'org-tempo)
+  (evil-leader/set-key-for-mode 'org-mode
+    "l l" 'jeemacs/org-link-follow
+    "l i" 'org-insert-link-global
+    "m c" 'org-toggle-checkbox
+    "m e" 'org-export-dispatch
+    "n e" 'org-narrow-to-element
+    "n b" 'org-narrow-to-block
+    "n s" 'org-narrow-to-subtree)
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
-  (add-to-list 'org-file-apps '(directory . emacs))
-  (require 'org-tempo))
+  (add-to-list 'org-file-apps '(directory . emacs)))
 
 (use-package prog-mode
   :commands prog-mode
