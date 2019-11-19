@@ -284,6 +284,9 @@
 
 (use-package magit
   :commands magit-status
+  :when
+  (and (not (eq system-type 'windows-nt))
+       (executable-find "git"))
   :init
   (setq magit-push-always-verify nil
         magit-refresh-status-buffer nil
