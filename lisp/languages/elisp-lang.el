@@ -26,7 +26,7 @@
 
 (use-package elisp-mode
   :hook ((emacs-lisp-mode . aggressive-indent-mode)
-         (emacs-lisp-mode . jeemacs/emacs-lisp-setup)))
+         (emacs-lisp-mode . je/emacs-lisp-setup)))
 
 (use-package eldoc
   :diminish eldoc-mode

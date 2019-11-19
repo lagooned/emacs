@@ -49,7 +49,7 @@
   (setq xref-js2-ignored-dirs nil)
   :config
   (if (executable-find "ag")
-      (add-hook 'js2-mode-hook #'jeemacs/add-xref-js2-xref-backend)))
+      (add-hook 'js2-mode-hook #'je/add-xref-js2-xref-backend)))
 
 (use-package js2-refactor
   :after js2-mode

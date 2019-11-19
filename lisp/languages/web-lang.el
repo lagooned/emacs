@@ -26,7 +26,7 @@
 
 (use-package web-mode
   :commands web-mode
-  :hook (web-mode . jeemacs/web-mode-setup)
+  :hook (web-mode . je/web-mode-setup)
   :init
   (setq web-mode-enable-auto-pairing nil
         web-mode-markup-indent-offset 4

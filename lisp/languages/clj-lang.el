@@ -26,7 +26,7 @@
 
 (use-package clojure-mode
   :config
-  (when (jeemacs/cider-deps-p)
+  (when (je/cider-deps-p)
     (evil-leader/set-key-for-mode 'clojure-mode
       "j" 'cider-jack-in
       "e" 'cider-eval-last-sexp
@@ -38,9 +38,9 @@
   cider-eval-last-sexp
   cider-switch-to-repl-buffer
   :when
-  (jeemacs/cider-deps-p)
+  (je/cider-deps-p)
   :hook
-  ((cider-repl-mode . jeemacs/cider-repl-mode-setup)
+  ((cider-repl-mode . je/cider-repl-mode-setup)
    (cider-repl-mode . eldoc-mode))
   :init
   (setq cider-repl-display-help-banner 'nil)

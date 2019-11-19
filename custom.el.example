@@ -37,7 +37,7 @@
 (transparency-set-value 100)
 
 ;; use basic grep
-(setq jeemacs/force-basic-grep nil)
+(setq je/force-basic-grep nil)
 
 ;; load theme
 (if (display-graphic-p)

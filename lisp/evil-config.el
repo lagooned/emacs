@@ -57,7 +57,7 @@
   (evil-collection-init))
 
 ;; cursor configs
-(let ((height (eval jeemacs/evil-base-cursor-height))
+(let ((height (eval je/evil-base-cursor-height))
       (pipe-width (/ (frame-char-width) 5)))
   (setq evil-normal-state-cursor `("#00ffff" (hbar . ,(eval height))))
   (setq evil-insert-state-cursor `("#00e000" (bar . ,(eval pipe-width))))
@@ -91,7 +91,7 @@
 (define-key evil-normal-state-map (kbd "-") 'dired-jump)
 (define-key evil-normal-state-map (kbd "M-;") 'comment-line)
 (define-key evil-normal-state-map (kbd "C-=") 'er/expand-region)
-(define-key evil-normal-state-map (kbd "C-]") 'jeemacs/xref-find-definitions-symbol)
+(define-key evil-normal-state-map (kbd "C-]") 'je/xref-find-definitions-symbol)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-page-up)
 (define-key evil-normal-state-map (kbd "C-j") 'newline)

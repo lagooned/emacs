@@ -58,8 +58,8 @@
         ("M-n" . company-select-next-or-abort)
         ("M-p" . company-select-previous-or-abort)
         ("M-i" . company-complete-common-or-cycle)
-        ("C-n" . jeemacs/company-cancel-complete-next)
-        ("C-p" . jeemacs/company-cancel-complete-prev)
+        ("C-n" . je/company-cancel-complete-next)
+        ("C-p" . je/company-cancel-complete-prev)
         ("M-g" . company-abort)
         ("M-j" . company-complete-selection)
         ("M-m" . company-complete-selection)
@@ -105,9 +105,9 @@
 
 (use-package dired
   :hook
-  ((dired-mode . jeemacs/rename-dired-buffer)
+  ((dired-mode . je/rename-dired-buffer)
    (dired-mode . auto-revert-mode)
-   (dired-mode . jeemacs/enable-truncate-lines-no-message)
+   (dired-mode . je/enable-truncate-lines-no-message)
    (dired-mode . dired-hide-details-mode))
   :init
   (setq dired-listing-switches "-lah")
@@ -146,11 +146,11 @@
 
 (use-package eshell
   :hook
-  (eshell-mode . jeemacs/enable-truncate-lines-no-message)
+  (eshell-mode . je/enable-truncate-lines-no-message)
   :init
-  (setq eshell-banner-message 'jeemacs/eshell-message
-        eshell-prompt-function 'jeemacs/eshell-prompt-function
-        eshell-prompt-regexp (eval 'jeemacs/eshell-prompt-regexp))
+  (setq eshell-banner-message 'je/eshell-message
+        eshell-prompt-function 'je/eshell-prompt-function
+        eshell-prompt-regexp (eval 'je/eshell-prompt-regexp))
   :config
   (with-eval-after-load 'em-term
     (push 'eshell-truncate-buffer eshell-output-filter-functions))
@@ -160,13 +160,13 @@
 (use-package evil
   :hook
   ((with-editor-mode . evil-insert-state)
-   (evil-command-window-mode . jeemacs/evil-command-window-setup)
-   (eshell-mode . jeemacs/evil-eshell-mode-setup)
-   (minibuffer-setup . jeemacs/evil-minibuffer-setup)
-   (org-mode . jeemacs/evil-org-mode-setup)
-   (c-mode-common . jeemacs/evil-c-common-mode-setup)
-   (evil-insert-state-exit . jeemacs/evil-company-abort-on-insert-leave)
-   (evil-mode . jeemacs/evil-jumplist-setup))
+   (evil-command-window-mode . je/evil-command-window-setup)
+   (eshell-mode . je/evil-eshell-mode-setup)
+   (minibuffer-setup . je/evil-minibuffer-setup)
+   (org-mode . je/evil-org-mode-setup)
+   (c-mode-common . je/evil-c-common-mode-setup)
+   (evil-insert-state-exit . je/evil-company-abort-on-insert-leave)
+   (evil-mode . je/evil-jumplist-setup))
   :init
   (setq
    evil-move-cursor-back nil
@@ -228,7 +228,7 @@
   focus-mode)
 
 (use-package grep
-  :hook (grep-mode . jeemacs/enable-truncate-lines-no-message)
+  :hook (grep-mode . je/enable-truncate-lines-no-message)
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
         grep-use-null-device nil))
@@ -301,8 +301,8 @@
 
 (use-package multiple-cursors
   :hook
-  ((multiple-cursors-mode-enabled . jeemacs/mc-evil-emacs-state)
-   (multiple-cursors-mode-disabled . jeemacs/mc-evil-normal-state)))
+  ((multiple-cursors-mode-enabled . je/mc-evil-emacs-state)
+   (multiple-cursors-mode-disabled . je/mc-evil-normal-state)))
 
 (use-package org
   :commands
@@ -312,8 +312,8 @@
   org-iswitchb
   org-capture
   :hook
-  (org-mode . jeemacs/enable-truncate-lines-no-message)
-  (org-indent-mode . jeemacs/org-indent-setup)
+  (org-mode . je/enable-truncate-lines-no-message)
+  (org-indent-mode . je/org-indent-setup)
   :init
   (setq org-startup-indented t
         org-log-done t
@@ -328,8 +328,8 @@
 (use-package prog-mode
   :commands prog-mode
   :hook ((prog-mode . too-long-lines-mode)
-         (prog-mode . jeemacs/enable-truncate-lines-no-message)
-         (prog-mode . jeemacs/enable-company-mode)))
+         (prog-mode . je/enable-truncate-lines-no-message)
+         (prog-mode . je/enable-company-mode)))
 
 (use-package projectile
   :diminish projectile-mode
@@ -377,7 +377,7 @@
 
 (use-package shell
   :commands shell
-  :hook (shell-mode . jeemacs/shell-kill-buffer-on-exit-sentinel))
+  :hook (shell-mode . je/shell-kill-buffer-on-exit-sentinel))
 
 (use-package smartparens
   :commands smartparens-mode

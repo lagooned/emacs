@@ -31,7 +31,7 @@
          (web-mode . emmet-mode)
          (css-mode . emmet-mode)
          (nxml-mode . emmet-mode)
-         (emmet-mode . jeemacs/evil-emmet-mode-setup)))
+         (emmet-mode . je/evil-emmet-mode-setup)))
 
 (use-package nxml-mode
   :init

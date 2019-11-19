@@ -34,8 +34,8 @@
   "b k" 'kill-this-buffer
   "b K" 'kill-buffer
   "b C-k" 'kill-matching-buffers
-  "b h" 'jeemacs/switch-to-scratch-buffer
-  "b m" 'jeemacs/switch-to-messages-buffer
+  "b h" 'je/switch-to-scratch-buffer
+  "b m" 'je/switch-to-messages-buffer
   "b l" 'ibuffer
   "b r" 'revert-buffer
   "b R" 'rename-buffer
@@ -44,28 +44,28 @@
   "TAB" 'evil-switch-to-windows-last-buffer
 
   ;; config
-  "c i" 'jeemacs/open-init-config
-  "c f" 'jeemacs/open-functions-config
-  "c v" 'jeemacs/open-variables-config
-  "c ," 'jeemacs/open-leader-config
-  "c ." 'jeemacs/open-custom-config
-  "c l" 'jeemacs/open-language-config
-  "c g" 'jeemacs/open-global-config
-  "c k" 'jeemacs/open-evil-config
-  "c p" 'jeemacs/open-packages-config
-  "c c" 'jeemacs/load-config
+  "c i" 'je/open-init-config
+  "c f" 'je/open-functions-config
+  "c v" 'je/open-variables-config
+  "c ," 'je/open-leader-config
+  "c ." 'je/open-custom-config
+  "c l" 'je/open-language-config
+  "c g" 'je/open-global-config
+  "c k" 'je/open-evil-config
+  "c p" 'je/open-packages-config
+  "c c" 'je/load-config
 
   ;; file
   "f f" 'find-file
   "f a" 'find-alternate-file
-  "f c" 'jeemacs/cleanup-file
+  "f c" 'je/cleanup-file
   "f r" 'counsel-recentf
   "f l" 'counsel-locate
   "f s" 'save-buffer
   "f w" 'write-file
 
   ;; grep
-  "g" 'jeemacs/run-grep
+  "g" 'je/run-grep
 
   ;; help
   "h a"   'about-emacs
@@ -105,22 +105,22 @@
 
   ;; open
   "o a" 'org-agenda
-  "o o" 'jeemacs/open-org-dir
-  "o d" 'jeemacs/open-downloads-dir
-  "o c" 'jeemacs/open-code-dir
-  "o h" 'jeemacs/open-home-dir
+  "o o" 'je/open-org-dir
+  "o d" 'je/open-downloads-dir
+  "o c" 'je/open-code-dir
+  "o h" 'je/open-home-dir
 
   ;; project
   "p s" 'projectile-vc
   "p e" 'projectile-run-eshell
   "p p" 'counsel-projectile-switch-project
-  "p r" 'jeemacs/projectile-root-dir
-  "p f" 'jeemacs/counsel-projectile-find-file-region
-  "p d" 'jeemacs/counsel-projectile-find-dir-region
-  "p g" 'jeemacs/counsel-git-grep-region
+  "p r" 'je/projectile-root-dir
+  "p f" 'je/counsel-projectile-find-file-region
+  "p d" 'je/counsel-projectile-find-dir-region
+  "p g" 'je/counsel-git-grep-region
 
   ;; search
-  "s s" 'jeemacs/swiper-region-thing
+  "s s" 'je/swiper-region-thing
   "s c" 'avy-goto-char
   "s l" 'avy-goto-line
   "s j" 'avy-goto-word-0
@@ -135,9 +135,9 @@
   "t p" 'smartparens-mode
   "t f" 'focus-mode
   "t c" 'flycheck-mode
-  "t s" 'jeemacs/toggle-spelling
+  "t s" 'je/toggle-spelling
   "t h" 'highlight-symbol-at-point
-  "t H" 'jeemacs/unhighlight-all
+  "t H" 'je/unhighlight-all
 
   ;; universal
   "u" 'universal-argument
@@ -157,14 +157,14 @@
   "w c" 'evil-window-delete
   "w o" 'delete-other-windows
   "w f" 'reposition-window
-  "w m" 'jeemacs/switch-to-minibuffer
+  "w m" 'je/switch-to-minibuffer
   "w u" 'winner-undo
   "w r" 'winner-redo
   "w RET" 'toggle-frame-fullscreen
-  "]" 'jeemacs/enlarge-window-horizontally
-  "[" 'jeemacs/shrink-window-horizontally
-  "=" 'jeemacs/enlarge-window
-  "-" 'jeemacs/shrink-window
+  "]" 'je/enlarge-window-horizontally
+  "[" 'je/shrink-window-horizontally
+  "=" 'je/enlarge-window
+  "-" 'je/shrink-window
 
   ;; command
   ";" 'counsel-M-x
@@ -201,7 +201,7 @@
   "q r" 'restart-emacs)
 
 (evil-leader/set-key-for-mode 'org-mode
-  "l l" 'jeemacs/org-link-follow
+  "l l" 'je/org-link-follow
   "l i" 'org-insert-link-global
   "m c" 'org-toggle-checkbox
   "m e" 'org-export-dispatch

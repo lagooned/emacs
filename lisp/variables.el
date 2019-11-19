@@ -24,24 +24,24 @@
 
 ;;; Code:
 
-(defvar jeemacs/evil-base-cursor-height #xffff
+(defvar je/evil-base-cursor-height #xffff
   "Set the cursor height to be used, note \
 anything over the current line height \
 will be capped at the current line height \
 set by (line-pixel-height)")
 
-(defvar jeemacs/large-file-size 2
+(defvar je/large-file-size 2
   "Size (in MB) above which the user will be prompted to open the file literally \
 to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
-(defvar jeemacs/eshell-message "Jeeshell \\(^.^\\)\n"
+(defvar je/eshell-message "Jeeshell \\(^.^\\)\n"
   "Message shown when starting Eshell.")
 
-(defvar jeemacs/eshell-top-prompt-regexp "^\\[.*\\].*"
+(defvar je/eshell-top-prompt-regexp "^\\[.*\\].*"
   "A regexp which matches the top line in the eshell prompt.")
 
-(defvar jeemacs/eshell-prompt-regexp "^[#$] "
+(defvar je/eshell-prompt-regexp "^[#$] "
   "A regexp which fully matches your eshell prompt.
 
 This setting is important, since it affects how eshell will interpret \
@@ -49,19 +49,19 @@ the lines that are passed to it. \
 If this variable is changed, all Eshell buffers must be exited and \
 re-entered for it to take effect.")
 
-(defvar jeemacs/mc-evil-prev-state nil
+(defvar je/mc-evil-prev-state nil
   "Saves the previous evil state as a string.")
 
-(defvar jeemacs/mc-evil-mark-was-active nil
+(defvar je/mc-evil-mark-was-active nil
   "Saves the previous state of the mark.")
 
-(defvar jeemacs/js2-xref-accept-ag nil
+(defvar je/js2-xref-accept-ag nil
   "Determines whether or not to show the xref-ag confirmation.")
 
-(defvar jeemacs/force-basic-grep nil
+(defvar je/force-basic-grep nil
   "Determines whether or not to use basic grep.")
 
-(defvar jeemacs/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
+(defvar je/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
   "Git command for showing ls-tree")
 
 (provide 'variables)

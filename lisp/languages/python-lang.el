@@ -27,7 +27,7 @@
 (use-package python-mode
   :commands python-mode
   :init
-  (add-hook 'python-mode-hook #'jeemacs/python-mode-hook))
+  (add-hook 'python-mode-hook #'je/python-mode-hook))
 
 (provide 'python-lang)
 ;;; python-lang.el ends here

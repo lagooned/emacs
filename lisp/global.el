@@ -80,8 +80,8 @@
 (fringe-mode (frame-char-width))
 
 ;; decouple window and minibuffer fringes
-(add-hook 'after-init-hook #'jeemacs/minibuffer-fringe-setup)
-(jeemacs/disable-minibuffer-fringe)
+(add-hook 'after-init-hook #'je/minibuffer-fringe-setup)
+(je/disable-minibuffer-fringe)
 
 ;; backups
 (setq version-control t
@@ -92,7 +92,7 @@
       vc-make-backup-files t
       backup-directory-alist '(("" . "~/.backup/save")))
 
-(add-hook 'before-save-hook 'jeemacs/force-buffer-backup)
+(add-hook 'before-save-hook 'je/force-buffer-backup)
 
 ;; auto save to temp
 (setq auto-save-file-name-transforms
@@ -114,7 +114,7 @@
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(add-hook 'kill-buffer-query-functions 'jeemacs/dont-kill-scratch-or-dired)
+(add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch-or-dired)
 
 ;; no tool bar
 (tool-bar-mode -1)
@@ -134,7 +134,7 @@
 (setq-default c-basic-offset 4)
 
 ;; reload init
-(global-set-key (kbd "C-c i") 'jeemacs/load-config)
+(global-set-key (kbd "C-c i") 'je/load-config)
 
 ;; make prompts easier
 (defalias 'yes-or-no-p 'y-or-n-p)
