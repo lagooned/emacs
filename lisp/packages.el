@@ -24,10 +24,8 @@
 
 ;;; Code:
 
-(if (not (package-installed-p 'use-package))
-    (progn
-      (package-refresh-contents)
-      (package-install 'use-package)))
+(je/ensure-use-package)
+
 (require 'use-package)
 
 (use-package abbrev
