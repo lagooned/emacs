@@ -187,6 +187,12 @@
 (setq ring-bell-function 'ignore)
 (setq visible-bell nil)
 
+;; no position in modeline
+(setq mode-line-percent-position 'nil)
+(size-indication-mode -1)
+(line-number-mode 1)
+(column-number-mode 1)
+
 (provide 'global)
 ;;; global.el ends here
 
