@@ -64,6 +64,9 @@ re-entered for it to take effect.")
 (defvar je/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
   "Git command for showing ls-tree")
 
+(defvar je/current-user
+  (getenv (if (equal system-type 'windows-nt) "USERNAME" "USER")))
+
 (defvar je/modeline-blacklist
   '((vc-mode vc-mode)))
 

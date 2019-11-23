@@ -24,22 +24,6 @@
 
 ;;; Code:
 
-(setq inhibit-startup-screen t)
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message "
-;;
-;;        ██╗ ██████╗    ██╗ ██████╗███╗   ███╗ █████╗  ██████╗███████╗
-;;        ██║██╔════╝   ██╔╝██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
-;;        ██║█████╗    ██╔╝ █████╗  ██╔████╔██║███████║██║     ███████╗
-;;   ██   ██║██╔══╝   ██╔╝  ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
-;;   ╚█████╔╝╚██████╗██╔╝   ╚██████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
-;;    ╚════╝  ╚═════╝╚═╝     ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
-;;
-
-;; welcome to je/emacs, enjoy! (/^.^)/
-
-;; this buffer is for text that is not saved, and for lisp evaluation.
-;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n")
 
 ;; set max mem alloc before gc for startup
 (setq gc-cons-threshold 402653184
@@ -87,6 +71,24 @@
 
 ;; write startup log, fix messages modeline, set dir to ~/.emacs.d
 (add-hook 'emacs-startup-hook #'je/emacs-startup-hook)
+
+(setq inhibit-startup-screen t)
+(setq inhibit-splash-screen t)
+(setq initial-scratch-message
+      (format "
+;;
+;;        ██╗ ██████╗    ██╗ ██████╗███╗   ███╗ █████╗  ██████╗███████╗
+;;        ██║██╔════╝   ██╔╝██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
+;;        ██║█████╗    ██╔╝ █████╗  ██╔████╔██║███████║██║     ███████╗
+;;   ██   ██║██╔══╝   ██╔╝  ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
+;;   ╚█████╔╝╚██████╗██╔╝   ╚██████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
+;;    ╚════╝  ╚═════╝╚═╝     ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
+;;
+
+;; welcome to je/emacs, %s! (/^.^)/
+
+;; this buffer is for text that is not saved, and for lisp evaluation.
+;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n" je/current-user))
 
 ;; customs file
 (setq custom-file "~/.emacs.d/.custom.el")
