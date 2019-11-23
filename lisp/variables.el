@@ -68,7 +68,10 @@ re-entered for it to take effect.")
   (getenv (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
 (defvar je/modeline-blacklist
-  '((vc-mode vc-mode)))
+  '((vc-mode vc-mode)
+    mode-line-mule-info
+    mode-line-client
+    mode-line-remote))
 
 (provide 'variables)
 ;;; variables.el ends here
