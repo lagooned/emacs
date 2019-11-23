@@ -187,7 +187,7 @@
 (setq ring-bell-function 'ignore)
 (setq visible-bell nil)
 
-;; no position in modeline
+;; no percent in modeline
 (setq mode-line-percent-position 'nil)
 (size-indication-mode -1)
 (line-number-mode 1)
