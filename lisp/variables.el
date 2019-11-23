@@ -64,5 +64,8 @@ re-entered for it to take effect.")
 (defvar je/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
   "Git command for showing ls-tree")
 
+(defvar je/modeline-blacklist
+  '((vc-mode vc-mode)))
+
 (provide 'variables)
 ;;; variables.el ends here

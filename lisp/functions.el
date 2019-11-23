@@ -731,6 +731,12 @@ then kill buffer."
 (defun je/cider-mode-enabled-p ()
   (bound-and-true-p cider-mode))
 
+(defun je/should-not-be-in-mode-line-p (e)
+  (not (member e je/modeline-blacklist)))
+
+(defun je/create-mode-line-format ()
+  (seq-filter 'je/should-not-be-in-mode-line-p mode-line-format))
+
 (provide 'functions)
 ;;; functions.el ends here
 
