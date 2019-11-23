@@ -201,7 +201,8 @@
    evil-operator-state-message nil
    evil-want-Y-yank-to-eol t
    evil-want-keybinding nil
-   evil-jumps-max-length 20)
+   evil-jumps-max-length 20
+   evil-mode-line-format '(before . mode-line-front-space))
   :config
   (load "evil-pre-config")
   (evil-mode 1)
