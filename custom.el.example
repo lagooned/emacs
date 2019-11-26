@@ -32,9 +32,11 @@
 (when (not (eq system-type 'windows-nt))
   (exec-path-from-shell-initialize))
 
-;; enable full screen
-(if (not (frame-parameter nil 'fullscreen))
-    (toggle-frame-fullscreen))
+;; initial frame display
+(if (not (eq system-type 'darwin))
+    (if (not (frame-parameter nil 'fullscreen))
+        (toggle-frame-fullscreen))
+  (je/set-window-dimensions 30 30 150 43))
 
 ;; transparency
 (transparency-set-value 100)

@@ -737,6 +737,12 @@ then kill buffer."
 (defun je/create-mode-line-format ()
   (seq-filter 'je/should-not-be-in-mode-line-p mode-line-format))
 
+(defun je/set-window-dimensions (x-pos y-pos width height)
+  (when window-system
+    (progn
+      (set-frame-position (selected-frame) x-pos y-pos)
+      (set-frame-size (selected-frame) width height))))
+
 (provide 'functions)
 ;;; functions.el ends here
 
