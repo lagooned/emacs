@@ -11,6 +11,11 @@
 (when (eq system-type 'windows-nt)
   (set-face-attribute 'default nil :family "Consolas" :height 100))
 
+;; set font on darwin
+(when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :family "Monaco" :height 140)
+  (setq-default line-spacing 0.1))
+
 ;; spelling binary
 (if (executable-find "aspell")
     (setq ispell-program-name "aspell"
