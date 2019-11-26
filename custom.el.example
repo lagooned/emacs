@@ -25,9 +25,6 @@
 ;; menu-bar-display
 (menu-bar-mode -1)
 
-;; icon in title bar
-(setq ns-use-proxy-icon nil)
-
 ;; title bar name command
 (setq frame-title-format 'buffer-file-truename)
 
