@@ -276,7 +276,7 @@
   :diminish ivy-mode
   :bind
   (:map ivy-minibuffer-map
-        ("M--" . counsel-up-directory))
+        ("C--" . counsel-up-directory))
   :init
   (setq
    ivy-re-builders-alist
