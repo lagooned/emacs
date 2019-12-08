@@ -478,8 +478,7 @@
   (winner-mode 1))
 
 (use-package which-key
-  :diminish
-  which-key-mode
+  :diminish which-key-mode
   :config
   (setq which-key-sort-order #'which-key-prefix-then-key-order
         which-key-sort-uppercase-first nil
