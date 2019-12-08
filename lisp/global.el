@@ -191,7 +191,7 @@
 (setq mode-line-percent-position 'nil)
 (size-indication-mode -1)
 (line-number-mode 1)
-(column-number-mode 1)
+(column-number-mode -1)
 
 ;; menu-bar-display
 (menu-bar-mode -1)
