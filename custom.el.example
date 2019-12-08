@@ -22,9 +22,6 @@
     (setq ispell-program-name "aspell"
           ispell-extra-args '("--sug-mode=ultra")))
 
-;; menu-bar-display
-(menu-bar-mode -1)
-
 ;; title bar name command
 (setq frame-title-format 'buffer-file-truename)
 

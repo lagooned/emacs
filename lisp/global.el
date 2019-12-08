@@ -193,6 +193,9 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
+;; menu-bar-display
+(menu-bar-mode -1)
+
 (provide 'global)
 ;;; global.el ends here
 
