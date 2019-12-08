@@ -69,6 +69,9 @@
       history-delete-duplicates t)
 (savehist-mode 1)
 
+;; enable dimmer
+(dimmer-mode t)
+
 ;; write startup log, fix messages modeline, set dir to ~/.emacs.d
 (add-hook 'emacs-startup-hook #'je/emacs-startup-hook)
 
