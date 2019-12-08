@@ -97,9 +97,13 @@ to sane runtime defaults."
   (find-file "~/.emacs.d/lisp/languages/packages-lang.el"))
 
 (defun je/open-custom-config ()
-  "Open .custom.el."
+  "Open or create `(eval je/custom-file-location)` from current custom file."
   (interactive)
-  (find-file "~/.emacs.d/.custom.el"))
+  (if (not (string-equal custom-file je/custom-file-location))
+      (progn
+        (copy-file custom-file je/custom-file-location t)
+        (setq custom-file je/custom-file-location)))
+  (find-file je/custom-file-location))
 
 (defun je/minibuffer-fringe-setup ()
   "Decouples the minibuffer's fringe from that of the main buffer."

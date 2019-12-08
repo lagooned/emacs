@@ -73,5 +73,8 @@ re-entered for it to take effect.")
     mode-line-client
     mode-line-remote))
 
+(defvar je/custom-file-location "~/.emacs.d/.custom.el"
+  "Location for Emacs custom config file.")
+
 (provide 'variables)
 ;;; variables.el ends here

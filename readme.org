@@ -8,11 +8,10 @@
 * install
 - =git clone https://github.com/lagooned/emacs.git=
 - =ln -s ./emacs ~/.emacs.d=
-- =cp ~/.emacs.d/custom.el.example ~/.emacs.d/.custom.el=
 - =emacs &=
 * usage
 - evil-leader-key is SPC (much like spacemacs)
-  - customize .custom.el by using SPC c . (default)
+  - create env specific .custom.el by using SPC c . (default)
   - quit/restart with SPC q q and SPC q r (default)
 - use which-key to explore functionality
 - have fun :)
