@@ -1,4 +1,4 @@
-#+title: jeemacs
+#+title: je/emacs
 #+author: jared engler
 
 * disclaimer
