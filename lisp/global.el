@@ -196,6 +196,9 @@
 ;; menu-bar-display
 (menu-bar-mode -1)
 
+;; title bar name command
+(setq frame-title-format 'buffer-file-truename)
+
 (provide 'global)
 ;;; global.el ends here
 

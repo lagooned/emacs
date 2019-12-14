@@ -17,9 +17,6 @@
   (set-face-attribute 'default nil :family "Monaco" :height 140)
   (setq-default line-spacing 0.1))
 
-;; title bar name command
-(setq frame-title-format 'buffer-file-truename)
-
 ;; grab env path
 (when (not (eq system-type 'windows-nt))
   (exec-path-from-shell-initialize))
