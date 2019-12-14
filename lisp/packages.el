@@ -491,8 +491,11 @@
         uniquify-ignore-buffers-re "^\\*"))
 
 (use-package winner
+  :commands winner-mode
   :config
-  (winner-mode 1))
+  (evil-leader/set-key
+    "w u" 'winner-undo
+    "w r" 'winner-redo))
 
 (use-package which-key
   :diminish which-key-mode

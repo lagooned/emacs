@@ -156,8 +156,6 @@
   "w o" 'delete-other-windows
   "w f" 'reposition-window
   "w m" 'je/switch-to-minibuffer
-  "w u" 'winner-undo
-  "w r" 'winner-redo
   "w RET" 'toggle-frame-fullscreen
   "]" 'je/enlarge-window-horizontally
   "[" 'je/shrink-window-horizontally
