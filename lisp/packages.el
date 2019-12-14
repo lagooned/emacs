@@ -320,7 +320,11 @@
   :commands
   lorem-ipsum-insert-list
   lorem-ipsum-insert-sentences
-  lorem-ipsum-insert-paragraphs)
+  lorem-ipsum-insert-paragraphs
+  :init
+  (evil-leader/set-key
+    "i l s" 'lorem-ipsum-insert-sentences
+    "i l p" 'Lorem-ipsum-insert-paragraphs))
 
 (use-package magit
   :commands magit-status

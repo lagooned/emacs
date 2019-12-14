@@ -29,6 +29,7 @@
 (evil-leader/set-leader "<SPC>")
 
 (evil-leader/set-key
+
   ;; buffer
   "b b" 'switch-to-buffer
   "b k" 'kill-this-buffer
@@ -90,8 +91,6 @@
   "i f" 'insert-file
   "i s" 'yas-insert-snippet
   "i h" 'auto-insert
-  "i l s" 'lorem-ipsum-insert-sentences
-  "i l p" 'Lorem-ipsum-insert-paragraphs
 
   ;; link
   "l s" 'org-store-link
