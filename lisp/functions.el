@@ -108,7 +108,6 @@ to sane runtime defaults."
 
 (defun je/minibuffer-fringe-setup ()
   "Decouples the minibuffer's fringe from that of the main buffer."
-  ;; (set-window-fringes (minibuffer-window) 0 0 nil)
   (add-hook 'minibuffer-setup-hook #'je/disable-minibuffer-fringe)
   (add-hook 'minibuffer-exit-hook #'je/disable-minibuffer-fringe))
 
