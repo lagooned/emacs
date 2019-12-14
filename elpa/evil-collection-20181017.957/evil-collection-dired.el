@@ -50,7 +50,7 @@
     ;; Upper case keys (except !) for operating on the marked files
     "A" 'dired-do-find-regexp
     "C" 'dired-do-copy
-    "B" 'dired-do-byte-compile
+    "B" 'evil-backward-WORD-begin
     "D" 'dired-do-delete
     "gG" 'dired-do-chgrp ;; FIXME: This can probably live on a better binding.
     "gg" 'beginning-of-buffer
@@ -137,7 +137,7 @@
     "m" 'dired-mark
     "t" 'dired-toggle-marks
     "u" 'dired-unmark                   ; also "*u"
-    "W" 'browse-url-of-dired-file
+    "W" 'evil-forward-WORD-begin
     "x" 'dired-do-flagged-delete
     "gy" 'dired-show-file-type ;; FIXME: This could probably go on a better key.
     "Y" 'dired-copy-filename-as-kill
