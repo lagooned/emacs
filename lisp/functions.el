@@ -29,14 +29,15 @@
 (require 'cl)
 (require 'string-utils)
 
-(defun je/ensure-use-package ()
-  (if (not (package-installed-p 'use-package))
-      (progn (package-refresh-contents)
-             (package-install 'use-package))))
-
 (defun void ()
   "Interactive No-op."
   (interactive))
+
+(defun je/ensure-use-package ()
+  "Install `use-package' if not installed."
+  (if (not (package-installed-p 'use-package))
+      (progn (package-refresh-contents)
+             (package-install 'use-package))))
 
 (defun je/emacs-startup-hook ()
   "Gmacs startup function."
