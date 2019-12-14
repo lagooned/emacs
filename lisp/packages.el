@@ -278,6 +278,18 @@
           "hi-blue"
           "hi-magenta")))
 
+(use-package ispell
+  :commands ispell
+  :when (executable-find "ispell")
+  :init
+  (when (executable-find "aspell")
+    (setq
+     ispell-program-name "aspell"
+     ispell-extra-args '("--sug-mode=ultra")))
+  :config
+  (evil-leader/set-key
+    "t s" 'je/toggle-spelling))
+
 (use-package ivy
   :diminish ivy-mode
   :bind

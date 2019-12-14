@@ -17,11 +17,6 @@
   (set-face-attribute 'default nil :family "Monaco" :height 140)
   (setq-default line-spacing 0.1))
 
-;; spelling binary
-(if (executable-find "aspell")
-    (setq ispell-program-name "aspell"
-          ispell-extra-args '("--sug-mode=ultra")))
-
 ;; title bar name command
 (setq frame-title-format 'buffer-file-truename)
 

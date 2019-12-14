@@ -135,7 +135,6 @@
   "t p" 'smartparens-mode
   "t f" 'focus-mode
   "t c" 'flycheck-mode
-  "t s" 'je/toggle-spelling
   "t h" 'highlight-symbol-at-point
   "t H" 'je/unhighlight-all
 
