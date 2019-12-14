@@ -486,13 +486,13 @@ match your prompt."
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun je/evil-eshell-mode-setup ()
-  "Setup Jeeshell."
+  "Setup Je/eshell."
   (setq-local inhibit-read-only t)
   (je/eshell-def-evil-eshell-delete)
-  (je/jeeshell-evil-mode-keys-setup))
+  (je/eshell-evil-mode-keys-setup))
 
-(defun je/jeeshell-evil-mode-keys-setup ()
-  "Setup Jeeshell evil-mode keys."
+(defun je/eshell-evil-mode-keys-setup ()
+  "Setup Je/eshell evil-mode keys."
   (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
   (define-key evil-normal-state-local-map (kbd "M-r") 'je/counsel-yank-eshell-history)
   (define-key evil-insert-state-local-map (kbd "M-r") 'je/counsel-insert-eshell-history)
