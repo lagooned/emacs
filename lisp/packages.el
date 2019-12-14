@@ -40,7 +40,8 @@
 (use-package avy)
 
 (use-package aggressive-indent
-  :diminish :commands aggressive-indent-mode)
+  :diminish aggressive-indent-mode
+  :commands aggressive-indent-mode)
 
 (use-package badwolf-theme)
 
