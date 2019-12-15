@@ -271,7 +271,9 @@
   :hook (grep-mode . je/enable-truncate-lines-no-message)
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
-        grep-use-null-device nil))
+        grep-use-null-device nil)
+  (evil-leader/set-key "g" 'je/run-grep)
+  (which-key-add-key-based-replacements "SPC g" "grep"))
 
 (use-package hi-lock
   :diminish hi-lock-mode "hi"
@@ -523,8 +525,6 @@
     "SPC TAB" "last buffer"
     "SPC c" "config"
     "SPC f" "file"
-    "SPC g" "grep"
-    "SPC G" "grep buffer"
     "SPC h" "help"
     "SPC h d" "describe"
     "SPC h v" "view"

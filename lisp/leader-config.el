@@ -65,9 +65,6 @@
   "f s" 'save-buffer
   "f w" 'write-file
 
-  ;; grep
-  "g" 'je/run-grep
-
   ;; help
   "h a"   'about-emacs
   "h i"   'info
