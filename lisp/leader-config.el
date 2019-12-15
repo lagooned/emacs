@@ -133,7 +133,6 @@
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
   "t f" 'focus-mode
-  "t c" 'flycheck-mode
   "t h" 'highlight-symbol-at-point
   "t H" 'je/unhighlight-all
 

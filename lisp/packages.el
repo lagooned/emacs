@@ -234,6 +234,7 @@
   fix-word-capitalize)
 
 (use-package flycheck
+  :commands flycheck-mode
   :diminish flycheck-mode "flyc"
   :init
   (setq
@@ -243,7 +244,9 @@
   (custom-set-faces
    '(flycheck-error ((t (:foreground "red" :underline nil))))
    '(flycheck-info ((t (:foreground "green" :underline nil))))
-   '(flycheck-warning ((t (:foreground "yellow" :underline nil))))))
+   '(flycheck-warning ((t (:foreground "yellow" :underline nil)))))
+  (evil-leader/set-key
+    "t c" 'flycheck-mode))
 
 (use-package flyspell
   :defer t
