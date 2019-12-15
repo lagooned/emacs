@@ -128,7 +128,7 @@
 (use-package dimmer
   :commands dimmer-mode
   :config
-  (setq dimmer-percent 0.15)
+  (setq dimmer-fraction 0.15)
   (dimmer-configure-which-key))
 
 (use-package dired
