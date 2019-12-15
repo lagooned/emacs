@@ -146,7 +146,7 @@ at the first save of each jeemacs session."
   (delete-trailing-whitespace))
 
 (defun je/run-grep ()
-  "jegrep function. Will try `je/counsel-rg-region', \
+  "Start grepping. Will try `je/counsel-rg-region', \
 then `je/grep-region' in order."
   (interactive)
   (if (and (executable-find "rg")
