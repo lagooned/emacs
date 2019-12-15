@@ -253,7 +253,6 @@
     "t c" 'flycheck-mode))
 
 (use-package flyspell
-  :defer t
   :diminish flyspell-mode "spl"
   :commands flyspell-mode
   :init
