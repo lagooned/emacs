@@ -259,8 +259,10 @@
   (setq flyspell-issue-message-flag nil))
 
 (use-package focus
-  :commands
-  focus-mode)
+  :commands focus-mode
+  :init
+  (evil-leader/set-key
+    "t f" 'focus-mode))
 
 (use-package grep
   :hook (grep-mode . je/enable-truncate-lines-no-message)

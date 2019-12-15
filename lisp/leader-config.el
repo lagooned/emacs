@@ -132,7 +132,6 @@
   "t A" 'auto-revert-mode
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
-  "t f" 'focus-mode
   "t h" 'highlight-symbol-at-point
   "t H" 'je/unhighlight-all
 
