@@ -202,6 +202,9 @@
 ;; winner
 (winner-mode 1)
 
+;; enable dimmer
+(dimmer-mode t)
+
 (provide 'global)
 ;;; global.el ends here
 
