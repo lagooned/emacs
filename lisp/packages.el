@@ -165,13 +165,14 @@
           'split-window-vertically)))
 
 (use-package elscreen
+  :commands elscreen-start
   :init
   (setq elscreen-tab-display-kill-screen nil
         elscreen-tab-display-control nil
         elscreen-display-tab nil
         elscreen-display-screen-number nil)
   :config
-  (elscreen-start))
+  (je/setup-elscreen))
 
 (use-package eshell
   :hook
@@ -531,7 +532,6 @@
     "SPC U" "negt arg"
     "SPC w" "window"
     "SPC q" "quit"
-    "SPC z" "screen"
     "SPC =" "^v ++"
     "SPC -" "^v --"
     "SPC ]" "<> ++"

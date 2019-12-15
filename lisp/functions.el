@@ -747,6 +747,34 @@ then kill buffer."
       (set-frame-position (selected-frame) x-pos y-pos)
       (set-frame-size (selected-frame) width height))))
 
+(defun je/setup-elscreen ()
+  "Setup elscreen."
+  (evil-leader/set-key
+    "1"   'elscreen-jump
+    "2"   'elscreen-jump
+    "3"   'elscreen-jump
+    "4"   'elscreen-jump
+    "5"   'elscreen-jump
+    "6"   'elscreen-jump
+    "7"   'elscreen-jump
+    "8"   'elscreen-jump
+    "9"   'elscreen-jump
+    "0"   'elscreen-jump
+    "z z" 'elscreen-toggle
+    "z l" 'elscreen-display-screen-name-list
+    "z c" 'elscreen-create
+    "z C" 'elscreen-clone
+    "z k" 'elscreen-kill
+    "z r" 'elscreen-screen-nickname
+    "z K" 'elscreen-kill-others
+    "z n" 'elscreen-next
+    "z p" 'elscreen-previous
+    "z ;" 'elscreen-execute-extended-command
+    "z d" 'elscreen-dired
+    "z s" 'elscreen-swap)
+  (which-key-add-key-based-replacements
+    "SPC z" "screen"))
+
 (provide 'functions)
 ;;; functions.el ends here
 

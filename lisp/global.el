@@ -202,6 +202,9 @@
 ;; winner
 (winner-mode 1)
 
+;; elscreen
+(elscreen-start)
+
 ;; enable dimmer
 (dimmer-mode t)
 
