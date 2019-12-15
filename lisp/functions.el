@@ -723,7 +723,7 @@ then kill buffer."
   (diminish 'org-indent-mode "in"))
 
 (defun je/cider-repl-mode-setup ()
-  "Configure `cider-repl-mode'"
+  "Configure `cider-repl-mode'."
   (define-key evil-normal-state-local-map (kbd "C-m") 'cider-repl-return)
   (define-key evil-insert-state-local-map (kbd "C-m") 'cider-repl-return)
   (define-key evil-normal-state-local-map (kbd "M-m") 'cider-repl-return)
