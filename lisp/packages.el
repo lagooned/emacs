@@ -34,8 +34,12 @@
 (use-package alpha)
 
 (use-package autorevert
+  :commands auto-revert-mode
   :diminish auto-revert-mode
-  :init (setq auto-revert-verbose nil))
+  :init
+  (setq auto-revert-verbose nil)
+  (evil-leader/set-key
+    "t A" 'auto-revert-mode))
 
 (use-package avy)
 

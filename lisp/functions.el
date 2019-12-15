@@ -709,10 +709,6 @@ then kill buffer."
   (sp-local-pair 'web-mode "<" "")
   (emmet-mode 1))
 
-(defun je/auto-revert-mode-setup ()
-  "Configure `auto-revert-mode' setup."
-  (diminish 'auto-revert-mode))
-
 (defun je/evil-jumplist-setup ()
   "Configure evil-jumplist."
   (setq evil--jumps-buffer-targets "\\(\\*\\(\\new\\|scratch\\)\\*\\|dired:.+\\)")

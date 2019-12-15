@@ -129,7 +129,6 @@
   "t l" 'linum-relative-mode
   "t w" 'whitespace-mode
   "t i" 'aggressive-indent-mode
-  "t A" 'auto-revert-mode
   "t t" 'toggle-truncate-lines
   "t p" 'smartparens-mode
   "t h" 'highlight-symbol-at-point
