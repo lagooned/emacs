@@ -82,7 +82,7 @@
   "h d t" 'describe-syntax
   "h d p" 'describe-package
   "h d c" 'describe-coding-system
-  "h v l" 'view-lossage
+  "h l" 'view-lossage
 
   ;; insert
   "i f" 'insert-file

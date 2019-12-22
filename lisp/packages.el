@@ -532,7 +532,6 @@
     "SPC f" "file"
     "SPC h" "help"
     "SPC h d" "describe"
-    "SPC h v" "view"
     "SPC i" "insert"
     "SPC j" "jump"
     "SPC m" "mode"
