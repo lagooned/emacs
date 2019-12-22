@@ -163,8 +163,7 @@
   "@" 'async-shell-command
 
   ;; quit
-  "q q" 'save-buffers-kill-terminal
-  "q r" 'restart-emacs)
+  "q q" 'save-buffers-kill-terminal)
 
 (global-evil-leader-mode 1)
 

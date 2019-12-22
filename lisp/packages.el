@@ -443,7 +443,10 @@
               "^#")))
 
 (use-package restart-emacs
-  :commands restart-emacs)
+  :commands restart-emacs
+  :init
+  (evil-leader/set-key
+    "q r" 'restart-emacs))
 
 (use-package shell
   :commands shell
