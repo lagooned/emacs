@@ -42,6 +42,7 @@
     magit-mode-map [escape] 'nil))
 
 (use-package evil-org
+  :commands evil-org-mode
   :diminish evil-org-mode
   :hook
   ((org-mode . evil-org-mode)
