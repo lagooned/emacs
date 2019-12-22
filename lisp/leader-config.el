@@ -36,7 +36,7 @@
   "b K" 'kill-buffer
   "b C-k" 'kill-matching-buffers
   "b l" 'ibuffer
-  "b R" 'rename-buffer
+  "b r" 'rename-buffer
   "b c" 'clean-buffer-list
   "b s" 'save-some-buffers
   "TAB" 'evil-switch-to-windows-last-buffer
