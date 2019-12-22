@@ -34,7 +34,6 @@
   "b b" 'switch-to-buffer
   "b k" 'kill-this-buffer
   "b K" 'kill-buffer
-  "b C-k" 'kill-matching-buffers
   "b l" 'ibuffer
   "b r" 'rename-buffer
   "b c" 'clean-buffer-list
