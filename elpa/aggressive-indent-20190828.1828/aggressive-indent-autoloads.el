@@ -26,12 +26,9 @@ then keep indenting until nothing more happens.
 
 (autoload 'aggressive-indent-mode "aggressive-indent" "\
 Toggle Aggressive-Indent mode on or off.
-
-If called interactively, enable Aggressive-Indent mode if ARG is positive, and
-disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it
-if ARG is `toggle'; disable the mode otherwise.
-
+With a prefix argument ARG, enable Aggressive-Indent mode if ARG is
+positive, and disable it otherwise.  If called from Lisp, enable
+the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 \\{aggressive-indent-mode-map}
 
 \(fn &optional ARG)" t nil)
