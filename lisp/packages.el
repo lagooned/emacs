@@ -31,7 +31,8 @@
 (use-package abbrev
   :diminish abbrev-mode "ab")
 
-(use-package alpha)
+(use-package alpha
+  :commands transparency-set-value)
 
 (use-package autorevert
   :commands auto-revert-mode
