@@ -533,7 +533,6 @@
     "SPC h" "help"
     "SPC h d" "describe"
     "SPC i" "insert"
-    "SPC j" "jump"
     "SPC m" "mode"
     "SPC n" "narrow"
     "SPC o" "open"
