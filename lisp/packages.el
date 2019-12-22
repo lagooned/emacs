@@ -544,10 +544,10 @@
     "SPC U" "negt arg"
     "SPC w" "window"
     "SPC q" "quit"
-    "SPC =" "^v ++"
-    "SPC -" "^v --"
-    "SPC ]" "<> ++"
-    "SPC [" "<> --")
+    "SPC =" "^|v ++"
+    "SPC -" "^|v --"
+    "SPC ]" "<=> ++"
+    "SPC [" "<=> --")
   (which-key-mode 1))
 
 (use-package whitespace
