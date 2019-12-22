@@ -143,7 +143,9 @@ at the first save of each jeemacs session."
   "Remove tabs and trailing whitespace from buffer."
   (interactive)
   (je/untabify-except-makefiles)
-  (delete-trailing-whitespace))
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max))
+  (message "File formatted"))
 
 (defun je/run-grep ()
   "Start grepping. Will try `je/counsel-rg-region', \
