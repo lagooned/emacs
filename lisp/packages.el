@@ -423,24 +423,22 @@
 (use-package rebecca-theme)
 
 (use-package recentf
-  :defer t
-  :commands counsel-recentf
-  :config
-  (setq recentf-max-menu-items 0
-        recentf-max-saved-items 20
-        recentf-filename-handlers '(file-truename)
-        recentf-exclude
-        (list "^/tmp/"
-              "^/ssh:"
-              "^/sudo:"
-              "\\.?ido\\.last$"
-              "\\.revive$"
-              "/TAGS$"
-              "^/var/folders/.+$"
-              "^/usr/lib/.+$"
-              "^.+gz$"
-              (concat "^" (expand-file-name "~/\\(.emacs.d\\|emacs\\)/workspace") "/.+$")
-              "^#")))
+  :init
+  (setq
+   recentf-max-menu-items 0
+   recentf-max-saved-items 20
+   recentf-filename-handlers '(file-truename)
+   recentf-exclude
+   (list "^/tmp/"
+         "^/ssh:"
+         "^/sudo:"
+         "\\.?ido\\.last$"
+         "\\.revive$"
+         "/TAGS$"
+         "^/var/folders/.+$"
+         "^/usr/lib/.+$"
+         "^.+gz$"
+         "^#")))
 
 (use-package restart-emacs
   :commands restart-emacs
