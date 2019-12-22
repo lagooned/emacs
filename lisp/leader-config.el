@@ -35,7 +35,6 @@
   "b k" 'kill-this-buffer
   "b K" 'kill-buffer
   "b C-k" 'kill-matching-buffers
-  "b m" 'je/switch-to-messages-buffer
   "b l" 'ibuffer
   "b r" 'revert-buffer
   "b R" 'rename-buffer
@@ -105,6 +104,7 @@
   "o c" 'je/open-code-dir
   "o h" 'je/open-home-dir
   "o s" 'je/switch-to-scratch-buffer
+  "o m" 'je/switch-to-messages-buffer
 
   ;; project
   "p s" 'projectile-vc
