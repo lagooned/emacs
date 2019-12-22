@@ -537,7 +537,7 @@
     "SPC j" "jump"
     "SPC m" "mode"
     "SPC n" "narrow"
-    "SPC o" "org"
+    "SPC o" "open"
     "SPC p" "project"
     "SPC s" "search"
     "SPC t" "toggle"
