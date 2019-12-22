@@ -195,6 +195,7 @@
     (setq eshell-hist-ignoredups t)))
 
 (use-package evil
+  :commands evil-mode
   :hook
   ((with-editor-mode . evil-insert-state)
    (evil-command-window-mode . je/evil-command-window-setup)
@@ -203,7 +204,8 @@
    (org-mode . je/evil-org-mode-setup)
    (c-mode-common . je/evil-c-common-mode-setup)
    (evil-insert-state-exit . je/evil-company-abort-on-insert-leave)
-   (evil-mode . je/evil-jumplist-setup))
+   (evil-mode . je/evil-jumplist-setup)
+   (emacs-startup . evil-mode))
   :init
   (setq
    evil-move-cursor-back nil
@@ -220,9 +222,8 @@
    evil-jumps-max-length 20
    evil-mode-line-format '(before . mode-line-front-space))
   (setq-default mode-line-format (je/create-mode-line-format))
-  :config
   (load "evil-pre-config")
-  (evil-mode 1)
+  :config
   (load "evil-config"))
 
 (use-package expand-region
