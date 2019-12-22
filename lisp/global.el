@@ -208,6 +208,9 @@
 ;; enable dimmer
 (dimmer-mode t)
 
+;; ivy
+(ivy-mode 1)
+
 (provide 'global)
 ;;; global.el ends here
 

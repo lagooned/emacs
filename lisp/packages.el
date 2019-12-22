@@ -303,6 +303,7 @@
     "t s" 'je/toggle-spelling))
 
 (use-package ivy
+  :commands ivy-mode
   :diminish ivy-mode
   :bind
   (:map ivy-minibuffer-map
@@ -317,8 +318,7 @@
      (counsel-git-grep . ivy--regex-ignore-order)
      (t . ivy--regex-plus)))
   :config
-  (require 'ivy-hydra)
-  (ivy-mode))
+  (require 'ivy-hydra))
 
 (use-package linum-relative
   :commands linum-relative-mode
