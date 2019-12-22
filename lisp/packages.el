@@ -77,9 +77,9 @@
   (setq company-backends nil))
 
 (use-package counsel
-  :diminish counsel-mode
-  :config
-  (counsel-mode 1))
+  :commands counsel-mode
+  :hook (emacs-startup . counsel-mode)
+  :diminish counsel-mode)
 
 (use-package counsel-projectile
   :after counsel
@@ -132,6 +132,7 @@
 
 (use-package dimmer
   :commands dimmer-mode
+  :hook (emacs-startup . dimmer-mode)
   :config
   (setq dimmer-fraction 0.15)
   (dimmer-configure-which-key))
@@ -171,6 +172,7 @@
 
 (use-package elscreen
   :commands elscreen-start
+  :hook (emacs-startup . elscreen-start)
   :init
   (setq elscreen-tab-display-kill-screen nil
         elscreen-tab-display-control nil
@@ -305,6 +307,7 @@
 
 (use-package ivy
   :commands ivy-mode
+  :hook (emacs-startup . ivy-mode)
   :diminish ivy-mode
   :bind
   (:map ivy-minibuffer-map
@@ -504,6 +507,7 @@
 
 (use-package winner
   :commands winner-mode
+  :hook (emacs-startup . winner-mode)
   :config
   (evil-leader/set-key
     "w u" 'winner-undo

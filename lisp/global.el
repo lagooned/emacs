@@ -199,18 +199,6 @@
 ;; title bar name command
 (setq frame-title-format 'buffer-file-truename)
 
-;; winner
-(winner-mode 1)
-
-;; elscreen
-(elscreen-start)
-
-;; enable dimmer
-(dimmer-mode t)
-
-;; ivy
-(ivy-mode 1)
-
 (provide 'global)
 ;;; global.el ends here
 
