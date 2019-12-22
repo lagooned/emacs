@@ -486,8 +486,8 @@
     (kill-buffer)))
 
 (use-package tiny
-  :config
-  (tiny-setup-default))
+  :commands tiny-expand
+  :config (tiny-setup-default))
 
 (use-package too-long-lines-mode
   :diminish too-long-lines-mode)
