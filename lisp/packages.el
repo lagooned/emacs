@@ -125,6 +125,8 @@
       "invoke eshell from project root")
      ("xt" counsel-projectile-switch-project-action-run-term
       "invoke term from project root")
+     ("xv" counsel-projectile-switch-project-action-run-vterm
+      "invoke vterm from project root")
      ("Oc" counsel-projectile-switch-project-action-org-capture
       "capture into project")
      ("Oa" counsel-projectile-switch-project-action-org-agenda

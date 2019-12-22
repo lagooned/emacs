@@ -4,10 +4,10 @@
 
 ;; Author: Eric Danan
 ;; URL: https://github.com/ericdanan/counsel-projectile
-;; Package-Version: 20190325.856
+;; Package-Version: 20191204.1759
 ;; Keywords: project, convenience
-;; Version: 0.3.0
-;; Package-Requires: ((counsel "0.11.0") (projectile "2.0.0"))
+;; Version: 0.3.1
+;; Package-Requires: ((counsel "0.13.0") (projectile "2.0.0"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -673,13 +673,13 @@ construct the command.")
   (counsel-projectile-switch-project 'counsel-projectile-switch-project-action-git-grep))
 
 (defun counsel-projectile-grep-transformer (str)
-  "Higlight file and line number in STR, first removing the
+  "Highlight file and line number in STR, first removing the
 \"./\" prefix from the filename."
   ;; This makes the display consistent with `counsel-git-grep' and
   ;; `counsel-ag'-like commands.
   (counsel-git-grep-transformer (string-remove-prefix "./" str)))
 
-(defun counsel-projectile-grep-occur ()
+(defun counsel-projectile-grep-occur (&optional _cands)
   "Generate a custom occur buffer for `counsel-projectile-grep'."
   (counsel-grep-like-occur
    counsel-projectile-grep-command))
@@ -902,7 +902,7 @@ is called with a prefix argument."
             (format (counsel-projectile--string-trim-right counsel-rg-base-command " \\.")
                     (concat ignored " %s " path))))
       (ivy-add-actions
-       'counsel-ag
+       'counsel-rg
        counsel-projectile-rg-extra-actions)
       (counsel-rg (eval counsel-projectile-rg-initial-input)
                   (projectile-project-root)
@@ -1149,7 +1149,7 @@ Optional arguments ARG, KEYS, and RESTRICTION are as in
   (let* ((root (projectile-project-root))
          (org-agenda-files
           (cl-remove-if-not (lambda (file)
-                              (string-prefix-p root file))
+                              (string-prefix-p root (expand-file-name file)))
                             (org-agenda-files t 'ifmode))))
     (org-agenda arg keys restriction))))
 
@@ -1214,6 +1214,8 @@ candidates list of `counsel-projectile-switch-project'."
     "invoke eshell from project root")
    ("xt" counsel-projectile-switch-project-action-run-term
     "invoke term from project root")
+   ("xv" counsel-projectile-switch-project-action-run-vterm
+    "invoke vterm from project root")
    ("Oc" counsel-projectile-switch-project-action-org-capture
     "capture into project")
    ("Oa" counsel-projectile-switch-project-action-org-agenda
@@ -1341,6 +1343,11 @@ action."
   (let ((projectile-switch-project-action
          (lambda ()
            (projectile-run-term nil))))
+    (counsel-projectile-switch-project-by-name project)))
+
+(defun counsel-projectile-switch-project-action-run-vterm (project)
+  "Invoke `vterm' from PROJECT's root."
+  (let ((projectile-switch-project-action 'projectile-run-vterm))
     (counsel-projectile-switch-project-by-name project)))
 
 (defun counsel-projectile-switch-project-action-grep (project)
