@@ -57,7 +57,6 @@
   "f a" 'find-alternate-file
   "f c" 'je/cleanup-file
   "f r" 'counsel-recentf
-  "f l" 'counsel-locate
   "f s" 'save-buffer
   "f w" 'write-file
 

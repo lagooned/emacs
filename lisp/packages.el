@@ -334,6 +334,12 @@
   (setq linum-relative-format "%5s "
         linum-relative-current-symbol ""))
 
+(use-package locate
+  :when (executable-find "locate")
+  :init
+  (evil-leader/set-key
+    "f l" 'counsel-locate))
+
 (use-package lorem-ipsum
   :commands
   lorem-ipsum-insert-list
