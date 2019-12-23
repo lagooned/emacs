@@ -33,9 +33,6 @@
 ;; use basic grep
 (setq je/force-basic-grep nil)
 
-;; don't pass commands to osx
-(setq mac-pass-command-to-system nil)
-
 ;; load theme
 (if (display-graphic-p)
     (load-theme 'badwolf t))

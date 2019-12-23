@@ -199,6 +199,9 @@
 ;; title bar name command
 (setq frame-title-format 'buffer-file-truename)
 
+;; don't pass commands to osx
+(setq mac-pass-command-to-system nil)
+
 (provide 'global)
 ;;; global.el ends here
 
