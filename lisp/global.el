@@ -202,6 +202,10 @@
 ;; don't pass commands to osx
 (setq mac-pass-command-to-system nil)
 
+;; no mode line dashes in -nw
+(setq-default mode-line-front-space " ")
+(setq-default mode-line-end-spaces " ")
+
 (provide 'global)
 ;;; global.el ends here
 
