@@ -531,7 +531,7 @@
         which-key-add-column-padding 1
         which-key-max-display-columns nil
         which-key-min-display-lines 5)
-  (which-key-setup-minibuffer)
+  (which-key-setup-side-window-bottom)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
     "SPC !" "shell command"
