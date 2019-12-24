@@ -773,6 +773,16 @@ then kill buffer."
   (which-key-add-key-based-replacements
     "SPC z" "screen"))
 
+(defun je/calculate-startup-info-string ()
+  (if (bound-and-true-p package-alist)
+      (format "%d packages loaded in %s"
+              (length package-activated-list) (emacs-init-time))
+    (if (and (boundp 'straight--profile-cache)
+             (hash-table-p straight--profile-cache))
+        (format "%d packages loaded in %s"
+                (hash-table-size straight--profile-cache) (emacs-init-time))
+      (format "Emacs started in %s" (emacs-init-time)))))
+
 (provide 'functions)
 ;;; functions.el ends here
 

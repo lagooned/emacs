@@ -73,21 +73,13 @@
 
 (setq inhibit-startup-screen t)
 (setq inhibit-splash-screen t)
-(setq initial-scratch-message
-      (format "
-;;
-;;        ██╗ ██████╗    ██╗ ██████╗███╗   ███╗ █████╗  ██████╗███████╗
-;;        ██║██╔════╝   ██╔╝██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
-;;        ██║█████╗    ██╔╝ █████╗  ██╔████╔██║███████║██║     ███████╗
-;;   ██   ██║██╔══╝   ██╔╝  ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
-;;   ╚█████╔╝╚██████╗██╔╝   ╚██████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
-;;    ╚════╝  ╚═════╝╚═╝     ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
-;;
-
-;; welcome to je/emacs, %s! (/^.^)/
-
-;; this buffer is for text that is not saved, and for lisp evaluation.
-;; to create a file, visit it with \\[find-file] and enter text in its buffer.\n\n" je/current-user))
+(setq
+ initial-scratch-message
+ (format
+  je/scratch-message
+  (je/calculate-startup-info-string)
+  je/current-user
+  je/leader-key))
 
 ;; custom file
 (setq custom-file je/custom-file-location)

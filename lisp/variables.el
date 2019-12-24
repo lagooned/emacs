@@ -76,5 +76,26 @@ re-entered for it to take effect.")
 (defvar je/custom-file-location "~/.emacs.d/.custom.el"
   "Location for Emacs custom config file.")
 
+(defvar je/scratch-message
+  "
+;;
+;;       ██╗ ██████╗    ██╗ ██████╗███╗   ███╗ █████╗  ██████╗███████╗
+;;       ██║██╔════╝   ██╔╝██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
+;;       ██║█████╗    ██╔╝ █████╗  ██╔████╔██║███████║██║     ███████╗
+;;  ██   ██║██╔══╝   ██╔╝  ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
+;;  ╚█████╔╝╚██████╗██╔╝   ╚██████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
+;;   ╚════╝  ╚═════╝╚═╝     ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
+;;
+;;  %s, %s.
+;;
+
+;; To begin exploring, press %s.
+
+"
+  "Initial scratch buffer message format.")
+
+(defvar je/leader-key "SPC"
+  "Key used by evil-leader to define the primary leader key.")
+
 (provide 'variables)
 ;;; variables.el ends here
