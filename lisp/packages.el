@@ -432,6 +432,7 @@
   :diminish "rnb")
 
 (use-package recentf
+  :defer t
   :init
   (setq
    recentf-max-menu-items 0
