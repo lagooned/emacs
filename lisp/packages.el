@@ -579,7 +579,9 @@
   (setq wdired-allow-to-change-permissions t
         wdired-allow-to-redirect-links t))
 
-(use-package wgrep)
+(use-package wgrep
+  :commands
+  wgrep-change-to-wgrep-mode)
 
 (use-package yasnippet
   :diminish yas-minor-mode
