@@ -194,7 +194,8 @@
 (column-number-mode -1)
 
 ;; menu-bar-display
-(menu-bar-mode -1)
+(when (not (eq system-type 'darwin))
+  (menu-bar-mode -1))
 
 ;; title bar name command
 (setq frame-title-format 'buffer-file-truename)
