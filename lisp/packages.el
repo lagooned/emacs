@@ -574,6 +574,7 @@
   (setq whitespace-line-column 100))
 
 (use-package wdired
+  :commands wdired-mode
   :init
   (setq wdired-allow-to-change-permissions t
         wdired-allow-to-redirect-links t))
