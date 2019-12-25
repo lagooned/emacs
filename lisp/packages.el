@@ -158,12 +158,6 @@
         (concat dired-omit-files
                 "\\|^\\..+$\\|^~.+$\\|^#.+$")))
 
-(use-package doom-themes
-  :init
-  (setq doom-themes-enable-bold nil))
-
-(use-package dracula-theme)
-
 (use-package ediff
   :commands ediff-mode
   :init
