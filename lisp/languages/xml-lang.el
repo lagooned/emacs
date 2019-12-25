@@ -34,10 +34,12 @@
          (emmet-mode . je/evil-emmet-mode-setup)))
 
 (use-package nxml-mode
+  :defer t
   :init
   (setq nxml-child-indent 4))
 
 (use-package sgml-mode
+  :defer t
   :init
   (setq sgml-basic-offset 4))
 
