@@ -45,9 +45,6 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
-;; load pre-config setup
-(load "setup")
-
 ;; load custom vars
 (load "variables")
 
