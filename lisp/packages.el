@@ -196,6 +196,9 @@
   (with-eval-after-load 'em-hist
     (setq eshell-hist-ignoredups t)))
 
+(use-package esup
+  :commands esup)
+
 (use-package evil
   :commands evil-mode
   :hook
