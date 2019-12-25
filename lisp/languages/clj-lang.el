@@ -25,6 +25,7 @@
 ;;; Code:
 
 (use-package clojure-mode
+  :commands clojure-mode
   :config
   (when (je/cider-deps-p)
     (evil-leader/set-key-for-mode 'clojure-mode
