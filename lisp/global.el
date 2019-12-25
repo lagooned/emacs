@@ -194,7 +194,8 @@
 (column-number-mode -1)
 
 ;; menu-bar-display
-(when (not (eq system-type 'darwin))
+(when (or (not (eq system-type 'darwin))
+          (not (display-graphic-p)))
   (menu-bar-mode -1))
 
 ;; title bar name command
