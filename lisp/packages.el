@@ -164,6 +164,7 @@
 (use-package dracula-theme)
 
 (use-package ediff
+  :commands ediff-mode
   :init
   (setq ediff-diff-options "-w"
         ediff-window-setup-function #'ediff-setup-windows-plain)
