@@ -429,8 +429,6 @@
   :commands rainbow-mode
   :diminish "rnb")
 
-(use-package rebecca-theme)
-
 (use-package recentf
   :init
   (setq
