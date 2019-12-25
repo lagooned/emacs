@@ -24,8 +24,6 @@
 
 ;;; Code:
 
-(use-package exato)
-
 (use-package evil-numbers
   :commands
   evil-numbers/inc-at-point
