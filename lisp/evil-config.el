@@ -25,11 +25,7 @@
 ;;; Code:
 
 (use-package evil-numbers
-  :commands
-  evil-numbers/inc-at-point
-  evil-numbers/dec-at-point
-  :config
-  (require 'evil-numbers))
+  :defer t)
 
 (use-package evil-magit
   :after magit
