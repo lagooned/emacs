@@ -30,7 +30,6 @@
 (use-package evil-magit
   :after magit
   :config
-  (require 'evil-magit)
   (evil-define-key
     evil-magit-state
     magit-mode-map [escape] 'nil))
