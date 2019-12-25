@@ -29,6 +29,7 @@
 (require 'use-package)
 
 (use-package abbrev
+  :defer t
   :diminish abbrev-mode "ab")
 
 (use-package alpha
