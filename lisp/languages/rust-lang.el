@@ -24,7 +24,8 @@
 
 ;;; Code:
 
-(use-package rust-mode)
+(use-package rust-mode
+  :commands rust-mode)
 
 (provide 'rust-lang)
 ;;; rust-lang.el ends here
