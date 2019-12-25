@@ -117,7 +117,11 @@
 (add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch-or-dired)
 
 ;; no tool bar
-(tool-bar-mode -1)
+(when (eq system-type 'darwin)
+  (push '(tool-bar-lines . 0) default-frame-alist))
+
+(when tool-bar-mode
+  (tool-bar-mode -1))
 
 ;; no tabs
 (setq-default indent-tabs-mode nil)
