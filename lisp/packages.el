@@ -495,6 +495,7 @@
   (magit-auto-revert-mode 0))
 
 (use-package multiple-cursors
+  :defer t
   :hook
   ((multiple-cursors-mode-enabled . je/mc-evil-emacs-state)
    (multiple-cursors-mode-disabled . je/mc-evil-normal-state)))
