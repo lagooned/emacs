@@ -198,6 +198,7 @@
   :commands esup)
 
 (use-package evil
+  :after evil-leader
   :commands evil-mode
   :hook
   ((with-editor-mode . evil-insert-state)
@@ -228,6 +229,12 @@
   (load "evil-pre-config")
   :config
   (load "evil-config"))
+
+(use-package evil-leader
+  :init
+  (setq evil-leader/in-all-states 1)
+  :config
+  (load "leader-config"))
 
 (use-package expand-region
   :commands er/expand-region)

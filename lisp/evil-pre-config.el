@@ -24,9 +24,6 @@
 
 ;;; Code:
 
-(use-package evil-leader
-  :config
-  (load "leader-config"))
 
 (use-package evil-matchit
   :config

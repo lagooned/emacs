@@ -24,8 +24,6 @@
 
 ;;; Code:
 
-(setq evil-leader/in-all-states 1)
-
 (evil-leader/set-leader (concat "<" je/leader-key ">"))
 
 (evil-leader/set-key
