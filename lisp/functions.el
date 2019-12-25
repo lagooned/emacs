@@ -72,11 +72,6 @@ to sane runtime defaults."
   (interactive)
   (find-file "~/.emacs.d/lisp/functions.el"))
 
-(defun je/open-leader-config ()
-  "Open leader-config.el."
-  (interactive)
-  (find-file "~/.emacs.d/lisp/leader-config.el"))
-
 (defun je/open-global-config ()
   "Open global.el."
   (interactive)
