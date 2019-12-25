@@ -495,6 +495,7 @@
   :commands suggest)
 
 (use-package term
+  :defer t
   :init
   (defadvice term-handle-exit
       (after term-kill-buffer-on-exit activate)
