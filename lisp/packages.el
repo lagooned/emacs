@@ -338,6 +338,7 @@
         linum-relative-current-symbol ""))
 
 (use-package locate
+  :defer t
   :when (executable-find "locate")
   :init
   (evil-leader/set-key
