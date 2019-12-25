@@ -169,6 +169,7 @@
           'split-window-vertically)))
 
 (use-package elscreen
+  :after which-key
   :commands elscreen-start
   :hook (emacs-startup . elscreen-start)
   :init
@@ -273,6 +274,7 @@
     "t f" 'focus-mode))
 
 (use-package grep
+  :after which-key
   :hook (grep-mode . je/enable-truncate-lines-no-message)
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
@@ -518,12 +520,15 @@
 
 (use-package which-key
   :diminish which-key-mode
-  :config
+  :commands which-key-mode
+  :hook (emacs-startup . which-key-mode)
+  :init
   (setq which-key-sort-order #'which-key-prefix-then-key-order
         which-key-sort-uppercase-first nil
         which-key-add-column-padding 1
         which-key-max-display-columns nil
         which-key-min-display-lines 5)
+  :config
   (which-key-setup-side-window-bottom)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
@@ -549,8 +554,7 @@
     "SPC =" "^|v ++"
     "SPC -" "^|v --"
     "SPC ]" "<=> ++"
-    "SPC [" "<=> --")
-  (which-key-mode 1))
+    "SPC [" "<=> --"))
 
 (use-package whitespace
   :init

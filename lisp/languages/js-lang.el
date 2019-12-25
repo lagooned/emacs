@@ -37,11 +37,20 @@
   (add-hook 'js2-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t))))
 
 (use-package js2-mode
+  :after which-key
   :commands js2-mode
   :init
   (setq js2-strict-missing-semi-warning nil
         js2-missing-semi-one-line-override nil)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  :config
+  (evil-leader/set-key-for-mode 'js2-mode
+    "m t s" 'js2-mode-toggle-hide-functions
+    "m t c" 'js2-mode-toggle-hide-comments
+    "m f f" 'js2-mode-toggle-element
+    "m r" 'js2r-rename-var)
+  (which-key-add-key-based-replacements
+    "SPC m f" "fold"))
 
 (use-package xref-js2
   :after js2-mode
@@ -55,15 +64,6 @@
   :after js2-mode
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
-
-(evil-leader/set-key-for-mode 'js2-mode
-  "m t s" 'js2-mode-toggle-hide-functions
-  "m t c" 'js2-mode-toggle-hide-comments
-  "m f f" 'js2-mode-toggle-element
-  "m r" 'js2r-rename-var)
-
-(which-key-add-key-based-replacements
-  "SPC m f" "fold")
 
 (provide 'js-lang)
 ;;; js-lang.el ends here

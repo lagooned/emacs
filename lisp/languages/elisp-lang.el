@@ -25,8 +25,12 @@
 ;;; Code:
 
 (use-package elisp-mode
+  :after which-key
   :hook ((emacs-lisp-mode . aggressive-indent-mode)
-         (emacs-lisp-mode . je/emacs-lisp-setup)))
+         (emacs-lisp-mode . je/emacs-lisp-setup))
+  :config
+  (which-key-add-key-based-replacements
+    "SPC e" "eval-sexp"))
 
 (use-package eldoc
   :diminish eldoc-mode
@@ -40,8 +44,6 @@
 (evil-leader/set-key-for-mode 'lisp-interaction-mode
   "e" 'eval-last-sexp)
 
-(which-key-add-key-based-replacements
-  "SPC e" "eval-sexp")
 
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here
