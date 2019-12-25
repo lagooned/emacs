@@ -24,7 +24,8 @@
 
 ;;; Code:
 
-(use-package typescript-mode)
+(use-package typescript-mode
+  :commands typescript-mode)
 
 (provide 'typescript-lang)
 ;;; typescript-lang.el ends here
