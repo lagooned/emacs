@@ -42,7 +42,8 @@
   (evil-leader/set-key
     "t A" 'auto-revert-mode))
 
-(use-package avy)
+(use-package avy
+  :defer t)
 
 (use-package aggressive-indent
   :diminish aggressive-indent-mode
