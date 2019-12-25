@@ -284,6 +284,7 @@
   (which-key-add-key-based-replacements "SPC g" "grep"))
 
 (use-package hi-lock
+  :commands hi-lock-mode
   :diminish hi-lock-mode "hi"
   :init
   (defface hi-magenta
