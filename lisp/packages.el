@@ -198,7 +198,10 @@
   :commands esup)
 
 (use-package evil
-  :after evil-leader
+  :after
+  evil-leader
+  evil-matchit
+  evil-visualstar
   :commands evil-mode
   :hook
   ((with-editor-mode . evil-insert-state)
@@ -226,7 +229,6 @@
    evil-jumps-max-length 20
    evil-mode-line-format '(before . mode-line-front-space))
   (setq-default mode-line-format (je/create-mode-line-format))
-  (load "evil-pre-config")
   :config
   (load "evil-config"))
 
@@ -338,6 +340,14 @@
     "@" 'async-shell-command
     "q q" 'save-buffers-kill-terminal)
   (global-evil-leader-mode 1))
+
+(use-package evil-matchit
+  :config
+  (global-evil-matchit-mode 1))
+
+(use-package evil-visualstar
+  :config
+  (global-evil-visualstar-mode 1))
 
 (use-package expand-region
   :commands er/expand-region)
