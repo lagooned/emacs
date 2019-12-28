@@ -26,24 +26,24 @@
 
 (use-package elisp-mode
   :after which-key
+  :init (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" 'eval-last-sexp)
   :hook ((emacs-lisp-mode . aggressive-indent-mode)
-         (emacs-lisp-mode . je/emacs-lisp-setup))
+         (emacs-lisp-mode . prettify-symbols-mode)
+         (emacs-lisp-mode . je/configure-elisp-company-backends))
   :config
   (which-key-add-key-based-replacements
     "SPC e" "eval-sexp"))
+
+(use-package lisp-interaction-mode
+  :init (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" 'eval-last-sexp)
+  :hook ((lisp-interaction-mode . prettify-symbols-mode)
+         (lisp-interaction-mode . je/configure-elisp-company-backends)))
 
 (use-package eldoc
   :diminish eldoc-mode
   :commands eldoc-mode
   :hook ((emacs-lisp-mode . turn-on-eldoc-mode)
          (lisp-interaction-mode . turn-on-eldoc-mode)))
-
-(evil-leader/set-key-for-mode 'emacs-lisp-mode
-  "e" 'eval-last-sexp)
-
-(evil-leader/set-key-for-mode 'lisp-interaction-mode
-  "e" 'eval-last-sexp)
-
 
 (provide 'elisp-lang)
 ;;; elisp-lang.el ends here

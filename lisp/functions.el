@@ -476,12 +476,6 @@ match your prompt."
       (progn (bury-buffer) nil)
     t))
 
-(defun je/emacs-lisp-setup ()
-  "Setup Emacs Lisp Mode."
-  (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-  (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
-  (push '(company-capf company-yasnippet) company-backends))
-
 (defun je/evil-eshell-mode-setup ()
   "Setup Je/eshell."
   (setq-local inhibit-read-only t)
@@ -772,6 +766,9 @@ then kill buffer."
         (format "%d packages loaded in %s"
                 (hash-table-size straight--profile-cache) (emacs-init-time))
       (format "Emacs started in %s" (emacs-init-time)))))
+
+(defun je/configure-elisp-company-backends ()
+  (push '(company-capf company-yasnippet) company-backends))
 
 (provide 'functions)
 ;;; functions.el ends here
