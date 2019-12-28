@@ -528,7 +528,7 @@
   :config
   (require 'org-tempo)
   (evil-leader/set-key-for-mode 'org-mode
-    "l l" 'jeemacs/org-link-follow
+    "l l" 'je/org-link-follow
     "l i" 'org-insert-link-global
     "m c" 'org-toggle-checkbox
     "m e" 'org-export-dispatch
