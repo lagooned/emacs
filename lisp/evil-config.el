@@ -38,15 +38,13 @@
   (global-evil-surround-mode 1))
 
 ;; cursor configs
-(let ((height (eval je/evil-base-cursor-height))
-      (pipe-width (/ (frame-char-width) 5)))
-  (setq evil-normal-state-cursor `("#00ffff" (hbar . ,(eval height))))
-  (setq evil-insert-state-cursor `("#00e000" (bar . ,(eval pipe-width))))
-  (setq evil-visual-state-cursor `("#ff8800" (hbar . ,(eval height))))
-  (setq evil-emacs-state-cursor `("#ff0000" (hbar . ,(eval height))))
-  (setq evil-motion-state-cursor `("#0055ff" (hbar . ,(eval height))))
-  (setq evil-replace-state-cursor `("#00acff" (hbar . ,(eval height))))
-  (setq evil-operator-state-cursor `("#ff66ff" (hbar . ,(eval height)))))
+(setq evil-normal-state-cursor `("#00ffff" box))
+(setq evil-insert-state-cursor `("#00e000" (bar . ,(/ (frame-char-width) 5))))
+(setq evil-visual-state-cursor `("#ff8800" box))
+(setq evil-emacs-state-cursor `("#ff0000" box))
+(setq evil-motion-state-cursor `("#0055ff" box))
+(setq evil-replace-state-cursor `("#00acff" box))
+(setq evil-operator-state-cursor `("#ff66ff" box))
 
 ;; unbinds
 (global-unset-key (kbd "C-k"))

@@ -24,12 +24,6 @@
 
 ;;; Code:
 
-(defvar je/evil-base-cursor-height #xffff
-  "Set the cursor height to be used, note \
-anything over the current line height \
-will be capped at the current line height \
-set by (line-pixel-height)")
-
 (defvar je/large-file-size 2
   "Size (in MB) above which the user will be prompted to open the file literally \
 to avoid performance issues. Opening literally means that no major or minor \
