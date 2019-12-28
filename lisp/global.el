@@ -137,9 +137,6 @@
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
-;; reload init
-(global-set-key (kbd "C-c i") 'je/load-config)
-
 ;; make prompts easier
 (defalias 'yes-or-no-p 'y-or-n-p)
 
