@@ -24,11 +24,6 @@
 
 ;;; Code:
 
-(use-package evil-surround
-  :diminish evil-surround-mode
-  :config
-  (global-evil-surround-mode 1))
-
 ;; cursor configs
 (setq evil-normal-state-cursor `("#00ffff" box))
 (setq evil-insert-state-cursor `("#00e000" (bar . ,(/ (frame-char-width) 5))))

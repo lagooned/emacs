@@ -367,6 +367,12 @@
   :config
   (global-evil-matchit-mode 1))
 
+(use-package evil-surround
+  :after evil
+  :diminish evil-surround-mode
+  :config
+  (global-evil-surround-mode 1))
+
 (use-package evil-visualstar
   :after evil
   :config
