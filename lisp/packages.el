@@ -308,7 +308,6 @@
     "s j" 'avy-goto-word-0
     "s r" 'ivy-resume
     "t l" 'linum-relative-mode
-    "t w" 'whitespace-mode
     "t i" 'aggressive-indent-mode
     "t t" 'toggle-truncate-lines
     "t p" 'smartparens-mode
@@ -688,12 +687,14 @@
     "SPC [" "<=> --"))
 
 (use-package whitespace
+  :after evil-leader
   :commands whitespace-mode
   :init
   (setq whitespace-display-mappings
         '((tab-mark ?\t [?› ?\t])
           (newline-mark ?\n [?¬ ?\n])
           (space-mark ?\  [?·] [?.])))
+  (evil-leader/set-key "t w" 'whitespace-mode)
   :config
   (setq whitespace-line-column 100))
 
