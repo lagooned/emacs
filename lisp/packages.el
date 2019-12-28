@@ -227,6 +227,13 @@
    evil-mode-line-format '(before . mode-line-front-space))
   (setq-default mode-line-format (je/create-mode-line-format))
   :config
+  (setq evil-normal-state-cursor `("#00ffff" box))
+  (setq evil-insert-state-cursor `("#00e000" (bar . ,(/ (frame-char-width) 5))))
+  (setq evil-visual-state-cursor `("#ff8800" box))
+  (setq evil-emacs-state-cursor `("#ff0000" box))
+  (setq evil-motion-state-cursor `("#0055ff" box))
+  (setq evil-replace-state-cursor `("#00acff" box))
+  (setq evil-operator-state-cursor `("#ff66ff" box))
   (load "evil-config"))
 
 (use-package evil-collection
