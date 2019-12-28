@@ -25,7 +25,7 @@
 ;;; Code:
 
 (use-package elisp-mode
-  :after which-key
+  :after which-key evil-leader
   :init (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" 'eval-last-sexp)
   :hook ((emacs-lisp-mode . aggressive-indent-mode)
          (emacs-lisp-mode . prettify-symbols-mode)
@@ -35,6 +35,7 @@
     "SPC e" "eval-sexp"))
 
 (use-package lisp-interaction-mode
+  :after which-key evil-leader
   :init (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" 'eval-last-sexp)
   :hook ((lisp-interaction-mode . prettify-symbols-mode)
          (lisp-interaction-mode . je/configure-elisp-company-backends)))

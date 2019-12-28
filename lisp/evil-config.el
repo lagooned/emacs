@@ -28,6 +28,7 @@
   :defer t)
 
 (use-package evil-magit
+  :after evil-leader
   :after magit
   :config
   (evil-define-key

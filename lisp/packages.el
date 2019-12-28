@@ -199,10 +199,6 @@
   :commands esup)
 
 (use-package evil
-  :after
-  evil-leader
-  evil-matchit
-  evil-visualstar
   :commands evil-mode
   :hook
   ((with-editor-mode . evil-insert-state)
@@ -234,6 +230,7 @@
   (load "evil-config"))
 
 (use-package evil-leader
+  :after evil
   :init
   (setq evil-leader/in-all-states 1)
   :config
@@ -342,10 +339,12 @@
   (global-evil-leader-mode 1))
 
 (use-package evil-matchit
+  :after evil
   :config
   (global-evil-matchit-mode 1))
 
 (use-package evil-visualstar
+  :after evil
   :config
   (global-evil-visualstar-mode 1))
 
@@ -366,6 +365,7 @@
 
 (use-package flycheck
   :commands flycheck-mode
+  :after evil-leader
   :diminish flycheck-mode "flyc"
   :init
   (setq
@@ -390,12 +390,13 @@
 
 (use-package focus
   :commands focus-mode
+  :after evil-leader
   :init
   (evil-leader/set-key
     "t f" 'focus-mode))
 
 (use-package grep
-  :after which-key
+  :after which-key evil-leader
   :hook (grep-mode . je/enable-truncate-lines-no-message)
   :init
   (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
@@ -421,6 +422,7 @@
 
 (use-package ispell
   :commands ispell
+  :after evil-leader
   :when (executable-find "ispell")
   :init
   (when (executable-find "aspell")
@@ -459,6 +461,7 @@
 
 (use-package locate
   :defer t
+  :after evil-leader
   :when (executable-find "locate")
   :init
   (evil-leader/set-key
@@ -469,6 +472,7 @@
   lorem-ipsum-insert-list
   lorem-ipsum-insert-sentences
   lorem-ipsum-insert-paragraphs
+  :after evil-leader
   :init
   (evil-leader/set-key
     "i l s" 'lorem-ipsum-insert-sentences
@@ -507,6 +511,7 @@
   org-agenda
   org-iswitchb
   org-capture
+  :after evil-leader
   :hook
   (org-mode . je/enable-truncate-lines-no-message)
   (org-indent-mode . je/org-indent-setup)
@@ -575,6 +580,7 @@
 
 (use-package restart-emacs
   :commands restart-emacs
+  :after evil-leader
   :init
   (evil-leader/set-key
     "q r" 'restart-emacs))
@@ -642,6 +648,7 @@
 
 (use-package winner
   :commands winner-mode
+  :after evil-leader
   :hook (emacs-startup . winner-mode)
   :config
   (evil-leader/set-key

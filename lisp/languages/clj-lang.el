@@ -25,6 +25,7 @@
 ;;; Code:
 
 (use-package clojure-mode
+  :after evil-leader
   :commands clojure-mode
   :config
   (when (je/cider-deps-p)
@@ -34,6 +35,7 @@
       "r" 'cider-switch-to-repl-buffer)))
 
 (use-package cider
+  :after evil-leader
   :commands
   cider-jack-in
   cider-eval-last-sexp

@@ -37,7 +37,7 @@
   (add-hook 'js2-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t))))
 
 (use-package js2-mode
-  :after which-key
+  :after which-key evil-leader
   :commands js2-mode
   :init
   (setq js2-strict-missing-semi-warning nil
