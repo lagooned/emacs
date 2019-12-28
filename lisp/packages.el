@@ -343,6 +343,14 @@
     "q q" 'save-buffers-kill-terminal)
   (global-evil-leader-mode 1))
 
+(use-package evil-org
+  :after evil
+  :commands evil-org-mode
+  :diminish evil-org-mode
+  :hook
+  ((org-mode . evil-org-mode)
+   (evil-org-mode . evil-org-set-key-theme)))
+
 (use-package evil-matchit
   :after evil
   :config

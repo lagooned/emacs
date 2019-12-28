@@ -35,13 +35,6 @@
     evil-magit-state
     magit-mode-map [escape] 'nil))
 
-(use-package evil-org
-  :commands evil-org-mode
-  :diminish evil-org-mode
-  :hook
-  ((org-mode . evil-org-mode)
-   (evil-org-mode . evil-org-set-key-theme)))
-
 (use-package evil-surround
   :diminish evil-surround-mode
   :config
