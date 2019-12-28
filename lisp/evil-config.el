@@ -24,14 +24,6 @@
 
 ;;; Code:
 
-(use-package evil-magit
-  :after evil-leader
-  :after magit
-  :config
-  (evil-define-key
-    evil-magit-state
-    magit-mode-map [escape] 'nil))
-
 (use-package evil-surround
   :diminish evil-surround-mode
   :config
