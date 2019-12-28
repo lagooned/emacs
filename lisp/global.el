@@ -117,10 +117,8 @@
 (add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch-or-dired)
 
 ;; no tool bar
-(when (eq system-type 'darwin)
-  (push '(tool-bar-lines . 0) default-frame-alist))
-
-(when tool-bar-mode
+(if (eq system-type 'darwin)
+    (push '(tool-bar-lines . 0) default-frame-alist)
   (tool-bar-mode -1))
 
 ;; no tabs
