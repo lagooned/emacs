@@ -229,6 +229,11 @@
   :config
   (load "evil-config"))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package evil-leader
   :after evil
   :init

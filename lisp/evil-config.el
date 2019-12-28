@@ -47,10 +47,6 @@
   :config
   (global-evil-surround-mode 1))
 
-(use-package evil-collection
-  :config
-  (evil-collection-init))
-
 ;; cursor configs
 (let ((height (eval je/evil-base-cursor-height))
       (pipe-width (/ (frame-char-width) 5)))
