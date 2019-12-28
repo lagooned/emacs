@@ -688,6 +688,7 @@
     "SPC [" "<=> --"))
 
 (use-package whitespace
+  :commands whitespace-mode
   :init
   (setq whitespace-display-mappings
         '((tab-mark ?\t [?› ?\t])
