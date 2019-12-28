@@ -630,6 +630,7 @@
   :commands try)
 
 (use-package undo-tree
+  :defer t
   :diminish undo-tree-mode)
 
 (use-package uniquify
