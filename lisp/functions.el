@@ -666,11 +666,6 @@ stateful confirmation dialog.
   "Add `js2-xref-backend' to `xref-backend-functions'."
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))
 
-(defun je/enable-company-mode ()
-  "Enable Company Mode."
-  (make-variable-buffer-local 'company-backends)
-  (company-mode))
-
 (defun je/evil-command-window-setup ()
   "Setup Evil command window."
   (define-key evil-normal-state-local-map (kbd "M-:") 'evil-window-delete))

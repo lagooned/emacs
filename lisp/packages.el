@@ -76,7 +76,8 @@
         company-minimum-prefix-length 2
         company-show-numbers t)
   :config
-  (setq company-backends nil))
+  (setq company-backends nil)
+  (make-variable-buffer-local 'company-backends))
 
 (use-package counsel
   :commands counsel-mode
@@ -533,7 +534,7 @@
   :commands prog-mode
   :hook ((prog-mode . too-long-lines-mode)
          (prog-mode . je/enable-truncate-lines-no-message)
-         (prog-mode . je/enable-company-mode)))
+         (prog-mode . company-mode)))
 
 (use-package projectile
   :diminish projectile-mode
