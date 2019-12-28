@@ -24,9 +24,6 @@
 
 ;;; Code:
 
-(use-package evil-numbers
-  :defer t)
-
 (use-package evil-magit
   :after evil-leader
   :after magit

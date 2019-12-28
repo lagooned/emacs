@@ -343,6 +343,9 @@
     "q q" 'save-buffers-kill-terminal)
   (global-evil-leader-mode 1))
 
+(use-package evil-numbers
+  :defer t)
+
 (use-package evil-org
   :after evil
   :commands evil-org-mode
