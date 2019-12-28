@@ -149,9 +149,6 @@
 ;; no tooltips
 (tooltip-mode 0)
 
-;; remember place
-(save-place-mode 1)
-
 ;; create directories with find file
 (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
   "Create parent directory if not exists while visiting file."

@@ -579,6 +579,11 @@
   (evil-leader/set-key
     "q r" 'restart-emacs))
 
+(use-package save-place
+  :defer 1
+  :config
+  (save-place-mode 1))
+
 (use-package shell
   :commands shell
   :hook (shell-mode . je/shell-kill-buffer-on-exit-sentinel))
