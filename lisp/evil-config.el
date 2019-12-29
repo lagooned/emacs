@@ -82,7 +82,6 @@
 (define-key evil-insert-state-map (kbd "M-;") 'comment-dwim)
 (define-key evil-insert-state-map (kbd "C-j") 'newline)
 (define-key evil-insert-state-map (kbd "C-m") 'newline-and-indent)
-(define-key evil-insert-state-map (kbd "M-.") 'company-complete)
 (define-key evil-insert-state-map (kbd "M-/") 'yas-expand)
 (define-key evil-insert-state-map (kbd "M-<") 'beginning-of-buffer)
 (define-key evil-insert-state-map (kbd "M->") 'end-of-buffer)

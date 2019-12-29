@@ -24,6 +24,9 @@
 
 ;;; Code:
 
+;; fuck this stupid variable
+(setq evil-want-keybinding nil)
+
 ;; set max mem alloc before gc for startup
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6)

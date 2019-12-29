@@ -29,5 +29,8 @@
   :init
   (setq lsp-inhibit-message 1))
 
+(use-package company-lsp
+  :after lsp company yasnippet)
+
 (provide 'util-lang)
 ;;; util-lang.el ends here

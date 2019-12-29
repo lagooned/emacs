@@ -25,11 +25,12 @@
 ;;; Code:
 
 (use-package java-mode
-  :hook (java-mode . lsp)
+  :hook ((java-mode . lsp)
+         (java-mode . je/configure-company-lsp-backends))
   :commands java-mode)
 
 (use-package lsp-java
-  :after lsp
+  :after lsp company-lsp
   :when (and (not (eq system-type 'windows-nt))
              (executable-find "java"))
   :init

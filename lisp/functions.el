@@ -769,6 +769,9 @@ then kill buffer."
 (defun je/configure-elisp-company-backends ()
   (push '(company-capf company-yasnippet) company-backends))
 
+(defun je/configure-company-lsp-backends ()
+  (push 'company-lsp company-backends))
+
 (provide 'functions)
 ;;; functions.el ends here
 
