@@ -36,7 +36,6 @@
 (defun evil-collection-dired-setup ()
   "Set up `evil' bindings for `dired'."
   (evil-collection-define-key 'normal 'dired-mode-map
-    "-" 'dired-jump
     "q" 'quit-window
     "j" 'dired-next-line
     "k" 'dired-previous-line
@@ -44,13 +43,12 @@
     [follow-link] 'mouse-face
     ;; Commands to mark or flag certain categories of files
     "#" 'dired-flag-auto-save-files
-    ;; "." 'dired-clean-directory
-    "." 'dired-omit-mode
+    "." 'dired-clean-directory
     "~" 'dired-flag-backup-files
     ;; Upper case keys (except !) for operating on the marked files
     "A" 'dired-do-find-regexp
     "C" 'dired-do-copy
-    "B" 'evil-backward-WORD-begin
+    "B" 'dired-byte-compile
     "D" 'dired-do-delete
     "gG" 'dired-do-chgrp ;; FIXME: This can probably live on a better binding.
     "gg" 'beginning-of-buffer
@@ -60,7 +58,6 @@
     "M" 'dired-do-chmod
     "O" 'dired-do-chown
     "P" 'dired-do-print
-    "p" 'projectile-vc
     "Q" 'dired-do-find-regexp-and-replace
     "R" 'dired-do-rename
     "S" 'dired-do-symlink
@@ -122,28 +119,22 @@
     "d" 'dired-flag-file-deletion
     "gf" 'dired-find-file
     (kbd "C-m") 'dired-find-file
-    (kbd "C-j") 'dired-find-file-other-window
-    (kbd "C-i") 'evil-jump-forward
-    (kbd "C-o") 'evil-jump-backward
     "gr" 'revert-buffer
     "i" 'dired-toggle-read-only
     "I" 'dired-maybe-insert-subdir
     "J" 'dired-goto-file
-    "v" 'evil-visual-char
-    "V" 'evil-visual-line
-    (kbd "C-v") 'evil-visual-block
     "K" 'dired-do-kill-lines
     "r" 'dired-do-redisplay
     "m" 'dired-mark
     "t" 'dired-toggle-marks
     "u" 'dired-unmark                   ; also "*u"
-    "W" 'evil-forward-WORD-begin
+    "W" 'browse-url-of-dired-file
     "x" 'dired-do-flagged-delete
     "gy" 'dired-show-file-type ;; FIXME: This could probably go on a better key.
     "Y" 'dired-copy-filename-as-kill
     "+" 'dired-create-directory
     ;; open
-    (kbd "<return>") 'dired-find-file
+    (kbd "RET") 'dired-find-file
     (kbd "S-<return>") 'dired-find-file-other-window
     (kbd "M-<return>") 'dired-display-file
     "gO" 'dired-find-file-other-window
@@ -153,11 +144,12 @@
     ;; moving
     "gj" 'dired-next-dirline
     "gk" 'dired-prev-dirline
-    "[" 'dired-prev-dirline
-    "]" 'dired-next-dirline
+    "[[" 'dired-prev-dirline
+    "]]" 'dired-next-dirline
     "<" 'dired-prev-dirline
     ">" 'dired-next-dirline
     "^" 'dired-up-directory
+    "-" 'dired-up-directory
     " " 'dired-next-line
     [?\S-\ ] 'dired-previous-line
     [remap next-line] 'dired-next-line
@@ -171,10 +163,6 @@
     (kbd "M-s a M-C-s") 'dired-do-isearch-regexp
     (kbd "M-s f C-s")   'dired-isearch-filenames
     (kbd "M-s f M-C-s") 'dired-isearch-filenames-regexp
-    "/" 'evil-search-forward
-    "?" 'evil-search-backward
-    "n" 'evil-search-next
-    "N" 'evil-search-previous
     ;; misc
     [remap read-only-mode] 'dired-toggle-read-only
     ;; `toggle-read-only' is an obsolete alias for `read-only-mode'
@@ -200,7 +188,25 @@
     ";d" 'epa-dired-do-decrypt
     ";v" 'epa-dired-do-verify
     ";s" 'epa-dired-do-sign
-    ";e" 'epa-dired-do-encrypt))
+    ";e" 'epa-dired-do-encrypt)
+
+  ;; custom je/emacs bindings
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "." 'dired-omit-mode
+    "B" 'evil-backward-WORD-begin
+    "p" 'projectile-vc
+    "W" 'evil-forward-WORD-begin
+    "v" 'evil-visual-char
+    "V" 'evil-visual-line
+    "/" 'evil-search-forward
+    "?" 'evil-search-backward
+    "n" 'evil-search-next
+    "N" 'evil-search-previous
+    (kbd "C-v") 'evil-visual-block
+    (kbd "C-j") 'dired-find-file-other-window
+    (kbd "C-i") 'evil-jump-forward
+    (kbd "C-o") 'evil-jump-backward
+    (kbd "<return>") 'dired-find-file))
 
 (provide 'evil-collection-dired)
 ;;; evil-collection-dired.el ends here
