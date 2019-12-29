@@ -60,11 +60,6 @@
 ;; load language packages config
 (load "packages-lang")
 
-;; enable savehist
-(setq savehist-file "~/.emacs.d/.savehist"
-      history-delete-duplicates t)
-(savehist-mode 1)
-
 ;; reset gc threshold
 (add-hook 'emacs-startup-hook #'je/reset-gc-threshold-percentage)
 

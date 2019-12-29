@@ -180,8 +180,12 @@
 (setq fast-but-imprecise-scrolling t)
 
 ;; history
-(setq history-length 10)
-(setq savehist-additional-variables '(search-ring regexp-search-ring))
+(setq
+ history-length 10
+ savehist-file "~/.emacs.d/.savehist"
+ history-delete-duplicates t
+ savehist-additional-variables '(search-ring regexp-search-ring))
+(savehist-mode 1)
 
 ;; no bell
 (setq ring-bell-function 'ignore)
