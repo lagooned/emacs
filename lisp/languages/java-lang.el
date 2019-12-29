@@ -25,7 +25,25 @@
 ;;; Code:
 
 (use-package java-mode
+  :hook (java-mode . lsp)
   :commands java-mode)
+
+(use-package lsp-java
+  :after lsp
+  :when (and (not (eq system-type 'windows-nt))
+             (executable-find "java"))
+  :init
+  (setq lsp-java-autobuild-enabled nil
+        lsp-java-format-enabled nil
+        lsp-java-inhibit-message t
+        lsp-java-completion-overwrite nil
+        lsp-java-folding-range-enabled nil
+        lsp-java-format-on-type-enabled nil
+        lsp-java-import-gradle-enabled nil
+        lsp-java-import-maven-enabled t
+        lsp-java-references-code-lens-enabled nil
+        lsp-java-save-actions-organize-imports nil
+        lsp-java-selection-enabled nil))
 
 (use-package groovy-mode
   :commands groovy-mode)

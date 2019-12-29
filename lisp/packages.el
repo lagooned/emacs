@@ -30,7 +30,7 @@
 
 (use-package abbrev
   :defer t
-  :diminish abbrev-mode "ab")
+  :diminish abbrev-mode)
 
 (use-package alpha
   :commands transparency-set-value)

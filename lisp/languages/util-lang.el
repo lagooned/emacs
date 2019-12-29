@@ -24,8 +24,10 @@
 
 ;;; Code:
 
-(use-package lsp-mode :commands (lsp lsp-deferred))
-(use-package company-lsp :commands company-lsp)
+(use-package lsp-mode
+  :commands lsp
+  :init
+  (setq lsp-inhibit-message 1))
 
 (provide 'util-lang)
 ;;; util-lang.el ends here

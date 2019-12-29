@@ -39,3 +39,4 @@ url
 /undo/*
 /undo
 transient
+/.lsp-session-*
