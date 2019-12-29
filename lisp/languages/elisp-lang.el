@@ -31,12 +31,15 @@
   (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" 'eval-last-sexp)
   :hook ((emacs-lisp-mode . aggressive-indent-mode)
          (emacs-lisp-mode . prettify-symbols-mode)
-         (emacs-lisp-mode . je/configure-elisp-company-backends)
-         (lisp-interaction-mode . prettify-symbols-mode)
-         (lisp-interaction-mode . je/configure-elisp-company-backends))
+         (emacs-lisp-mode . je/configure-elisp-company-backends))
   :config
   (which-key-add-major-mode-key-based-replacements 'emacs-lisp-mode "SPC e" "eval-sexp")
   (which-key-add-major-mode-key-based-replacements 'lisp-interaction-mode "SPC e" "eval-sexp"))
+
+(use-package lisp-interaction-mode
+  :hook
+  ((lisp-interaction-mode . prettify-symbols-mode)
+   (lisp-interaction-mode . je/configure-elisp-company-backends)))
 
 (use-package eldoc
   :diminish eldoc-mode
