@@ -231,7 +231,6 @@
   (setq evil-motion-state-cursor `("#0055ff" (hbar . #xffff)))
   (setq evil-replace-state-cursor `("#00acff" (hbar . #xffff)))
   (setq evil-operator-state-cursor `("#ff66ff" (hbar . #xffff)))
-  (setq blink-cursor-alist '(((hbar . #xffff) . (hbar . 2))))
   (load "evil-config"))
 
 (use-package evil-collection
