@@ -454,6 +454,9 @@
           "hi-blue"
           "hi-magenta")))
 
+(use-package hydra
+  :defer t)
+
 (use-package ispell
   :commands ispell
   :after evil-leader
