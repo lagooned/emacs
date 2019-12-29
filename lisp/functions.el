@@ -256,7 +256,7 @@ can be given as the initial minibuffer input."
   (counsel-require-program (car (split-string counsel-git-cmd)))
   (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
          (cands (split-string
-                 (shell-command-to-string counsel-git-cmd)
+                 (shell-command-to-string "git ls-files --full-name -- ")
                  "\n"
                  t)))
     (ivy-read (projectile-prepend-project-name "Find file: ") cands
