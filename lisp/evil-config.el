@@ -1,6 +1,6 @@
 ;;; evil-config.el --- evil config  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2017  Jared M. Engler
+;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: jeemacs, evil, packages, config

@@ -1,6 +1,6 @@
 ;;; elisp-lang.el --- elisp language tools  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018  Jared M. Engler
+;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: jeemacs, config, languages, elisp
