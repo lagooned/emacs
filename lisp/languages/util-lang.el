@@ -1,9 +1,9 @@
-;;; package-lang.el --- jeemacs language-specific tools  -*- lexical-binding: t; -*-
+;;; util-lang.el --- je/emacs language utils         -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: jeemacs, config, languages, packages, syntax, xref, lsp, debug
+;; Keywords: utils, jeemacs, lang, tools
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -16,27 +16,16 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
-;; Gmacs language-specific package definitions.
+;; Je/emacs language utils.
 
 ;;; Code:
 
-(load "clj-lang")
-(load "elisp-lang")
-(load "haskell-lang")
-(load "java-lang")
-(load "js-lang")
-(load "ops-lang")
-(load "php-lang")
-(load "python-lang")
-(load "rust-lang")
-(load "typescript-lang")
-(load "util-lang")
-(load "web-lang")
-(load "xml-lang")
+(use-package lsp-mode :commands (lsp lsp-deferred))
+(use-package company-lsp :commands company-lsp)
 
-(provide 'packages-lang)
-;;; packages-lang.el ends here
+(provide 'util-lang)
+;;; util-lang.el ends here
