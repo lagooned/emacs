@@ -39,16 +39,15 @@
       (progn (package-refresh-contents)
              (package-install 'use-package))))
 
-(defun je/emacs-startup-hook ()
-  "Gmacs startup function."
-  (je/reset-gc-threshold-percentage)
-  (setq default-directory "~/.emacs.d/"))
-
 (defun je/reset-gc-threshold-percentage ()
   "Reset `gc-cons-threshold' and `gc-cons-percentage' \
 to sane runtime defaults."
   (setq gc-cons-threshold 16777216
         gc-cons-percentage 0.1))
+
+(defun je/set-emacs-d-default-directory ()
+  "Set ~/.emacs.d to default directory."
+  (setq default-directory "~/.emacs.d/"))
 
 (defun je/load-config ()
   "Load init.el."

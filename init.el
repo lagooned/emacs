@@ -65,8 +65,11 @@
       history-delete-duplicates t)
 (savehist-mode 1)
 
-;; write startup log, fix messages modeline, set dir to ~/.emacs.d
-(add-hook 'emacs-startup-hook #'je/emacs-startup-hook)
+;; reset gc threshold
+(add-hook 'emacs-startup-hook #'je/reset-gc-threshold-percentage)
+
+;; set default dir
+(add-hook 'emacs-startup-hook #'je/set-emacs-d-default-directory)
 
 (setq inhibit-startup-screen t)
 (setq inhibit-splash-screen t)
