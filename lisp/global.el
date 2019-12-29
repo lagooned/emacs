@@ -99,6 +99,10 @@
       `((".*" ,temporary-file-directory t)))
 
 ;; cursor blink
+(setq
+ blink-cursor-delay 1.2
+ blink-cursor-interval 0.2
+ blink-cursor-blinks 1)
 (blink-cursor-mode 1)
 
 ;; cursor stretch
