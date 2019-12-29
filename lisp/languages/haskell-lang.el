@@ -24,7 +24,8 @@
 
 ;;; Code:
 
-(use-package haskell-mode)
+(use-package haskell-mode
+  :commands haskell-mode)
 
 (provide 'haskell-lang)
 ;;; haskell-lang.el ends here

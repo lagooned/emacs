@@ -26,6 +26,7 @@
 
 (load "clj-lang")
 (load "elisp-lang")
+(load "haskell-lang")
 (load "java-lang")
 (load "js-lang")
 (load "ops-lang")
