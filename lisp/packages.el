@@ -290,7 +290,6 @@
     "h d c" 'describe-coding-system
     "h l" 'view-lossage
     "i f" 'insert-file
-    "i s" 'yas-insert-snippet
     "i h" 'auto-insert
     "l s" 'org-store-link
     "l l" 'browse-url-at-point
@@ -761,6 +760,7 @@
   yas-minor-mode
   yas-minor-mode-on
   :hook (prog-mode . yas-minor-mode)
+  :init (evil-leader/set-key "i s" 'yas-insert-snippet)
   :config
   (require 'yasnippet)
   (define-key yas-minor-mode-map (kbd "C-i") nil)
