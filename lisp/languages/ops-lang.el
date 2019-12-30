@@ -34,6 +34,13 @@
    'auto-mode-alist
    '("Dockerfile\\'" . dockerfile-mode)))
 
+(use-package feature-mode
+  :commands feature-mode
+  :init
+  (add-to-list
+   'auto-mode-alist
+   '("\.feature$" . feature-mode)))
+
 (use-package puppet-mode
   :commands puppet-mode)
 
