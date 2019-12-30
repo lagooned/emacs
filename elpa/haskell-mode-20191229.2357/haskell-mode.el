@@ -12,7 +12,6 @@
 ;;          2003      Dave Love <fx@gnu.org>
 ;;          2016      Arthur Fayzrakhmanov
 ;; Keywords: faces files Haskell
-;; Version: 16.2-git
 ;; URL: https://github.com/haskell/haskell-mode
 
 ;; This file is not part of GNU Emacs.
@@ -138,7 +137,6 @@
 (require 'cl-lib)
 (require 'haskell-ghc-support)
 (require 'haskell-complete-module)
-(require 'haskell-compat)
 (require 'haskell-align-imports)
 (require 'haskell-lexeme)
 (require 'haskell-sort-imports)
@@ -729,12 +727,20 @@ Returns beginning position of qualified part or nil if no qualified part found."
       pos)))
 
 (defun haskell-delete-indentation (&optional arg)
-  "Like `delete-indentation' but ignoring Bird-style \">\"."
+  "Like `delete-indentation' but ignoring Bird-style \">\".
+Prefix ARG is handled as per `delete-indentation'."
   (interactive "*P")
   (let ((fill-prefix (or fill-prefix (if (eq haskell-literate 'bird) ">"))))
     (delete-indentation arg)))
 
 (defvar eldoc-print-current-symbol-info-function)
+
+(defvar electric-pair-inhibit-predicate)
+(declare-function electric-pair-default-inhibit "elec-pair")
+(defun haskell-mode--inhibit-bracket-inside-comment-or-default (ch)
+  "An `electric-pair-mode' inhibit function for character CH."
+  (or (nth 4 (syntax-ppss))
+      (funcall #'electric-pair-default-inhibit ch)))
 
 ;; The main mode functions
 ;;;###autoload
@@ -789,16 +795,16 @@ Minor modes that work well with `haskell-mode':
 - `smerge-mode': show and work with diff3 conflict markers used
   by git, svn and other version control systems."
   :group 'haskell
-  (when (version< emacs-version "24.3")
-    (error "haskell-mode requires at least Emacs 24.3"))
+  (when (version< emacs-version "25.1")
+    (error "haskell-mode requires at least Emacs 25.1"))
 
   ;; paragraph-{start,separate} should treat comments as paragraphs as well.
   (setq-local paragraph-start (concat " *{-\\| *-- |\\|" page-delimiter))
   (setq-local paragraph-separate (concat " *$\\| *\\({-\\|-}\\) *$\\|" page-delimiter))
   (setq-local fill-paragraph-function 'haskell-fill-paragraph)
   ;; (setq-local adaptive-fill-function 'haskell-adaptive-fill)
-  (setq-local comment-start "-- ")
-  (setq-local comment-padding 0)
+  (setq-local comment-start "--")
+  (setq-local comment-padding 1)
   (setq-local comment-start-skip "[-{]-[ \t]*")
   (setq-local comment-end "")
   (setq-local comment-end-skip "[ \t]*\\(-}\\|\\s>\\)")
@@ -846,6 +852,11 @@ Minor modes that work well with `haskell-mode':
             'haskell-completions-completion-at-point
             nil
             t)
+
+  ;; Avoid Emacs 25 bug with electric-pair inside comments
+  (when (eq 25 emacs-major-version)
+    (setq-local electric-pair-inhibit-predicate 'haskell-mode--inhibit-bracket-inside-comment-or-default))
+
   (haskell-indentation-mode))
 
 (defcustom haskell-mode-hook '(haskell-indentation-mode interactive-haskell-mode)
@@ -1033,14 +1044,20 @@ See `haskell-check-command' for the default."
   (save-some-buffers (not compilation-ask-about-save) nil)
   (compilation-start command))
 
+;; This function was renamed and deprecated, but we want clean
+;; byte compilation in all versions.
+(defalias 'haskell-flymake-create-temp-buffer-copy
+  (if (fboundp 'flymake-proc-init-create-temp-buffer-copy)
+      'flymake-proc-init-create-temp-buffer-copy
+    'flymake-init-create-temp-buffer-copy))
+
 (defun haskell-flymake-init ()
-  "Flymake init function for Haskell.
-To be added to `flymake-init-create-temp-buffer-copy'."
+  "Flymake init function for Haskell."
   (let ((checker-elts (and haskell-saved-check-command
                            (split-string haskell-saved-check-command))))
     (list (car checker-elts)
           (append (cdr checker-elts)
-                  (list (flymake-init-create-temp-buffer-copy
+                  (list (haskell-flymake-create-temp-buffer-copy
                          'flymake-create-temp-inplace))))))
 
 (add-to-list 'flymake-allowed-file-name-masks '("\\.l?hs\\'" haskell-flymake-init))

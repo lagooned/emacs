@@ -1130,8 +1130,7 @@ Face for quarantines." :group (quote haskell))
 
 ;;;***
 
-;;;### (autoloads nil nil ("haskell-compat.el" "haskell-mode-pkg.el")
-;;;;;;  (0 0 0 0))
+;;;### (autoloads nil nil ("haskell-mode-pkg.el") (0 0 0 0))
 
 ;;;***
 
