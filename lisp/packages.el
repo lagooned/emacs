@@ -36,6 +36,7 @@
   :commands transparency-set-value)
 
 (use-package autorevert
+  :after evil-leader
   :commands auto-revert-mode
   :diminish auto-revert-mode
   :init
