@@ -59,6 +59,7 @@
 (use-package company
   :diminish company-mode
   :commands company-mode
+  :hook (prog-mode . company-mode)
   :bind
   (:map company-active-map
         ("<tab>" . nil)
@@ -576,8 +577,7 @@
 (use-package prog-mode
   :commands prog-mode
   :hook ((prog-mode . too-long-lines-mode)
-         (prog-mode . je/enable-truncate-lines-no-message)
-         (prog-mode . company-mode)))
+         (prog-mode . je/enable-truncate-lines-no-message)))
 
 (use-package projectile
   :diminish projectile-mode
