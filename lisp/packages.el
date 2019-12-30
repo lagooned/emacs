@@ -501,11 +501,9 @@
 
 (use-package locate
   :defer t
-  :after evil-leader
+  :after evil-leader counsel
   :when (executable-find "locate")
-  :init
-  (evil-leader/set-key
-    "f l" 'counsel-locate))
+  :init (evil-leader/set-key "f l" 'counsel-locate))
 
 (use-package lorem-ipsum
   :commands
