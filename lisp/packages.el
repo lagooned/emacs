@@ -176,7 +176,6 @@
           'split-window-vertically)))
 
 (use-package elscreen
-  :after which-key
   :commands elscreen-start
   :hook (emacs-startup . elscreen-start)
   :init
