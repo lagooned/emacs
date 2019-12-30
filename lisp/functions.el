@@ -772,6 +772,10 @@ then kill buffer."
 (defun je/configure-company-lsp-backends ()
   (push 'company-lsp company-backends))
 
+(defun je/java-lsp-deps-p ()
+  (and (not (eq system-type 'windows-nt))
+       (executable-find "java")))
+
 (provide 'functions)
 ;;; functions.el ends here
 
