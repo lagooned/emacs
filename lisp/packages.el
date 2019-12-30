@@ -648,8 +648,9 @@
   :commands swiper)
 
 (use-package sudo-edit
-  :when (and (eq system-type 'gnu/linux)
-             (executable-find "sudo")))
+  :when
+  (and (not (eq system-type 'windows-nt))
+       (executable-find "sudo")))
 
 (use-package suggest
   :commands suggest)
