@@ -759,7 +759,7 @@
   :commands
   yas-minor-mode
   yas-minor-mode-on
-  :hook (prog-mode . yas-minor-mode)
+  :hook (prog-mode . yas-minor-mode-on)
   :init (evil-leader/set-key "i s" 'yas-insert-snippet)
   :config
   (require 'yasnippet)
