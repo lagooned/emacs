@@ -48,8 +48,11 @@
   :defer t)
 
 (use-package aggressive-indent
+  :after evil-leader
   :diminish aggressive-indent-mode
-  :commands aggressive-indent-mode)
+  :commands aggressive-indent-mode
+  :init
+  (evil-leader/set-key "t i" 'aggressive-indent-mode))
 
 (use-package badwolf-theme)
 
@@ -315,7 +318,6 @@
     "s j" 'avy-goto-word-0
     "s r" 'ivy-resume
     "t l" 'linum-relative-mode
-    "t i" 'aggressive-indent-mode
     "t t" 'toggle-truncate-lines
     "t p" 'smartparens-mode
     "t h" 'highlight-symbol-at-point
