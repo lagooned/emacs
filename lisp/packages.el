@@ -756,9 +756,7 @@
 
 (use-package yasnippet
   :diminish yas-minor-mode
-  :commands
-  yas-minor-mode
-  yas-minor-mode-on
+  :commands yas-minor-mode yas-minor-mode-on
   :hook (prog-mode . yas-minor-mode-on)
   :init (evil-leader/set-key "i s" 'yas-insert-snippet)
   :config
