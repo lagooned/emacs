@@ -569,7 +569,7 @@ the `LOC' is `looking-at-p' `je/eshell-top-prompt-regexp'."
   (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
   (define-key evil-emacs-state-local-map (kbd "C-s") 'void)
   (define-key evil-emacs-state-local-map (kbd "C-j") 'ivy-alt-done)
-  (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done-hydra)
+  (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done)
   (define-key evil-emacs-state-local-map (kbd "M-n") 'ivy-next-history-element)
   (define-key evil-emacs-state-local-map (kbd "M-p") 'ivy-previous-history-element)
   (define-key evil-emacs-state-local-map (kbd "M-i") 'ivy-insert-current)
