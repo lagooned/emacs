@@ -576,8 +576,7 @@
 
 (use-package prog-mode
   :commands prog-mode
-  :hook ((prog-mode . too-long-lines-mode)
-         (prog-mode . je/enable-truncate-lines-no-message)))
+  :hook (prog-mode . je/enable-truncate-lines-no-message))
 
 (use-package projectile
   :diminish projectile-mode
@@ -669,6 +668,7 @@
   :config (tiny-setup-default))
 
 (use-package too-long-lines-mode
+  :hook (prog-mode . too-long-lines-mode)
   :diminish too-long-lines-mode)
 
 (use-package try
