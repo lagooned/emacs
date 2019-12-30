@@ -42,7 +42,7 @@
   :init
   (setq auto-revert-verbose nil)
   (evil-leader/set-key
-    "t A" 'auto-revert-mode))
+    "t a" 'auto-revert-mode))
 
 (use-package avy
   :defer t)
