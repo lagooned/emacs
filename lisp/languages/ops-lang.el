@@ -45,11 +45,15 @@
   :commands puppet-mode)
 
 (use-package restclient
+  :after evil-leader
   :commands restclient-mode
   :init
   (add-to-list
    'auto-mode-alist
-   '("\\.rest\\'" . restclient-mode)))
+   '("\\.rest\\'" . restclient-mode))
+  :config
+  (evil-leader/set-key-for-mode 'restclient-mode
+    "e" 'restclient-http-send-current))
 
 (use-package yaml-mode
   :commands yaml-mode)
