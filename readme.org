@@ -16,9 +16,6 @@
 - use which-key to explore functionality
 - have fun :)
 * future
-- better way of managing keybinds
-  - global keybinds conflict with evil philosophy
-    - better way to unbindall that doesn't make emacs unusable if config breaks
-  - convert evil-leader -> general.el
-- find the best theme
-  - probably impossible
+- create more full-featured prog modes
+  - add more binds
+  - use more lsp modes
