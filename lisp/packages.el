@@ -205,7 +205,23 @@
 (use-package evil-collection
   :after evil
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "." 'dired-omit-mode
+    "B" 'evil-backward-WORD-begin
+    "p" 'projectile-vc
+    "W" 'evil-forward-WORD-begin
+    "v" 'evil-visual-char
+    "V" 'evil-visual-line
+    "/" 'evil-search-forward
+    "?" 'evil-search-backward
+    "n" 'evil-search-next
+    "N" 'evil-search-previous
+    (kbd "C-v") 'evil-visual-block
+    (kbd "C-j") 'dired-find-file-other-window
+    (kbd "C-i") 'evil-jump-forward
+    (kbd "C-o") 'evil-jump-backward
+    (kbd "<return>") 'dired-find-file))
 
 (use-package evil-leader
   :after evil
