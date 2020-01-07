@@ -150,7 +150,7 @@ through removing their entry from `evil-collection-mode-list'."
     emms
     epa
     ert
-    eshell
+    ;; eshell
     eval-sexp-fu
     evil-mc
     eww
