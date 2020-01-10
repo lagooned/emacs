@@ -124,7 +124,7 @@ through removing their entry from `evil-collection-mode-list'."
     cider
     cmake-mode
     comint
-    company
+    ;; company
     compile
     (custom cus-edit)
     cus-theme

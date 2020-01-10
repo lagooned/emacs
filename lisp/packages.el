@@ -66,16 +66,14 @@
         ("<return>" . nil)
         ("RET" . nil)
         ("\e\e\e" . nil)
-        ("M-n" . company-select-next-or-abort)
-        ("M-p" . company-select-previous-or-abort)
-        ("M-i" . company-complete-common-or-cycle)
+        ("C-j" . company-select-next-or-abort)
+        ("C-k" . company-select-previous-or-abort)
         ("C-n" . je/company-cancel-complete-next)
         ("C-p" . je/company-cancel-complete-prev)
-        ("M-g" . company-abort)
-        ("M-j" . company-complete-selection)
-        ("M-m" . company-complete-selection)
-        ("C-v" . company-next-page)
-        ("M-v" . company-previous-page))
+        ("C-i" . company-complete-common-or-cycle)
+        ("C-m" . company-complete-selection)
+        ("C-u" . company-previous-page)
+        ("C-d" . company-next-page))
   :init
   (setq company-idle-delay 0.1
         company-minimum-prefix-length 2
