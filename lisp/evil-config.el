@@ -26,6 +26,7 @@
 
 ;; unbinds
 (global-unset-key (kbd "C-k"))
+(global-unset-key (kbd "C-l"))
 (global-unset-key (kbd "C-w"))
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-y"))
