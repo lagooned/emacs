@@ -41,7 +41,17 @@
    lsp-java-inhibit-message t
    lsp-java-folding-range-enabled nil
    lsp-java-format-on-type-enabled nil
-   lsp-java-references-code-lens-enabled nil))
+   lsp-java-references-code-lens-enabled nil)
+  :config
+  (evil-leader/set-key-for-mode 'java-mode
+    "m m" 'lsp-execute-code-action
+    "m o" 'lsp-java-organize-imports
+    "m r s" 'lsp-java-convert-to-static-import
+    "m r m" 'lsp-java-extract-method
+    "m r c" 'lsp-java-extract-to-constant
+    "m r l" 'lsp-java-extract-to-local-variable)
+  (which-key-add-major-mode-key-based-replacements 'java-mode
+    "SPC m r" "refactor"))
 
 (use-package groovy-mode
   :commands groovy-mode)
