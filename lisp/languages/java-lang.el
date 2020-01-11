@@ -42,6 +42,8 @@
    lsp-java-folding-range-enabled nil
    lsp-java-format-on-type-enabled nil
    lsp-java-references-code-lens-enabled nil)
+  (add-to-list
+   'recentf-exclude "^.+/workspace/.cache/.+$")
   :config
   (evil-leader/set-key-for-mode 'java-mode
     "m m" 'lsp-execute-code-action
