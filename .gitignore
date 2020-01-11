@@ -40,3 +40,4 @@ url
 /undo
 transient
 /.lsp-session-*
+/.cache/
