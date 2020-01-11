@@ -227,20 +227,6 @@ prompt for grep command."
     (if (word-at-point) (swiper (word-at-point))
       (error "No region or thing selected"))))
 
-(defun je/xref-find-definitions-symbol ()
-  "`xref-find-definitions' that doesn't fall back."
-  (interactive)
-  (if (symbol-at-point)
-      (xref-find-definitions (symbol-name (symbol-at-point)))
-    (message "No symbol selected")))
-
-(defun je/xref-find-apropos-symbol ()
-  "`xref-find-apropos' that doesn't fall back."
-  (interactive)
-  (if (symbol-at-point)
-      (xref-find-apropos (symbol-name (symbol-at-point)))
-    (message "No symbol selected")))
-
 (defun je/org-link-follow ()
   "Push marker stack and follow org link."
   (interactive)

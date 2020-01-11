@@ -102,7 +102,6 @@
 (define-key evil-normal-state-map (kbd "-") 'dired-jump)
 (define-key evil-normal-state-map (kbd "M-;") 'comment-line)
 (define-key evil-normal-state-map (kbd "C-=") 'er/expand-region)
-(define-key evil-normal-state-map (kbd "C-]") 'je/xref-find-definitions-symbol)
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-page-up)
 (define-key evil-normal-state-map (kbd "C-j") 'newline)
