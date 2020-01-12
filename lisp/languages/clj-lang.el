@@ -27,6 +27,9 @@
 (use-package clojure-mode
   :after evil-leader
   :commands clojure-mode
+  :init
+  (when (executable-find "clojure-lsp")
+    (add-hook 'clojure-mode-hook #'lsp))
   :config
   (when (je/cider-deps-p)
     (evil-leader/set-key-for-mode 'clojure-mode
@@ -51,6 +54,14 @@
   (evil-leader/set-key-for-mode 'cider-repl-mode
     "r" 'cider-switch-to-last-clojure-buffer
     "m q" 'cider-quit))
+
+(use-package clj-lsp
+  :after lsp company-lsp
+  :when (executable-find "clojure-lsp")
+  :config
+  (add-to-list
+   'lsp-language-id-configuration
+   (clojure-mode . "clojure")))
 
 (provide 'clj-lang)
 ;;; clj-lang.el ends here

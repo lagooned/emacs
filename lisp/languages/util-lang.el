@@ -27,7 +27,9 @@
 (use-package lsp-mode
   :commands lsp
   :init
-  (setq lsp-inhibit-message 1))
+  (setq
+   lsp-inhibit-message 1
+   lsp-enable-indention nil))
 
 (use-package company-lsp
   :after lsp company yasnippet)
