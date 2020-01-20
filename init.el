@@ -40,8 +40,8 @@
         ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
         ("org" . "http://orgmode.org/elpa/")))
 
-(if (version< emacs-version "27")
-    (package-initialize))
+(when (version< emacs-version "27")
+  (package-initialize))
 
 ;; add load path
 (let ((default-directory "~/.emacs.d/lisp/"))
