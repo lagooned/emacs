@@ -25,11 +25,20 @@
 ;;; Code:
 
 (use-package java-mode
+  :commands java-mode
   :init
   (when (je/java-lsp-deps-p)
     (add-hook 'java-mode-hook #'lsp)
-    (add-hook 'java-mode-hook #'je/configure-company-lsp-backends))
-  :commands java-mode)
+    (add-hook 'java-mode-hook #'je/configure-company-lsp-backends)
+    (evil-leader/set-key-for-mode 'java-mode
+      "m m" 'lsp-execute-code-action
+      "m o" 'lsp-java-organize-imports
+      "m r s" 'lsp-java-convert-to-static-import
+      "m r m" 'lsp-java-extract-method
+      "m r c" 'lsp-java-extract-to-constant
+      "m r l" 'lsp-java-extract-to-local-variable)
+    (which-key-add-major-mode-key-based-replacements 'java-mode
+      "SPC m r" "refactor")))
 
 (use-package lsp-java
   :after lsp company-lsp
@@ -43,17 +52,7 @@
    lsp-java-format-on-type-enabled nil
    lsp-java-references-code-lens-enabled nil)
   (add-to-list
-   'recentf-exclude "^.+/workspace/.cache/.+$")
-  :config
-  (evil-leader/set-key-for-mode 'java-mode
-    "m m" 'lsp-execute-code-action
-    "m o" 'lsp-java-organize-imports
-    "m r s" 'lsp-java-convert-to-static-import
-    "m r m" 'lsp-java-extract-method
-    "m r c" 'lsp-java-extract-to-constant
-    "m r l" 'lsp-java-extract-to-local-variable)
-  (which-key-add-major-mode-key-based-replacements 'java-mode
-    "SPC m r" "refactor"))
+   'recentf-exclude "^.+/workspace/.cache/.+$"))
 
 (use-package groovy-mode
   :commands groovy-mode)
