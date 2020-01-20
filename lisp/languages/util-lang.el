@@ -32,7 +32,13 @@
    lsp-enable-indention nil))
 
 (use-package company-lsp
-  :after lsp company yasnippet)
+  :after lsp company yasnippet
+  :init
+  (when (version<= "27" emacs-version)
+    (define-advice c-clear-string-fences
+        (:around (fn) inhibit-args-out-of-range-error)
+      (ignore-errors
+        (funcall fn)))))
 
 (provide 'util-lang)
 ;;; util-lang.el ends here
