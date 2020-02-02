@@ -276,7 +276,7 @@ initial input `INITIAL-INPUT'."
   "Wrap `projectile-vc' with `projectile-project-p'."
   (interactive)
   (if (not (projectile-project-p))
-      (error "Not in a git repository")
+      (error "Not in a vc repository")
     (projectile-vc)))
 
 (defun je/toggle-spelling ()
