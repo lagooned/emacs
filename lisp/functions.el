@@ -272,12 +272,12 @@ initial input `INITIAL-INPUT'."
               :action #'counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
 
-(defun je/magit-status ()
-  "Wrap `magit-status' with `projectile-project-p'."
+(defun je/projectile-vc ()
+  "Wrap `projectile-vc' with `projectile-project-p'."
   (interactive)
   (if (not (projectile-project-p))
       (error "Not in a git repository")
-    (magit-status)))
+    (projectile-vc)))
 
 (defun je/toggle-spelling ()
   "Toggle flyspell."

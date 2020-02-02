@@ -287,7 +287,7 @@
     "o h" 'je/open-home-dir
     "o s" 'je/switch-to-scratch-buffer
     "o m" 'je/switch-to-messages-buffer
-    "p s" 'projectile-vc
+    "p s" 'je/projectile-vc
     "p e" 'projectile-run-eshell
     "p p" 'counsel-projectile-switch-project
     "p r" 'je/projectile-root-dir
