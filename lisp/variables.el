@@ -72,13 +72,23 @@ re-entered for it to take effect.")
 
 (defvar je/scratch-message
   "
-;;
-;;       ██╗ ██████╗    ██╗ ██████╗███╗   ███╗ █████╗  ██████╗███████╗
-;;       ██║██╔════╝   ██╔╝██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
-;;       ██║█████╗    ██╔╝ █████╗  ██╔████╔██║███████║██║     ███████╗
-;;  ██   ██║██╔══╝   ██╔╝  ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
-;;  ╚█████╔╝╚██████╗██╔╝   ╚██████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
-;;   ╚════╝  ╚═════╝╚═╝     ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
+
+;;            JJJJJJJJJJJ                    EEEEE///////EEEEEEEEEEE
+;;            J:::::::::J                    E:::/:::::/:::::::::::E
+;;            J:::::::::J                    E::/:::::/::::::::::::E
+;;            JJ:::::::JJ                     E/:::::/:EEEEEEEE::::E
+;;              J:::::J    eeeeeeeeeeee       /:::::/:E       EEEEEE   mmmmmmm    mmmmmmm     aaaaaaaaaaaaa      cccccccccccccccc    ssssssssss
+;;              J:::::J  ee::::::::::::ee    /:::::/::E              mm:::::::m  m:::::::mm   a::::::::::::a   cc:::::::::::::::c  ss::::::::::s
+;;              J:::::J e::::::eeeee:::::ee /:::::/::::EEEEEEEEEE   m::::::::::mm::::::::::m  aaaaaaaaa:::::a c:::::::::::::::::css:::::::::::::s
+;;              J:::::je::::::e     e:::::e/:::::/::::::::::::::E   m::::::::::::::::::::::m           a::::ac:::::::cccccc:::::cs::::::ssss:::::s
+;;              J:::::Je:::::::eeeee::::::/:::::/:::::::::::::::E   m:::::mmm::::::mmm:::::m    aaaaaaa:::::ac::::::c     ccccccc s:::::s  ssssss
+;;  JJJJJJJ     J:::::Je:::::::::::::::::/:::::/E::::::EEEEEEEEEE   m::::m   m::::m   m::::m  aa::::::::::::ac:::::c                s::::::s
+;;  J:::::J     J:::::Je::::eeeeeeeeeeee/:::::/ E:::::E             m::::m   m::::m   m::::m a::::aaaa::::::ac:::::c                   s::::::s
+;;  J::::::J   J::::::Je::::e          /:::::/  E:::::E       EEEEEEm::::m   m::::m   m::::ma::::a    a:::::ac::::::c     cccccccssssss   s:::::s
+;;  J:::::::JJJ:::::::Je::::e         /:::::/ EE::::::EEEEEEEE:::::Em::::m   m::::m   m::::ma::::a    a:::::ac:::::::cccccc:::::cs:::::ssss::::::s
+;;   JJ:::::::::::::JJ  e::::eeeeeeee/:::::/ E:::::::::::::::::::::Em::::m   m::::m   m::::ma:::::aaaa::::::a c:::::::::::::::::cs::::::::::::::s
+;;     JJ:::::::::JJ     ee:::::::::/:::::/  E:::::::::::::::::::::Em::::m   m::::m   m::::m a::::::::::aa:::a cc:::::::::::::::c s:::::::::::ss
+;;       JJJJJJJJJ         eeeeeeee///////   EEEEEEEEEEEEEEEEEEEEEEEEmmmmmm   mmmmmm   mmmmmm  aaaaaaaaaa  aaaa   cccccccccccccccc  sssssssssss
 ;;
 ;;  %s, %s.
 ;;
