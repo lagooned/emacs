@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs Ops Tools
+;; Je/Emacs Ops Tools
 
 ;;; Code:
 

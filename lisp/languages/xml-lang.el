@@ -1,4 +1,4 @@
-;;; xml-lang.el --- Gmacs XML tools  -*- lexical-binding: t; -*-
+;;; xml-lang.el --- Je/Emacs XML tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Jared M. Engler
 
@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs xml tools.
+;; Je/Emacs xml tools.
 
 ;;; Code:
 

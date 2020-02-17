@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs web tools.
+;; Je/Emacs web tools.
 
 ;;; Code:
 

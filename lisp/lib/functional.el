@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs functional-style utility functions
+;; Je/Emacs functional-style utility functions
 
 ;;; Code:
 

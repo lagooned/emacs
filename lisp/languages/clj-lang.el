@@ -1,4 +1,4 @@
-;;; clj-lang.el --- Gmacs Clojure language tools  -*- lexical-binding: t; -*-
+;;; clj-lang.el --- Je/Emacs Clojure language tools  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Jared M. Engler
 
@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs clojure language tools.
+;; Je/Emacs clojure language tools.
 
 ;;; Code:
 

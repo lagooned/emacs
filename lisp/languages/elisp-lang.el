@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs Elisp language tools.
+;; Je/Emacs Elisp language tools.
 
 ;;; Code:
 

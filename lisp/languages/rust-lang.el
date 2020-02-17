@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs Rust Tools
+;; Je/Emacs Rust Tools
 
 ;;; Code:
 

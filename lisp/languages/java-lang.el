@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs java language tools.
+;; Je/Emacs java language tools.
 
 ;;; Code:
 

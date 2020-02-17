@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs javascript language tools.
+;; Je/Emacs javascript language tools.
 
 ;;; Code:
 

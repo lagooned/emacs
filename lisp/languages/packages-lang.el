@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs language-specific package definitions.
+;; Je/Emacs language-specific package definitions.
 
 ;;; Code:
 

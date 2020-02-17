@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs haskell language tools
+;; Je/Emacs haskell language tools
 
 ;;; Code:
 

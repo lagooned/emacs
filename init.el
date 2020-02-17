@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs initial configuration file.
+;; Je/Emacs initial configuration file.
 
 ;;; Code:
 

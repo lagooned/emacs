@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs custom function definitions.
+;; Je/Emacs custom function definitions.
 
 ;;; Code:
 
@@ -154,7 +154,7 @@ then `je/grep-region' in order."
       (funcall 'je/grep-region))))
 
 (defun je/grep (&optional initial)
-  "Gmacs grep wrapper to take optional `INITIAL' input or \
+  "Je/Emacs grep wrapper to take optional `INITIAL' input or \
 prompt for grep command."
   (if initial
       (je/build-grep-command-with-region)

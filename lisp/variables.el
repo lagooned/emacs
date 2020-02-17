@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs custom variable definitions.
+;; Je/Emacs custom variable definitions.
 
 ;;; Code:
 

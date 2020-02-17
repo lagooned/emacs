@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs Python languages tools
+;; Je/Emacs Python languages tools
 
 ;;; Code:
 

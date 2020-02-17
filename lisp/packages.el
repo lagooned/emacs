@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs package configuration.
+;; Je/Emacs package configuration.
 
 ;;; Code:
 

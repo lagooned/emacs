@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs PHP langauge tools.
+;; Je/Emacs PHP langauge tools.
 
 ;;; Code:
 

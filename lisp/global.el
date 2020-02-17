@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;;; Gmacs sane defaults configuration.
+;;; Je/Emacs sane defaults configuration.
 
 ;;; Code:
 

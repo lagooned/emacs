@@ -1,4 +1,4 @@
-;;; typescript-lang.el --- Gmacs typescript tools    -*- lexical-binding: t; -*-
+;;; typescript-lang.el --- Je/Emacs typescript tools    -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2019  Jared M. Engler
 
@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs typescript tools
+;; Je/Emacs typescript tools
 
 ;;; Code:
 

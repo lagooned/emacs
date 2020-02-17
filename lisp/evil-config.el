@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; Gmacs evil-mode configuration.
+;; Je/Emacs evil-mode configuration.
 
 ;;; Code:
 
