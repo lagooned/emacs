@@ -50,7 +50,6 @@
   :init
   (add-to-list
    'auto-mode-alist
-   '("\\.rest\\'" . restclient-mode)
    '("\\.restclient\\'" . restclient-mode))
   :config
   (evil-leader/set-key-for-mode 'restclient-mode
