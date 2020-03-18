@@ -9,7 +9,8 @@
       calendar-location-name "Houston, TX")
 
 ;; set font on windows
-(when (eq system-type 'windows-nt)
+(when (or (eq system-type 'windows-nt)
+          (eq system-type 'cygwin))
   (set-face-attribute 'default nil :family "Consolas" :height 100))
 
 ;; set font on darwin

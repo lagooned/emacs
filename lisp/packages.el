@@ -627,7 +627,7 @@
 
 (use-package sudo-edit
   :when
-  (and (not (eq system-type 'windows-nt))
+  (and (not (or (eq system-type 'windows-nt) (eq system-type 'cygwin)))
        (executable-find "sudo")))
 
 (use-package suggest

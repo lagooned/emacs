@@ -759,8 +759,11 @@ then kill buffer."
   (push 'company-lsp company-backends))
 
 (defun je/java-lsp-deps-p ()
-  (and (not (eq system-type 'windows-nt))
-       (executable-find "java")))
+  (and
+   (not
+    (or (eq system-type 'windows-nt)
+        (eq system-type 'cygwin)))
+   (executable-find "java")))
 
 (provide 'functions)
 ;;; functions.el ends here
