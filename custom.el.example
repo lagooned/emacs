@@ -11,7 +11,8 @@
 ;; set font on windows
 (when (or (eq system-type 'windows-nt)
           (eq system-type 'cygwin))
-  (set-face-attribute 'default nil :family "Consolas" :height 100))
+  (set-face-attribute 'default nil :family "Consolas" :height 110)
+  (setq-default line-spacing 0.1))
 
 ;; set font on darwin
 (when (eq system-type 'darwin)
