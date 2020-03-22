@@ -72,6 +72,7 @@ re-entered for it to take effect.")
 
 (defvar je/scratch-message
   "
+;;
 ;;                                              88888
 ;;           :::::::::::               ::::::: 88888 ::::::::
 ;;           :888888888:               :88888 88888 88888888:
