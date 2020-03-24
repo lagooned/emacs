@@ -36,13 +36,16 @@
 
 (defun string-utils/escape-command-str (str charlist)
   "Escapes all instances of each element of `CHARLIST' in `STR'."
-  (funcall
-   (reduce
-    #'compose
-    (mapcar
-     (lambda (char)
-       (curry 'string-utils/escape-character-str char)) charlist))
-   str))
+  (funcall (--string-utils/big-escape-char-func charlist) str))
+
+(defun --string-utils/big-escape-char-func (charlist)
+  (reduce #'compose (--string-utils/escape-char-funcs charlist)))
+
+(defun --string-utils/escape-char-funcs (charlist)
+  (mapcar #'--string-util/escape-char-func charlist))
+
+(defun --string-util/escape-char-func (char)
+  (curry 'string-utils/escape-character-str char))
 
 (defun string-utils/escape-character-str (char str)
   "Escapes every instance of `CHAR' in `STR'."
