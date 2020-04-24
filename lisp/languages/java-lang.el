@@ -55,7 +55,8 @@
    'recentf-exclude "^.+/workspace/.cache/.+$"))
 
 (use-package groovy-mode
-  :commands groovy-mode)
+  :commands groovy-mode
+  :init (add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode)))
 
 (provide 'java-lang)
 ;;; java-lang.el ends here
