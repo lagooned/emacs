@@ -1,6 +1,6 @@
 ;;; xml-lang.el --- Je/Emacs XML tools  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019  Jared M. Engler
+;; Copyright (C) 2020  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: jeemacs, config, languages, xml
