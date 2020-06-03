@@ -1,6 +1,6 @@
 ;;; haskell-lang.el --- jeemacs haskell language tools  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019  Jared Matthew Engler
+;; Copyright (C) 2020  Jared Matthew Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: jeemacs, config, languages, haskell
