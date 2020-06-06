@@ -103,6 +103,8 @@
      ("e" counsel-projectile-switch-project-action-run-eshell
       "invoke eshell from project root"))))
 
+(use-package diminish)
+
 (use-package dimmer
   :commands dimmer-mode
   :hook (emacs-startup . dimmer-mode)
