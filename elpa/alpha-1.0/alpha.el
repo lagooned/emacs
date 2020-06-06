@@ -34,6 +34,12 @@
       (set-frame-parameter nil 'alpha (+ (frame-parameter nil 'alpha) +2))
     (message "This is a minimum value of transparency!")))
 
+;; sample keybinding for transparency manipulation
+(global-set-key (kbd "C-?") 'transparency-set-value)
+;; the two below let for smooth transparency control
+(global-set-key (kbd "C->") 'transparency-increase)
+(global-set-key (kbd "C-<") 'transparency-decrease)
+
 (provide 'alpha)
 
 ;;; alpha.el ends here
