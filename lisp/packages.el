@@ -95,13 +95,7 @@
      ("o" counsel-projectile-switch-project-action-dired
       "open project in dired")
      ("k" counsel-projectile-switch-project-action-remove-known-project
-      "remove project from known projects")
-     ("v" counsel-projectile-switch-project-action-vc
-      "open project in vc-dir / magit / monky")
-     ("s" counsel-projectile-switch-project-action-git-grep
-      "search project with git grep")
-     ("e" counsel-projectile-switch-project-action-run-eshell
-      "invoke eshell from project root"))))
+      "remove project from known projects"))))
 
 (use-package diminish)
 
@@ -471,6 +465,9 @@
      (counsel-git . ivy--regex-ignore-order)
      (counsel-git-grep . ivy--regex-ignore-order)
      (t . ivy--regex-plus))))
+
+(use-package ivy-hydra
+  :after (ivy hydra))
 
 (use-package linum-relative
   :commands linum-relative-mode
