@@ -146,15 +146,10 @@
   (je/setup-elscreen))
 
 (use-package eshell
-  :hook
-  (eshell-mode . je/enable-truncate-lines-no-message)
-  :init
-  (setq eshell-banner-message 'je/eshell-message)
+  :hook (eshell-mode . je/enable-truncate-lines-no-message)
   :config
-  (with-eval-after-load 'em-term
-    (push 'eshell-truncate-buffer eshell-output-filter-functions))
-  (with-eval-after-load 'em-hist
-    (setq eshell-hist-ignoredups t)))
+  (with-eval-after-load 'em-term (push 'eshell-truncate-buffer eshell-output-filter-functions))
+  (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))
 
 (use-package evil
   :commands evil-mode
