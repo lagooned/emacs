@@ -320,6 +320,7 @@
     "=" 'je/enlarge-window
     "-" 'je/shrink-window
     ";" 'counsel-M-x
+    ":" 'eval-expression
     "`" 'eshell
     "!" 'shell-command
     "@" 'async-shell-command
