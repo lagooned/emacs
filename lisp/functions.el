@@ -28,6 +28,7 @@
 (require 'functional)
 (require 'cl)
 (require 'string-utils)
+(require 'subr-x)
 
 (defun void ()
   "Interactive No-op."
@@ -463,90 +464,28 @@ match your prompt."
 
 (defun je/evil-eshell-mode-setup ()
   "Setup Je/eshell."
-  (setq-local inhibit-read-only t)
-  (je/eshell-def-evil-eshell-delete)
+  (evil-set-initial-state 'eshell-mode 'emacs)
   (je/eshell-evil-mode-keys-setup))
 
 (defun je/eshell-evil-mode-keys-setup ()
   "Setup Je/eshell evil-mode keys."
-  (evil-define-key 'normal eshell-mode-map (kbd "d") 'evil-eshell-delete)
-  (define-key evil-normal-state-local-map (kbd "M-r") 'je/counsel-yank-eshell-history)
-  (define-key evil-insert-state-local-map (kbd "M-r") 'je/counsel-insert-eshell-history)
-  (define-key evil-normal-state-local-map (kbd "C-l") 'je/eshell-clear)
-  (define-key evil-insert-state-local-map (kbd "C-l") 'je/eshell-clear)
-  (define-key evil-insert-state-local-map (kbd "C-d") 'je/eshell-send-eof-kill-on-empty-prompt)
-  (define-key evil-insert-state-local-map (kbd "C-i") 'eshell-pcomplete)
-  (define-key evil-insert-state-local-map (kbd "C-c C-d") 'je/eshell-send-eof)
-  (define-key evil-normal-state-local-map (kbd "C-c C-d") 'je/eshell-send-eof)
-  (define-key evil-insert-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
-  (define-key evil-normal-state-local-map (kbd "C-k") 'eshell-life-is-too-much)
-  (define-key evil-normal-state-local-map (kbd "RET") 'eshell-send-input)
-  (define-key evil-normal-state-local-map (kbd "C-j") 'eshell-send-input)
-  (define-key evil-normal-state-local-map (kbd "C-m") 'eshell-send-input)
-  (define-key evil-insert-state-local-map (kbd "RET") 'eshell-send-input)
-  (define-key evil-insert-state-local-map (kbd "C-j") 'eshell-send-input)
-  (define-key evil-insert-state-local-map (kbd "C-m") 'eshell-send-input))
-
-(defun je/eshell-def-evil-eshell-delete ()
-  "Define custom delete operation for Eshell when on the line with the prompt."
-  (evil-define-operator evil-eshell-delete (beg end type register yank-handler)
-    "Like evil-delete, but inhibit read only and when the eshell prompt is \
-involved re-emit it."
-    (interactive "<R><x><y>")
-    (let ((inhibit-read-only t)
-          (total-prompt-length (length (je/eshell-prompt-function)))
-          (bottom-prompt-length (length (je/eshell-bottom-prompt-function))))
-      (cond
-       ((je/looking-at-eshell-prompt-regexp-p beg)
-        (progn
-          (evil-delete
-           (+ beg bottom-prompt-length)
-           end type register yank-handler)
-          (delete-region
-           (- (+ beg bottom-prompt-length) total-prompt-length)
-           (+ beg bottom-prompt-length))
-          (eshell-emit-prompt)))
-       ((je/looking-at-eshell-top-prompt-regexp-p beg) (void))
-       (t (evil-delete beg end type register yank-handler))))))
-
-(defun je/looking-at-eshell-prompt-regexp-p (loc)
-  "Truthy value for evil-eshell-delete which determines if \
-the `LOC' is `looking-at-p' `je/eshell-prompt-regexp'."
-  (save-excursion
-    (goto-char loc)
-    (looking-at-p je/eshell-prompt-regexp)))
-
-(defun je/looking-at-empty-eshell-prompt-regexp-p (loc)
-  "Truthy value for evil-eshell-delete which determines if \
-the `LOC' is `looking-at-p' `je/eshell-prompt-regexp' \
-followed by nothing."
-  (save-excursion
-    (goto-char loc)
-    (looking-at-p (concat je/eshell-prompt-regexp "$"))))
+  (define-key evil-emacs-state-local-map (kbd "C-c M-r") 'je/counsel-insert-eshell-history)
+  (define-key evil-emacs-state-local-map (kbd "C-c C-l") 'je/eshell-clear)
+  (define-key evil-emacs-state-local-map (kbd "C-c C-d") 'je/eshell-send-eof-kill-on-empty-prompt )
+  (define-key evil-emacs-state-local-map (kbd "RET") 'eshell-send-input)
+  (define-key evil-emacs-state-local-map (kbd "C-m") 'eshell-send-input))
 
 (defun je/eshell-send-eof-kill-on-empty-prompt ()
   "Send eshell-life-is-too-much if there is no pending \
 eshell command string, and EOF if there is a pending command string."
   (interactive)
-  (if (je/looking-at-empty-eshell-prompt-p)
+  (if (je/on-empty-eshell-prompt-line-p)
       (eshell-life-is-too-much)
     (je/eshell-send-eof)))
 
-(defun je/looking-at-empty-eshell-prompt-p ()
-  "Test if looking an empty eshell prompt."
-  (let ((beginning-of-line-pos
-         (progn
-           (save-excursion
-             (call-interactively 'move-beginning-of-line)
-             (point)))))
-    (je/looking-at-empty-eshell-prompt-regexp-p beginning-of-line-pos)))
-
-(defun je/looking-at-eshell-top-prompt-regexp-p (loc)
-  "Truthy value for evil-eshell-delete which determines if \
-the `LOC' is `looking-at-p' `je/eshell-top-prompt-regexp'."
-  (save-excursion
-    (goto-char loc)
-    (looking-at-p je/eshell-top-prompt-regexp)))
+(defun je/on-empty-eshell-prompt-line-p ()
+  (string-match (string-trim-right eshell-prompt-regexp)
+                (string-trim (thing-at-point 'line t))))
 
 (defun je/evil-minibuffer-setup ()
   "Setup the minibuffer."

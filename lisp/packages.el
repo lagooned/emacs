@@ -149,9 +149,7 @@
   :hook
   (eshell-mode . je/enable-truncate-lines-no-message)
   :init
-  (setq eshell-banner-message 'je/eshell-message
-        eshell-prompt-function 'je/eshell-prompt-function
-        eshell-prompt-regexp (eval 'je/eshell-prompt-regexp))
+  (setq eshell-banner-message 'je/eshell-message)
   :config
   (with-eval-after-load 'em-term
     (push 'eshell-truncate-buffer eshell-output-filter-functions))
