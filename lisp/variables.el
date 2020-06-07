@@ -29,15 +29,6 @@
 to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
-(defvar je/mc-evil-prev-state nil
-  "Saves the previous evil state as a string.")
-
-(defvar je/mc-evil-mark-was-active nil
-  "Saves the previous state of the mark.")
-
-(defvar je/js2-xref-accept-ag nil
-  "Determines whether or not to show the xref-ag confirmation.")
-
 (defvar je/force-basic-grep nil
   "Determines whether or not to use basic grep.")
 
