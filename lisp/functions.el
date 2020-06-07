@@ -471,7 +471,7 @@ match your prompt."
   "Setup Je/eshell evil-mode keys."
   (define-key evil-emacs-state-local-map (kbd "C-c M-r") 'je/counsel-insert-eshell-history)
   (define-key evil-emacs-state-local-map (kbd "C-c C-l") 'je/eshell-clear)
-  (define-key evil-emacs-state-local-map (kbd "C-c C-d") 'je/eshell-send-eof-kill-on-empty-prompt )
+  (define-key evil-emacs-state-local-map (kbd "C-c C-d") 'je/eshell-send-eof-kill-on-empty-prompt)
   (define-key evil-emacs-state-local-map (kbd "RET") 'eshell-send-input)
   (define-key evil-emacs-state-local-map (kbd "C-m") 'eshell-send-input))
 
