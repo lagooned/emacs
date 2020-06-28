@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "puppet-mode" "0.4" "Major mode for Puppet manifests" '((emacs "24.1") (pkg-info "0.4")) :commit "73ea35bc7a3ad663c5b73f65cb6377eb0ae11d6f" :keywords '("languages") :authors '(("Bozhidar Batsov" . "bozhidar@batsov.com") ("Sebastian Wiesner" . "swiesner@lunaryorn.com") ("Russ Allbery" . "rra@stanford.edu")) :maintainer '("Tim Meusel" . "tim@bastelfreak.de") :url "https://github.com/voxpupuli/puppet-mode")

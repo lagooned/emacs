@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "evil-numbers" "0.4" "increment/decrement numbers like in vim" 'nil :commit "8834eb2e8bd93561a706363946701d0d90546a9f" :keywords '("numbers" "increment" "decrement" "octal" "hex" "binary") :authors '(("Michael Markert" . "markert.michael@googlemail.com")) :maintainer '("Michael Markert" . "markert.michael@googlemail.com") :url "http://github.com/cofi/evil-numbers")
