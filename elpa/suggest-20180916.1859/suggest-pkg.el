@@ -5,7 +5,7 @@
     (s "1.11.0")
     (f "0.18.2")
     (spinner "1.7.3"))
-  :keywords
+  :commit "83a2679baf661ee834e9e75921fd546243a6d919" :keywords
   '("convenience")
   :authors
   '(("Wilfred Hughes" . "me@wilfred.me.uk"))

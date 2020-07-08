@@ -22,7 +22,7 @@
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from elscreen-buffer-list.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elscreen-buffer-list" '("buffer-dead-p" "elscreen-" "reorder-buffer-list" "toggle-elscreen-buffer-list")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elscreen-buffer-list" '("toggle-elscreen-buffer-list" "elscreen-" "reorder-buffer-list" "buffer-dead-p")))
 
 ;;;***
 
@@ -66,7 +66,7 @@
 ;;;### (autoloads nil "elscreen-howm" "elscreen-howm.el" (0 0 0 0))
 ;;; Generated autoloads from elscreen-howm.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elscreen-howm" '("elscreen-howm-" "howm-save-and-kill-buffer/screen")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elscreen-howm" '("howm-save-and-kill-buffer/screen" "elscreen-howm-")))
 
 ;;;***
 

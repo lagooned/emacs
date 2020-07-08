@@ -95,13 +95,9 @@
      ("o" counsel-projectile-switch-project-action-dired
       "open project in dired")
      ("k" counsel-projectile-switch-project-action-remove-known-project
-      "remove project from known projects")
-     ("v" counsel-projectile-switch-project-action-vc
-      "open project in vc-dir / magit / monky")
-     ("s" counsel-projectile-switch-project-action-git-grep
-      "search project with git grep")
-     ("e" counsel-projectile-switch-project-action-run-eshell
-      "invoke eshell from project root"))))
+      "remove project from known projects"))))
+
+(use-package diminish)
 
 (use-package dimmer
   :commands dimmer-mode
@@ -150,17 +146,10 @@
   (je/setup-elscreen))
 
 (use-package eshell
-  :hook
-  (eshell-mode . je/enable-truncate-lines-no-message)
-  :init
-  (setq eshell-banner-message 'je/eshell-message
-        eshell-prompt-function 'je/eshell-prompt-function
-        eshell-prompt-regexp (eval 'je/eshell-prompt-regexp))
+  :hook (eshell-mode . je/enable-truncate-lines-no-message)
   :config
-  (with-eval-after-load 'em-term
-    (push 'eshell-truncate-buffer eshell-output-filter-functions))
-  (with-eval-after-load 'em-hist
-    (setq eshell-hist-ignoredups t)))
+  (with-eval-after-load 'em-term (push 'eshell-truncate-buffer eshell-output-filter-functions))
+  (with-eval-after-load 'em-hist (setq eshell-hist-ignoredups t)))
 
 (use-package evil
   :commands evil-mode
@@ -203,6 +192,7 @@
 (use-package evil-collection
   :after evil
   :config
+  (setq evil-collection-mode-list (remove `(term term ansi-term multi-term) evil-collection-mode-list))
   (evil-collection-init)
   (evil-collection-define-key 'normal 'dired-mode-map
     "." 'dired-omit-mode
@@ -326,6 +316,7 @@
     "=" 'je/enlarge-window
     "-" 'je/shrink-window
     ";" 'counsel-M-x
+    ":" 'eval-expression
     "`" 'eshell
     "!" 'shell-command
     "@" 'async-shell-command
@@ -469,6 +460,9 @@
      (counsel-git . ivy--regex-ignore-order)
      (counsel-git-grep . ivy--regex-ignore-order)
      (t . ivy--regex-plus))))
+
+(use-package ivy-hydra
+  :after (ivy hydra))
 
 (use-package linum-relative
   :commands linum-relative-mode

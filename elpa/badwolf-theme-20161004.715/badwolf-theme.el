@@ -5,6 +5,7 @@
 ;; Author: bkruczyk <bartlomiej.kruczyk@gmail.com>
 ;; Version: 1.2
 ;; Package-Version: 20161004.715
+;; Package-Commit: ea01a3d9358e968f75e3ed15dec6a2a96ce3d9a1
 ;; Keywords: themes
 ;; Package-Requires: ((emacs "24"))
 ;; URL: https://github.com/bkruczyk/badwolf-emacs
@@ -116,11 +117,7 @@
    `(secondary-selection ((t (:foreground ,darkgravel :background ,tardis))))
    `(fringe ((t (:background ,bg))))
    `(linum ((t (:foreground ,mediumgravel :background ,bg))))
-   `(line-number ((t (:foreground ,mediumgravel :background ,bg))))
-   `(line-number-current-line ((t (:foreground ,mediumgravel :background ,bg))))
-   `(linum-relative-current-face ((t :foreground ,orange :background ,bg)))
-   `(linum-highlight-face ((t (:foreground ,mediumgravel :background ,bg))))
-   `(vertical-border ((t (:foreground ,deepgravel))))
+   `(vertical-border ((t (:foreground ,gravel))))
    `(highlight ((t (:foreground ,coal :background ,dalespale))))
    `(escape-glyph ((t (:foreground ,tardis))))
    `(hl-line ((t (:inherit nil :background ,hl-line))))
@@ -175,7 +172,7 @@
    `(anzu-replace-to ((t (:background ,tardis :foreground ,coal))))
 
    ;; rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((t (:foreground ,lightgravel))))
+   `(rainbow-delimiters-depth-1-face ((t (:foreground ,mediumgravel))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground ,dalespale))))
    `(rainbow-delimiters-depth-3-face ((t (:foreground ,dress))))
    `(rainbow-delimiters-depth-4-face ((t (:foreground ,orange))))
@@ -218,7 +215,7 @@
 
    `(flx-highlight-face ((t (:foreground ,dirtyblonde :weight normal :underline nil))))
 
-   ;; ivy
+  ;; ivy
    `(ivy-confirm-face ((t :foreground ,lime)))
    `(ivy-current-match ((t :foreground ,dirtyblonde :bold t)))
    `(ivy-match-required-face ((t :foreground ,taffy)))
@@ -235,21 +232,18 @@
    `(swiper-match-face-4 ((t :foreground ,bg :background ,tardis :bold t)))
 
    ;; org
-   `(outline-1 ((t (:foreground ,orange))))
+   `(outline-1 ((t (:foreground ,orange :height 1.2))))
    `(outline-2 ((t (:foreground ,dirtyblonde))))
    `(outline-3 ((t (:foreground ,brightgravel))))
    `(outline-4 ((t (:foreground ,toffee))))
    `(outline-5 ((t (:foreground ,dress))))
-
-   `(org-hide ((t (:foreground ,bg :background ,bg))))
-   `(org-indent ((t (:foreground ,bg :background ,bg))))
 
    `(org-done ((t (:foreground ,dress :weight bold))))
    `(org-todo ((t (:foreground ,dalespale :weight bold))))
    `(org-date ((t (:foreground ,tardis :underline t))))
    `(org-special-keyword ((t (:foreground ,taffy :weight bold))))
    `(org-document-info ((t (:foreground ,brightgravel))))
-   `(org-document-title ((t (:foreground ,plain :family "sans" :weight bold))))
+   `(org-document-title ((t (:foreground ,plain :family "sans" :height 1.8 :weight bold))))
 
    ;; erc
    `(erc-default-face ((t (:inherit default))))
@@ -325,9 +319,7 @@
                            `(:background ,dress :foreground ,bg)))))
    `(diff-hl-change ((t ,(if badwolf-diff-hl-inverse
                              `(:background ,bg :foreground ,dirtyblonde)
-                           `(:background ,dirtyblonde :foreground ,bg)))))
-   ;; term
-   `(term-color-blue ((t (:background ,tardis :foreground ,tardis))))))
+                           `(:background ,dirtyblonde :foreground ,bg)))))))
 
 ;;;###autoload
 (when load-file-name

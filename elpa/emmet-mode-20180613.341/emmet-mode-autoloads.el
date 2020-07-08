@@ -24,11 +24,6 @@ For more information see `emmet-mode'.
 Minor mode for writing HTML and CSS markup.
 With emmet for HTML and CSS you can write a line like
 
-If called interactively, enable Emmet mode if ARG is positive, and
-disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it
-if ARG is `toggle'; disable the mode otherwise.
-
   ul#name>li.item*2
 
 and have it expanded to
