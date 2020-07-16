@@ -192,7 +192,15 @@
 (use-package evil-collection
   :after evil
   :config
-  (setq evil-collection-mode-list (remove `(term term ansi-term multi-term) evil-collection-mode-list))
+  (setq evil-collection-mode-list
+        (remove
+         `(term
+           term
+           ansi-term
+           multi-term)
+         evil-collection-mode-list))
+  (setq evil-collection-mode-list
+        (remove 'company evil-collection-mode-list))
   (evil-collection-init)
   (evil-collection-define-key 'normal 'dired-mode-map
     "." 'dired-omit-mode
