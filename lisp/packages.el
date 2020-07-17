@@ -201,6 +201,8 @@
          evil-collection-mode-list))
   (setq evil-collection-mode-list
         (remove 'company evil-collection-mode-list))
+  (setq evil-collection-mode-list
+        (remove 'eshell evil-collection-mode-list))
   (evil-collection-init)
   (evil-collection-define-key 'normal 'dired-mode-map
     "." 'dired-omit-mode
