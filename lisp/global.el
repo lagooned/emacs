@@ -212,6 +212,10 @@
 (setq-default mode-line-front-space " ")
 (setq-default mode-line-end-spaces " ")
 
+;; set eval props
+(setq eval-expression-print-level 4
+      eval-expression-print-length 100)
+
 (provide 'global)
 ;;; global.el ends here
 
