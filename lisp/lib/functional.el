@@ -24,11 +24,11 @@
 
 ;;; Code:
 
-(defsubst flatten (list)
+(defsubst flatten-to-inner-lists (list)
   (mapcan (lambda (x) (if (listp x) x nil)) list))
 
 (defun flatmap (func list)
-  (flatten (mapcar func list)))
+  (flatten-to-inner-lists (mapcar func list)))
 
 (defsubst curry (function &rest arguments)
   (lexical-let ((function function)
