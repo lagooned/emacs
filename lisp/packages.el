@@ -541,7 +541,6 @@
         org-agenda-files (list "~/org/work.org"
                                "~/org/home.org"))
   :config
-  (require 'org-tempo)
   (evil-leader/set-key-for-mode 'org-mode
     "l l" 'je/org-link-follow
     "l i" 'org-insert-link-global
