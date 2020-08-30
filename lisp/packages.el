@@ -299,7 +299,6 @@
     "s l" 'avy-goto-line
     "s j" 'avy-goto-word-0
     "s r" 'ivy-resume
-    "t l" 'linum-relative-mode
     "t t" 'toggle-truncate-lines
     "t p" 'smartparens-mode
     "t h" 'highlight-symbol-at-point
@@ -473,13 +472,6 @@
 
 (use-package ivy-hydra
   :after (ivy hydra))
-
-(use-package linum-relative
-  :commands linum-relative-mode
-  :diminish linum-relative-mode
-  :init
-  (setq linum-relative-format "%5s "
-        linum-relative-current-symbol ""))
 
 (use-package locate
   :defer t
