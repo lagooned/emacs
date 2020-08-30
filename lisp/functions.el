@@ -257,7 +257,7 @@ initial input `INITIAL-INPUT'."
   (interactive)
   (counsel-require-program (car (split-string counsel-git-cmd)))
   (let* ((default-directory (expand-file-name (counsel-locate-git-root)))
-         (cands (flatmap
+         (cands (--je/unwrap-inner-lists-on
                  'last
                  (seq-filter
                   #'je/directory-ls-tree-entry-p
@@ -272,6 +272,12 @@ initial input `INITIAL-INPUT'."
               :initial-input initial-input
               :action #'counsel-projectile-find-dir-action
               :caller 'counsel-projectile-find-dir)))
+
+(defsubst --je/unwrap-inner-lists (list)
+  (mapcan (lambda (x) (if (listp x) x nil)) list))
+
+(defun --je/unwrap-inner-lists-on (func list)
+  (--je/unwrap-inner-lists (mapcar func list)))
 
 (defun je/projectile-vc ()
   "Wrap `projectile-vc' with `projectile-project-p'."
