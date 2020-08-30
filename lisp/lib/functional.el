@@ -3,7 +3,7 @@
 ;; Copyright (C) 2020  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
-;; Keywords: map, flatmap, reduce, lan, helpers, functions
+;; Keywords: reduce, lan, helpers, functions
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -23,12 +23,6 @@
 ;; Je/Emacs functional-style utility functions
 
 ;;; Code:
-
-(defsubst flatten-to-inner-lists (list)
-  (mapcan (lambda (x) (if (listp x) x nil)) list))
-
-(defun flatmap (func list)
-  (flatten-to-inner-lists (mapcar func list)))
 
 (defsubst curry (function &rest arguments)
   (lexical-let ((function function)
