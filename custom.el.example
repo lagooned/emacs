@@ -37,7 +37,10 @@
 
 ;; load theme
 (if (display-graphic-p)
-    (load-theme 'badwolf t))
+    (load-theme
+     ;; 'badwolf
+     'modus-vivendi
+     t))
 
 ;; custom vars
 (custom-set-variables
