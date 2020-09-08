@@ -26,8 +26,7 @@
 
 (require 'seq)
 (require 'functional)
-(if (version< emacs-version "27.1")
-    (require 'cl))
+(require 'cl-seq)
 (require 'string-utils)
 (require 'subr-x)
 

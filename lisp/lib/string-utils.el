@@ -25,6 +25,7 @@
 ;;; Code:
 
 (require 'functional)
+(require 'cl-seq)
 
 (defun string-utils/add-quotes (str)
   "Surround `STR' in quotes."
@@ -39,7 +40,7 @@
   (funcall (--string-utils/big-escape-char-func charlist) str))
 
 (defun --string-utils/big-escape-char-func (charlist)
-  (reduce #'compose (--string-utils/escape-char-funcs charlist)))
+  (cl-reduce #'compose (--string-utils/escape-char-funcs charlist)))
 
 (defun --string-utils/escape-char-funcs (charlist)
   (mapcar #'--string-util/escape-char-func charlist))
