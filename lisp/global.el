@@ -24,6 +24,10 @@
 
 ;;; Code:
 
+;; fix lexical let post emacs 27.1
+(unless (version< emacs-version "27.1")
+  (defalias 'lexical-let 'let))
+
 ;; use utf-8
 (prefer-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
