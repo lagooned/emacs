@@ -700,7 +700,7 @@ then kill buffer."
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun je/configure-company-lsp-backends ()
-  (push 'company-lsp company-backends))
+  (push 'company-capf company-backends))
 
 (defun je/java-lsp-deps-p ()
   (and
