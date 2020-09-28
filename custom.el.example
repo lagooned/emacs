@@ -27,7 +27,8 @@
 (if (not (eq system-type 'darwin))
     (if (not (frame-parameter nil 'fullscreen))
         (toggle-frame-fullscreen))
-  (je/set-window-dimensions 30 30 150 43))
+  (set-frame-parameter nil 'undecorated t)
+  (toggle-frame-maximized))
 
 ;; transparency
 (transparency-set-value 100)
