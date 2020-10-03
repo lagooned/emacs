@@ -24,9 +24,9 @@
   (exec-path-from-shell-initialize))
 
 ;; initial frame display
-(if (not (eq system-type 'darwin))
-    (if (not (frame-parameter nil 'fullscreen))
-        (toggle-frame-fullscreen))
+(unless (eq system-type 'darwin)
+  (if (not (frame-parameter nil 'fullscreen))
+      (toggle-frame-fullscreen))
   (set-frame-parameter nil 'undecorated t)
   (toggle-frame-maximized))
 
