@@ -41,6 +41,7 @@
     (load-theme
      ;; 'badwolf
      ;; 'modus-vivendi
+     ;; 'doom-wilmersdorf
      'doom-old-hope
      t))
 
