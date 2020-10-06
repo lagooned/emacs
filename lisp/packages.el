@@ -97,6 +97,13 @@
      ("k" counsel-projectile-switch-project-action-remove-known-project
       "remove project from known projects"))))
 
+(use-package dashboard
+  :after evil-collection
+  :config
+  (dashboard-setup-startup-hook)
+  (evil-collection-define-key 'normal 'dashboard-mode-map
+    (kbd "RET") 'dashboard-return))
+
 (use-package diminish)
 
 (use-package dimmer
