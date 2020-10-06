@@ -214,7 +214,7 @@
 
 ;; set eval props
 (setq eval-expression-print-level 4
-      eval-expression-print-length 100)
+      eval-expression-print-length 1000)
 
 (provide 'global)
 ;;; global.el ends here
