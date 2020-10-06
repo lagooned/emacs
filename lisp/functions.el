@@ -709,6 +709,16 @@ then kill buffer."
         (eq system-type 'cygwin)))
    (executable-find "java")))
 
+(defun je/configure-evil-collection-mode-list ()
+  (setq
+   evil-collection-mode-list
+   (cl-reduce
+    (lambda (acc e) (remove e evil-collection-mode-list))
+    (list
+     `(term term ansi-term multi-term)
+     'company
+     'eshell))))
+
 (provide 'functions)
 ;;; functions.el ends here
 
