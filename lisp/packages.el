@@ -411,8 +411,9 @@
   :after which-key evil-leader
   :hook (grep-mode . je/enable-truncate-lines-no-message)
   :init
-  (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
-        grep-use-null-device nil)
+  (setq
+   grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
+   grep-use-null-device nil)
   (evil-leader/set-key "g" 'je/run-grep)
   (which-key-add-key-based-replacements "SPC g" "grep"))
 
