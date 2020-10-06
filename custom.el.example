@@ -40,7 +40,8 @@
 (if (display-graphic-p)
     (load-theme
      ;; 'badwolf
-     'modus-vivendi
+     ;; 'modus-vivendi
+     'doom-old-hope
      t))
 
 ;; custom vars
