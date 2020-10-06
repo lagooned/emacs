@@ -76,8 +76,8 @@
    #b00000000
    #b00000000])
 
-;; let text breath
-(fringe-mode (frame-char-width))
+;; choke text
+(fringe-mode 1)
 
 ;; decouple window and minibuffer fringes
 (add-hook 'after-init-hook #'je/minibuffer-fringe-setup)
