@@ -106,11 +106,8 @@
   (setq
    dashboard-startup-banner 99
    dashboard-items
-   '((recents  . 5)
-     (bookmarks . 5)
-     (projects . 5)
-     (agenda . 5)
-     (registers . 5)))
+   '((recents  . 10)
+     (projects . 10)))
   (dashboard-setup-startup-hook)
   :config
   (je/print-to-file (dashboard-get-banner-path 99) je/logo)
