@@ -318,6 +318,11 @@ disable command `hi-lock-mode'."
   (interactive)
   (switch-to-buffer "*Messages*"))
 
+(defun je/switch-to-dashboard-buffer ()
+  "Switch to dashboard buffer."
+  (interactive)
+  (switch-to-buffer "*dashboard*"))
+
 (defun je/eshell-send-eof ()
   "Send EOF to Eshell with newline."
   (interactive)

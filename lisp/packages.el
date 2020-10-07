@@ -294,6 +294,7 @@
     "o h" 'je/open-home-dir
     "o s" 'je/switch-to-scratch-buffer
     "o m" 'je/switch-to-messages-buffer
+    "o ESC" 'je/switch-to-dashboard-buffer
     "p s" 'je/projectile-vc
     "p e" 'projectile-run-eshell
     "p p" 'counsel-projectile-switch-project
