@@ -521,6 +521,10 @@
      "~/.emacs.d/packages/magit/Documentation/"))
   (magit-auto-revert-mode 0))
 
+(use-package modus-vivendi-theme
+  :init
+  (setq modus-vivendi-theme-no-link-underline t))
+
 (use-package multiple-cursors
   :defer t
   :hook
