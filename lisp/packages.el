@@ -572,7 +572,7 @@
   :hook (emacs-startup . projectile-mode)
   :init
   (setq projectile-switch-project-action 'projectile-dired)
-  (projectile-add-known-project "~/emacs"))
+  (projectile-add-known-project "~/.emacs.d"))
 
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
