@@ -98,11 +98,22 @@
       "remove project from known projects"))))
 
 (use-package dashboard
-  :after evil-collection
+  :after
+  (evil-collection projectile)
+  :commands
+  dashboard-insert-startupify-lists
+  :init
+  (setq
+   dashboard-startup-banner 99
+   dashboard-items
+   '((recents  . 5)
+     (bookmarks . 5)
+     (projects . 5)
+     (agenda . 5)
+     (registers . 5)))
+  (dashboard-setup-startup-hook)
   :config
   (je/print-to-file (dashboard-get-banner-path 99) je/logo)
-  (setq dashboard-startup-banner 99)
-  (dashboard-setup-startup-hook)
   (evil-collection-define-key 'normal 'dashboard-mode-map
     (kbd "RET") 'dashboard-return))
 
