@@ -465,10 +465,15 @@ match your prompt."
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window)))
 
-(defun je/dont-kill-scratch-or-dired ()
+(defun je/dont-kill-scratch ()
   "Don't kill but bury *scratch* and \"dired:\" buffers."
-  (if (or (string-match-p "dired:" (buffer-name))
-          (equal (buffer-name (current-buffer)) "*scratch*"))
+  (if (equal (buffer-name (current-buffer)) "*scratch*")
+      (progn (bury-buffer) nil)
+    t))
+
+(defun je/dont-kill-dired ()
+  "Don't kill but bury \"dired:\" buffers."
+  (if (string-match-p "dired:" (buffer-name))
       (progn (bury-buffer) nil)
     t))
 

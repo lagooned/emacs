@@ -133,6 +133,7 @@
    (dired-mode . je/enable-truncate-lines-no-message)
    (dired-mode . dired-hide-details-mode))
   :init
+  (add-hook 'kill-buffer-query-functions #'je/dont-kill-dired)
   (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil))
 

@@ -118,7 +118,7 @@
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch-or-dired)
+(add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch)
 
 ;; no tool bar
 (if (eq system-type 'darwin)
