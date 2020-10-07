@@ -96,6 +96,8 @@
       "remove project from known projects"))))
 
 (use-package dashboard
+  :hook
+  (dashboard-mode . je/set-emacs-d-default-directory)
   :after
   (evil-collection projectile)
   :commands
