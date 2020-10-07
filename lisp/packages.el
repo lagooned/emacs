@@ -54,8 +54,6 @@
   :init
   (evil-leader/set-key "t i" 'aggressive-indent-mode))
 
-(use-package badwolf-theme)
-
 (use-package company
   :diminish company-mode
   :commands company-mode
