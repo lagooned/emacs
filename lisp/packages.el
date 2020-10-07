@@ -103,6 +103,9 @@
   :commands
   dashboard-insert-startupify-lists
   :init
+  (add-hook
+   'kill-buffer-query-functions
+   #'je/dont-kill-dashboard)
   (setq
    dashboard-startup-banner 99
    dashboard-items

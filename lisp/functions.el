@@ -472,6 +472,12 @@ match your prompt."
       (progn (bury-buffer) nil)
     t))
 
+(defun je/dont-kill-dashboard ()
+  "Don't kill but bury *dashboard* buffer.."
+  (if (equal (buffer-name (current-buffer)) "*dashboard*")
+      (progn (bury-buffer) nil)
+    t))
+
 (defun je/evil-eshell-mode-setup ()
   "Setup Je/eshell."
   (evil-set-initial-state 'eshell-mode 'emacs)
