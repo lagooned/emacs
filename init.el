@@ -70,15 +70,10 @@
 ;; set default dir
 (add-hook 'emacs-startup-hook #'je/set-emacs-d-default-directory)
 
-(setq inhibit-startup-screen t)
-(setq inhibit-splash-screen t)
 (setq
- initial-scratch-message
- (format
-  je/scratch-message
-  (je/calculate-startup-info-string)
-  je/current-user
-  je/leader-key))
+ inhibit-startup-screen t
+ inhibit-splash-screen t
+ initial-scratch-message (format je/scratch-message je/current-user))
 
 ;; custom file
 (setq custom-file je/custom-file-location)

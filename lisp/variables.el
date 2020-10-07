@@ -50,9 +50,7 @@ modes are active and the buffer is read-only.")
 (defvar je/scratch-message
   "
 ;;
-;;  This is the scratch buffer, this can be used to evaluate emacs lisp.
-;;
-;;  %s, %s.
+;;  hey %s, this buffer can be used to evaluate emacs lisp
 ;;
 
 "
