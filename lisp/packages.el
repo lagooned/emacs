@@ -100,6 +100,8 @@
 (use-package dashboard
   :after evil-collection
   :config
+  (je/print-to-file (dashboard-get-banner-path 99) je/logo)
+  (setq dashboard-startup-banner 99)
   (dashboard-setup-startup-hook)
   (evil-collection-define-key 'normal 'dashboard-mode-map
     (kbd "RET") 'dashboard-return))

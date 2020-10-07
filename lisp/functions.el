@@ -719,6 +719,10 @@ then kill buffer."
      'company
      'eshell))))
 
+(defun je/print-to-file (filename data)
+  (with-temp-file filename
+    (insert data)))
+
 (provide 'functions)
 ;;; functions.el ends here
 

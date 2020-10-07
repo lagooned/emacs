@@ -41,3 +41,4 @@ url
 transient
 /.lsp-session-*
 /.cache/
+/elpa/dashboard-*/banners/99.txt
