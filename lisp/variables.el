@@ -29,9 +29,6 @@
 to avoid performance issues. Opening literally means that no major or minor \
 modes are active and the buffer is read-only.")
 
-(defvar je/force-basic-grep nil
-  "Determines whether or not to use basic grep.")
-
 (defvar je/git-ls-tree-head-cmd "git ls-tree -rt HEAD"
   "Git command for showing ls-tree")
 

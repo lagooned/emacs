@@ -148,16 +148,12 @@ at the first save of each jeemacs session."
   (message "file properly indented"))
 
 (defun je/run-grep ()
-  "Start grepping. Will try `je/counsel-rg-region', \
-then `je/grep-region' in order."
+  "Start grepping."
   (interactive)
-  (if (and (executable-find "rg")
-           (not (eval 'je/force-basic-grep)))
-      (call-interactively 'je/counsel-rg-region)
-    (if (projectile-project-p)
-        (let ((default-directory (projectile-project-p)))
-          (funcall 'je/grep-region))
-      (funcall 'je/grep-region))))
+  (if (projectile-project-p)
+      (let ((default-directory (projectile-project-p)))
+        (funcall 'je/grep-region))
+    (funcall 'je/grep-region)))
 
 (defun je/grep (&optional initial)
   "Je/Emacs grep wrapper to take optional `INITIAL' input or \

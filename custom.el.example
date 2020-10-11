@@ -35,9 +35,6 @@
 ;; transparency
 (transparency-set-value 100)
 
-;; use basic grep
-(setq je/force-basic-grep nil)
-
 ;; load theme
 (if (display-graphic-p)
     (load-theme
