@@ -1,6 +1,6 @@
-(define-package "modus-vivendi-theme" "20200918.401" "Accessible dark theme (WCAG AAA)"
+(define-package "modus-vivendi-theme" "20201010.1735" "Accessible dark theme (WCAG AAA)"
   '((emacs "26.1"))
-  :commit "aeaf598ae8cd84100243e0fe084545ea18397b90" :keywords
+  :commit "3b668380c2b4f297e1a177ef63e826facf92f22b" :keywords
   '("faces" "theme" "accessibility")
   :authors
   '(("Protesilaos Stavrou" . "info@protesilaos.com"))
