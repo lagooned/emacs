@@ -96,6 +96,7 @@
       "remove project from known projects"))))
 
 (use-package dashboard
+  :diminish page-break-lines-mode
   :hook
   (dashboard-mode . je/set-emacs-d-default-directory)
   :after
