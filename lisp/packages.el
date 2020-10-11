@@ -425,7 +425,8 @@
     "c c" 'je/load-config
     "f f" 'find-file
     "f a" 'find-alternate-file
-    "f c" 'je/cleanup-file
+    "f c w" 'je/cleanup-whitespace
+    "f c i" 'je/cleanup-indent
     "f r" 'counsel-recentf
     "f s" 'save-buffer
     "f w" 'write-file

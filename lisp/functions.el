@@ -134,13 +134,18 @@ at the first save of each jeemacs session."
       (select-window (active-minibuffer-window))
     (error "Minibuffer is not active")))
 
-(defun je/cleanup-file ()
+(defun je/cleanup-whitespace ()
   "Remove tabs and trailing whitespace from buffer."
   (interactive)
   (je/untabify-except-makefiles)
   (delete-trailing-whitespace)
+  (message "file untabified and trailing whitespace removed"))
+
+(defun je/cleanup-indent ()
+  "Properly indent buffer."
+  (interactive)
   (indent-region (point-min) (point-max))
-  (message "File formatted"))
+  (message "file properly indented"))
 
 (defun je/run-grep ()
   "Start grepping. Will try `je/counsel-rg-region', \
