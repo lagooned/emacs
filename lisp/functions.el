@@ -180,11 +180,6 @@ prompt for grep command."
   "Constuct grep command with `FUNC' and truncate with cut."
   (grep (concat (eval grep-command) (funcall func) " | cut -c -1500")))
 
-(defun je/counsel-rg-region ()
-  "Optionally run ripgrep on region."
-  (interactive)
-  (je/opt-region-helper 'counsel-rg))
-
 (defun je/counsel-git-grep-region ()
   "Optionally run `counsel-git-grep' on region."
   (interactive)
