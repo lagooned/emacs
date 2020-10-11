@@ -525,7 +525,18 @@
 
 (use-package modus-vivendi-theme
   :init
-  (setq modus-vivendi-theme-no-link-underline t))
+  (setq
+   modus-vivendi-theme-no-link-underline t
+   modus-vivendi-theme-mode-line 'moody))
+
+(use-package moody
+  :commands
+  moody-replace-mode-line-buffer-identification
+  :hook
+  (emacs-startup . moody-replace-mode-line-buffer-identification)
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification))
 
 (use-package multiple-cursors
   :defer t

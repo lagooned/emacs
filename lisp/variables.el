@@ -42,7 +42,8 @@ modes are active and the buffer is read-only.")
   '((vc-mode vc-mode)
     mode-line-mule-info
     mode-line-client
-    mode-line-remote))
+    mode-line-remote
+    "  "))
 
 (defvar je/custom-file-location "~/.emacs.d/.custom.el"
   "Location for Emacs custom config file.")
