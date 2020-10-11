@@ -394,6 +394,8 @@
     (kbd "C-i") 'evil-jump-forward
     (kbd "C-o") 'evil-jump-backward
     (kbd "<return>") 'dired-find-file)
+  (evil-collection-define-key 'normal 'grep-mode-map
+    "gg" 'beginning-of-buffer)
   (evil-collection-define-key 'insert 'term-raw-map
     (kbd "<return>") 'term-send-input)
   (evil-collection-define-key 'normal 'term-mode-map
