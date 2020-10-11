@@ -185,7 +185,7 @@ prompt for grep command."
   (interactive)
   (je/opt-region-helper
    '(lambda (&optional initial)
-      (counsel-git-grep nil initial))))
+      (counsel-git-grep initial))))
 
 (defun je/grep-region ()
   "Optionally run `grep' on region."
