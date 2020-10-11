@@ -159,22 +159,14 @@ at the first save of each jeemacs session."
   "Je/Emacs grep wrapper to take optional `INITIAL' input or \
 prompt for grep command."
   (if initial
-      (je/build-grep-command-with-region)
-    (je/build-grep-command-with-input)))
+      (je/build-grep-command-with-func
+       (string-utils/escape-str-for-command initial))
+    (je/build-grep-command-with-func
+     (read-string "grep regexp: "))))
 
-(defun je/build-grep-command-with-region ()
-  "Use currently selected region to build grep command."
-  (je/grep-concat-command
-   (lambda ()
-     (string-utils/add-quotes
-      (string-utils/escape-str-for-command initial)))))
-
-(defun je/build-grep-command-with-input ()
-  "Use `read-string' to build grep command."
-  (je/grep-concat-command
-   (lambda ()
-     (string-utils/add-quotes
-      (read-string "grep regexp: ")))))
+(defun je/build-grep-command-with-func (func)
+  "Use `FUNC' to build grep command."
+  (je/grep-concat-command (lambda () (string-utils/add-quotes func))))
 
 (defun je/grep-concat-command (func)
   "Constuct grep command with `FUNC' and truncate with cut."
