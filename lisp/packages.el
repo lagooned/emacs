@@ -64,7 +64,9 @@
   (special-mode . command-log-mode)
   (dired-mode . command-log-mode)
   :init
-  (setq clm/logging-dir "~/.emacs.d/.clm-log")
+  (setq
+   command-log-mode-window-size 60
+   clm/logging-dir "~/.emacs.d/.clm-log")
   (evil-leader/set-key "t l" 'clm/toggle-command-log-buffer))
 
 (use-package company
