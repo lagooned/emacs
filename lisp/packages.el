@@ -54,6 +54,19 @@
   :init
   (evil-leader/set-key "t i" 'aggressive-indent-mode))
 
+(use-package command-log-mode
+  :diminish
+  :after evil-leader
+  :commands command-log-mode
+  :hook
+  (prog-mode . command-log-mode)
+  (text-mode . command-log-mode)
+  (special-mode . command-log-mode)
+  (dired-mode . command-log-mode)
+  :init
+  (setq clm/logging-dir "~/.emacs.d/.clm-log")
+  (evil-leader/set-key "t l" 'clm/toggle-command-log-buffer))
+
 (use-package company
   :diminish company-mode
   :commands company-mode
