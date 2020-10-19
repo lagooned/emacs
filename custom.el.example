@@ -44,6 +44,9 @@
      'doom-old-hope
      t))
 
+;; set mode-line height
+(setq moody-mode-line-height 23)
+
 ;; custom vars
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
