@@ -26,7 +26,7 @@
 
 (require 'seq)
 (require 'functional)
-(require 'cl)
+(require 'cl-seq)
 (require 'string-utils)
 (require 'subr-x)
 
@@ -134,62 +134,50 @@ at the first save of each jeemacs session."
       (select-window (active-minibuffer-window))
     (error "Minibuffer is not active")))
 
-(defun je/cleanup-file ()
+(defun je/cleanup-whitespace ()
   "Remove tabs and trailing whitespace from buffer."
   (interactive)
   (je/untabify-except-makefiles)
   (delete-trailing-whitespace)
+  (message "file untabified and trailing whitespace removed"))
+
+(defun je/cleanup-indent ()
+  "Properly indent buffer."
+  (interactive)
   (indent-region (point-min) (point-max))
-  (message "File formatted"))
+  (message "file properly indented"))
 
 (defun je/run-grep ()
-  "Start grepping. Will try `je/counsel-rg-region', \
-then `je/grep-region' in order."
+  "Start grepping."
   (interactive)
-  (if (and (executable-find "rg")
-           (not (eval 'je/force-basic-grep)))
-      (call-interactively 'je/counsel-rg-region)
-    (if (projectile-project-p)
-        (let ((default-directory (projectile-project-p)))
-          (funcall 'je/grep-region))
-      (funcall 'je/grep-region))))
+  (if (projectile-project-p)
+      (let ((default-directory (projectile-project-p)))
+        (funcall 'je/grep-region))
+    (funcall 'je/grep-region)))
 
 (defun je/grep (&optional initial)
   "Je/Emacs grep wrapper to take optional `INITIAL' input or \
 prompt for grep command."
   (if initial
-      (je/build-grep-command-with-region)
-    (je/build-grep-command-with-input)))
+      (je/build-grep-command-with-func
+       (string-utils/escape-str-for-command initial))
+    (je/build-grep-command-with-func
+     (read-string "grep regexp: "))))
 
-(defun je/build-grep-command-with-region ()
-  "Use currently selected region to build grep command."
-  (je/grep-concat-command
-   (lambda ()
-     (string-utils/add-quotes
-      (string-utils/escape-str-for-command initial)))))
-
-(defun je/build-grep-command-with-input ()
-  "Use `read-string' to build grep command."
-  (je/grep-concat-command
-   (lambda ()
-     (string-utils/add-quotes
-      (read-string "grep regexp: ")))))
+(defun je/build-grep-command-with-func (func)
+  "Use `FUNC' to build grep command."
+  (je/grep-concat-command (lambda () (string-utils/add-quotes func))))
 
 (defun je/grep-concat-command (func)
   "Constuct grep command with `FUNC' and truncate with cut."
   (grep (concat (eval grep-command) (funcall func) " | cut -c -1500")))
-
-(defun je/counsel-rg-region ()
-  "Optionally run ripgrep on region."
-  (interactive)
-  (je/opt-region-helper 'counsel-rg))
 
 (defun je/counsel-git-grep-region ()
   "Optionally run `counsel-git-grep' on region."
   (interactive)
   (je/opt-region-helper
    '(lambda (&optional initial)
-      (counsel-git-grep nil initial))))
+      (counsel-git-grep initial))))
 
 (defun je/grep-region ()
   "Optionally run `grep' on region."
@@ -233,7 +221,7 @@ prompt for grep command."
   (interactive)
   (if (thing-at-point-url-at-point)
       (browse-url-at-point)
-    (lexical-let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
+    (let ((org-link-frame-setup '((file . (lambda (args) (progn (find-file args)))))))
       (call-interactively #'org-open-at-point))))
 
 (defun je/counsel-git (&optional initial-input)
@@ -317,6 +305,11 @@ disable command `hi-lock-mode'."
   "Switch to Messages buffer."
   (interactive)
   (switch-to-buffer "*Messages*"))
+
+(defun je/switch-to-dashboard-buffer ()
+  "Switch to dashboard buffer."
+  (interactive)
+  (switch-to-buffer "*dashboard*"))
 
 (defun je/eshell-send-eof ()
   "Send EOF to Eshell with newline."
@@ -460,10 +453,21 @@ match your prompt."
   (let ((current-prefix-arg `(4)))
     (call-interactively 'shrink-window)))
 
-(defun je/dont-kill-scratch-or-dired ()
+(defun je/dont-kill-scratch ()
   "Don't kill but bury *scratch* and \"dired:\" buffers."
-  (if (or (string-match-p "dired:" (buffer-name))
-          (equal (buffer-name (current-buffer)) "*scratch*"))
+  (if (equal (buffer-name (current-buffer)) "*scratch*")
+      (progn (bury-buffer) nil)
+    t))
+
+(defun je/dont-kill-dired ()
+  "Don't kill but bury \"dired:\" buffers."
+  (if (string-match-p "dired:" (buffer-name))
+      (progn (bury-buffer) nil)
+    t))
+
+(defun je/dont-kill-dashboard ()
+  "Don't kill but bury *dashboard* buffer.."
+  (if (equal (buffer-name (current-buffer)) "*dashboard*")
       (progn (bury-buffer) nil)
     t))
 
@@ -686,21 +690,11 @@ then kill buffer."
   (which-key-add-key-based-replacements
     "SPC z" "screen"))
 
-(defun je/calculate-startup-info-string ()
-  (if (bound-and-true-p package-alist)
-      (format "%d packages loaded in %s"
-              (length package-activated-list) (emacs-init-time))
-    (if (and (boundp 'straight--profile-cache)
-             (hash-table-p straight--profile-cache))
-        (format "%d packages loaded in %s"
-                (hash-table-size straight--profile-cache) (emacs-init-time))
-      (format "Emacs started in %s" (emacs-init-time)))))
-
 (defun je/configure-elisp-company-backends ()
   (push '(company-capf company-yasnippet) company-backends))
 
 (defun je/configure-company-lsp-backends ()
-  (push 'company-lsp company-backends))
+  (push 'company-capf company-backends))
 
 (defun je/java-lsp-deps-p ()
   (and
@@ -708,6 +702,20 @@ then kill buffer."
     (or (eq system-type 'windows-nt)
         (eq system-type 'cygwin)))
    (executable-find "java")))
+
+(defun je/configure-evil-collection-mode-list ()
+  (setq
+   evil-collection-mode-list
+   (cl-reduce
+    (lambda (acc e) (remove e evil-collection-mode-list))
+    (list
+     `(term term ansi-term multi-term)
+     'company
+     'eshell))))
+
+(defun je/print-to-file (filename data)
+  (with-temp-file filename
+    (insert data)))
 
 (provide 'functions)
 ;;; functions.el ends here

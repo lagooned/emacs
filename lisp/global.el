@@ -76,8 +76,8 @@
    #b00000000
    #b00000000])
 
-;; let text breath
-(fringe-mode (frame-char-width))
+;; choke text
+(fringe-mode 1)
 
 ;; decouple window and minibuffer fringes
 (add-hook 'after-init-hook #'je/minibuffer-fringe-setup)
@@ -118,7 +118,7 @@
 (setq echo-keystrokes 0.01)
 
 ;; bury scratch on kill
-(add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch-or-dired)
+(add-hook 'kill-buffer-query-functions 'je/dont-kill-scratch)
 
 ;; no tool bar
 (if (eq system-type 'darwin)
@@ -214,7 +214,7 @@
 
 ;; set eval props
 (setq eval-expression-print-level 4
-      eval-expression-print-length 100)
+      eval-expression-print-length 1000)
 
 (provide 'global)
 ;;; global.el ends here

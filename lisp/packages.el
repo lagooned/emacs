@@ -54,7 +54,20 @@
   :init
   (evil-leader/set-key "t i" 'aggressive-indent-mode))
 
-(use-package badwolf-theme)
+(use-package command-log-mode
+  :diminish
+  :after evil-leader
+  :commands command-log-mode
+  :hook
+  (prog-mode . command-log-mode)
+  (text-mode . command-log-mode)
+  (special-mode . command-log-mode)
+  (dired-mode . command-log-mode)
+  :init
+  (setq
+   command-log-mode-window-size 60
+   clm/logging-dir "~/.emacs.d/.clm-log")
+  (evil-leader/set-key "t l" 'clm/toggle-command-log-buffer))
 
 (use-package company
   :diminish company-mode
@@ -97,6 +110,29 @@
      ("k" counsel-projectile-switch-project-action-remove-known-project
       "remove project from known projects"))))
 
+(use-package dashboard
+  :diminish page-break-lines-mode
+  :hook
+  (dashboard-mode . je/set-emacs-d-default-directory)
+  :after
+  (evil-collection projectile)
+  :commands
+  dashboard-insert-startupify-lists
+  :init
+  (add-hook
+   'kill-buffer-query-functions
+   #'je/dont-kill-dashboard)
+  (setq
+   dashboard-startup-banner 99
+   dashboard-items
+   '((recents  . 10)
+     (projects . 10)))
+  (dashboard-setup-startup-hook)
+  :config
+  (je/print-to-file (dashboard-get-banner-path 99) je/logo)
+  (evil-collection-define-key 'normal 'dashboard-mode-map
+    (kbd "RET") 'dashboard-return))
+
 (use-package diminish)
 
 (use-package dimmer
@@ -113,6 +149,7 @@
    (dired-mode . je/enable-truncate-lines-no-message)
    (dired-mode . dired-hide-details-mode))
   :init
+  (add-hook 'kill-buffer-query-functions #'je/dont-kill-dired)
   (setq dired-listing-switches "-lah")
   (put 'dired-find-alternate-file 'disabled nil))
 
@@ -187,22 +224,174 @@
   (setq evil-motion-state-cursor `("#0055ff" (hbar . #xffff)))
   (setq evil-replace-state-cursor `("#00acff" (hbar . #xffff)))
   (setq evil-operator-state-cursor `("#ff66ff" (hbar . #xffff)))
-  (load "evil-config"))
+  (global-unset-key (kbd "C-k"))
+  (global-unset-key (kbd "C-l"))
+  (global-unset-key (kbd "C-w"))
+  (global-unset-key (kbd "C-s"))
+  (global-unset-key (kbd "C-y"))
+  (global-unset-key (kbd "M-j"))
+  (global-unset-key (kbd "M-a"))
+  (global-unset-key (kbd "M-b"))
+  (global-unset-key (kbd "M-e"))
+  (global-unset-key (kbd "M-w"))
+  (global-unset-key (kbd "M-d"))
+  (global-unset-key (kbd "M-m"))
+  (global-unset-key (kbd "M-k"))
+  (global-unset-key (kbd "M-u"))
+  (global-unset-key (kbd "M-v"))
+  (global-unset-key (kbd "M-l"))
+  (global-unset-key (kbd "M-i"))
+  (global-unset-key (kbd "M-c"))
+  (global-unset-key (kbd "M-t"))
+  (global-unset-key (kbd "M-h"))
+  (global-unset-key (kbd "M-r"))
+  (global-unset-key (kbd "M-m"))
+  (global-unset-key (kbd "M-."))
+  (global-unset-key (kbd "M-^"))
+  (global-unset-key (kbd "M-,"))
+  (global-unset-key (kbd "M-;"))
+  (global-unset-key (kbd "M-?"))
+  (global-unset-key (kbd "M-z"))
+  (global-unset-key (kbd "M-!"))
+  (global-unset-key (kbd "M-@"))
+  (global-unset-key (kbd "M-&"))
+  (global-unset-key (kbd "M->"))
+  (global-unset-key (kbd "M-<"))
+  (global-unset-key (kbd "C-x C-u"))
+  (global-unset-key (kbd "C-x C-l"))
+  (global-unset-key (kbd "C-M-j"))
+  (global-unset-key (kbd "C-M-k"))
+  (global-unset-key (kbd "C-M-v"))
+  (global-unset-key (kbd "C-M-h"))
+  (global-unset-key (kbd "C-M-u"))
+  (global-unset-key (kbd "C-M-d"))
+  (global-unset-key (kbd "C-M-f"))
+  (global-unset-key (kbd "C-M-e"))
+  (global-unset-key (kbd "C-M-b"))
+  (global-unset-key (kbd "C-M-a"))
+  (global-unset-key (kbd "C-M-t"))
+  (global-unset-key (kbd "C-M-l"))
+  (global-unset-key (kbd "C-M-n"))
+  (global-unset-key (kbd "C-M-p"))
+  (global-unset-key (kbd "C-M-/"))
+  (global-unset-key (kbd "C-M-."))
+  (global-unset-key (kbd "M-o"))
+  (global-unset-key (kbd "C-M-o"))
+  (define-key evil-insert-state-map (kbd "M-;") 'comment-dwim)
+  (define-key evil-insert-state-map (kbd "C-j") 'newline)
+  (define-key evil-insert-state-map (kbd "C-m") 'newline-and-indent)
+  (define-key evil-insert-state-map (kbd "M-/") 'yas-expand)
+  (define-key evil-insert-state-map (kbd "M-<") 'beginning-of-buffer)
+  (define-key evil-insert-state-map (kbd "M->") 'end-of-buffer)
+  (define-key evil-insert-state-map (kbd "M-\\") 'evil-execute-in-emacs-state)
+  (define-key evil-insert-state-map (kbd "M-b") 'backward-word)
+  (define-key evil-insert-state-map (kbd "M-j") 'indent-new-comment-line)
+  (define-key evil-insert-state-map (kbd "M-m") 'indent-new-comment-line)
+  (define-key evil-insert-state-map (kbd "M-y") 'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+  (define-key evil-motion-state-map (kbd "C-=") 'er/expand-region)
+  (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up)
+  (define-key evil-normal-state-map (kbd "-") 'dired-jump)
+  (define-key evil-normal-state-map (kbd "M-;") 'comment-line)
+  (define-key evil-normal-state-map (kbd "C-=") 'er/expand-region)
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-b") 'evil-scroll-page-up)
+  (define-key evil-normal-state-map (kbd "C-j") 'newline)
+  (define-key evil-normal-state-map (kbd "C-m") 'newline-and-indent)
+  (define-key evil-normal-state-map (kbd "C-s") 'swiper)
+  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+  (define-key evil-normal-state-map (kbd "G") 'end-of-buffer)
+  (define-key evil-normal-state-map (kbd "M-/") 'yas-expand)
+  (define-key evil-normal-state-map (kbd "M-j") 'indent-new-comment-line)
+  (define-key evil-normal-state-map (kbd "M-m") 'indent-new-comment-line)
+  (define-key evil-normal-state-map (kbd "M-y") 'counsel-yank-pop)
+  (define-key evil-normal-state-map (kbd "RET") 'newline-and-indent)
+  (define-key evil-normal-state-map (kbd "U") 'undo-tree-visualize)
+  (define-key evil-normal-state-map (kbd "gg") 'beginning-of-buffer)
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "gr") 'revert-buffer)
+  (define-key evil-normal-state-map (kbd "M-t") 'transpose-words)
+  (define-key evil-normal-state-map (kbd "M-:") 'evil-command-window-ex)
+  (define-key evil-visual-state-map (kbd "$") 'evil-end-of-visual-line)
+  (define-key evil-visual-state-map (kbd "C-;") 'comment-dwim)
+  (define-key evil-visual-state-map (kbd "C-=") 'er/expand-region)
+  (define-key evil-visual-state-map (kbd "C-j") 'void)
+  (define-key evil-visual-state-map (kbd "G") 'end-of-buffer)
+  (define-key evil-visual-state-map (kbd "M-n") 'evil-visualstar/begin-search-forward)
+  (define-key evil-visual-state-map (kbd "M-N") 'evil-visualstar/begin-search-backward)
+  (define-key evil-visual-state-map (kbd "RET") 'void)
+  (define-key evil-visual-state-map (kbd "gg") 'beginning-of-buffer)
+  (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-visual-state-map (kbd "M-j") 'void)
+  (define-key evil-visual-state-map (kbd "M-m") 'void)
+  (define-key evil-emacs-state-map (kbd "C-k") 'kill-line)
+  (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
+  (define-key evil-emacs-state-map (kbd "C-w") 'kill-region)
+  (define-key evil-emacs-state-map (kbd "C-y") 'yank)
+  (define-key evil-emacs-state-map (kbd "M-r") 'move-to-window-line-top-bottom)
+  (define-key evil-emacs-state-map (kbd "M-a") 'backward-sentence)
+  (define-key evil-emacs-state-map (kbd "M-b") 'backward-word)
+  (define-key evil-emacs-state-map (kbd "M-e") 'forward-sentence)
+  (define-key evil-emacs-state-map (kbd "M-w") 'kill-ring-save)
+  (define-key evil-emacs-state-map (kbd "M-d") 'kill-word)
+  (define-key evil-emacs-state-map (kbd "M-v") 'scroll-down-command)
+  (define-key evil-emacs-state-map (kbd "M-m") 'back-to-indentation)
+  (define-key evil-emacs-state-map (kbd "M-j") 'back-to-indentation)
+  (define-key evil-emacs-state-map (kbd "M-k") 'kill-sentence)
+  (define-key evil-emacs-state-map (kbd "M-u") 'fix-word-upcase)
+  (define-key evil-emacs-state-map (kbd "M-l") 'fix-word-downcase)
+  (define-key evil-emacs-state-map (kbd "M-c") 'fix-word-capitalize)
+  (define-key evil-emacs-state-map (kbd "M-z") 'zop-to-char)
+  (define-key evil-emacs-state-map (kbd "M-.") 'xref-find-definitions)
+  (define-key evil-emacs-state-map (kbd "M-&") 'async-shell-command)
+  (define-key evil-emacs-state-map (kbd "M-^") 'delete-indentation)
+  (define-key evil-emacs-state-map (kbd "M-,") 'xref-pop-marker-stack)
+  (define-key evil-emacs-state-map (kbd "M-?") 'xref-find-references)
+  (define-key evil-emacs-state-map (kbd "M-@") 'mark-word)
+  (define-key evil-emacs-state-map (kbd "M-!") 'shell-command)
+  (define-key evil-emacs-state-map (kbd "M-<") 'beginning-of-buffer)
+  (define-key evil-emacs-state-map (kbd "M->") 'end-of-buffer)
+  (define-key evil-emacs-state-map (kbd "M-o b") 'facemenu-set-bold)
+  (define-key evil-emacs-state-map (kbd "M-o d") 'facemenu-set-default)
+  (define-key evil-emacs-state-map (kbd "M-o i") 'facemenu-set-italic)
+  (define-key evil-emacs-state-map (kbd "M-o l") 'facemenu-set-bold-italic)
+  (define-key evil-emacs-state-map (kbd "M-o o") 'facemenu-set-face)
+  (define-key evil-emacs-state-map (kbd "M-o u") 'facemenu-set-underline)
+  (define-key evil-emacs-state-map (kbd "M-o M-o") 'font-lock-fontify-block)
+  (define-key evil-emacs-state-map (kbd "M-o M-s") 'center-line)
+  (define-key evil-emacs-state-map (kbd "M-o M-S") 'center-paragraph)
+  (define-key evil-emacs-state-map (kbd "C-x C-u") 'upcase-region)
+  (define-key evil-emacs-state-map (kbd "C-x C-l") 'downcase-region)
+  (define-key evil-emacs-state-map (kbd "C-M-h") 'mark-defun)
+  (define-key evil-emacs-state-map (kbd "C-M-d") 'down-list)
+  (define-key evil-emacs-state-map (kbd "C-M-u") 'backward-up-list)
+  (define-key evil-emacs-state-map (kbd "C-M-n") 'forward-list)
+  (define-key evil-emacs-state-map (kbd "C-M-p") 'backward-list)
+  (define-key evil-emacs-state-map (kbd "C-M-f") 'forward-sexp)
+  (define-key evil-emacs-state-map (kbd "C-M-b") 'backward-sexp)
+  (define-key evil-emacs-state-map (kbd "C-M-k") 'kill-sexp)
+  (define-key evil-emacs-state-map (kbd "C-M-v") 'scroll-other-window)
+  (define-key evil-emacs-state-map (kbd "C-M-e") 'end-of-defun)
+  (define-key evil-emacs-state-map (kbd "C-M-a") 'beginning-of-defun)
+  (define-key evil-emacs-state-map (kbd "C-M-t") 'transpose-sexps)
+  (define-key evil-emacs-state-map (kbd "C-M-l") 'reposition-window)
+  (define-key evil-emacs-state-map (kbd "C-=") 'er/expand-region)
+  (define-key evil-emacs-state-map (kbd "M-;") 'comment-dwim)
+  (define-key evil-emacs-state-map (kbd "M-i") 'tab-to-tab-stop)
+  (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
+  (define-key evil-ex-completion-map (kbd "C-d") 'delete-char)
+  (define-key evil-ex-completion-map (kbd "C-a") 'move-beginning-of-line)
+  (define-key evil-ex-completion-map (kbd "M-p") 'previous-complete-history-element)
+  (define-key evil-ex-completion-map (kbd "M-n") 'next-complete-history-element))
 
 (use-package evil-collection
   :after evil
   :config
-  (setq evil-collection-mode-list
-        (remove
-         `(term
-           term
-           ansi-term
-           multi-term)
-         evil-collection-mode-list))
-  (setq evil-collection-mode-list
-        (remove 'company evil-collection-mode-list))
-  (setq evil-collection-mode-list
-        (remove 'eshell evil-collection-mode-list))
+  (je/configure-evil-collection-mode-list)
   (evil-collection-init)
   (evil-collection-define-key 'normal 'dired-mode-map
     "." 'dired-omit-mode
@@ -220,6 +409,8 @@
     (kbd "C-i") 'evil-jump-forward
     (kbd "C-o") 'evil-jump-backward
     (kbd "<return>") 'dired-find-file)
+  (evil-collection-define-key 'normal 'grep-mode-map
+    "gg" 'beginning-of-buffer)
   (evil-collection-define-key 'insert 'term-raw-map
     (kbd "<return>") 'term-send-input)
   (evil-collection-define-key 'normal 'term-mode-map
@@ -251,7 +442,8 @@
     "c c" 'je/load-config
     "f f" 'find-file
     "f a" 'find-alternate-file
-    "f c" 'je/cleanup-file
+    "f c w" 'je/cleanup-whitespace
+    "f c i" 'je/cleanup-indent
     "f r" 'counsel-recentf
     "f s" 'save-buffer
     "f w" 'write-file
@@ -287,6 +479,7 @@
     "o h" 'je/open-home-dir
     "o s" 'je/switch-to-scratch-buffer
     "o m" 'je/switch-to-messages-buffer
+    "o ESC" 'je/switch-to-dashboard-buffer
     "p s" 'je/projectile-vc
     "p e" 'projectile-run-eshell
     "p p" 'counsel-projectile-switch-project
@@ -299,7 +492,6 @@
     "s l" 'avy-goto-line
     "s j" 'avy-goto-word-0
     "s r" 'ivy-resume
-    "t l" 'linum-relative-mode
     "t t" 'toggle-truncate-lines
     "t p" 'smartparens-mode
     "t h" 'highlight-symbol-at-point
@@ -419,8 +611,9 @@
   :after which-key evil-leader
   :hook (grep-mode . je/enable-truncate-lines-no-message)
   :init
-  (setq grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
-        grep-use-null-device nil)
+  (setq
+   grep-command "grep -R . --exclude-dir={.git,.svn} --color -n -e "
+   grep-use-null-device nil)
   (evil-leader/set-key "g" 'je/run-grep)
   (which-key-add-key-based-replacements "SPC g" "grep"))
 
@@ -474,13 +667,6 @@
 (use-package ivy-hydra
   :after (ivy hydra))
 
-(use-package linum-relative
-  :commands linum-relative-mode
-  :diminish linum-relative-mode
-  :init
-  (setq linum-relative-format "%5s "
-        linum-relative-current-symbol ""))
-
 (use-package locate
   :defer t
   :after evil-leader counsel
@@ -517,6 +703,21 @@
      'Info-directory-list
      "~/.emacs.d/packages/magit/Documentation/"))
   (magit-auto-revert-mode 0))
+
+(use-package modus-vivendi-theme
+  :init
+  (setq
+   modus-vivendi-theme-no-link-underline t
+   modus-vivendi-theme-mode-line 'moody))
+
+(use-package moody
+  :commands
+  moody-replace-mode-line-buffer-identification
+  :hook
+  (emacs-startup . moody-replace-mode-line-buffer-identification)
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification))
 
 (use-package multiple-cursors
   :defer t
@@ -562,7 +763,8 @@
   :commands projectile-mode
   :hook (emacs-startup . projectile-mode)
   :init
-  (setq projectile-switch-project-action 'projectile-dired))
+  (setq projectile-switch-project-action 'projectile-dired)
+  (projectile-add-known-project "~/.emacs.d"))
 
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode

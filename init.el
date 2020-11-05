@@ -32,14 +32,15 @@
       gc-cons-percentage 0.6)
 
 (require 'package)
-(setq package-archives
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-        ("marmalade" . "https://marmalade-repo.org/packages/")
-        ("melpa-stable" . "https://stable.melpa.org/packages/")
-        ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+(setq
+ package-archives
+ '(("gnu" . "https://elpa.gnu.org/packages/")
+   ("marmalade" . "https://marmalade-repo.org/packages/")
+   ("melpa-stable" . "https://stable.melpa.org/packages/")
+   ;; ("melpa-stable-mirror" . "https://www.mirrorservice.org/sites/stable.melpa.org/packages/")
+   ("melpa" . "https://melpa.org/packages/")
+   ;; ("melpa-mirror" . "https://www.mirrorservice.org/sites/melpa.org/packages/")
+   ("org" . "http://orgmode.org/elpa/")))
 
 (when (version< emacs-version "27")
   (package-initialize))
@@ -70,15 +71,10 @@
 ;; set default dir
 (add-hook 'emacs-startup-hook #'je/set-emacs-d-default-directory)
 
-(setq inhibit-startup-screen t)
-(setq inhibit-splash-screen t)
 (setq
- initial-scratch-message
- (format
-  je/scratch-message
-  (je/calculate-startup-info-string)
-  je/current-user
-  je/leader-key))
+ inhibit-startup-screen t
+ inhibit-splash-screen t
+ initial-scratch-message (format je/scratch-message je/current-user))
 
 ;; custom file
 (setq custom-file je/custom-file-location)
