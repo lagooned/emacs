@@ -743,6 +743,7 @@
                                "~/org/home.org"))
   :config
   (evil-leader/set-key-for-mode 'org-mode
+    "i e" 'org-insert-structure-template
     "l l" 'je/org-link-follow
     "l i" 'org-insert-link-global
     "m c" 'org-toggle-checkbox
