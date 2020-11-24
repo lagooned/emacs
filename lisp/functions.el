@@ -704,14 +704,9 @@ then kill buffer."
    (executable-find "java")))
 
 (defun je/configure-evil-collection-mode-list ()
-  (setq
-   evil-collection-mode-list
-   (cl-reduce
-    (lambda (acc e) (remove e evil-collection-mode-list))
-    (list
-     `(term term ansi-term multi-term)
-     'company
-     'eshell))))
+  (setq evil-collection-mode-list (remove 'company evil-collection-mode-list))
+  (setq evil-collection-mode-list (remove 'eshell evil-collection-mode-list))
+  (setq evil-collection-mode-list (remove `(term term ansi-term multi-term) evil-collection-mode-list)))
 
 (defun je/print-to-file (filename data)
   (with-temp-file filename
