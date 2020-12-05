@@ -482,6 +482,7 @@
     "o ESC" 'je/switch-to-dashboard-buffer
     "p s" 'je/projectile-vc
     "p e" 'projectile-run-eshell
+    "p t" 'projectile-run-shell
     "p p" 'counsel-projectile-switch-project
     "p r" 'je/projectile-root-dir
     "p f" 'je/counsel-projectile-find-file-region
