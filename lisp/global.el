@@ -145,9 +145,6 @@
 ;; sentence navigation
 (setq sentence-end-double-space nil)
 
-;; line spaceing
-(setq-default line-spacing 6)
-
 ;; no tooltips
 (tooltip-mode 0)
 

@@ -8,6 +8,9 @@
       calendar-longitude -95.57
       calendar-location-name "Houston, TX")
 
+(when (eq system-type 'linux)
+  (setq-default line-spacing 6))
+
 ;; set font on windows
 (when (or (eq system-type 'windows-nt)
           (eq system-type 'cygwin))
