@@ -562,20 +562,6 @@ Note: effective as an evil-insert-state-exit-hook."
   (prettify-symbols-mode 1)
   (message nil))
 
-(defun je/prompt-maybe-run (confirmed-var question enabled-var init-func)
-  "Defines an interface which one can adhear to create a environmentally \
-stateful confirmation dialog.
-
-`CONFIRMED-VAR': var that keeps track of the user confirmation of the dialog.
-`QUESTION': string question to ask in the confirmation dialog.
-`ENABLED-VAR': var which keeps track of the response from the user.
-`INIT-FUNC': function to run when the dialog has been confirmed."
-  (if (not (eval confirmed-var))
-      (let ((answer (y-or-n-p question)))
-        (customize-save-variable confirmed-var t)
-        (customize-save-variable enabled-var answer)))
-  (funcall init-func))
-
 (defun je/toggle-truncate-lines-mode-no-message (arg)
   "Run `toggle-truncate-lines' with `ARG' and swallow the message."
   (progn (toggle-truncate-lines arg)
