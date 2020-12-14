@@ -77,11 +77,6 @@ to sane runtime defaults."
   (interactive)
   (find-file "~/.emacs.d/lisp/global.el"))
 
-(defun je/open-evil-config ()
-  "Open evil-config.el."
-  (interactive)
-  (find-file "~/.emacs.d/lisp/evil-config.el"))
-
 (defun je/open-packages-config ()
   "Open packages.el."
   (interactive)

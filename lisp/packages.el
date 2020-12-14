@@ -442,7 +442,6 @@
     "c ." 'je/open-custom-config
     "c l" 'je/open-language-config
     "c g" 'je/open-global-config
-    "c k" 'je/open-evil-config
     "c p" 'je/open-packages-config
     "c c" 'je/load-config
     "f f" 'find-file
