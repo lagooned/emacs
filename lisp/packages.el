@@ -171,6 +171,11 @@
             'split-window-horizontally
           'split-window-vertically)))
 
+(use-package editorconfig
+  :diminish "ec"
+  :commands editorconfig-mode
+  :hook (prog-mode . editorconfig-mode))
+
 (use-package elscreen
   :commands elscreen-start
   :hook (emacs-startup . elscreen-start)
