@@ -172,7 +172,7 @@
           'split-window-vertically)))
 
 (use-package editorconfig
-  :diminish "ec"
+  :diminish
   :commands editorconfig-mode
   :hook (prog-mode . editorconfig-mode))
 
