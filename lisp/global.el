@@ -137,7 +137,6 @@
 
 ;; set default tab display width to 4 spaces
 (setq-default tab-width 4)
-(setq-default c-basic-offset 4)
 
 ;; make prompts easier
 (defalias 'yes-or-no-p 'y-or-n-p)
