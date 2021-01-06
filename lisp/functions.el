@@ -398,21 +398,6 @@ disable command `hi-lock-mode'."
     (eshell-banner-initialize)
     (eshell-send-input)))
 
-(defun je/eshell-top-prompt-function ()
-  "Builds the top line of the jeemacs eshell prompt."
-  (concat "[" (abbreviate-file-name (eshell/pwd)) "]"))
-
-(defun je/eshell-bottom-prompt-function ()
-  "Builds the bottom line of the jeemacs eshell prompt."
-  (if (= (user-uid) 0) "# " "$ "))
-
-(defun je/eshell-prompt-function ()
-  "Builds the Eshell prompt string. Make sure to \
-update `je/eshell-prompt-regexp' so that it will \
-match your prompt."
-  (concat "\n" (je/eshell-top-prompt-function) " \n"
-          (je/eshell-bottom-prompt-function)))
-
 (defun je/mc-evil-emacs-state ()
   "When using multiple-cursors, switch to Emacs state."
   (if (region-active-p)
