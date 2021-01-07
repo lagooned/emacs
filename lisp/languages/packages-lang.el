@@ -33,6 +33,7 @@
 (load "php-lang")
 (load "python-lang")
 (load "rust-lang")
+(load "scala-lang")
 (load "typescript-lang")
 (load "util-lang")
 (load "web-lang")
