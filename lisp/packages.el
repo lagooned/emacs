@@ -716,6 +716,7 @@
    modus-vivendi-theme-mode-line 'moody))
 
 (use-package moody
+  :when (display-graphic-p)
   :commands
   moody-replace-mode-line-buffer-identification
   :hook
