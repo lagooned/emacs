@@ -488,6 +488,7 @@
     "p e" 'projectile-run-eshell
     "p t" 'projectile-run-shell
     "p p" 'counsel-projectile-switch-project
+    "p b" 'counsel-projectile-switch-to-buffer
     "p r" 'je/projectile-root-dir
     "p f" 'je/counsel-projectile-find-file-region
     "p d" 'je/counsel-projectile-find-dir-region
