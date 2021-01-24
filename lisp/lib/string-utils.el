@@ -1,6 +1,6 @@
 ;;; string-utils.el --- string utility functions  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020  Jared M. Engler
+;; Copyright (C) 2021  Jared M. Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: utils, functions, lib, string

@@ -1,6 +1,6 @@
 ;;; js-lang.el --- jeemacs javascript langauge tools  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020  Jared Matthew Engler
+;; Copyright (C) 2021  Jared Matthew Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: jeemacs, config, languages, javascript

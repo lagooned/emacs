@@ -1,6 +1,6 @@
 ;;; php-lang.el --- php langauge tools  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020  Jared Matthew Engler
+;; Copyright (C) 2021  Jared Matthew Engler
 
 ;; Author: Jared M. Engler <jared.lite@gmail.com>
 ;; Keywords: jeemacs, config, languages, php, syntax
