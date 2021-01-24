@@ -33,8 +33,7 @@
   :config (setq sbt:program-options '("-Dsbt.supershell=false")))
 
 (use-package lsp-metals
-  :when (and (eq system-type 'gnu/linux)
-             (executable-find "metals-emacs")
+  :when (and (executable-find "metals-emacs")
              (executable-find "bloop"))
   :hook (scala-mode . lsp))
 
