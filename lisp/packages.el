@@ -762,6 +762,9 @@
   (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
   (add-to-list 'org-file-apps '(directory . emacs)))
 
+(use-package page-break-lines
+  :diminish page-break-lines-mode "")
+
 (use-package prog-mode
   :commands prog-mode
   :hook (prog-mode . je/enable-truncate-lines-no-message))
