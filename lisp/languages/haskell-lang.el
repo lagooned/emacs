@@ -27,5 +27,10 @@
 (use-package haskell-mode
   :commands haskell-mode)
 
+(use-package lsp-haskell
+  :when (executable-find "haskell-language-server")
+  :hook ((haskell-mode . lsp)
+         (haskell-literate-mode . lsp)))
+
 (provide 'haskell-lang)
 ;;; haskell-lang.el ends here
