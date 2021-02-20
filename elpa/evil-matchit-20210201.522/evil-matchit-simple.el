@@ -42,16 +42,16 @@ If it's t, use simple jump.")
   (let (rlt)
     (cond
 
-     ;; code "(function(...) { ..."
-     ;; code "} else {"
-     ;; css-mode use characters ".:-"
-     ((or (string-match-p "^[ \t]*[\(\}]?[.:_a-zA-Z0-9-]+.*{ *\\(\/\/.*\\)?$" cur-line)
-          (string-match-p "^[ \t]*[\(\}]?[.:_a-zA-Z0-9-]+.*{ *\\(\/\*[^/]*\*\/\\)?$" cur-line))
+     ;; code: function(...) { ...
+     ;; code: } else {'
+     ;; code: "jsonField": {
+     ;; Please note css-mode use characters ".:-"
+     ((string-match "^[ \t]*[\(\}]?[.:_a-zA-Z0-9\"-]+.*{ *\\(\/\/.*\\|\/\*[^/]*\*\/\\)?$" cur-line)
       (setq rlt 1))
 
     ;; code "} if (...) {"
     ;; code "} else (...) {"
-     ((and (string-match-p "^[ \t]*[\}]? \\(if\\|el[a-z]*\\) *.*{ *?$" cur-line)
+     ((and (string-match "^[ \t]*[\}]? \\(if\\|el[a-z]*\\) *.*{ *?$" cur-line)
            (not (eq (following-char) ?})))
       (setq rlt 1))
 
@@ -60,7 +60,7 @@ If it's t, use simple jump.")
       (save-excursion
         (forward-line)
         (setq cur-line (evilmi-sdk-curline))
-        (if (string-match-p "^[ \t]*{ *$" cur-line)
+        (if (string-match "^[ \t]*{ *$" cur-line)
             (setq rlt 2)))))
 
     rlt))
@@ -86,11 +86,31 @@ If it's t, use simple jump.")
         ;; sorry we could not jump between ends of string in python-mode
         (memq ch evilmi-quote-chars)))))
 
+(defun evilmi-simple-following-char ()
+  "Get the character at point or find matching tag start point nearby."
+  (let* ((b (line-beginning-position))
+         (whitespaces '(9 10 13 32))
+         new-pos)
+
+    (save-excursion
+      (let* (ch found)
+        (while (and (setq ch (following-char))
+                    (> (point) b)
+                    (not (setq found (or (memq ch evilmi-backward-chars)
+                                         (memq ch evilmi-forward-chars))))
+                    (memq ch whitespaces))
+          (goto-char (1- (point))))
+        (if found (setq new-pos (point)))))
+
+    (if new-pos (goto-char new-pos))
+
+    (following-char)))
+
 ;;;###autoload
 (defun evilmi-simple-get-tag ()
   "Get current tag in simple language."
   (let* (forward-line-num
-         (ch (following-char))
+         (ch (evilmi-simple-following-char))
          rlt)
 
     (cond
