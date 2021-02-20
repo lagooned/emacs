@@ -25,6 +25,8 @@
 ;;; Code:
 
 (use-package haskell-mode
+  :hook (haskell-mode . haskell-doc-mode)
+  :init (add-hook 'haskell-mode-hook (lambda () (eldoc-mode 0)))
   :commands haskell-mode)
 
 (use-package lsp-haskell
