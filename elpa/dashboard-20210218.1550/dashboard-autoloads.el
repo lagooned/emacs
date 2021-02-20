@@ -22,7 +22,7 @@ assume a filename and skip displaying Dashboard." nil nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from dashboard-widgets.el
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dashboard-widgets" '("dashboard-" "recentf-list")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dashboard-widgets" '("dashboard-" "org-" "recentf-list")))
 
 ;;;***
 
