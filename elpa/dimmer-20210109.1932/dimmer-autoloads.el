@@ -12,34 +12,22 @@
 (autoload 'dimmer-configure-company-box "dimmer" "\
 Convenience setting for company-box users.
 This predicate prevents dimming the buffer you are editing when
-company-box pops up a list of completion.
-
-\(fn)" nil nil)
+company-box pops up a list of completion." nil nil)
 
 (autoload 'dimmer-configure-helm "dimmer" "\
-Convenience settings for helm users.
-
-\(fn)" nil nil)
+Convenience settings for helm users." nil nil)
 
 (autoload 'dimmer-configure-gnus "dimmer" "\
-Convenience settings for gnus users.
-
-\(fn)" nil nil)
+Convenience settings for gnus users." nil nil)
 
 (autoload 'dimmer-configure-hydra "dimmer" "\
-Convenience settings for hydra users.
-
-\(fn)" nil nil)
+Convenience settings for hydra users." nil nil)
 
 (autoload 'dimmer-configure-magit "dimmer" "\
-Convenience settings for magit users.
-
-\(fn)" nil nil)
+Convenience settings for magit users." nil nil)
 
 (autoload 'dimmer-configure-org "dimmer" "\
-Convenience settings for org users.
-
-\(fn)" nil nil)
+Convenience settings for org users." nil nil)
 
 (autoload 'dimmer-configure-posframe "dimmer" "\
 Convenience settings for packages depending on posframe.
@@ -57,14 +45,10 @@ name.  Examples include:
 If this setting doesn't work for you, you still have the option
 of adding another regular expression to catch more things, or
 in some cases you can customize the other package and ensure it
-uses a buffer name that fits this pattern.
-
-\(fn)" nil nil)
+uses a buffer name that fits this pattern." nil nil)
 
 (autoload 'dimmer-configure-which-key "dimmer" "\
-Convenience settings for which-key-users.
-
-\(fn)" nil nil)
+Convenience settings for which-key-users." nil nil)
 
 (defvar dimmer-mode nil "\
 Non-nil if Dimmer mode is enabled.
@@ -79,9 +63,14 @@ or call the function `dimmer-mode'.")
 (autoload 'dimmer-mode "dimmer" "\
 visually highlight the selected buffer
 
+If called interactively, enable Dimmer mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
 \(fn &optional ARG)" t nil)
 
-(define-obsolete-function-alias 'dimmer-activate 'dimmer-mode)
+(define-obsolete-function-alias 'dimmer-activate 'dimmer-mode "0.2.0")
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dimmer" '("dimmer-")))
 

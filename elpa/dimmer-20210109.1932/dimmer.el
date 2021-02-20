@@ -1,12 +1,12 @@
 ;;; dimmer.el --- Visually highlight the selected buffer
 
-;; Copyright (C) 2017-2020 Neil Okamoto
+;; Copyright (C) 2017-2021 Neil Okamoto
 
 ;; Filename: dimmer.el
 ;; Author: Neil Okamoto
 ;; Version: 0.4.2
-;; Package-Version: 20200509.1718
-;; Package-Commit: 4abe51533a972910f9012029a47b533878ec682e
+;; Package-Version: 20210109.1932
+;; Package-Commit: 8559fb73a2c96755cb30f560be82191164014b43
 ;; Package-Requires: ((emacs "25.1"))
 ;; URL: https://github.com/gonewest818/dimmer.el
 ;; Keywords: faces, editing
@@ -129,7 +129,7 @@
   :group 'convenience
   :link '(url-link :tag "GitHub" "https://github.com/gonewest818/dimmer.el"))
 
-(define-obsolete-variable-alias 'dimmer-percent 'dimmer-fraction)
+(define-obsolete-variable-alias 'dimmer-percent 'dimmer-fraction "0.2.2")
 (defcustom dimmer-fraction 0.20
   "Control the degree to which buffers are dimmed (0.0 - 1.0)."
   :type '(float)
@@ -151,7 +151,7 @@ See documentation for details."
  "v0.4.0")
 
 (define-obsolete-variable-alias
-  'dimmer-exclusion-regexp-list 'dimmer-buffer-exclusion-regexps)
+  'dimmer-exclusion-regexp-list 'dimmer-buffer-exclusion-regexps "0.4.2")
 (defcustom dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$"
                                              "^ \\*Echo.*\\*$")
   "List of regular expressions describing buffer names that are never dimmed."
@@ -168,7 +168,7 @@ the buffer is not dimmed."
   :group 'dimmer)
 
 (define-obsolete-variable-alias
-  'dimmer-exclusion-predicates 'dimmer-prevent-dimming-predicates)
+  'dimmer-exclusion-predicates 'dimmer-prevent-dimming-predicates "0.4.0")
 (defcustom dimmer-prevent-dimming-predicates '(window-minibuffer-p)
   "List of functions which prevent dimmer from altering dimmed buffer set.
 
@@ -586,7 +586,7 @@ when `dimmer-watch-frame-focus-events` is nil."
   nil
   :lighter ""
   :global t
-  :require 'dimmer
+  :group 'dimmer
   (if dimmer-mode
       (progn
         (dimmer-manage-frame-focus-hooks t)
@@ -600,7 +600,7 @@ when `dimmer-watch-frame-focus-events` is nil."
     (dimmer-restore-all)))
 
 ;;;###autoload
-(define-obsolete-function-alias 'dimmer-activate 'dimmer-mode)
+(define-obsolete-function-alias 'dimmer-activate 'dimmer-mode "0.2.0")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; debugging - call from *scratch*, ielm, or eshell
