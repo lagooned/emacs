@@ -11,6 +11,11 @@
   :group 'doom-flatwhite-theme
   :type 'boolean)
 
+(defcustom doom-flatwhite-no-highlight-variables nil
+  "If non-nil, removes highlight on variable names"
+  :group 'doom-flatwhite-theme
+  :type 'boolean)
+
 (defcustom doom-fw-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
@@ -118,6 +123,7 @@ determine the exact padding."
 
    ;; custom categories
    (-modeline-bright doom-flatwhite-brighter-modeline)
+   (-no-highlight-variables doom-flatwhite-no-highlight-variables)
    (-modeline-pad
     (when doom-fw-padded-modeline
       (if (integerp doom-fw-padded-modeline) doom-fw-padded-modeline 4)))
@@ -150,7 +156,10 @@ determine the exact padding."
       :foreground doc-comments
       :slant 'italic)
     (font-lock-type-face                 :inherit 'default)
-    (font-lock-variable-name-face        :foreground fg)
+
+    (font-lock-variable-name-face
+     :foreground (if -no-highlight-variables fg fw-blue-text)
+     :background (if -no-highlight-variables bg fw-blue-blend ))
     (font-lock-warning-face              :background fw-red-blend
                                          :foreground fw-red-text)
     (font-lock-negation-char-face        :inherit 'default)
@@ -269,6 +278,7 @@ determine the exact padding."
     (web-mode-html-attr-name-face    :background bg
                                      :foreground fg
                                      :inherit 'italic)
+    (web-mode-html-attr-value-face   :inherit 'font-lock-string-face)
     (web-mode-html-entity-face       :background fw-orange-blend
                                      :foreground fw-orange-text
                                      :inherit 'italic)
@@ -278,6 +288,10 @@ determine the exact padding."
                                      :foreground fg-alt)
     (web-mode-symbol-face            :foreground fw-blue-text
                                      :background fw-blue-blend)
+    (web-mode-string-face            :inherit 'font-lock-string-face)
+
+
+   
 
    ;; rjsx-mode
    (rjsx-tag  :background fw-purple-blend
@@ -444,14 +458,14 @@ determine the exact padding."
     (js2-external-variable :foreground fg)
 
     ;; racket
-    (racket-keyword-argument-face :foreground fw-blue-text
-                                  :background fw-blue-blend)
+    (racket-keyword-argument-face :foreground fw-orange-text
+                                  :background fw-orange-blend)
     (racket-selfeval-face :foreground fw-teal-text
                           :background fw-teal-blend)
 
     ;; clojure
-    (clojure-keyword-face :foreground fw-blue-text
-                          :background fw-blue-blend)
+    (clojure-keyword-face :foreground fw-orange-text
+                          :background fw-orange-blend)
 
     ;; fill column
     (hl-fill-column-face :foreground fg

@@ -158,7 +158,10 @@ This is used to generate extensions for `treemacs' from `all-the-icons-icon-alis
       (progn
         (treemacs-create-icon
          :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
-         :extensions (root))
+         :extensions (root-open))
+        (treemacs-create-icon
+         :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
+         :extensions (root-closed))
         (treemacs-create-icon
          :icon (format "%s\t%s\t"
                        (all-the-icons-octicon "chevron-down" :height 0.75 :v-adjust 0.1 :face face-spec)
@@ -241,7 +244,10 @@ This is used to generate extensions for `treemacs' from `all-the-icons-icon-alis
       (progn
         (treemacs-create-icon
          :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
-         :extensions (root))
+         :extensions (root-open))
+        (treemacs-create-icon
+         :icon (format " %s\t" (all-the-icons-octicon "repo" :height 1.2 :v-adjust -0.1 :face 'doom-themes-treemacs-root-face))
+         :extensions (root-closed))
         (treemacs-create-icon
          :icon (format "%s\t" (all-the-icons-octicon "flame" :height 0.8 :v-adjust 0 :face 'all-the-icons-red))
          :extensions (error))
@@ -254,6 +260,9 @@ This is used to generate extensions for `treemacs' from `all-the-icons-icon-alis
         (treemacs-create-icon
          :icon (format "  %s\t" (all-the-icons-alltheicon "git" :height 0.85 :v-adjust 0.0 :face 'all-the-icons-red))
          :extensions ("gitignore" "git" "gitconfig" "gitmodules"))
+        (treemacs-create-icon
+         :icon (format "%s\t" (all-the-icons-octicon "book" :height 1.0 :v-adjust 0.0 :face 'all-the-icons-blue))
+         :extensions (license))
 
         (dolist (item all-the-icons-icon-alist)
           (let* ((extensions (doom-themes--get-treemacs-extensions (car item)))
