@@ -30,7 +30,8 @@
   :commands haskell-mode)
 
 (use-package lsp-haskell
-  :when ((and (executable-find "stack") (executable-find "haskell-language-server-wrapper")))
+  :when (and (executable-find "stack")
+             (executable-find "haskell-language-server-wrapper"))
   :hook ((haskell-mode . lsp) (haskell-literate-mode . lsp)))
 
 (provide 'haskell-lang)
