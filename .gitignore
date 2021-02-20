@@ -44,3 +44,4 @@ transient
 /elpa/dashboard-*/banners/99.txt
 /bookmarks
 /package-quickstart.el
+/.dap-breakpoints

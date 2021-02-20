@@ -29,7 +29,6 @@
   :init
   (when (je/java-lsp-deps-p)
     (add-hook 'java-mode-hook #'lsp)
-    (add-hook 'java-mode-hook #'je/configure-company-lsp-backends)
     (evil-leader/set-key-for-mode 'java-mode
       "m m" 'lsp-execute-code-action
       "m o" 'lsp-java-organize-imports
@@ -41,7 +40,6 @@
       "SPC m r" "refactor")))
 
 (use-package lsp-java
-  :after lsp company-lsp
   :when (je/java-lsp-deps-p)
   :init
   (setq

@@ -56,7 +56,6 @@
     "m q" 'cider-quit))
 
 (use-package clj-lsp
-  :after lsp company-lsp
   :when (executable-find "clojure-lsp")
   :config
   (add-to-list

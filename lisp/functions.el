@@ -659,15 +659,10 @@ then kill buffer."
 (defun je/configure-elisp-company-backends ()
   (push '(company-capf company-yasnippet) company-backends))
 
-(defun je/configure-company-lsp-backends ()
-  (push 'company-capf company-backends))
-
 (defun je/java-lsp-deps-p ()
-  (and
-   (not
-    (or (eq system-type 'windows-nt)
-        (eq system-type 'cygwin)))
-   (executable-find "java")))
+  (and (not (or (eq system-type 'windows-nt)
+                (eq system-type 'cygwin)))
+       (executable-find "java")))
 
 (defun je/configure-evil-collection-mode-list ()
   (setq evil-collection-mode-list (remove 'company evil-collection-mode-list))

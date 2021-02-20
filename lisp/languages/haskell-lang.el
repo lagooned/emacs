@@ -29,8 +29,7 @@
 
 (use-package lsp-haskell
   :when (executable-find "haskell-language-server-wrapper")
-  :hook ((haskell-mode . lsp)
-         (haskell-literate-mode . lsp)))
+  :hook ((haskell-mode . lsp) (haskell-literate-mode . lsp)))
 
 (provide 'haskell-lang)
 ;;; haskell-lang.el ends here
