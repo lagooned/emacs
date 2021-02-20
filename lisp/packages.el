@@ -139,7 +139,7 @@
   :commands dimmer-mode
   :hook (emacs-startup . dimmer-mode)
   :config
-  (setq dimmer-fraction 0.15)
+  (setq dimmer-fraction 0.30)
   (dimmer-configure-which-key))
 
 (use-package dired
