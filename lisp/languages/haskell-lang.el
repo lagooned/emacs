@@ -28,7 +28,7 @@
   :commands haskell-mode)
 
 (use-package lsp-haskell
-  :when (executable-find "haskell-language-server")
+  :when (executable-find "haskell-language-server-wrapper")
   :hook ((haskell-mode . lsp)
          (haskell-literate-mode . lsp)))
 
