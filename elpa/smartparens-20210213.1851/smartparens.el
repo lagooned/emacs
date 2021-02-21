@@ -246,11 +246,12 @@ function will be considered."
   (and sp-backward-bound-fn (funcall sp-backward-bound-fn)))
 
 
+(defvaralias 'sp-keymap 'smartparens-mode-map)
+(make-obsolete-variable 'sp-keymap 'smartparens-mode-map "2015-01-01")
+
 ;;;###autoload
 (defvar smartparens-mode-map (make-sparse-keymap)
   "Keymap used for `smartparens-mode'.")
-(defvaralias 'sp-keymap 'smartparens-mode-map)
-(make-obsolete-variable 'sp-keymap 'smartparens-mode-map "2015-01-01")
 
 (defvar sp-paredit-bindings '(
                               ("C-M-f" . sp-forward-sexp) ;; navigation
@@ -756,15 +757,15 @@ after the smartparens indicator in the mode list."
       (progn
         (unless smartparens-mode
           (smartparens-mode 1))
-        (unless (-find-indices (lambda (it) (eq (car it) 'smartparens-strict-mode)) minor-mode-overriding-map-alist)
-          (setq minor-mode-overriding-map-alist
-                (cons `(smartparens-strict-mode . ,smartparens-strict-mode-map) minor-mode-overriding-map-alist)))
+        (unless (assq 'smartparens-strict-mode minor-mode-overriding-map-alist)
+          (push `(smartparens-strict-mode . ,smartparens-strict-mode-map)
+                minor-mode-overriding-map-alist))
         (put 'sp-backward-delete-char 'delete-selection 'sp--delete-selection-supersede-p)
         (put 'sp-delete-char 'delete-selection 'sp--delete-selection-supersede-p)
         (add-hook 'self-insert-uses-region-functions 'sp--self-insert-uses-region-strict-p nil 'local)
         (setq sp-autoskip-closing-pair 'always))
     (setq minor-mode-overriding-map-alist
-          (-remove (lambda (it) (eq (car it) 'smartparens-strict-mode)) minor-mode-overriding-map-alist))
+          (assq-delete-all 'smartparens-strict-mode minor-mode-overriding-map-alist))
     (put 'sp-backward-delete-char 'delete-selection 'supersede)
     (put 'sp-delete-char 'delete-selection 'supersede)
     (remove-hook 'self-insert-uses-region-functions 'sp--self-insert-uses-region-strict-p 'local)
@@ -842,14 +843,13 @@ See `sp--init'."
 
 This commands load all the parent major mode definitions and
 merges them into current buffer's `sp-local-pairs'."
-  (let ((parent-modes (-fix (lambda (x)
-                              (--if-let (get (car x) 'derived-mode-parent)
-                                  (cons it x)
-                                x))
-                            (list major-mode))))
-    ;; Combine all the definitions from the most ancient parent to the
-    ;; most recent parent
-    (--each parent-modes (sp-update-local-pairs it))))
+  ;; Combine all the definitions from the most ancient parent to the
+  ;; most recent parent
+  (-each (nreverse
+          (--unfold (when it
+                      (cons it (get it 'derived-mode-parent)))
+                    major-mode))
+    #'sp-update-local-pairs))
 
 (defun sp-update-local-pairs (configuration)
   "Update `sp-local-pairs' with CONFIGURATION.
@@ -2097,27 +2097,25 @@ The list OLD-PAIR must not be nil."
 (defun sp--merge-pairs (old-pair new-pair)
   "Merge OLD-PAIR and NEW-PAIR.
 This modifies the OLD-PAIR by side effect."
-  (let ((ind 0))
-    (--each new-pair
-      (when (= 0 (% ind 2))
-        (sp--merge-prop it new-pair old-pair))
-      (setq ind (1+ ind))))
+  (--each new-pair
+    ;; In plists, items at even positions are keys
+    (when (= 0 (% it-index 2))
+      (sp--merge-prop it new-pair old-pair)))
   old-pair)
 
 (defun sp--update-pair (new-pair old-pair)
   "Copy properties from NEW-PAIR to OLD-PAIR.
 
 The list OLD-PAIR must not be nil."
-  (let ((ind 0))
-    (--each new-pair
-      (when (= 0 (% ind 2))
-        (when (or (not (plist-get old-pair it))
-                  ;; HACK: we don't want to overwrite list properties
-                  ;; that aren't just :add with :add because this
-                  ;; would break the "idempotency".
-                  (not (equal '(:add) (plist-get new-pair it))))
-          (plist-put old-pair it (plist-get new-pair it))))
-      (setq ind (1+ ind))))
+  (--each new-pair
+    ;; In plists, items at even positions are keys
+    (when (= 0 (% it-index 2))
+      (when (or (not (plist-get old-pair it))
+                ;; HACK: we don't want to overwrite list properties
+                ;; that aren't just :add with :add because this
+                ;; would break the "idempotency".
+                (not (equal '(:add) (plist-get new-pair it))))
+        (plist-put old-pair it (plist-get new-pair it)))))
   old-pair)
 
 (defun sp--update-pair-list (pair mode)
@@ -2154,24 +2152,21 @@ old definition with values from PAIR."
 
 If PROP is non-nil, return the value of that property instead."
   (let ((pair (sp--get-pair open list)))
-    (if prop
-        (cond
-         ((eq prop :op-l)
-          (length (plist-get pair :open)))
-         ((eq prop :cl-l)
-          (length (plist-get pair :close)))
-         ((eq prop :len)
-          (+ (length (plist-get pair :open)) (length (plist-get pair :close))))
-         ((eq prop :post-handlers)
-          (--filter (not (listp it)) (plist-get pair prop)))
-         ((eq prop :post-handlers-cond)
-          (--filter (listp it) (plist-get pair :post-handlers)))
-         ((eq prop :when)
-          (--filter (not (listp it)) (plist-get pair :when)))
-         ((eq prop :when-cond)
-          (-flatten (-concat (--filter (listp it) (plist-get pair :when)))))
-         (t (plist-get pair prop)))
-      pair)))
+    (cl-case prop
+      ((nil) pair)
+      (:op-l (length (plist-get pair :open)))
+      (:cl-l (length (plist-get pair :close)))
+      (:len (+ (length (plist-get pair :open))
+               (length (plist-get pair :close))))
+      (:post-handlers
+       (-remove #'listp (plist-get pair :post-handlers)))
+      (:post-handlers-cond
+       (-filter #'listp (plist-get pair :post-handlers)))
+      (:when
+       (-remove #'listp (plist-get pair :when)))
+      (:when-cond
+       (-flatten (-concat (-filter #'listp (plist-get pair :when)))))
+      (t (plist-get pair prop)))))
 
 (defun sp-get-pair-definition (open mode &optional prop)
   "Get the definition of pair identified by OPEN.
@@ -4145,11 +4140,11 @@ just-inserted character."
 position of point.
 
 If the point is inside an empty pair, automatically delete both.  That
-is, [(|) turns to [|, [\{|\} turns to [|.  Can be disabled by setting
+is, [(|) turns to [|, [{|} turns to [|.  Can be disabled by setting
 `sp-autodelete-pair' to nil.
 
 If the point is behind a closing pair or behind an opening pair delete
-it as a whole.  That is, \{\}| turns to \{|, \{| turns to |.  Can be
+it as a whole.  That is, {}| turns to {|, {| turns to |.  Can be
 disabled by setting `sp-autodelete-closing-pair' and
 `sp-autodelete-opening-pair' to nil.
 
@@ -5232,8 +5227,9 @@ is used to retrieve the prefix instead of the global setting."
       (let* ((pref (sp-get-pair op :prefix))
              (prefix
               (if pref
-                  (when (sp--looking-back pref sp-max-prefix-length)
-                    (match-string-no-properties 0))
+                  (if (sp--looking-back pref sp-max-prefix-length)
+                      (match-string-no-properties 0)
+                    "")
                 (-if-let (mmode-prefix (cdr (assoc major-mode sp-sexp-prefix)))
                     (cond
                      ((and (eq (car mmode-prefix) 'regexp)
@@ -5274,8 +5270,9 @@ is used to retrieve the suffix instead of the global setting."
       (let* ((suff (sp-get-pair op :suffix))
              (suffix
               (if suff
-                  (when (sp--looking-at suff)
-                    (match-string-no-properties 0))
+                  (if (sp--looking-at suff)
+                      (match-string-no-properties 0)
+                    "")
                 (-if-let (mmode-suffix (cdr (assoc major-mode sp-sexp-suffix)))
                     (cond
                      ((and (eq (car mmode-suffix) 'regexp)
@@ -7506,8 +7503,8 @@ Examples:
                        (and (or (,(if forward 'sp--looking-back 'sp--looking-at)
                                  ,(if forward 'allowed-close 'allowed-open))
                                 (,(if forward 'sp--looking-back 'sp--looking-at) allowed-strings))
-                            (progn
-                              (setq prefix (,prefix-fn))
+                            (let ((op (match-string 0)))
+                              (setq prefix (,prefix-fn (point) op))
                               (> (length prefix) 0)))))
          (if (and (not in-comment)
                   (sp-point-in-comment))
@@ -7515,7 +7512,8 @@ Examples:
                (goto-char (,comment-bound (sp-get-comment-bounds)))
                (unless ,eob-test (,forward-fn 1)))
            (unless ,eob-test
-             (,forward-fn (max (length prefix) 1))))))))
+             (,forward-fn (max (length prefix) 1))))
+         (setq prefix nil)))))
 
 (defun sp-skip-forward-to-symbol (&optional stop-at-string stop-after-string stop-inside-string)
   "Skip whitespace and comments moving forward.
@@ -8385,25 +8383,18 @@ Examples:
   (interactive "P")
   (cond
    ((equal arg '(4))
-    (-when-let (items (sp-get-list-items))
-      (let ((op (sp-get (car items) :op))
-            (cl (sp-get (car items) :cl))
-            (beg (sp-get (car items) :beg))
-            (end (sp-get (car items) :end)))
-        (!cdr items)
-        (setq items (nreverse items))
+    (-when-let [(first-item . rest-items) (sp-get-list-items)]
+      (sp-get first-item
         (save-excursion
-          (goto-char end)
-          (delete-char (- (length cl)))
-          (while items
-            (sp-get (car items)
-              (goto-char :end)
-              (insert cl)
-              (goto-char :beg)
-              (insert op))
-            (!cdr items))
-          (goto-char beg)
-          (delete-char (length op))))))
+          (goto-char :end)
+          (delete-char (- (length :cl)))
+          (--each (nreverse rest-items)
+            (goto-char (sp-get it :end))
+            (insert :cl)
+            (goto-char (sp-get it :beg))
+            (insert :op))
+          (goto-char :beg)
+          (delete-char (length :op))))))
    (t
     (let ((should-split-as-string
            (and sp-split-sexp-always-split-as-string
@@ -9405,64 +9396,105 @@ support custom pairs."
             (sp-show--pair-enc-function ok)))
       (execute-kbd-macro cmd))))
 
+(eval-when-compile
+  (defalias 'sp--while-no-input 'while-no-input)
+  (when (version< emacs-version "27")
+    ;; Ripped from Emacs 27.0 subr.el.
+    ;; See Github Issue#946 and Emacs bug#31692.
+    (defmacro sp--while-no-input (&rest body)
+      "Execute BODY only as long as there's no pending input.
+If input arrives, that ends the execution of BODY,
+and `while-no-input' returns t.  Quitting makes it return nil.
+If BODY finishes, `while-no-input' returns whatever value BODY produced."
+      (declare (debug t) (indent 0))
+      (let ((catch-sym (make-symbol "input")))
+       `(with-local-quit
+           (catch ',catch-sym
+             (let ((throw-on-input ',catch-sym)
+                   val)
+               (setq val (or (input-pending-p)
+                             (progn ,@body)))
+               (cond
+               ;; When input arrives while throw-on-input is non-nil,
+               ;; kbd_buffer_store_buffered_event sets quit-flag to the
+               ;; value of throw-on-input.  If, when BODY finishes,
+               ;; quit-flag still has the same value as throw-on-input, it
+               ;; means BODY never tested quit-flag, and therefore ran to
+               ;; completion even though input did arrive before it
+               ;; finished.  In that case, we must manually simulate what
+               ;; 'throw' in process_quit_flag would do, and we must
+               ;; reset quit-flag, because leaving it set will cause us
+               ;; quit to top-level, which has undesirable consequences,
+               ;; such as discarding input etc.  We return t in that case
+               ;; because input did arrive during execution of BODY.
+               ((eq quit-flag throw-on-input)
+                (setq quit-flag nil)
+                t)
+               ;; This is for when the user actually QUITs during
+               ;; execution of BODY.
+               (quit-flag
+                nil)
+               (t val)))))))))
+
 (defun sp-show--pair-function ()
   "Display the show pair overlays and print the line of the
 matching paren in the echo area if not visible on screen."
   (when show-smartparens-mode
     (sp--with-case-sensitive
       (save-match-data
-        (cl-labels ((scan-and-place-overlays
-                     (match &optional back)
-                     ;; we can use `sp-get-thing' here because we *are* at some
-                     ;; pair opening, and so only the tag or the sexp can trigger.
-                     (-if-let (ok (sp-get-thing back))
-                         (sp-get ok
-                           (when (or (and back
-                                          (or (= :end (point))
-                                              (= :beg-in (point))))
-                                     (and (not back)
-                                          (or (= :beg (point))
-                                              (= :end-in (point)))))
-                             (sp-show--pair-create-overlays :beg :end :op-l :cl-l)
-                             (when (and sp-echo-match-when-invisible
-                                        (not (or (active-minibuffer-window) cursor-in-echo-area)))
-                               (sp-show--pair-echo-match :beg :end :op-l :cl-l))))
-                       (if back
-                           (sp-show--pair-create-mismatch-overlay (- (point) (length match))
-                                                                  (length match))
-                         (sp-show--pair-create-mismatch-overlay (point) (length match)))
-                       (setq sp-show-pair-previous-match-positions nil)
-                       (setq sp-show-pair-previous-point nil))))
-          (let* ((pair-list (sp--get-allowed-pair-list))
-                 (opening (sp--get-opening-regexp pair-list))
-                 (closing (sp--get-closing-regexp pair-list))
-                 (allowed (and sp-show-pair-from-inside (sp--get-allowed-regexp))))
-            (cond
-             ;; if we are in a situation "()|", we should highlight the
-             ;; regular pair and not the string pair "from inside"
-             ((and (not (sp--evil-normal-state-p))
-                   (not (sp--evil-motion-state-p))
-                   (not (sp--evil-visual-state-p))
-                   (sp--looking-back (if sp-show-pair-from-inside allowed closing)))
-              (scan-and-place-overlays (match-string 0) :back))
-             ((or (and (or (sp--evil-normal-state-p)
-                           (sp--evil-motion-state-p)
-                           (sp--evil-visual-state-p))
-                       (sp--looking-at (sp--get-allowed-regexp)))
-                  (sp--looking-at (if sp-show-pair-from-inside allowed opening))
-                  (looking-at (sp--get-stringlike-regexp))
-                  (and (memq major-mode sp-navigate-consider-sgml-tags)
-                       (looking-at "<")))
-              (scan-and-place-overlays (match-string 0)))
-             ((or (sp--looking-back (if sp-show-pair-from-inside allowed closing))
-                  (sp--looking-back (sp--get-stringlike-regexp))
-                  (and (memq major-mode sp-navigate-consider-sgml-tags)
-                       (sp--looking-back ">")))
-              (scan-and-place-overlays (match-string 0) :back))
-             (sp-show-pair-overlays
-              (sp-show--pair-delete-overlays)
-              (setq sp-show-pair-previous-match-positions nil)
-              (setq sp-show-pair-previous-point nil)))))))))
+        (sp--while-no-input
+          (cl-labels ((scan-and-place-overlays
+                       (match &optional back)
+                       ;; we can use `sp-get-thing' here because we *are* at some
+                       ;; pair opening, and so only the tag or the sexp can trigger.
+                       (-if-let (ok (sp-get-thing back))
+                           (sp-get ok
+                             (when (or (and back
+                                            (or (= :end (point))
+                                                (= :beg-in (point))))
+                                       (and (not back)
+                                            (or (= :beg (point))
+                                                (= :end-in (point)))))
+                               (sp-show--pair-create-overlays :beg :end :op-l :cl-l)
+                               (when (and sp-echo-match-when-invisible
+                                          (not (or (active-minibuffer-window) cursor-in-echo-area)))
+                                 (sp-show--pair-echo-match :beg :end :op-l :cl-l))))
+                         (if back
+                             (sp-show--pair-create-mismatch-overlay (- (point) (length match))
+                                                                    (length match))
+                           (sp-show--pair-create-mismatch-overlay (point) (length match)))
+                         (setq sp-show-pair-previous-match-positions nil)
+                         (setq sp-show-pair-previous-point nil))))
+            (let* ((pair-list (sp--get-allowed-pair-list))
+                   (opening (sp--get-opening-regexp pair-list))
+                   (closing (sp--get-closing-regexp pair-list))
+                   (allowed (and sp-show-pair-from-inside (sp--get-allowed-regexp))))
+              (cond
+               ;; if we are in a situation "()|", we should highlight the
+               ;; regular pair and not the string pair "from inside"
+               ((and (not (sp--evil-normal-state-p))
+                     (not (sp--evil-motion-state-p))
+                     (not (sp--evil-visual-state-p))
+                     (sp--looking-back (if sp-show-pair-from-inside allowed closing)))
+                (scan-and-place-overlays (match-string 0) :back))
+               ((or (and (or (sp--evil-normal-state-p)
+                             (sp--evil-motion-state-p)
+                             (sp--evil-visual-state-p))
+                         (sp--looking-at (sp--get-allowed-regexp)))
+                    (sp--looking-at (if sp-show-pair-from-inside allowed opening))
+                    (looking-at (sp--get-stringlike-regexp))
+                    (and (memq major-mode sp-navigate-consider-sgml-tags)
+                         (looking-at "<")))
+                (scan-and-place-overlays (match-string 0)))
+               ((or (sp--looking-back (if sp-show-pair-from-inside allowed closing))
+                    (sp--looking-back (sp--get-stringlike-regexp))
+                    (and (memq major-mode sp-navigate-consider-sgml-tags)
+                         (sp--looking-back ">")))
+                (scan-and-place-overlays (match-string 0) :back))
+               (sp-show-pair-overlays
+                (sp-show--pair-delete-overlays)
+                (setq sp-show-pair-previous-match-positions nil)
+                (setq sp-show-pair-previous-point nil))))))))))
 
 (defun sp-show--pair-enc-function (&optional thing)
   "Display the show pair overlays for enclosing expression."
