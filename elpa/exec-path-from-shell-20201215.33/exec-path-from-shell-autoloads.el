@@ -13,18 +13,19 @@
 (autoload 'exec-path-from-shell-copy-envs "exec-path-from-shell" "\
 Set the environment variables with NAMES from the user's shell.
 
-As a special case, if the variable is $PATH, then `exec-path' and
-`eshell-path-env' are also set appropriately.  The result is an alist,
-as described by `exec-path-from-shell-getenvs'.
+As a special case, if the variable is $PATH, then the variables
+`exec-path' and `eshell-path-env' are also set appropriately.
+The result is an alist, as described by
+`exec-path-from-shell-getenvs'.
 
 \(fn NAMES)" nil nil)
 
 (autoload 'exec-path-from-shell-copy-env "exec-path-from-shell" "\
 Set the environment variable $NAME from the user's shell.
 
-As a special case, if the variable is $PATH, then `exec-path' and
-`eshell-path-env' are also set appropriately.  Return the value
-of the environment variable.
+As a special case, if the variable is $PATH, then the variables
+`exec-path' and `eshell-path-env' are also set appropriately.
+Return the value of the environment variable.
 
 \(fn NAME)" t nil)
 
@@ -33,9 +34,7 @@ Initialize environment from the user's shell.
 
 The values of all the environment variables named in
 `exec-path-from-shell-variables' are set from the corresponding
-values used in the user's shell.
-
-\(fn)" t nil)
+values used in the user's shell." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "exec-path-from-shell" '("exec-path-from-shell-")))
 
