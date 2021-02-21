@@ -44,8 +44,38 @@
     (load-theme
      ;; 'badwolf
      ;; 'modus-vivendi
+     ;; 'doom-dark+
+     ;; 'doom-Iosvkem
+     ;; 'doom-city-lights
+     ;; 'doom-ephemeral
+     ;; 'doom-flatwhite
+     ;; 'doom-homage-black
+     ;; 'doom-gruvbox
+     ;; 'doom-henna
+     ;; 'doom-material
+     ;; 'doom-miramare
+     ;; 'doom-molokai
+     ;; 'doom-monokai-classic
+     ;; 'doom-monokai-pro
+     ;; 'doom-monokai-spectrum
+     ;; 'doom-moonlight
+     ;; 'doom-nord
+     ;; 'doom-nova
+     'doom-oceanic-next
+     ;; 'doom-old-hope
+     ;; 'doom-opera
+     ;; 'doom-outrun-electric
+     ;; 'doom-palenight
+     ;; 'doom-peacock
+     ;; 'doom-plain-dark
+     ;; 'doom-solarized-dark
+     ;; 'doom-solarized-light
+     ;; 'doom-sourcerer
+     ;; 'doom-spacegrey
+     ;; 'doom-tomorrow-day
+     ;; 'doom-tomorrow-night
+     ;; 'doom-vibrant
      ;; 'doom-wilmersdorf
-     'doom-old-hope
      t))
 
 ;; set mode-line height
