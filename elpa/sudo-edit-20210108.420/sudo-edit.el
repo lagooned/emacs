@@ -4,10 +4,10 @@
 
 ;; Author: Nathaniel Flath <flat0103@gmail.com>
 ;; URL: https://github.com/nflath/sudo-edit
-;; Package-Version: 20200625.142
-;; Package-Commit: 0e2c32b5e5242d30f8780cbe8e1b1649476cac4d
+;; Package-Version: 20210108.420
+;; Package-Commit: a7ae1713bb659988bb1465a13b837fbc2d699504
 ;; Keywords: convenience
-;; Version: 0.0.1a
+;; Version: 0.1.1
 ;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
 
 ;; This file is not part of GNU Emacs.
@@ -212,7 +212,7 @@ for a file to visit if current buffer is not visiting a file."
   (cl-assert (not (string-blank-p sudo-edit-user)) nil "User must not be a empty string")
   (find-file (sudo-edit-filename filename sudo-edit-user)))
 
-(define-obsolete-function-alias 'sudo-edit-current-file 'sudo-edit)
+(define-obsolete-function-alias 'sudo-edit-current-file 'sudo-edit "2016-09-05")
 
 (provide 'sudo-edit)
 ;;; sudo-edit.el ends here
