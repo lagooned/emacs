@@ -901,8 +901,9 @@
   (which-key-setup-side-window-bottom)
   (which-key-add-key-based-replacements
     "SPC ;" "M-x"
-    "SPC !" "shell command"
-    "SPC @" "async shell command"
+    "SPC !" "exec"
+    "SPC @" "async exec"
+    "SPC :" "eval expr"
     "SPC b" "buffer"
     "SPC TAB" "last buffer"
     "SPC c" "config"
