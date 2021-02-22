@@ -183,7 +183,7 @@
   (setq elscreen-tab-display-kill-screen nil
         elscreen-tab-display-control nil
         elscreen-display-tab nil
-        elscreen-display-screen-number nil)
+        elscreen-display-screen-number 1)
   :config
   (je/setup-elscreen))
 
