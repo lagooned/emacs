@@ -54,12 +54,10 @@
      ;; 'doom-miramare
      ;; 'doom-molokai
      ;; 'doom-monokai-classic
-     ;; 'doom-monokai-pro
-     ;; 'doom-monokai-spectrum
-     ;; 'doom-moonlight
+     'doom-moonlight
      ;; 'doom-nord
      ;; 'doom-nova
-     'doom-oceanic-next
+     ;; 'doom-oceanic-next
      ;; 'doom-old-hope
      ;; 'doom-opera
      ;; 'doom-outrun-electric
