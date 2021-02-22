@@ -479,7 +479,19 @@ Make a message by passing ARGS to `format-message'."
   "Set buffer coding system by END-OF-LINE and CHARSET."
   (let ((coding-system (editorconfig-merge-coding-systems end-of-line
                                                           charset)))
+    (display-warning '(editorconfig editorconfig-set-coding-system)
+                     (format "buffer-file-name: %S | buffer-file-coding-system: %S | coding-system: %S | apply-currently: %S"
+                             buffer-file-name
+                             buffer-file-coding-system
+                             coding-system
+                             editorconfig--apply-coding-system-currently)
+                     :debug)
     (when (eq coding-system 'undecided)
+      (cl-return-from editorconfig-set-coding-system))
+    (when (and buffer-file-coding-system
+               (memq buffer-file-coding-system
+                     (coding-system-aliases (merge-coding-systems coding-system
+                                                                  buffer-file-coding-system))))
       (cl-return-from editorconfig-set-coding-system))
     (unless (file-readable-p buffer-file-name)
       (set-buffer-file-coding-system coding-system)
@@ -636,13 +648,6 @@ This function also removes 'unset'ted properties and calls
                            err)))
     (cl-loop for k being the hash-keys of props using (hash-values v)
              when (equal v "unset") do (remhash k props))
-    (condition-case err
-        (run-hook-with-args 'editorconfig-hack-properties-functions props)
-      (error
-       (display-warning 'editorconfig-hack-properties-functions
-                        (concat (error-message-string err)
-                                ". Abort running hook.")
-                        :warning)))
     props))
 
 (defun editorconfig-set-variables (props)
@@ -666,6 +671,13 @@ Use `editorconfig-mode-apply' instead to make use of these variables."
     (condition-case err
         (progn
           (let ((props (editorconfig-call-get-properties-function buffer-file-name)))
+            (condition-case err
+                (run-hook-with-args 'editorconfig-hack-properties-functions props)
+              (error
+               (display-warning '(editorconfig editorconfig-hack-properties-functions)
+                                (format "Error while running editorconfig-hack-properties-functions, abort running hook: %S"
+                                        err)
+                                :warning)))
             (setq editorconfig-properties-hash props)
             (editorconfig-set-variables props)
             (editorconfig-set-coding-system
@@ -674,14 +686,13 @@ Use `editorconfig-mode-apply' instead to make use of these variables."
             (condition-case err
                 (run-hook-with-args 'editorconfig-after-apply-functions props)
               (error
-               (display-warning 'editorconfig-after-apply-functions
-                                (concat (error-message-string err)
-                                        ". Stop running hook.")
+               (display-warning '(editorconfig editorconfig-after-apply-functions)
+                                (format "Error while running editorconfig-after-apply-functions, abort running hook: %S"
+                                        err)
                                 :warning)))))
       (error
-       (display-warning 'editorconfig
-                        (concat (error-message-string err)
-                                ".  Styles will not be applied.")
+       (display-warning '(editorconfig editorconfig-apply)
+                        (format "Error in editorconfig-apply, styles will not be applied: %S" err)
                         :error)))))
 
 (defun editorconfig-mode-apply ()
@@ -741,7 +752,7 @@ F is that function, and FILENAME and ARGS are arguments passed to F."
                 (editorconfig-merge-coding-systems (gethash 'end_of_line props)
                                                    (gethash 'charset props))))
       (error
-       (display-warning 'editorconfig
+       (display-warning '(editorconfig editorconfig--advice-find-file-noselect)
                         (format "Failed to get properties, styles will not be applied: %S"
                                 err)
                         :warning)))
@@ -767,18 +778,34 @@ F is that function, and FILENAME and ARGS are arguments passed to F."
               ;; For that case, explicitly set this value so that saving will be done
               ;; with expected coding system.
               (set-buffer-file-coding-system coding-system))
+
+            ;; When using editorconfig-2-mode, hack-properties-functions cannot affect coding-system value,
+            ;; because it has to be set before initializing buffers.
+            (condition-case err
+                (run-hook-with-args 'editorconfig-hack-properties-functions props)
+              (error
+               (display-warning '(editorconfig editorconfig-hack-properties-functions)
+                                (format "Error while running editorconfig-hack-properties-functions, abort running hook: %S"
+                                        err)
+                                :warning)))
             (setq editorconfig-properties-hash props)
             (editorconfig-set-variables props)
             (condition-case err
                 (run-hook-with-args 'editorconfig-after-apply-functions props)
               (error
-               (display-warning 'editorconfig
+               (display-warning '(editorconfig editorconfig--advice-find-file-noselect)
                                 (format "Error while running `editorconfig-after-apply-functions': %S"
                                         err))))))
       (error
-       (display-warning 'editorconfig
+       (display-warning '(editorconfig editorconfig--advice-find-file-noselect)
                         (format "Error while setting variables from EditorConfig: %S" err))))
     ret))
+
+(defvar editorconfig--enable-20210221-testing nil
+  "Enable testing version of `editorconfig-mode'.
+
+Currently this mode is not well tested yet and can cause unexpected behaviors
+like killing Emacs process or not able to visit files at all.")
 
 ;;;###autoload
 (define-minor-mode editorconfig-mode
@@ -788,39 +815,32 @@ To disable EditorConfig in some buffers, modify
 `editorconfig-exclude-modes' or `editorconfig-exclude-regexps'."
   :global t
   :lighter editorconfig-mode-lighter
-  ;; See https://github.com/editorconfig/editorconfig-emacs/issues/141 for why
-  ;; not `after-change-major-mode-hook'
-  (dolist (hook '(change-major-mode-after-body-hook
-                  read-only-mode-hook
-                  ;; Some modes call `kill-all-local-variables' in their init
-                  ;; code, which clears some values set by editorconfig.
-                  ;; For those modes, editorconfig-apply need to be called
-                  ;; explicitly through their hooks.
-                  rpm-spec-mode-hook
-                  ))
-    (if editorconfig-mode
-        (add-hook hook 'editorconfig-mode-apply)
-      (remove-hook hook 'editorconfig-mode-apply))))
+  (if editorconfig--enable-20210221-testing
+      (if editorconfig-mode
+          (progn
+            (advice-add 'find-file-noselect :around 'editorconfig--advice-find-file-noselect)
+            (advice-add 'insert-file-contents :around 'editorconfig--advice-insert-file-contents)
+            (add-hook 'read-only-mode-hook
+                      'editorconfig-mode-apply))
+        (advice-remove 'find-file-noselect 'editorconfig--advice-find-file-noselect)
+        (advice-remove 'insert-file-contents 'editorconfig--advice-insert-file-contents)
+        (remove-hook 'read-only-mode-hook
+                     'editorconfig-mode-apply))
 
-(define-minor-mode editorconfig-2-mode
-  "Toggle EditorConfig feature.
-
-This function is provided temporarily for beta testing, and not well tested yet.
-Currently this can cause unexpected behaviors like kill emacs processes and
-destroying your files, so please use with caution if you enable this instead of
- `editorconfig-mode'."
-  :global t
-  :lighter editorconfig-mode-lighter
-  (if editorconfig-2-mode
-      (progn
-        (advice-add 'find-file-noselect :around 'editorconfig--advice-find-file-noselect)
-        (advice-add 'insert-file-contents :around 'editorconfig--advice-insert-file-contents)
-        (add-hook 'read-only-mode-hook
-                  'editorconfig-mode-apply))
-    (advice-remove 'find-file-noselect 'editorconfig--advice-find-file-noselect)
-    (advice-remove 'insert-file-contents 'editorconfig--advice-insert-file-contents)
-    (remove-hook 'read-only-mode-hook
-              'editorconfig-mode-apply)))
+    ;; editorconfig--enable-20210221-testing is disabled
+    ;; See https://github.com/editorconfig/editorconfig-emacs/issues/141 for why
+    ;; not `after-change-major-mode-hook'
+    (dolist (hook '(change-major-mode-after-body-hook
+                    read-only-mode-hook
+                    ;; Some modes call `kill-all-local-variables' in their init
+                    ;; code, which clears some values set by editorconfig.
+                    ;; For those modes, editorconfig-apply need to be called
+                    ;; explicitly through their hooks.
+                    rpm-spec-mode-hook
+                    ))
+      (if editorconfig-mode
+          (add-hook hook 'editorconfig-mode-apply)
+        (remove-hook hook 'editorconfig-mode-apply)))))
 
 
 ;; Tools
