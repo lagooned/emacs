@@ -74,23 +74,25 @@
   :commands company-mode
   :hook (prog-mode . company-mode)
   :bind
-  (:map company-active-map
-        ("<tab>" . nil)
-        ("<return>" . nil)
-        ("RET" . nil)
-        ("\e\e\e" . nil)
-        ("C-j" . company-select-next-or-abort)
-        ("C-k" . company-select-previous-or-abort)
-        ("C-n" . je/company-cancel-complete-next)
-        ("C-p" . je/company-cancel-complete-prev)
-        ("C-i" . company-complete-common-or-cycle)
-        ("C-m" . company-complete-selection)
-        ("C-u" . company-previous-page)
-        ("C-d" . company-next-page))
+  (:map
+   company-active-map
+   ("<tab>" . nil)
+   ("<return>" . nil)
+   ("RET" . nil)
+   ("\e\e\e" . nil)
+   ("C-j" . company-select-next-or-abort)
+   ("C-k" . company-select-previous-or-abort)
+   ("C-n" . jecompany-cancel-complete-next)
+   ("C-p" . je/company-cancel-complete-prev)
+   ("C-i" . company-complete-common-or-cycle)
+   ("C-m" . company-complete-selection)
+   ("C-u" . company-previous-page)
+   ("C-d" . company-next-page))
   :init
-  (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2
-        company-show-numbers t)
+  (setq
+   company-idle-delay 0.1
+   company-minimum-prefix-length 2
+   company-show-numbers t)
   :config
   (setq company-backends nil)
   (make-variable-buffer-local 'company-backends))
