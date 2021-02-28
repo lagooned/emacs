@@ -734,6 +734,18 @@ then kill buffer."
   (global-unset-key (kbd "M-o"))
   (global-unset-key (kbd "C-M-o")))
 
+(defun je/evil-insert-binds ()
+  (define-key evil-insert-state-map (kbd "M-;") 'comment-dwim)
+  (define-key evil-insert-state-map (kbd "C-j") 'newline)
+  (define-key evil-insert-state-map (kbd "C-m") 'newline-and-indent)
+  (define-key evil-insert-state-map (kbd "M-j") 'indent-new-comment-line)
+  (define-key evil-insert-state-map (kbd "M-m") 'indent-new-comment-line)
+  (define-key evil-insert-state-map (kbd "M-y") 'counsel-yank-pop)
+  (define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
+  (define-key evil-insert-state-map (kbd "C-f") 'evil-forward-char)
+  (define-key evil-insert-state-map (kbd "C-b") 'evil-backward-char)
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop))
+
 (provide 'functions)
 ;;; functions.el ends here
 
