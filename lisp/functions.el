@@ -496,7 +496,9 @@ eshell command string, and EOF if there is a pending command string."
   (define-key evil-emacs-state-local-map (kbd "C-M-n") 'ivy-next-line-and-call)
   (define-key evil-emacs-state-local-map (kbd "C-M-p") 'ivy-previous-line-and-call)
   (define-key evil-emacs-state-local-map (kbd "C-M-o") 'ivy-dispatching-call)
-  (define-key evil-emacs-state-local-map (kbd "C-M-h") 'ivy-help))
+  (define-key evil-emacs-state-local-map (kbd "C-M-h") 'ivy-help)
+  (define-key evil-emacs-state-local-map (kbd "C-u") 'ivy-scroll-down-command)
+  (define-key evil-emacs-state-local-map (kbd "C-d") 'ivy-scroll-up-command))
 
 (defun je/evil-org-mode-setup ()
   "Setup org mode."
