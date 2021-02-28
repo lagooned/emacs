@@ -350,6 +350,8 @@
   (define-key evil-emacs-state-map (kbd "C-s") 'isearch-forward)
   (define-key evil-emacs-state-map (kbd "C-w") 'kill-region)
   (define-key evil-emacs-state-map (kbd "C-y") 'yank)
+  (define-key evil-emacs-state-map (kbd "C-f") 'forward-char)
+  (define-key evil-emacs-state-map (kbd "C-b") 'backward-char)
   (define-key evil-emacs-state-map (kbd "M-r") 'move-to-window-line-top-bottom)
   (define-key evil-emacs-state-map (kbd "M-a") 'backward-sentence)
   (define-key evil-emacs-state-map (kbd "M-b") 'backward-word)
