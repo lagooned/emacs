@@ -242,6 +242,8 @@
   (global-unset-key (kbd "C-y"))
   (global-unset-key (kbd "C-b"))
   (global-unset-key (kbd "C-f"))
+  (global-unset-key (kbd "C-/"))
+  (global-unset-key (kbd "C-_"))
   (global-unset-key (kbd "M-j"))
   (global-unset-key (kbd "M-a"))
   (global-unset-key (kbd "M-b"))
@@ -308,7 +310,8 @@
   (define-key evil-motion-state-map (kbd "C-=") 'er/expand-region)
   (define-key evil-motion-state-map (kbd "C-u") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "-") 'dired-jump)
-  (define-key evil-normal-state-map (kbd "M-;") 'comment-line)
+  (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
+  (define-key evil-normal-state-map (kbd "C-_") 'comment-line)
   (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
   (define-key evil-normal-state-map (kbd "C-=") 'er/expand-region)
   (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
@@ -879,7 +882,10 @@
 
 (use-package undo-tree
   :defer t
-  :diminish undo-tree-mode)
+  :diminish undo-tree-mode
+  (:map
+   undo-tree-map
+   ("C-_") . void))
 
 (use-package uniquify
   :config
