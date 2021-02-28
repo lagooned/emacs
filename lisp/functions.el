@@ -657,7 +657,7 @@ then kill buffer."
     "SPC z" "screen"))
 
 (defun je/configure-elisp-company-backends ()
-  (push '(company-capf company-yasnippet) company-backends))
+  (setq company-backends `(company-capf company-yasnippet)))
 
 (defun je/java-lsp-deps-p ()
   (and (not (or (eq system-type 'windows-nt)
