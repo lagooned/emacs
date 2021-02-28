@@ -225,7 +225,8 @@
    evil-want-Y-yank-to-eol t
    evil-want-keybinding nil
    evil-jumps-max-length 20
-   evil-mode-line-format '(before . mode-line-front-space))
+   evil-mode-line-format '(before . mode-line-front-space)
+   evil-toggle-key "C-`")
   (setq-default mode-line-format (je/create-mode-line-format))
   :config
   (setq evil-normal-state-cursor `("#00ffff" (hbar . #xffff)))
