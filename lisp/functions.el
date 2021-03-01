@@ -774,7 +774,8 @@ then kill buffer."
 
 (defun je/evil-visual-binds ()
   (define-key evil-visual-state-map (kbd "$") 'evil-end-of-visual-line)
-  (define-key evil-visual-state-map (kbd "C-;") 'comment-dwim)
+  (define-key evil-visual-state-map (kbd "C-/") 'comment-dwim)
+  (define-key evil-visual-state-map (kbd "C-_") 'comment-dwim)
   (define-key evil-visual-state-map (kbd "gcc") 'comment-dwim)
   (define-key evil-visual-state-map (kbd "C-=") 'er/expand-region)
   (define-key evil-visual-state-map (kbd "C-j") 'void)
