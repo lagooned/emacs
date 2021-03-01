@@ -719,11 +719,8 @@
   :commands try)
 
 (use-package undo-tree
-  :defer t
-  :diminish undo-tree-mode
-  (:map
-   undo-tree-map
-   ("C-_") . void))
+  :diminish
+  :commands undo-tree-mode)
 
 (use-package uniquify
   :config
