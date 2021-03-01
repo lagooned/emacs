@@ -735,7 +735,6 @@ then kill buffer."
   (global-unset-key (kbd "C-M-o")))
 
 (defun je/evil-insert-binds ()
-  (define-key evil-insert-state-map (kbd "M-;") 'comment-dwim)
   (define-key evil-insert-state-map (kbd "C-j") 'newline)
   (define-key evil-insert-state-map (kbd "C-m") 'newline-and-indent)
   (define-key evil-insert-state-map (kbd "M-j") 'indent-new-comment-line)
