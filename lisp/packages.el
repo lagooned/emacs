@@ -474,6 +474,12 @@
   (evil-leader/set-key "g" 'je/run-grep)
   (which-key-add-key-based-replacements "SPC g" "grep"))
 
+(use-package google-this
+  :diminish
+  :after (which-key evil-leader)
+  :init (evil-leader/set-key "h g" 'google-this)
+  :config (google-this-mode 1))
+
 (use-package hi-lock
   :commands hi-lock-mode
   :diminish hi-lock-mode "hi"
