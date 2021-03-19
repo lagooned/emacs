@@ -376,7 +376,8 @@
     "-" 'je/shrink-window
     ";" 'counsel-M-x
     ":" 'eval-expression
-    "`" 'eshell
+    "~" 'eshell
+    "`" 'shell
     "!" 'shell-command
     "@" 'async-shell-command
     "q q" 'save-buffers-kill-terminal)
