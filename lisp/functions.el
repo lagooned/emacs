@@ -613,7 +613,9 @@ then kill buffer."
   (define-key evil-insert-state-local-map (kbd "M-m") 'cider-repl-return))
 
 (defun je/cider-deps-p ()
-  (and (executable-find "clj") (executable-find "lein")))
+  (and (executable-find "clj")
+       (executable-find "lein")
+       (not (eq system-type 'windows-nt))))
 
 (defun je/cider-mode-enabled-p ()
   (bound-and-true-p cider-mode))
