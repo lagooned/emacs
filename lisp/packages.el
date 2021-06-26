@@ -754,7 +754,8 @@
         which-key-sort-uppercase-first nil
         which-key-add-column-padding 1
         which-key-max-display-columns nil
-        which-key-min-display-lines 5)
+        which-key-min-display-lines 5
+        which-key-idle-delay 0.2)
   :config
   (which-key-setup-side-window-bottom)
   (which-key-add-key-based-replacements
