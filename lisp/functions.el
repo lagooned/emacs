@@ -482,6 +482,7 @@ eshell command string, and EOF if there is a pending command string."
   (define-key evil-emacs-state-local-map (kbd "M-m") 'void)
   (define-key evil-emacs-state-local-map (kbd "M-j") 'void)
   (define-key evil-emacs-state-local-map (kbd "C-s") 'void)
+  (define-key evil-emacs-state-local-map (kbd "C-y") 'yank)
   (define-key evil-emacs-state-local-map (kbd "C-j") 'ivy-alt-done)
   (define-key evil-emacs-state-local-map (kbd "M-o") 'ivy-dispatching-done)
   (define-key evil-emacs-state-local-map (kbd "M-n") 'ivy-next-history-element)
